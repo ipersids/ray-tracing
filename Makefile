@@ -6,7 +6,7 @@
 #    By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 17:34:34 by ipersids          #+#    #+#              #
-#    Updated: 2025/04/15 17:55:41 by ipersids         ###   ########.fr        #
+#    Updated: 2025/04/15 18:54:48 by ipersids         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,12 +40,16 @@ LIBS			:= -L$(SUBM_MLX_DIR)/build -lmlx42 \
 				   -ldl -lglfw \
 				   -lm
 
+# Directories
+OBJ_DIR			:= obj
+SRC_DIR			:= src
+
 # Sources and objects
 SRCS			:= 
 SRC_MAIN		:= src/main.c
 
-OBJS			:= 
-OBJ_MAIN		:= src/main.o
+OBJS			:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
+OBJ_MAIN		:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_MAIN))
 
 # RULES
 all: update-submodule build-submodule $(NAME)
@@ -53,11 +57,12 @@ all: update-submodule build-submodule $(NAME)
 $(NAME): $(OBJS) $(OBJ_MAIN)
 	$(CC) $(CFLAGS) $(OBJS) $(OBJ_MAIN) $(HDRS) $(LIBS) -o $(NAME)
 
-%.o: %.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(HDRS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS) $(OBJ_MAIN)
+	$(RM_DIR) $(OBJ_DIR)
 	$(MAKE) -C $(SUBM_LIBFT_DIR) clean
 
 fclean: clean
