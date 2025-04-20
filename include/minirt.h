@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:15:50 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/20 01:18:32 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/20 13:23:04 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@
 
 /* --------------------- File and arguments validation  -------------------- */
 
-int		rt_validate_args(int argc, char **argv);
+int		rt_validate_input(int argc, char **argv);
+int		rt_read_scene(int fd, char ***content);
 
 /* ---------------------- Error and memory management ---------------------- */
 
 void	rt_perror(int exit_code);
+void	rt_free_arr(void **arr, int i);
 
 #endif // MINIRT_H

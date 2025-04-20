@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:35:35 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/20 00:48:27 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/20 13:43:09 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ typedef enum s_error
 	ERR_MLX42,
 	ERR_ARGC,
 	ERR_EXTENSION,
+	ERR_OVERFLOW,
 	ERR_MAX
 }	t_error;
 
 # define ERR_MODULO ERR_ARGC
+# define CAPACITY 10
 
 #endif // MINIRT_DATA_H
