@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:51:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/22 15:11:04 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/23 16:51:19 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	validate_args(int argc, char **argv, char ***content);
 
 /* --------------------------- Public functions ---------------------------- */
 
-int	rt_validate_input(int argc, char **argv)
+int	rt_validate_input(int argc, char **argv, t_info *rt)
 {
 	int		exit_code;
 	char	**content;
@@ -50,6 +50,15 @@ int	rt_validate_input(int argc, char **argv)
 	} else {
 		ft_printf("No data\n");
 	}
+
+	printf("A: %f\t%i,%i,%i\n", rt->ambient.ratio, rt->ambient.color.r,
+			rt->ambient.color.g, rt->ambient.color.b);
+	printf("C: %f,%f,%f\t%f,%f,%f\t%i\n", rt->camera.pos.x, rt->camera.pos.y,
+		rt->camera.pos.z, rt->camera.dir.x, rt->camera.dir.y,
+		rt->camera.dir.z, rt->camera.fov);
+	printf("L: %f,%f,%f\t%f\n", rt->light.pos.x, rt->light.pos.y,
+		rt->light.pos.z, rt->light.bright);
+	printf("Pointer to objects: %p\n", rt->obj);
 	/// end <--
 	
 	return (0);
