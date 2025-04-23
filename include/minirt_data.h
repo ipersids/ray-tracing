@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:35:35 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/21 14:45:06 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:10:33 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef enum s_error
 
 # define ERR_MODULO ERR_ARGC
 # define CAPACITY 10
+# define NULL_TERMINATED_ARR -1
 
 /* ---------------------------- Scene structures  -------------------------- */
 
