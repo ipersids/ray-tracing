@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   rt_destroy_exit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 17:55:51 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/25 14:23:06 by ipersids         ###   ########.fr       */
+/*   Created: 2025/04/25 14:10:38 by ipersids          #+#    #+#             */
+/*   Updated: 2025/04/25 14:32:18 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+void	rt_destroy_exit(t_info *rt, int exit_code)
 {
-	int		exit_code;
-	t_info	rt;
-
-	rt_init_info(&rt);
-	exit_code = rt_validate_input(argc, argv, &rt);
-	if (0 != exit_code)
-		rt_destroy_exit(&rt, exit_code);
-	ft_printf("%s\n", argv[1]);
-	rt_destroy_exit(&rt, EXIT_SUCCESS);
-	return (exit_code);
+	if (NULL != rt->obj)
+		free(rt->obj);
+	if (EXIT_SUCCESS != exit_code)
+		rt_perror(exit_code);
+	exit(exit_code);
 }
