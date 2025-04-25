@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:35:35 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/23 16:50:06 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/25 16:24:57 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef enum s_error
 	ERR_ARGC,
 	ERR_EXTENSION,
 	ERR_OVERFLOW,
+	ERR_OBJECT_TYPE,
+	ERR_OBJECT_AMOUNT,
 	ERR_MAX
 }	t_error;
 
@@ -86,7 +88,9 @@ typedef struct s_color
 }		t_color;
 
 # define DEFAULT_AMBIENT_RATIO 0.2
-# define DEFAULT_AMBIENT_COLOR ((const int[]){255, 255, 255})
+# define DEFAULT_AMBIENT_COLOR_R 255
+# define DEFAULT_AMBIENT_COLOR_G 255
+# define DEFAULT_AMBIENT_COLOR_B 255
 
 typedef struct s_ambient_light
 {
@@ -94,8 +98,12 @@ typedef struct s_ambient_light
 	t_color	color;				// R,G,B colors in range [0-255]: 255, 255, 255
 }			t_ambient_light;
 
-# define DEFAULT_CAMERA_POSITION ((const float[]){-50.0, 0.0, 20.0})
-# define DEFAULT_CAMERA_DIRECTION ((const float[]){0.0, 0.0, 1.0})
+# define DEFAULT_CAMERA_POSITION_X -50.0
+# define DEFAULT_CAMERA_POSITION_Y 0.0
+# define DEFAULT_CAMERA_POSITION_Z 20.0
+# define DEFAULT_CAMERA_DIRECTION_X 0.0
+# define DEFAULT_CAMERA_DIRECTION_Y 0.0
+# define DEFAULT_CAMERA_DIRECTION_Z 1.0
 # define DEFAULT_CAMERA_FOV 70
 
 typedef struct s_camera
@@ -105,7 +113,9 @@ typedef struct s_camera
 	int		fov;				// Horizontal field of view, degrees [0,180]: 70
 }			t_camera;
 
-# define DEFAULT_LIGHT_POSITION ((const float[]){-40.0, 50.0, 0.0})
+# define DEFAULT_LIGHT_POSITION_X -40.0
+# define DEFAULT_LIGHT_POSITION_Y 50.0
+# define DEFAULT_LIGHT_POSITION_Z 0.0
 # define DEFAULT_LIGHT_BRIGHTNESS 0.6
 // # define DEFAULT_LIGHT_COLOR {10, 0, 255}
 
@@ -161,5 +171,15 @@ typedef struct s_info
 	t_light			light;
 	t_object		*obj;
 }	t_info;
+
+/* ------------------------- Parser helper structures ----------------------- */
+
+typedef struct s_counter
+{
+	int	figures;
+	int	lights;
+	int	camera;
+	int	ambient;
+}		t_counter;
 
 #endif // MINIRT_DATA_H
