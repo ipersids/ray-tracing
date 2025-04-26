@@ -6,14 +6,14 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:35:35 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/25 20:00:36 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/26 14:30:38 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_DATA_H
 # define MINIRT_DATA_H
 
-# define EXTENTION ".rt"
+# define EXTENSION ".rt"
 
 /**
  * @brief Colors palette
@@ -47,6 +47,7 @@ typedef enum s_error
 	ERR_OBJECT_TYPE,
 	ERR_OBJECT_AMOUNT,
 	ERR_OBJECT_CONFIG,
+	ERR_OBJECT_CONFIG_LIMITS,
 	ERR_MAX
 }	t_error;
 
@@ -74,6 +75,8 @@ typedef enum e_type
 	ELEMENT_CYLINDER,
 	ELEMENT_UKNOWN
 }	t_type;
+
+# define LIMIT_COORD 10000.0f
 
 typedef struct s_point
 {
