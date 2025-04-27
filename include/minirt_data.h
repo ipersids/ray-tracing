@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:35:35 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/23 16:50:06 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:10:33 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 /**
  * @brief Colors palette
  */
-# define PRINT_RED "\033[0;31m"
-# define PRINT_GREEN "\033[0;32m"
-# define PRINT_PURPLE "\033[0;35m"
-# define PRINT_DEFAULT "\033[0m"
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define PURPLE "\033[0;35m"
+# define DEFAULT "\033[0m"
 
 /* ------------------- File validation and errors handling  ----------------- */
 
@@ -51,14 +51,6 @@ typedef enum s_error
 # define CAPACITY 10
 # define NULL_TERMINATED_ARR -1
 
-# define R 0
-# define G 1
-# define B 2
-
-# define X 0
-# define Y 1
-# define Z 2
-
 /* ---------------------------- Scene structures  -------------------------- */
 
 typedef enum e_type
@@ -80,13 +72,10 @@ typedef struct s_point
 
 typedef struct s_color
 {
-	int	r;
-	int	g;
-	int	b;
-}		t_color;
-
-# define DEFAULT_AMBIENT_RATIO 0.2
-# define DEFAULT_AMBIENT_COLOR ((const int[]){255, 255, 255})
+	float	r;
+	float	g;
+	float	b;
+}			t_color;
 
 typedef struct s_ambient_light
 {
@@ -94,72 +83,57 @@ typedef struct s_ambient_light
 	t_color	color;				// R,G,B colors in range [0-255]: 255, 255, 255
 }			t_ambient_light;
 
-# define DEFAULT_CAMERA_POSITION ((const float[]){-50.0, 0.0, 20.0})
-# define DEFAULT_CAMERA_DIRECTION ((const float[]){0.0, 0.0, 1.0})
-# define DEFAULT_CAMERA_FOV 70
-
 typedef struct s_camera
 {
-	t_point	pos;				// x,y,z of the camera position: -50.0,0,20
-	t_point	dir;				// 3d norm. orientation vector: 0.0,0.0,1.0
+	t_point	position;			// x,y,z of the camera position: -50.0,0,20
+	t_point	direction;			// 3d norm. orientation vector: 0.0,0.0,1.0
 	int		fov;				// Horizontal field of view, degrees [0,180]: 70
 }			t_camera;
 
-# define DEFAULT_LIGHT_POSITION ((const float[]){-40.0, 50.0, 0.0})
-# define DEFAULT_LIGHT_BRIGHTNESS 0.6
-// # define DEFAULT_LIGHT_COLOR {10, 0, 255}
-
 typedef struct s_light
 {
-	t_point	pos;				// x,y,z of the light point: -40.0,50.0,0.0
-	float	bright;				// the light brightness ratio [0.0,1.0]: 0.6
+	t_point	position;			// x,y,z of the light point: -40.0,50.0,0.0
+	float	brightness;			// the light brightness ratio [0.0,1.0]: 0.6
 	// t_color	color;			// (unused in mandatory part)
 }			t_light;
 
 typedef struct s_sphere
 {
-	t_point	pos;				// x,y,z of sphere center: 0.0,0.0,20.6
-	float	diam;				// the sphere diameter: 12.6
+	t_point	position;			// x,y,z of sphere center: 0.0,0.0,20.6
+	float	diameter;			// the sphere diameter: 12.6
 	t_color	color;				// R,G,B colors in range [0-255]: 10, 0, 255
 }			t_sphere;
 
 typedef struct s_plane
 {
-	t_point	pos;				// x,y,z of a point on plane: 0.0,0.0,-10.0
-	t_point	dir;				// 3d norm. orientation vector: 0.0,1.0,0.0
+	t_point	position;			// x,y,z of a point on plane: 0.0,0.0,-10.0
+	t_point	direction;			// 3d norm. orientation vector: 0.0,1.0,0.0
 	t_color	color;				// R,G,B colors in range [0-255]: 0,0,225
 }			t_plane;
 
 typedef struct s_cylinder
 {
-	t_point	pos;				// center point of cy. base: 50.0,0.0,20.6
-	t_point	dir;				// 3d norm. vector of cy.axis: 0.0,0.0,1.0
-	float	diam;				// the cylinder diameter: 14.2
+	t_point	position;			// center point of cy. base: 50.0,0.0,20.6
+	t_point	direction;			// 3d norm. vector of cy.axis: 0.0,0.0,1.0
+	float	diameter;			// the cylinder diameter: 14.2
 	float	height;				// the cylinder height: 21.42
 	t_color	color;				// R,G,B colors in range [0,255]: 10, 0, 255
 }			t_cylinder;
 
 typedef union u_element
 {
-	t_sphere		sp;
-	t_plane			pl;
-	t_cylinder		cy;
+	t_ambient_light	ambient;
+	t_camera		camera;
+	t_light			light;
+	t_sphere		sphere;
+	t_plane			plane;
+	t_cylinder		cylinder;
 }					t_element;
 
 typedef struct s_object
 {
 	t_type		id;
-	t_element	obj;
+	t_element	data;
 }				t_object;
-
-/* -------------------------- Main minirt structure  ----------------------- */
-
-typedef struct s_info
-{
-	t_ambient_light	ambient;
-	t_camera		camera;
-	t_light			light;
-	t_object		*obj;
-}	t_info;
 
 #endif // MINIRT_DATA_H

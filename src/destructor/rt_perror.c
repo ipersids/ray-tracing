@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:19:51 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/23 16:06:17 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/20 13:55:07 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static const char	*get_error_message(int exit_code);
  */
 void	rt_perror(int exit_code)
 {
-	ft_putstr_fd(PRINT_RED"Error: "PRINT_DEFAULT, STDERR_FILENO);
+	ft_putstr_fd(RED"Error: "DEFAULT, STDERR_FILENO);
 	if (ERR_SYSTEM == exit_code)
 	{
 		perror("System");

@@ -6,16 +6,9 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:15:50 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/23 16:44:56 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/20 13:23:04 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/**
- * @todo:
- * 
- * @note:
- * - lightning model: https://learnopengl.com/Lighting/Basic-Lighting
- */
 
 #ifndef MINIRT_H
 # define MINIRT_H
@@ -33,13 +26,9 @@
 
 # include "minirt_data.h"
 
-/* ----------------------------- Initialisation  --------------------------- */
-
-void	rt_init_info(t_info *rt);
-
 /* --------------------- File and arguments validation  -------------------- */
 
-int		rt_validate_input(int argc, char **argv, t_info *rt);
+int		rt_validate_input(int argc, char **argv);
 int		rt_read_scene(int fd, char ***content);
 
 /* ---------------------- Error and memory management ---------------------- */
