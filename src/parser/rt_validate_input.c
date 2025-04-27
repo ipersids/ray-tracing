@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:51:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/25 14:32:09 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:00:51 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ static int	validate_args(int argc, char **argv, char ***content)
 	slash = ft_strrchr(name, '/');
 	if (NULL != slash)
 		name = slash + 1;
-	name_len = (int)ft_strlen(name) - (int)ft_strlen(EXTENTION);
-	if (0 >= name_len || ft_strcmp(&name[name_len], EXTENTION))
+	name_len = (int)ft_strlen(name) - (int)ft_strlen(EXTENSION);
+	if (0 >= name_len || ft_strcmp(&name[name_len], EXTENSION))
 		return (ERR_EXTENSION);
 	fd = open(argv[1], O_RDONLY);
 	if (-1 == fd)
