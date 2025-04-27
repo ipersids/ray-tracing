@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:19:51 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/25 18:25:52 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:02:58 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ static const char	*get_error_message(int exit_code)
 		"Wrong file extension or empty name: should be [path/file"EXTENTION"]",
 		"Read file: Overflow occurs when memory is reallocated",
 		"Wrong element in the scene file",
-		"Wrong amount of elements in the scene file",
-		"Wrong configuration of element in the scene file"
+		"Wrong amount of elements in the scene file"
 	};
 
 	if (!(ERR_MLX42 < exit_code && ERR_MAX > exit_code))

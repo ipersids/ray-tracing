@@ -6,15 +6,14 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:58:48 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/25 20:02:01 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/25 16:27:02 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_type	get_object_type(char *line);
-static int		validate_object_type(t_counter *cnt, char **scene);
-static int		parse_line(t_info *rt, char *line);
+static int	validate_object_type(t_counter *cnt, char **scene);
+static bool	is_figure(char *line);
 
 int	rt_parse_scene(t_info *rt, char **scene)
 {
@@ -22,85 +21,52 @@ int	rt_parse_scene(t_info *rt, char **scene)
 	t_counter	cnt;
 
 	ft_memset(&cnt, 0, sizeof(cnt));
+	printf("%d\n", cnt.ambient);
 	exit_code = validate_object_type(&cnt, scene);
 	if (0 != exit_code)
 		return (exit_code);
 	rt->obj = malloc(cnt.figures * sizeof(t_object));
 	if (!rt->obj)
 		return (ERR_SYSTEM);
-	while (NULL != (*scene))
-	{
-		exit_code = parse_line(rt, *scene);
-		if (0 != exit_code)
-			return (exit_code);
-		++scene;
-	}
 	return (0);
-}
-
-static t_type	get_object_type(char *line)
-{
-	if (ft_strncmp(line, "A", 1) == 0 && ft_isspace(line[1]))
-		return (ELEMENT_AMBIENT);
-	if (ft_strncmp(line, "C", 1) == 0 && ft_isspace(line[1]))
-		return (ELEMENT_CAMERA);
-	if (ft_strncmp(line, "L", 1) == 0 && ft_isspace(line[1]))
-		return (ELEMENT_LIGHT);
-	if (ft_strncmp(line, "sp", 2) == 0 && ft_isspace(line[2]))
-		return (ELEMENT_SPHERE);
-	if (ft_strncmp(line, "pl", 2) == 0 && ft_isspace(line[2]))
-		return (ELEMENT_PLANE);
-	if (ft_strncmp(line, "cy", 2) == 0 && ft_isspace(line[2]))
-		return (ELEMENT_CYLINDER);
-	return (ELEMENT_UKNOWN);
 }
 
 static int	validate_object_type(t_counter *cnt, char **scene)
 {
-	int		i;
-	t_type	type;
+	int	i;
 
-	i = 0;
-	while (scene[i] != NULL)
+	i = -1;
+	while (scene[--i] != NULL)
 	{
-		type = get_object_type(scene[i]);
-		if (ELEMENT_AMBIENT == type)
+		if (ft_strncmp(scene[i], "A", 1) == 0 && ft_isspace(scene[i][1]))
 			cnt->ambient += 1;
-		else if (ELEMENT_CAMERA == type)
+		else if (ft_strncmp(scene[i], "C", 1) == 0 && ft_isspace(scene[i][1]))
 			cnt->camera += 1;
-		else if (ELEMENT_LIGHT == type)
+		else if (ft_strncmp(scene[i], "L", 1) == 0 && ft_isspace(scene[i][1]))
 			cnt->lights += 1;
-		else if (ELEMENT_UKNOWN != type)
+		else if (is_figure(scene[i]))
 			cnt->figures += 1;
 		else
+		{
+			printf("%sLine: %s%s\n", PRINT_PURPLE, PRINT_DEFAULT, scene[i]);
 			return (ERR_OBJECT_TYPE);
+		}
 		if (1 < cnt->ambient || 1 < cnt->camera || 1 < cnt->lights)
+		{
+			printf("%sLine: %s%s\n", PRINT_PURPLE, PRINT_DEFAULT, scene[i]);
 			return (ERR_OBJECT_AMOUNT);
-		++i;
+		}
 	}
 	return (0);
 }
 
-static int	parse_line(t_info *rt, char *line)
+static bool	is_figure(char *line)
 {
-	t_type	type;
-	int		exit_code;
-
-	exit_code = 0;
-	type = get_object_type(line);
-	if (ELEMENT_AMBIENT == type)
-		exit_code = rt_parse_ambient(rt, line + 1);
-	else if (ELEMENT_CAMERA == type)
-		;// exit_code = rt_parse_camera(rt, line + 1);
-	else if (ELEMENT_LIGHT == type)
-		;// exit_code = rt_parse_light(rt, line + 1);
-	else if (ELEMENT_CYLINDER == type)
-		;// exit_code = rt_parse_cylinder(rt, line + 2);
-	else if (ELEMENT_PLANE == type)
-		;// exit_code = rt_parse_plane(rt, line + 2);
-	else if (ELEMENT_SPHERE == type)
-		;// exit_code = rt_parse_plane(rt, line + 2);
-	else
-		exit_code = ERR_OBJECT_TYPE;
-	return (exit_code);
+	if (ft_strncmp(line, "sp", 2) == 0 && ft_isspace(line[2]))
+		return (true);
+	if (ft_strncmp(line, "pl", 2) == 0 && ft_isspace(line[2]))
+		return (true);
+	if (ft_strncmp(line, "cy", 2) == 0 && ft_isspace(line[2]))
+		return (true);
+	return (false);
 }

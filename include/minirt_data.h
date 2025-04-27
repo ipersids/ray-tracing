@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:35:35 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/25 20:00:36 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/25 16:24:57 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef enum s_error
 	ERR_OVERFLOW,
 	ERR_OBJECT_TYPE,
 	ERR_OBJECT_AMOUNT,
-	ERR_OBJECT_CONFIG,
 	ERR_MAX
 }	t_error;
 
@@ -71,8 +70,7 @@ typedef enum e_type
 	ELEMENT_LIGHT,
 	ELEMENT_SPHERE,
 	ELEMENT_PLANE,
-	ELEMENT_CYLINDER,
-	ELEMENT_UKNOWN
+	ELEMENT_CYLINDER
 }	t_type;
 
 typedef struct s_point
@@ -97,7 +95,7 @@ typedef struct s_color
 typedef struct s_ambient_light
 {
 	float	ratio;				// amb. lighting ratio in range [0.0,1.0]: 0.2
-	t_color	color;				// R,G,B colors in range [0-255]: 255,255,255
+	t_color	color;				// R,G,B colors in range [0-255]: 255, 255, 255
 }			t_ambient_light;
 
 # define DEFAULT_CAMERA_POSITION_X -50.0

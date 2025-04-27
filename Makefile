@@ -6,7 +6,7 @@
 #    By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 17:34:34 by ipersids          #+#    #+#              #
-#    Updated: 2025/04/25 19:51:35 by ipersids         ###   ########.fr        #
+#    Updated: 2025/04/25 14:21:15 by ipersids         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,7 @@ SRC_DIR			:= src
 SRCS			:= src/destructor/rt_perror.c src/parser/rt_validate_input.c \
 				   src/parser/rt_read_scene.c src/destructor/rt_free_arr.c \
 				   src/constructor/rt_init_info.c src/parser/rt_parse_scene.c \
-				   src/destructor/rt_destroy_exit.c src/parser/rt_parse_ambient.c \
-				   src/parser/rt_get_color.c
+				   src/destructor/rt_destroy_exit.c
 SRC_MAIN		:= src/main.c
 
 OBJS			:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
