@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:58:48 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/26 14:13:21 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/25 20:02:01 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ int	rt_parse_scene(t_info *rt, char **scene)
 	{
 		exit_code = parse_line(rt, *scene);
 		if (0 != exit_code)
-		{
-			printf("Line: %s\n", *scene);
 			return (exit_code);
-		}
 		++scene;
 	}
 	return (0);
@@ -94,7 +91,7 @@ static int	parse_line(t_info *rt, char *line)
 	if (ELEMENT_AMBIENT == type)
 		exit_code = rt_parse_ambient(rt, line + 1);
 	else if (ELEMENT_CAMERA == type)
-		exit_code = rt_parse_camera(rt, line + 1);
+		;// exit_code = rt_parse_camera(rt, line + 1);
 	else if (ELEMENT_LIGHT == type)
 		;// exit_code = rt_parse_light(rt, line + 1);
 	else if (ELEMENT_CYLINDER == type)
