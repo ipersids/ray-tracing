@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 17:55:51 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/20 11:37:14 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/20 01:46:24 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,8 @@ int	main(int argc, char **argv)
 {
 	int	exit_code;
 
-	exit_code = rt_validate_input(argc, argv);
-	if (0 != exit_code)
-	{
-		rt_perror(exit_code);
-		return (exit_code);
-	}
-	ft_printf("%s\n", argv[1]);
+	exit_code = rt_validate_args(argc, argv);
+	if (0 == exit_code)
+		ft_printf("%s\n", argv[1]);
 	return (exit_code);
 }
