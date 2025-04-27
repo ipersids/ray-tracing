@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:19:51 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/26 14:33:48 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/25 18:25:52 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,12 @@ void	rt_perror(int exit_code)
 static const char	*get_error_message(int exit_code)
 {
 	static const char	list[ERR_MAX % ERR_MODULO][100] = {
-		"Usage: ./miniRT [file with ."EXTENSION"]",
-		"Invalid file name or extension",
-		"Memory overflow detected while reading file",
-		"Unknown element in scene file",
-		"Incorrect number of elements in scene file",
-		"Invalid element configuration in scene file",
-		"Value exceeded allowed limits"
+		"Usage: ./miniRT [path/file"EXTENTION"]",
+		"Wrong file extension or empty name: should be [path/file"EXTENTION"]",
+		"Read file: Overflow occurs when memory is reallocated",
+		"Wrong element in the scene file",
+		"Wrong amount of elements in the scene file",
+		"Wrong configuration of element in the scene file"
 	};
 
 	if (!(ERR_MLX42 < exit_code && ERR_MAX > exit_code))
