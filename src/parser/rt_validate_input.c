@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:51:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/22 15:11:04 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/20 14:03:50 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	rt_validate_input(int argc, char **argv)
 		for (; content[i] != NULL; i++) {
 			ft_printf("Line %d:\t%s\n", i, content[i]); // issue for libft
 		}
-		rt_free_arr((void **)content, NULL_TERMINATED_ARR);
+		rt_free_arr((void **)content, i);
 	} else {
 		ft_printf("No data\n");
 	}

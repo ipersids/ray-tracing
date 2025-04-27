@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 12:05:25 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/22 15:10:52 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/20 13:51:33 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@ void	rt_free_arr(void **arr, int i)
 	j = 0;
 	if (!arr)
 		return ;
-	if (i == NULL_TERMINATED_ARR)
-	{
-		i = 0;
-		while (NULL != arr[i])
-			i++;
-	}
 	while (j < i || NULL != arr[j])
 	{
 		free(arr[j]);
