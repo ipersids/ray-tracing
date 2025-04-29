@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:15:50 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/26 12:26:44 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:35:02 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		rt_read_scene(int fd, char ***content);
 int		rt_parse_scene(t_info *rt, char **scene);
 int		rt_parse_ambient(t_info *rt, char *line);
 int		rt_parse_camera(t_info *rt, char *line);
+int		rt_parse_light(t_info *rt, char *line);
 
 int		rt_parse_color(t_color *color, char *start, char **endptr);
 int		rt_parse_coord(t_point *pos, char *start, char **endptr, bool is_norm);

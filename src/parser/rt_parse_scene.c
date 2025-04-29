@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:58:48 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/26 14:13:21 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:56:02 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,13 @@ static int	parse_line(t_info *rt, char *line)
 	else if (ELEMENT_CAMERA == type)
 		exit_code = rt_parse_camera(rt, line + 1);
 	else if (ELEMENT_LIGHT == type)
-		;// exit_code = rt_parse_light(rt, line + 1);
+		exit_code = rt_parse_light(rt, line + 1);
 	else if (ELEMENT_CYLINDER == type)
 		;// exit_code = rt_parse_cylinder(rt, line + 2);
 	else if (ELEMENT_PLANE == type)
 		;// exit_code = rt_parse_plane(rt, line + 2);
 	else if (ELEMENT_SPHERE == type)
-		;// exit_code = rt_parse_plane(rt, line + 2);
+		;// exit_code = rt_parse_sphere(rt, line + 2);
 	else
 		exit_code = ERR_OBJECT_TYPE;
 	return (exit_code);

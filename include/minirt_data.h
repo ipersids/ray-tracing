@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:35:35 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/26 14:30:38 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:43:15 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ typedef struct s_light
 {
 	t_point	pos;				// x,y,z of the light point: -40.0,50.0,0.0
 	float	bright;				// the light brightness ratio [0.0,1.0]: 0.6
-	// t_color	color;			// (unused in mandatory part)
+	t_color	color;				// (unused in mandatory part)
 }			t_light;
 
 typedef struct s_sphere
