@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:58:48 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/29 15:56:02 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/29 19:05:32 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ int	rt_parse_scene(t_info *rt, char **scene)
 	exit_code = validate_object_type(&cnt, scene);
 	if (0 != exit_code)
 		return (exit_code);
-	rt->obj = malloc(cnt.figures * sizeof(t_object));
-	if (!rt->obj)
+	rt->objs = malloc(cnt.figures * sizeof(t_object));
+	if (!rt->objs)
+		return (ERR_SYSTEM);
+	rt->lights = malloc(cnt.lights * sizeof(t_object));
+	if (!rt->lights)
 		return (ERR_SYSTEM);
 	while (NULL != (*scene))
 	{
@@ -77,7 +80,9 @@ static int	validate_object_type(t_counter *cnt, char **scene)
 			cnt->figures += 1;
 		else
 			return (ERR_OBJECT_TYPE);
-		if (1 < cnt->ambient || 1 < cnt->camera || 1 < cnt->lights)
+		if (1 < cnt->ambient || 1 < cnt->camera)
+			return (ERR_OBJECT_AMOUNT);
+		if (false == IS_BONUS && 1 < cnt->lights)
 			return (ERR_OBJECT_AMOUNT);
 		++i;
 	}
@@ -96,7 +101,7 @@ static int	parse_line(t_info *rt, char *line)
 	else if (ELEMENT_CAMERA == type)
 		exit_code = rt_parse_camera(rt, line + 1);
 	else if (ELEMENT_LIGHT == type)
-		exit_code = rt_parse_light(rt, line + 1);
+		;// exit_code = rt_parse_light(rt, line + 1);
 	else if (ELEMENT_CYLINDER == type)
 		;// exit_code = rt_parse_cylinder(rt, line + 2);
 	else if (ELEMENT_PLANE == type)

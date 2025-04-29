@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:35:35 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/29 15:43:15 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/29 18:55:28 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 # define PRINT_GREEN "\033[0;32m"
 # define PRINT_PURPLE "\033[0;35m"
 # define PRINT_DEFAULT "\033[0m"
+
+# ifndef IS_BONUS
+#  define IS_BONUS false
+# endif
 
 /* ------------------- File validation and errors handling  ----------------- */
 
@@ -154,18 +158,16 @@ typedef struct s_cylinder
 	t_color	color;				// R,G,B colors in range [0,255]: 10, 0, 255
 }			t_cylinder;
 
-typedef union u_element
-{
-	t_sphere		sp;
-	t_plane			pl;
-	t_cylinder		cy;
-}					t_element;
-
 typedef struct s_object
 {
-	t_type		id;
-	t_element	obj;
-}				t_object;
+	t_type			id;
+	union
+	{
+		t_sphere	sp;
+		t_plane		pl;
+		t_cylinder	cy;
+	};
+}					t_object;
 
 /* -------------------------- Main minirt structure  ----------------------- */
 
@@ -173,8 +175,10 @@ typedef struct s_info
 {
 	t_ambient_light	ambient;
 	t_camera		camera;
-	t_light			light;
-	t_object		*obj;
+	t_light			*lights;
+	t_object		*objs;
+	size_t			n_objs;
+	size_t			n_lights;
 }	t_info;
 
 /* ------------------------- Parser helper structures ----------------------- */

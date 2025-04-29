@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:51:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/29 16:07:20 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:44:14 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ int	rt_validate_input(int argc, char **argv, t_info *rt)
 	printf("C: %f,%f,%f\t%f,%f,%f\t%i\n", rt->camera.pos.x, rt->camera.pos.y,
 		rt->camera.pos.z, rt->camera.dir.x, rt->camera.dir.y,
 		rt->camera.dir.z, rt->camera.fov);
-	printf("L: %f,%f,%f\t%f\t%d,%d,%d\n", rt->light.pos.x, rt->light.pos.y,
-		rt->light.pos.z, rt->light.bright, rt->light.color.r,
-		rt->light.color.g, rt->light.color.b);
+	// printf("L: %f,%f,%f\t%f\t%d,%d,%d\n", rt->light.pos.x, rt->light.pos.y,
+	// 	rt->light.pos.z, rt->light.bright, rt->light.color.r,
+	// 	rt->light.color.g, rt->light.color.b);
+	
 	/// end <--
 	
 	return (0);
