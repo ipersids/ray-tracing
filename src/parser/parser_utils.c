@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 23:54:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 14:08:09 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/30 20:44:21 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	rt_parse_float(float *value, char **startptr, char **endptr)
 	res = FLT_MAX;
 	*endptr = *startptr;
 	res = ft_strtod(*startptr, endptr);
-	if (*endptr == *startptr)
+	if (*endptr == *startptr || ft_isspace(**startptr))
 		return (ERR_OBJECT_CONFIG);
 	if (FLT_MAX < res)
 		*value = FLT_MAX;
@@ -28,7 +28,10 @@ int	rt_parse_float(float *value, char **startptr, char **endptr)
 		*value = -FLT_MAX;
 	else
 		*value = (float)res;
-	*startptr = (*endptr) + 1;
+	if ('\0' == (**endptr))
+		*startptr = (*endptr);
+	else
+		*startptr = (*endptr) + 1;
 	return (0);
 }
 
@@ -40,12 +43,12 @@ int	rt_parse_coord(t_point *pos, char **start, char **endptr, bool is_norm)
 	while (ft_isspace(**start))
 		++(*start);
 	exit_code = rt_parse_float(&pos->x, start, endptr);
-	if (0 != exit_code || ',' != **endptr)
+	if (0 != exit_code || ',' != (**endptr))
 		return (ERR_OBJECT_CONFIG);
 	if (pos->x > LIMIT_COORD || pos->x < -LIMIT_COORD)
 		return (ERR_OBJECT_CONFIG_LIMITS);
 	exit_code = rt_parse_float(&pos->y, start, endptr);
-	if (0 != exit_code || ',' != **endptr)
+	if (0 != exit_code || ',' != (**endptr))
 		return (ERR_OBJECT_CONFIG);
 	if (pos->y > LIMIT_COORD || pos->y < -LIMIT_COORD)
 		return (ERR_OBJECT_CONFIG_LIMITS);
