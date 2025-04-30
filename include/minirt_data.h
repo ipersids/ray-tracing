@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:35:35 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 14:31:23 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:49:44 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,6 @@ typedef enum s_error
 # define CAPACITY 10
 # define NULL_TERMINATED_ARR -1
 
-# define R 0
-# define G 1
-# define B 2
-
-# define X 0
-# define Y 1
-# define Z 2
-
 /* ---------------------------- Scene structures  -------------------------- */
 
 typedef enum e_type
@@ -81,6 +73,7 @@ typedef enum e_type
 }	t_type;
 
 # define LIMIT_COORD 10000.0f
+# define LIMIT_S 10000.0f
 
 typedef struct s_vec3
 {

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:15:50 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 14:05:50 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/30 19:22:06 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		rt_parse_scene(t_info *rt, char **scene);
 int		rt_parse_ambient(t_info *rt, char *line);
 int		rt_parse_camera(t_info *rt, char *line);
 int		rt_parse_light(t_info *rt, char *line);
+int		rt_parse_cylinder(t_info *rt, char *line);
 
 /// parser_utils.c
 

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:58:48 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 11:10:43 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:35:02 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static int	parse_line(t_info *rt, char *line)
 	else if (ELEMENT_LIGHT == type)
 		exit_code = rt_parse_light(rt, line + 1);
 	else if (ELEMENT_CYLINDER == type)
-		;// exit_code = rt_parse_cylinder(rt, line + 2);
+		exit_code = rt_parse_cylinder(rt, line + 2);
 	else if (ELEMENT_PLANE == type)
 		;// exit_code = rt_parse_plane(rt, line + 2);
 	else if (ELEMENT_SPHERE == type)

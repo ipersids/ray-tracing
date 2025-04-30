@@ -6,7 +6,7 @@
 #    By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 17:34:34 by ipersids          #+#    #+#              #
-#    Updated: 2025/04/30 14:29:35 by ipersids         ###   ########.fr        #
+#    Updated: 2025/04/30 19:21:46 by ipersids         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ SRCS			:= src/constructor/rt_init_info.c src/constructor/rt_init_objects.c \
 				   src/parser/parser_utils.c src/parser/rt_parse_ambient.c \
 				   src/parser/rt_parse_camera.c src/parser/rt_parse_light.c \
 				   src/parser/rt_parse_scene.c src/parser/rt_read_scene.c \
-				   src/parser/rt_validate_input.c
+				   src/parser/rt_validate_input.c src/parser/rt_parse_cylinder.c \
+				   
 SRC_MAIN		:= src/main.c
 
 OBJS			:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
