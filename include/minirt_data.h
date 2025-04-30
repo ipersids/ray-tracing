@@ -83,7 +83,6 @@ typedef struct s_vec3
 }			t_vec3;
 
 typedef t_vec3	t_point;
-
 typedef t_vec3	t_color;
 
 # define DEFAULT_AMBIENT_RATIO 0.2

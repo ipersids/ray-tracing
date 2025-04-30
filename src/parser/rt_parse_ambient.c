@@ -20,7 +20,7 @@
  * @param rt Pointer to the ray tracing information structure.
  * @param line The input line containing ambient light data.
  * @return int 0 on success, or an error code.
- */
+*/
 int	rt_parse_ambient(t_info *rt, char *line)
 {
 	char	*next;
