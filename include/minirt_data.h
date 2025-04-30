@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:35:35 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/29 23:32:02 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:31:23 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,19 +82,16 @@ typedef enum e_type
 
 # define LIMIT_COORD 10000.0f
 
-typedef struct s_point
+typedef struct s_vec3
 {
 	float	x;
 	float	y;
 	float	z;
-}			t_point;
+}			t_vec3;
 
-typedef struct s_color
-{
-	int	r;
-	int	g;
-	int	b;
-}		t_color;
+typedef t_vec3	t_point;
+
+typedef t_vec3	t_color;
 
 # define DEFAULT_AMBIENT_RATIO 0.2
 # define DEFAULT_AMBIENT_COLOR_R 255
@@ -113,13 +110,13 @@ typedef struct s_ambient_light
 # define DEFAULT_CAMERA_DIRECTION_X 0.0
 # define DEFAULT_CAMERA_DIRECTION_Y 0.0
 # define DEFAULT_CAMERA_DIRECTION_Z 1.0
-# define DEFAULT_CAMERA_FOV 70
+# define DEFAULT_CAMERA_FOV 70.0
 
 typedef struct s_camera
 {
 	t_point	pos;				// x,y,z of the camera position: -50.0,0,20
 	t_point	dir;				// 3d norm. orientation vector: 0.0,0.0,1.0
-	int		fov;				// Horizontal field of view, degrees [0,180]: 70
+	float	fov;				// Horizontal field of view, degrees [0,180]: 70
 }			t_camera;
 
 typedef struct s_light

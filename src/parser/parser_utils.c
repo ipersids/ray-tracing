@@ -6,24 +6,12 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 23:54:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 10:56:59 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:08:09 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <float.h>
 #include "minirt.h"
-
-int	rt_parse_integer(int *value, char **startptr, char **endptr)
-{
-	*endptr = *startptr;
-	while (ft_isdigit(**endptr))
-		(*endptr) += 1;
-	if (*endptr == *startptr)
-		return (ERR_OBJECT_CONFIG);
-	*value = ft_atoi(*startptr);
-	*startptr = (*endptr) + 1;
-	return (0);
-}
 
 int	rt_parse_float(float *value, char **startptr, char **endptr)
 {
@@ -80,20 +68,20 @@ int	rt_parse_color(t_color *color, char **start, char **endptr)
 	exit_code = 0;
 	while (ft_isspace(**start))
 		++(*start);
-	exit_code = rt_parse_integer(&color->r, start, endptr);
+	exit_code = rt_parse_float(&color->x, start, endptr);
 	if (0 != exit_code || ',' != **endptr)
 		return (ERR_OBJECT_CONFIG);
-	if (0 > color->r || 255 < color->r)
+	if (0.0 > color->x || 255.0 < color->x)
 		return (ERR_OBJECT_CONFIG_LIMITS);
-	exit_code = rt_parse_integer(&color->g, start, endptr);
+	exit_code = rt_parse_float(&color->y, start, endptr);
 	if (0 != exit_code || ',' != **endptr)
 		return (ERR_OBJECT_CONFIG);
-	if (0 > color->g || 255 < color->g)
+	if (0.0 > color->y || 255.0 < color->y)
 		return (ERR_OBJECT_CONFIG_LIMITS);
-	exit_code = rt_parse_integer(&color->b, start, endptr);
+	exit_code = rt_parse_float(&color->z, start, endptr);
 	if (0 != exit_code || !('\0' == **endptr || ft_isspace(**endptr)))
 		return (ERR_OBJECT_CONFIG);
-	if (0 > color->b || 255 < color->b)
+	if (0.0 > color->z || 255.0 < color->z)
 		return (ERR_OBJECT_CONFIG_LIMITS);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:15:50 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 10:51:52 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:05:50 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int		rt_parse_light(t_info *rt, char *line);
 
 /// parser_utils.c
 
-int		rt_parse_integer(int *value, char **startptr, char **endptr);
 int		rt_parse_float(float *value, char **startptr, char **endptr);
 int		rt_parse_color(t_color *color, char **start, char **endptr);
 int		rt_parse_coord(t_point *pos, char **start, char **endptr, bool is_norm);

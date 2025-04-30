@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/29 18:56:38 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/30 13:58:53 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	rt_init_info(t_info *rt)
 
 void	init_ambient(t_ambient_light *ambient)
 {
-	ambient->color.r = DEFAULT_AMBIENT_COLOR_R;
-	ambient->color.g = DEFAULT_AMBIENT_COLOR_G;
-	ambient->color.b = DEFAULT_AMBIENT_COLOR_B;
+	ambient->color.x = DEFAULT_AMBIENT_COLOR_R;
+	ambient->color.y = DEFAULT_AMBIENT_COLOR_G;
+	ambient->color.z = DEFAULT_AMBIENT_COLOR_B;
 	ambient->ratio = DEFAULT_AMBIENT_RATIO;
 }
 
