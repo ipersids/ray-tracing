@@ -6,12 +6,21 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 18:53:41 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 11:04:24 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/01 01:19:25 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/* --------------------------- Public Functions ---------------------------- */
+
+/**
+ * @brief Allocate memory for objects and lights in the ray tracing structure.
+ * 
+ * @param cnt Pointer to the counter structure.
+ * @param rt Pointer to the ray tracing information structure.
+ * @return int Returns 0 on success, or ERR_SYSTEM on memory allocation failure.
+ */
 int	rt_init_objects(t_counter *cnt, t_info *rt)
 {
 	if (1 <= cnt->figures)

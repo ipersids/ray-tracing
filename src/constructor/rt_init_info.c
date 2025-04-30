@@ -6,15 +6,32 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 13:58:53 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/01 01:18:16 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	init_ambient(t_ambient_light *ambient);
-void	init_camera(t_camera *camera);
+/* --------------------- Private function prototypes ----------------------- */
 
+/**
+ * @brief Initialize default ambient light settings.
+ * @param ambient Pointer to the ambient light structure.
+ */
+static void	init_ambient(t_ambient_light *ambient);
+
+/**
+ * @brief Initialize default camera settings.
+ * @param camera Pointer to the camera structure.
+ */
+static void	init_camera(t_camera *camera);
+
+/* --------------------------- Public Functions ---------------------------- */
+
+/**
+ * @brief Initialize the ray tracing information structure.
+ * @param rt Pointer to the ray tracing information structure.
+ */
 void	rt_init_info(t_info *rt)
 {
 	init_ambient(&rt->ambient);
@@ -25,7 +42,9 @@ void	rt_init_info(t_info *rt)
 	rt->n_lights = 0;
 }
 
-void	init_ambient(t_ambient_light *ambient)
+/* ------------------- Private Function Implementation --------------------- */
+
+static void	init_ambient(t_ambient_light *ambient)
 {
 	ambient->color.x = DEFAULT_AMBIENT_COLOR_R;
 	ambient->color.y = DEFAULT_AMBIENT_COLOR_G;
@@ -33,7 +52,7 @@ void	init_ambient(t_ambient_light *ambient)
 	ambient->ratio = DEFAULT_AMBIENT_RATIO;
 }
 
-void	init_camera(t_camera *camera)
+static void	init_camera(t_camera *camera)
 {
 	camera->pos.x = DEFAULT_CAMERA_POSITION_X;
 	camera->pos.y = DEFAULT_CAMERA_POSITION_Y;

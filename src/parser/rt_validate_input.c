@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:51:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/29 23:33:09 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/01 01:54:00 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,36 @@
 
 /**
  * @brief Validates arguments and file extension then reads file.
- *
  * @param argc The number of arguments passed to the program.
  * @param argv The array of argument strings.
  * @param content A pointer to a pointer to an array for the scene content.
- * 
  * @return o in success, otherwise — error code.
- * 
  */
 static int	validate_args(int argc, char **argv, char ***content);
 
 /* --------------------------- Public functions ---------------------------- */
 
+/**
+ * @brief Validate input arguments and parse the scene file.
+ * 
+ * @param argc The number of arguments passed to the program.
+ * @param argv The array of argument strings.
+ * @param rt Pointer to the ray tracing information structure.
+ * @return int 0 on success, or an error code.
+ */
 int	rt_validate_input(int argc, char **argv, t_info *rt)
 {
 	int		exit_code;
 	char	**content;
 
 	content = NULL;
+	exit_code = 0;
 	exit_code = validate_args(argc, argv, &content);
 	if (0 != exit_code)
 		return (exit_code);
 	exit_code = rt_parse_scene(rt, content);
 	rt_free_arr((void **)content, NULL_TERMINATED_ARR);
-	if (0 != exit_code)
-		return (exit_code);
-	return (0);
+	return (exit_code);
 }
 
 /* ------------------- Private function implementation --------------------- */

@@ -6,12 +6,21 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 11:49:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 14:08:25 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/01 01:29:48 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/* --------------------------- Public Functions ---------------------------- */
+
+/**
+ * @brief Parse camera settings from a string.
+ * 
+ * @param rt Pointer to the ray tracing information structure.
+ * @param line The input line containing camera data.
+ * @return int 0 on success, or an error code.
+ */
 int	rt_parse_camera(t_info *rt, char *line)
 {
 	char	*next;

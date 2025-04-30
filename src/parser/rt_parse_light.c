@@ -6,12 +6,21 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:51:31 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 11:10:03 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/01 01:32:03 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/* --------------------------- Public Functions ---------------------------- */
+
+/**
+ * @brief Parse light settings from a string.
+ * 
+ * @param rt Pointer to the ray tracing information structure.
+ * @param line The input line containing light data.
+ * @return int 0 on success, or an error code.
+ */
 int	rt_parse_light(t_info *rt, char *line)
 {
 	char	*next;

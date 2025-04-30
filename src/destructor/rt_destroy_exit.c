@@ -6,11 +6,13 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:10:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/29 18:56:03 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/01 01:19:52 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+/* --------------------------- Public Functions ---------------------------- */
 
 void	rt_destroy_exit(t_info *rt, int exit_code)
 {

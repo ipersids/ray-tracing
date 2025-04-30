@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 11:05:03 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/20 13:47:23 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/01 01:52:30 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,34 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
+/**
+ * @brief Reallocate memory for the scene content array.
+ * @param arr The current array of strings.
+ * @param i The current number of rows in the array.
+ * @param size Pointer to the current capacity of the array.
+ * @param exit_code Pointer to store the exit code in case of failure.
+ * @return char** The reallocated array, or NULL on failure.
+ */
 static char	**realloc_matrix(char **arr, int i, int *size, int *exit_code);
+
+/**
+ * @brief Check if a line is empty or contains only whitespace.
+ * @param nl Pointer to the newline character in the line.
+ * @param line The line to check.
+ * @return bool True if the line is empty, false otherwise.
+ */
 static bool	is_empty_line(char *nl, char *line);
 
 /* --------------------------- Public functions ---------------------------- */
 
+/**
+ * @brief Read the scene file and store its content 
+ * 		  in a dynamically allocated array.
+ * 
+ * @param fd The file descriptor of the scene file.
+ * @param content Pointer to the array of strings to store the scene content.
+ * @return int EXIT_SUCCESS on success, or an error code on failure.
+ */
 int	rt_read_scene(int fd, char ***content)
 {
 	static int	row = 0;

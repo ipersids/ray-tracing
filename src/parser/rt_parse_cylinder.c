@@ -6,14 +6,33 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:35:22 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 19:32:18 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/01 01:31:26 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/* --------------------- Private function prototypes ----------------------- */
+
+/**
+ * @brief Parse the diameter and height of a cylinder.
+ * 
+ * @param rt Pointer to the ray tracing information structure.
+ * @param startptr Pointer to the start of the string.
+ * @param endptr Pointer to a pointer to the character where parsing stopped.
+ * @return int 0 on success, or an error code.
+ */
 static int	parse_diam_and_height(t_info *rt, char **startptr, char **endptr);
 
+/* --------------------------- Public Functions ---------------------------- */
+
+/**
+ * @brief Parse cylinder settings from a string.
+ * 
+ * @param rt Pointer to the ray tracing information structure.
+ * @param line The input line containing cylinder data.
+ * @return int 0 on success, or an error code.
+ */
 int	rt_parse_cylinder(t_info *rt, char *line)
 {
 	char	*next;
@@ -40,6 +59,8 @@ int	rt_parse_cylinder(t_info *rt, char *line)
 	rt->n_objs += 1;
 	return (exit_code);
 }
+
+/* ------------------- Private Function Implementation --------------------- */
 
 static int	parse_diam_and_height(t_info *rt, char **startptr, char **endptr)
 {

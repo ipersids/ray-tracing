@@ -6,12 +6,21 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:40:19 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 19:44:24 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/01 01:32:14 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/* --------------------------- Public Functions ---------------------------- */
+
+/**
+ * @brief Parse plane settings from a string.
+ * 
+ * @param rt Pointer to the ray tracing information structure.
+ * @param line The input line containing plane data.
+ * @return int 0 on success, or an error code.
+ */
 int	rt_parse_plane(t_info *rt, char *line)
 {
 	char	*next;

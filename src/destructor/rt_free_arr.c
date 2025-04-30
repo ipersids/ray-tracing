@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 12:05:25 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/25 14:09:21 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/01 01:21:08 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 /* --------------------------- Public Functions ---------------------------- */
 
 /**
- * @brief Frees a dynamically allocated array of strings.
+ * @brief Frees a dynamically allocated array of pointers.
  * 
- * @param arr Pointer to the array of strings to be freed.
- * @param i The number of elements in the array.
+ * If the array is null-terminated, the function calculates 
+ * the number of elements.
+ * 
+ * @param arr Pointer to the array of pointers to be freed.
+ * @param i The number of elements in the array, 
+ * 			or NULL_TERMINATED_ARR if the array is null-terminated.
  */
 void	rt_free_arr(void **arr, int i)
 {

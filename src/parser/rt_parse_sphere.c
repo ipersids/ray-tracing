@@ -6,12 +6,21 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:49:23 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 19:56:08 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/01 01:34:56 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/* --------------------------- Public Functions ---------------------------- */
+
+/**
+ * @brief Parse sphere settings from a string.
+ * 
+ * @param rt Pointer to the ray tracing information structure.
+ * @param line The input line containing sphere data.
+ * @return int 0 on success, or an error code.
+ */
 int	rt_parse_sphere(t_info *rt, char *line)
 {
 	char	*next;

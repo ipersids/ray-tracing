@@ -6,12 +6,21 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 18:00:31 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 10:52:13 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/01 01:29:22 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/* --------------------------- Public Functions ---------------------------- */
+
+/**
+ * @brief Parse ambient light settings from a string.
+ * 
+ * @param rt Pointer to the ray tracing information structure.
+ * @param line The input line containing ambient light data.
+ * @return int 0 on success, or an error code.
+ */
 int	rt_parse_ambient(t_info *rt, char *line)
 {
 	char	*next;
