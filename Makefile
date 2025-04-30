@@ -6,7 +6,7 @@
 #    By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 17:34:34 by ipersids          #+#    #+#              #
-#    Updated: 2025/04/15 18:54:48 by ipersids         ###   ########.fr        #
+#    Updated: 2025/04/30 20:03:48 by ipersids         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,17 @@ OBJ_DIR			:= obj
 SRC_DIR			:= src
 
 # Sources and objects
-SRCS			:= 
+SRCS			:= src/constructor/rt_init_info.c src/constructor/rt_init_objects.c \
+				   \
+				   src/destructor/rt_destroy_exit.c src/destructor/rt_free_arr.c \
+				   src/destructor/rt_perror.c \
+				   \
+				   src/parser/parser_utils.c src/parser/rt_parse_ambient.c \
+				   src/parser/rt_parse_camera.c src/parser/rt_parse_light.c \
+				   src/parser/rt_parse_scene.c src/parser/rt_read_scene.c \
+				   src/parser/rt_validate_input.c src/parser/rt_parse_cylinder.c \
+				   src/parser/rt_parse_plane.c src/parser/rt_parse_sphere.c \
+				   
 SRC_MAIN		:= src/main.c
 
 OBJS			:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
