@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 17:55:51 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 19:36:27 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/30 19:47:56 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	debug_print_info(t_info *rt);
 static void	debug_print_cy(t_cylinder cy);
+static void	debug_print_pl(t_plane pl);
 
 int	main(int argc, char **argv)
 {
@@ -51,6 +52,8 @@ static void	debug_print_info(t_info *rt)
 		printf("Object [%zu/%zu] -> ", i + 1, rt->n_objs);
 		if (ELEMENT_CYLINDER == rt->objs[i].id)
 			debug_print_cy(rt->objs[i].cy);
+		else if (ELEMENT_PLANE == rt->objs[i].id)
+			debug_print_pl(rt->objs[i].pl);
 	}
 }
 
@@ -62,4 +65,12 @@ static void	debug_print_cy(t_cylinder cy)
 	printf("\t- diameter: %.2f\n", cy.diam);
 	printf("\t- height: %.2f\n", cy.height);
 	printf("\t- color: %.2f, %.2f, %.2f\n", cy.color.x, cy.color.y, cy.color.z);
+}
+
+static void	debug_print_pl(t_plane pl)
+{
+	printf(PRINT_PURPLE"plane:\n"PRINT_DEFAULT);
+	printf("\t- position: %.2f, %.2f, %.2f\n", pl.pos.x, pl.pos.y, pl.pos.z);
+	printf("\t- direction: %.2f, %.2f, %.2f\n", pl.dir.x, pl.dir.y, pl.dir.z);
+	printf("\t- color: %.2f, %.2f, %.2f\n", pl.color.x, pl.color.y, pl.color.z);
 }
