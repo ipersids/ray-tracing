@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:58:48 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/29 19:05:32 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/30 11:10:43 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,17 @@ int	rt_parse_scene(t_info *rt, char **scene)
 	exit_code = validate_object_type(&cnt, scene);
 	if (0 != exit_code)
 		return (exit_code);
-	rt->objs = malloc(cnt.figures * sizeof(t_object));
-	if (!rt->objs)
-		return (ERR_SYSTEM);
-	rt->lights = malloc(cnt.lights * sizeof(t_object));
-	if (!rt->lights)
-		return (ERR_SYSTEM);
+	exit_code = rt_init_objects(&cnt, rt);
+	if (0 != exit_code)
+		return (exit_code);
 	while (NULL != (*scene))
 	{
 		exit_code = parse_line(rt, *scene);
 		if (0 != exit_code)
 		{
-			printf("Line: %s\n", *scene);
+			ft_putstr_fd(PRINT_PURPLE"Line: "PRINT_DEFAULT, STDERR_FILENO);
+			ft_putstr_fd((*scene), STDERR_FILENO);
+			ft_putchar_fd('\n', STDERR_FILENO);
 			return (exit_code);
 		}
 		++scene;
@@ -101,7 +100,7 @@ static int	parse_line(t_info *rt, char *line)
 	else if (ELEMENT_CAMERA == type)
 		exit_code = rt_parse_camera(rt, line + 1);
 	else if (ELEMENT_LIGHT == type)
-		;// exit_code = rt_parse_light(rt, line + 1);
+		exit_code = rt_parse_light(rt, line + 1);
 	else if (ELEMENT_CYLINDER == type)
 		;// exit_code = rt_parse_cylinder(rt, line + 2);
 	else if (ELEMENT_PLANE == type)

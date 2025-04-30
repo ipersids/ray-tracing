@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:35:35 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/29 18:55:28 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/29 23:32:02 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,6 @@ typedef struct s_camera
 	int		fov;				// Horizontal field of view, degrees [0,180]: 70
 }			t_camera;
 
-# define DEFAULT_LIGHT_POSITION_X -40.0
-# define DEFAULT_LIGHT_POSITION_Y 50.0
-# define DEFAULT_LIGHT_POSITION_Z 0.0
-# define DEFAULT_LIGHT_BRIGHTNESS 0.6
-// # define DEFAULT_LIGHT_COLOR {10, 0, 255}
-
 typedef struct s_light
 {
 	t_point	pos;				// x,y,z of the light point: -40.0,50.0,0.0
@@ -176,9 +170,9 @@ typedef struct s_info
 	t_ambient_light	ambient;
 	t_camera		camera;
 	t_light			*lights;
+	size_t			n_lights;
 	t_object		*objs;
 	size_t			n_objs;
-	size_t			n_lights;
 }	t_info;
 
 /* ------------------------- Parser helper structures ----------------------- */

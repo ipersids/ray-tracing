@@ -6,13 +6,11 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 18:00:31 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/26 14:50:11 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/04/30 10:52:13 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-static int	get_ration(float *ratio, char *line, char **next);
 
 int	rt_parse_ambient(t_info *rt, char *line)
 {
@@ -23,33 +21,14 @@ int	rt_parse_ambient(t_info *rt, char *line)
 	exit_code = 0;
 	while (ft_isspace(*line))
 		++line;
-	exit_code = get_ration(&rt->ambient.ratio, line, &next);
-	if (0 != exit_code)
-		return (exit_code);
-	line = next;
-	while (ft_isspace(*line))
-		++line;
-	exit_code = rt_parse_color(&rt->ambient.color, line, &next);
-	if (0 != exit_code)
-		return (exit_code);
-	line = next;
-	while (ft_isspace(*line))
-		++line;
-	if ('\0' != *line)
+	exit_code = rt_parse_float(&rt->ambient.ratio, &line, &next);
+	if (0 != exit_code || 0 == ft_isspace(*next))
 		return (ERR_OBJECT_CONFIG);
-	return (0);
-}
-
-static int	get_ration(float *ratio, char *line, char **next)
-{
-	float	res;
-
-	res = 10.0;
-	res = (float)ft_strtod(line, next);
-	if (line == *next)
-		return (ERR_OBJECT_CONFIG);
-	if (0.0 > res || 1.0 < res)
+	if (0.0 > rt->ambient.ratio || 1.0 < rt->ambient.ratio)
 		return (ERR_OBJECT_CONFIG_LIMITS);
-	*ratio = res;
-	return (0);
+	exit_code = rt_parse_color(&rt->ambient.color, &line, &next);
+	if (0 != exit_code)
+		return (exit_code);
+	exit_code = rt_validate_end_of_line(&line, &next);
+	return (exit_code);
 }
