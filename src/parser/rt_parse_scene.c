@@ -6,16 +6,46 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:58:48 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 19:49:12 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/01 01:49:39 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/* --------------------- Private function prototypes ----------------------- */
+
+/**
+ * @brief Get the type of object from a line.
+ * @param line The input line containing object data.
+ * @return t_type The type of the object.
+ */
 static t_type	get_object_type(char *line);
+
+/**
+ * @brief Validate object types and count their occurrences.
+ * @param cnt Pointer to the counter structure.
+ * @param scene Array of strings representing the scene.
+ * @return int 0 on success, or an error code.
+ */
 static int		validate_object_type(t_counter *cnt, char **scene);
+
+/**
+ * @brief Parse a single line of the scene.
+ * @param rt Pointer to the ray tracing information structure.
+ * @param line The input line to parse.
+ * @return int 0 on success, or an error code.
+ */
 static int		parse_line(t_info *rt, char *line);
 
+/* --------------------------- Public Functions ---------------------------- */
+
+/**
+ * @brief Parse the entire scene from an array of strings.
+ * 
+ * @param rt Pointer to the ray tracing information structure.
+ * @param scene Array of strings representing the scene.
+ * @return int 0 on success, or an error code.
+ */
 int	rt_parse_scene(t_info *rt, char **scene)
 {
 	int			exit_code;
@@ -43,8 +73,12 @@ int	rt_parse_scene(t_info *rt, char **scene)
 	return (0);
 }
 
+/* ------------------- Private Function Implementation --------------------- */
+
 static t_type	get_object_type(char *line)
 {
+	while (0 != ft_isspace(*line))
+		++line;
 	if (ft_strncmp(line, "A", 1) == 0 && ft_isspace(line[1]))
 		return (ELEMENT_AMBIENT);
 	if (ft_strncmp(line, "C", 1) == 0 && ft_isspace(line[1]))
@@ -94,6 +128,8 @@ static int	parse_line(t_info *rt, char *line)
 	int		exit_code;
 
 	exit_code = 0;
+	while (0 != ft_isspace(*line))
+		++line;
 	type = get_object_type(line);
 	if (ELEMENT_AMBIENT == type)
 		exit_code = rt_parse_ambient(rt, line + 1);
