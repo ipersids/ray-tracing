@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:35:35 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 14:49:44 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/09 23:01:55 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ typedef t_vec3	t_point;
 typedef t_vec3	t_color;
 
 # define DEFAULT_AMBIENT_RATIO 0.2
-# define DEFAULT_AMBIENT_COLOR_R 255
-# define DEFAULT_AMBIENT_COLOR_G 255
-# define DEFAULT_AMBIENT_COLOR_B 255
+# define DEFAULT_AMBIENT_COLOR_R 255.0
+# define DEFAULT_AMBIENT_COLOR_G 255.0
+# define DEFAULT_AMBIENT_COLOR_B 255.0
 
 typedef struct s_ambient_light
 {
@@ -153,17 +153,45 @@ typedef struct s_object
 	};
 }					t_object;
 
+/* --------------------- MLX42 constants and structures  ------------------- */
+
+// Default resolutions for window (16:9 aspect ratio):
+
+// 128x72 is the smallest alternative
+# define WIDTH_MIN 640
+# define HEIGHT_MIN 360
+# define WIDTH_DEFAULT 1280	// W = 16/9 * H
+# define HEIGHT_DEFAULT 720	// H = 9/16 * W
+
+// Window Title:
+# define NAME "Mini Ray Traycer"
+
+# define RGBA 4
+
+/**
+ * @brief Structure representing a window data
+ * Managed by MLX42 lib
+ */
+typedef struct s_canvas
+{
+	mlx_t		*mlx;
+	int32_t		width;
+	int32_t		height;
+	mlx_image_t	*img;
+}				t_canvas;
+
 /* -------------------------- Main minirt structure  ----------------------- */
 
 typedef struct s_info
 {
-	t_ambient_light	ambient;
-	t_camera		camera;
-	t_light			*lights;
-	size_t			n_lights;
-	t_object		*objs;
-	size_t			n_objs;
-}	t_info;
+	t_ambient_light	ambient;	// Ambient lightning data
+	t_camera		camera;		// Camera data
+	t_light			*lights;	// Array to store lights on the scene
+	size_t			n_lights;	// Amount of lights in the *lights array
+	t_object		*objs;		// Array to store scene's objects (sp, pl, cy)
+	size_t			n_objs;		// Amount of items in the *objs array
+	t_canvas		win;		// mlx window and images info struct
+}					t_info;
 
 /* ------------------------- Parser helper structures ----------------------- */
 

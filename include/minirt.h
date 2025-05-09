@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:15:50 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/30 19:57:32 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/09 23:01:36 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,15 @@
 # include <errno.h>				// strerror dependency
 # include <unistd.h>			// close, write, read
 # include <stdlib.h>			// malloc, free, exit
+# include <stdbool.h>			// `bool` data type
 
-# include "minirt_data.h"
+# include "minirt_data.h"		// custom data structures and constants
 
 /* ----------------------------- Initialisation  --------------------------- */
 
 void	rt_init_info(t_info *rt);
 int		rt_init_objects(t_counter *cnt, t_info *rt);
+int		rt_init_canvas(t_info *rt);
 
 /* ------------------------- Validation and Parsing  ----------------------- */
 
@@ -62,5 +64,10 @@ int		rt_validate_end_of_line(char **startptr, char **endptr);
 void	rt_perror(int exit_code);
 void	rt_free_arr(void **arr, int i);
 void	rt_destroy_exit(t_info *rt, int exit_code);
+
+/* ------------------------- Canvas: MLX42 managment ------------------------ */
+
+void	rt_press_esc_hook(void *param);
+void	rt_close_window_hook(void *param);
 
 #endif // MINIRT_H

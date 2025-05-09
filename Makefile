@@ -6,7 +6,7 @@
 #    By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 17:34:34 by ipersids          #+#    #+#              #
-#    Updated: 2025/04/30 20:03:48 by ipersids         ###   ########.fr        #
+#    Updated: 2025/05/09 22:55:49 by ipersids         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC_DIR			:= src
 
 # Sources and objects
 SRCS			:= src/constructor/rt_init_info.c src/constructor/rt_init_objects.c \
+				   src/constructor/rt_init_canvas.c \
 				   \
 				   src/destructor/rt_destroy_exit.c src/destructor/rt_free_arr.c \
 				   src/destructor/rt_perror.c \
@@ -55,11 +56,16 @@ SRCS			:= src/constructor/rt_init_info.c src/constructor/rt_init_objects.c \
 				   src/parser/rt_parse_scene.c src/parser/rt_read_scene.c \
 				   src/parser/rt_validate_input.c src/parser/rt_parse_cylinder.c \
 				   src/parser/rt_parse_plane.c src/parser/rt_parse_sphere.c \
+				   \
+				   src/hook/hook_close_window.c
 				   
 SRC_MAIN		:= src/main.c
 
 OBJS			:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 OBJ_MAIN		:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_MAIN))
+
+#for tarcking changes in header files
+H_FILES			:= include/minirt_data.h include/minirt.h
 
 # RULES
 all: update-submodule build-submodule $(NAME)
@@ -67,7 +73,7 @@ all: update-submodule build-submodule $(NAME)
 $(NAME): $(OBJS) $(OBJ_MAIN)
 	$(CC) $(CFLAGS) $(OBJS) $(OBJ_MAIN) $(HDRS) $(LIBS) -o $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(H_FILES)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(HDRS) -c $< -o $@
 
@@ -82,12 +88,12 @@ fclean: clean
 
 re: fclean all
 
-# Rule: update submodule MLX42 --init
+# Rule: update submodules (MLX42 and libft)
 update-submodule:
-	git submodule init
-	git submodule update --recursive
+	@git submodule init
+	@git submodule update --recursive
 
-# Rule: build Submodule MLX42
+# Rule: build submodule MLX42 and compile libft
 build-submodule:
 	cd $(SUBM_MLX_DIR) && cmake -B build && cmake --build build -j4
 	@echo "\nMLX42 is ready.\n"

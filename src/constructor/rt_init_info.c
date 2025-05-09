@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/01 01:18:16 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/09 22:35:36 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ static void	init_ambient(t_ambient_light *ambient);
  */
 static void	init_camera(t_camera *camera);
 
+/**
+ * @brief Initializes the canvas with the necessary properties.
+ * @param window A pointer to the `t_canvas` structure to be initialized.
+ */
+static void	init_canvas(t_canvas *window);
+
 /* --------------------------- Public Functions ---------------------------- */
 
 /**
@@ -36,6 +42,7 @@ void	rt_init_info(t_info *rt)
 {
 	init_ambient(&rt->ambient);
 	init_camera(&rt->camera);
+	init_canvas(&rt->win);
 	rt->objs = NULL;
 	rt->n_objs = 0;
 	rt->lights = NULL;
@@ -61,4 +68,12 @@ static void	init_camera(t_camera *camera)
 	camera->dir.y = DEFAULT_CAMERA_DIRECTION_Y;
 	camera->dir.z = DEFAULT_CAMERA_DIRECTION_Z;
 	camera->fov = DEFAULT_CAMERA_FOV;
+}
+
+static void	init_canvas(t_canvas *window)
+{
+	window->mlx = NULL;
+	window->height = HEIGHT_DEFAULT;
+	window->width = WIDTH_DEFAULT;
+	window->img = NULL;
 }
