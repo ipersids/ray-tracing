@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 23:54:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/01 01:27:19 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/10 10:55:17 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ int	rt_parse_coord(t_point *pos, char **start, char **endptr, bool is_norm)
 /**
  * @brief Parse a color value from a string.
  * 
+ * Colors from the scene file are represented in the RGB [0, 255] range and 
+ * will be normalized to fit the [0.0, 1.0] range.
+ * 
  * @param color Pointer to store the parsed color.
  * @param start Pointer to the start of the string.
  * @param endptr Pointer to a pointer to the character where parsing stopped.
@@ -113,6 +116,9 @@ int	rt_parse_color(t_color *color, char **start, char **endptr)
 		return (ERR_OBJECT_CONFIG);
 	if (0.0 > color->z || 255.0 < color->z)
 		return (ERR_OBJECT_CONFIG_LIMITS);
+	color->x = color->x / 255.0;
+	color->y = color->y / 255.0;
+	color->z = color->z / 255.0;
 	return (0);
 }
 
