@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:15:50 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/10 10:56:09 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/12 02:18:52 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
  * 
  * @note:
  * - lightning model: https://learnopengl.com/Lighting/Basic-Lighting
+ * - Physically Based Rendering: From Theory to Implementation: 
+ *   https://pbr-book.org/4ed/contents (advanced)
+ * - The Cherno Ray Tracing youtube playlist
+ *   https://www.youtube.com/playlist?list=PLlrATfBNZ98edc5GshdBtREv5asFW3yXl
+ * - Welcome to Computer Graphics: https://scratchapixel.com/
  */
 
 #ifndef MINIRT_H
