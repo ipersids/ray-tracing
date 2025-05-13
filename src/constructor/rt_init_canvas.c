@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 20:31:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/12 01:14:18 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:55:59 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,12 @@ static int	init_window(t_canvas *window)
 	return (0);
 }
 
+/// @todo:
+/// - add resize hook
+/// - add translation and rotation transformation
 static void	init_hook(t_info *rt)
 {
+	rt_camera_render(rt); /// @test
 	mlx_loop_hook(rt->win.mlx, rt_press_esc_hook, rt);
 	mlx_close_hook(rt->win.mlx, rt_close_window_hook, rt);
 	mlx_loop(rt->win.mlx);

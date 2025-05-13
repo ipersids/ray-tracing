@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minirt_data.h                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 14:35:35 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/12 00:59:06 by ipersids         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINIRT_DATA_H
 # define MINIRT_DATA_H
 
@@ -184,6 +172,20 @@ typedef struct s_canvas
 	bool		rendered;
 	mlx_image_t	*img;
 }				t_canvas;
+
+/* ------------------------ Ray and render structures  --------------------- */
+
+typedef enum e_ray_type
+{
+	RAY_CAMERA,
+}	t_ray_type;
+
+typedef struct s_ray
+{
+	t_point		orig;
+	t_vec3		dir;
+	t_ray_type	type;
+}				t_ray;
 
 /* -------------------------- Main minirt structure  ----------------------- */
 
