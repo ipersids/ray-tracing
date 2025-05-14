@@ -60,6 +60,20 @@ void	rt_perror(int exit_code);
 void	rt_free_arr(void **arr, int i);
 void	rt_destroy_exit(t_info *rt, int exit_code);
 
+/* ------------------------------ Calculations ----------------------------- */
+
+t_vec3	addition(t_vec3 vec_a, t_vec3 vec_b);
+t_vec3	subtractation(t_vec3 vec_a, t_vec3 vec_b);
+t_vec3	negation(t_vec3 vec);
+t_vec3	multiplication(t_vec3 vec, float multiplier);
+t_vec3	division(t_vec3 vec, float divider);
+t_vec3	normalize(t_vec3 vec);
+t_vec3	cross_product(t_vec3 a, t_vec3 b);
+t_vec3	multiply_colors(t_vec3 a, t_vec3 b);
+
+float	magnitude(t_vec3 vec);
+float	dot_product(t_vec3 a, t_vec3 b);
+
 /* ------------------------- Canvas: MLX42 managment ------------------------ */
 /// @dir src/hook
 /// @file src/hook/hook_close_window.c
