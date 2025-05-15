@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:19:51 by ipersids          #+#    #+#             */
-/*   Updated: 2025/04/26 14:33:48 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/15 10:58:15 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ static const char	*get_error_message(int exit_code)
 		"Unknown element in scene file",
 		"Incorrect number of elements in scene file",
 		"Invalid element configuration in scene file",
-		"Value exceeded allowed limits"
+		"Value exceeded allowed limits",
+		"Camera orientation vector cannot be aprox_eq(0.0, 0.0, 0.0)"
 	};
 
 	if (!(ERR_MLX42 < exit_code && ERR_MAX > exit_code))
