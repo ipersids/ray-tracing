@@ -6,7 +6,7 @@
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:41:44 by reerikai          #+#    #+#             */
-/*   Updated: 2025/05/15 12:16:08 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:19:02 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_vec3	division(t_vec3 vec, float divider)
 
 /*
 	MAGNITUDE
-	The distance represented by a vvector is called its magnitude or length.
+	The distance represented by a vector is called its magnitude or length.
 	It's how far you would travel in a straight line if you were to walk from
 	one end of the vector to the other.
 	Vectors with magnitude of 1 are called 'unit vectors'.
