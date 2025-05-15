@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 01:47:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/15 12:44:53 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:20:45 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	rt_camera_render(t_info *rt)
 		px = 0;
 		while (px < rt->win.img->width)
 		{
-			ray = rt_get_ray(&rt->camera, px, py);
+			ray = rt_get_ray(&rt->camera, py, px);
 			ray_color = rt_get_ray_color(&ray);
 			rgba = rt_convert_to_rgba(&ray_color);
 			mlx_put_pixel(rt->win.img, px, py, rgba);
