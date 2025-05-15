@@ -7,14 +7,16 @@
 */
 t_ray	rt_get_ray(t_camera *camera, int32_t px, int32_t py)
 {
-	t_point	px_center = addition(
+	t_point	px_center;
+	t_vec3	ray_direction;
+	
+	px_center= addition(
 		camera->px00_loc, addition(
-			multiplication(camera->px_delta_u, py),
-			multiplication(camera->px_delta_v, px)
+			multiplication(camera->px_delta_u, px),
+			multiplication(camera->px_delta_v, py)
 		)
 	);
-
-	t_vec3 ray_direction = subtractation(px_center, camera->pos);
+	ray_direction = subtractation(px_center, camera->pos);
 	return ((t_ray){camera->pos, ray_direction, RAY_CAMERA});
 }
 

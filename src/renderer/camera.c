@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 01:47:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/15 14:20:45 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/16 00:38:02 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ void	rt_camera_render(t_info *rt)
 
 	py = 0;
 	camera_init(&rt->camera, &rt->win);
+	debug_print_camera(&rt->camera); /// @todo delete
+	debug_print_world(&rt->win); /// @todo delete
 	while (py < rt->win.img->height)
 	{
 		px = 0;
 		while (px < rt->win.img->width)
 		{
-			ray = rt_get_ray(&rt->camera, py, px);
+			ray = rt_get_ray(&rt->camera, px, py);
 			ray_color = rt_get_ray_color(&ray);
 			rgba = rt_convert_to_rgba(&ray_color);
 			mlx_put_pixel(rt->win.img, px, py, rgba);
@@ -43,8 +45,8 @@ static void	camera_init(t_camera *cam, t_canvas *win)
 {
 	t_vec3	vp_center;
 
-	cam->right = normalize(cross_product(cam->forward, WORLD_UP));
-	cam->up = normalize(cross_product(cam->right, cam->forward));
+	cam->right = cross_product(cam->forward, WORLD_UP);
+	cam->up = cross_product(cam->right, cam->forward);
 	cam->vport_h = 2.0f * tan((cam->fov * M_PI / 180.0f) / 2.0f) * cam->focal_len;
 	cam->vport_w = cam->vport_h * ((float)win->img->width / win->img->height);
 	cam->vport_u = multiplication(cam->right, cam->vport_w);

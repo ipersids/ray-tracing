@@ -25,6 +25,7 @@
 
 # include "minirt_data.h"		// custom data structures and constants
 # include "minirt_renderer.h"	// camera, ray, colors related functions
+# include "display_config.h"	// debug print objects config
 
 /* ----------------------------- Initialisation  --------------------------- */
 /// @dir src/constructor
