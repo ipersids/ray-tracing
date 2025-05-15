@@ -1,18 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 18:15:50 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/10 10:56:09 by ipersids         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 /**
  * @todo:
- * 
+ *
  * @note:
  * - lightning model: https://learnopengl.com/Lighting/Basic-Lighting
  */
@@ -65,9 +54,25 @@ void	rt_perror(int exit_code);
 void	rt_free_arr(void **arr, int i);
 void	rt_destroy_exit(t_info *rt, int exit_code);
 
+/* ------------------------------ Calculations ----------------------------- */
+
+t_vec3	addition(t_vec3 vec_a, t_vec3 vec_b);
+t_vec3	subtractation(t_vec3 vec_a, t_vec3 vec_b);
+t_vec3	negation(t_vec3 vec);
+t_vec3	multiplication(t_vec3 vec, float multiplier);
+t_vec3	division(t_vec3 vec, float divider);
+t_vec3	normalize(t_vec3 vec);
+t_vec3	cross_product(t_vec3 a, t_vec3 b);
+t_vec3	multiply_colors(t_vec3 a, t_vec3 b);
+
+float	magnitude(t_vec3 vec);
+float	dot_product(t_vec3 a, t_vec3 b);
+
+
 /* ------------------------- Canvas: MLX42 managment ------------------------ */
 
 void	rt_press_esc_hook(void *param);
 void	rt_close_window_hook(void *param);
 
 #endif // MINIRT_H
+
