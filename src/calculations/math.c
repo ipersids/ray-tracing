@@ -6,7 +6,7 @@
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:41:44 by reerikai          #+#    #+#             */
-/*   Updated: 2025/05/15 11:46:05 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/05/15 12:16:08 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,37 +163,3 @@ t_vec3	multiply_colors(t_vec3 a, t_vec3 b)
 	result.z = a.z * b.z;
 	return (result);
 }
-
-
-
-// /*---	Tuples and added w value in the struct	---*/
-
-// typedef	struct	s_tuple
-// {
-// 	float	x;
-// 	float	y;
-// 	float	z;
-// 	float	w; // If w == 1 it's a point, if w == 0 it's a vector
-// }			t_tuple;
-
-// t_tuple	addition(t_tuple a, t_tuple b)
-// {
-// 	t_tuple result;
-
-// 	result.x = a.x + b.x;
-// 	result.y = a.y + b.y;
-// 	result.z = a.z + b.z;
-// 	result.w = a.w + b.w;
-// 	return (result);
-// }
-
-// t_tuple	subtractation(t_tuple a, t_tuple b)
-// {
-// 	t_tuple result;
-
-// 	result.x = a.x - b.x;
-// 	result.y = a.y - b.y;
-// 	result.z = a.z - b.z;
-// 	result.w = a.w - b.w;
-// 	return (result);
-// }
