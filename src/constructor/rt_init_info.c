@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/12 00:09:37 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/15 12:29:04 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,19 @@ void	rt_init_info(t_info *rt)
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static void	init_ambient(t_ambient_light *ambient)
+static void	init_ambient(t_ambient_light *amb)
 {
-	ambient->color.x = DEFAULT_AMBIENT_COLOR_R;
-	ambient->color.y = DEFAULT_AMBIENT_COLOR_G;
-	ambient->color.z = DEFAULT_AMBIENT_COLOR_B;
-	ambient->ratio = DEFAULT_AMBIENT_RATIO;
+	amb->color = DEFAULT_AMBIENT_COLOR;
+	amb->ratio = DEFAULT_AMBIENT_RATIO;
 }
 
-static void	init_camera(t_camera *camera)
+static void	init_camera(t_camera *cam)
 {
-	camera->pos.x = DEFAULT_CAMERA_POSITION_X;
-	camera->pos.y = DEFAULT_CAMERA_POSITION_Y;
-	camera->pos.z = DEFAULT_CAMERA_POSITION_Z;
-	camera->dir.x = DEFAULT_CAMERA_DIRECTION_X;
-	camera->dir.y = DEFAULT_CAMERA_DIRECTION_Y;
-	camera->dir.z = DEFAULT_CAMERA_DIRECTION_Z;
-	camera->fov = DEFAULT_CAMERA_FOV;
+	ft_memset(cam, 0, sizeof(t_camera));
+	cam->forward = DEFAULT_CAMERA_ORIENTATION;
+	cam->pos = DEFAULT_CAMERA_POSITION;
+	cam->fov = DEFAULT_CAMERA_FOV;
+	cam->focal_len = CAMERA_FOCAL_LENGTH;
 }
 
 static void	init_canvas(t_canvas *window)
@@ -77,5 +73,6 @@ static void	init_canvas(t_canvas *window)
 	window->width = WIDTH_DEFAULT;
 	window->img = NULL;
 	window->a_ratio = ASPECT_RATIO;
+	window->world_up = WORLD_UP;
 	window->rendered = false;
 }

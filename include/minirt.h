@@ -62,6 +62,7 @@ void	rt_destroy_exit(t_info *rt, int exit_code);
 
 /* ------------------------------ Calculations ----------------------------- */
 
+bool	equal(float a, float b);
 t_vec3	addition(t_vec3 vec_a, t_vec3 vec_b);
 t_vec3	subtractation(t_vec3 vec_a, t_vec3 vec_b);
 t_vec3	negation(t_vec3 vec);

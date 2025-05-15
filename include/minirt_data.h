@@ -40,6 +40,7 @@ typedef enum s_error
 	ERR_OBJECT_AMOUNT,
 	ERR_OBJECT_CONFIG,
 	ERR_OBJECT_CONFIG_LIMITS,
+	ERR_CAMERA_ORIENT_VECTOR,
 	ERR_MAX
 }	t_error;
 
@@ -74,10 +75,8 @@ typedef t_vec3	t_point;
 
 typedef t_vec3	t_color;
 
-# define DEFAULT_AMBIENT_RATIO 0.2
-# define DEFAULT_AMBIENT_COLOR_R 1.0
-# define DEFAULT_AMBIENT_COLOR_G 1.0
-# define DEFAULT_AMBIENT_COLOR_B 1.0
+# define DEFAULT_AMBIENT_RATIO 0.2f
+# define DEFAULT_AMBIENT_COLOR (t_color){1.0f, 1.0f, 1.0f}
 
 typedef struct s_ambient_light
 {
@@ -85,19 +84,28 @@ typedef struct s_ambient_light
 	t_color	color;				// R,G,B colors in range [0.0-1.0]
 }			t_ambient_light;
 
-# define DEFAULT_CAMERA_POSITION_X -50.0
-# define DEFAULT_CAMERA_POSITION_Y 0.0
-# define DEFAULT_CAMERA_POSITION_Z 20.0
-# define DEFAULT_CAMERA_DIRECTION_X 0.0
-# define DEFAULT_CAMERA_DIRECTION_Y 0.0
-# define DEFAULT_CAMERA_DIRECTION_Z 1.0
-# define DEFAULT_CAMERA_FOV 70.0
+# define DEFAULT_CAMERA_POSITION (t_point){-50.0f, 0.0f, 20.0f}
+# define DEFAULT_CAMERA_ORIENTATION (t_vec3){0.0f, 0.0f, 1.0f}
+# define DEFAULT_CAMERA_FOV 70.0f
+# define CAMERA_SPEED 0.05f
+# define CAMERA_FOCAL_LENGTH 1.0f
 
 typedef struct s_camera
 {
 	t_point	pos;				// x,y,z of the camera position
-	t_vec3	dir;				// 3d norm. orientation vector
+	t_vec3	forward;			// 3d norm. orientation vector
 	float	fov;				// Horizontal field of view, degrees [0.0,180.0]
+	t_point	px00_loc;
+	t_vec3	px_delta_u;
+	t_vec3	px_delta_v;
+	t_vec3	up;
+	t_vec3	right;
+	float	focal_len;
+	float	vport_h;
+	float	vport_w;
+	t_vec3	vport_u;
+	t_vec3	vport_v;
+	t_vec3	vport_upleft;
 }			t_camera;
 
 typedef struct s_light
@@ -153,11 +161,12 @@ typedef struct s_object
 # define WIDTH_DEFAULT 1280		// W = 16/9 * H
 # define HEIGHT_DEFAULT 720		// H = 9/16 * W
 # define ASPECT_RATIO 1.777778	// 16/9
+# define WORLD_UP (t_vec3){0.0f, 1.0f, 0.0f}
 
 // Window Title:
 # define NAME "Mini Ray Traycer"
 
-# define RGBA 4
+// # define RGBA 4
 
 /**
  * @brief Structure representing a window data
@@ -169,6 +178,7 @@ typedef struct s_canvas
 	int32_t		width;
 	int32_t		height;
 	float		a_ratio;
+	t_vec3		world_up;
 	bool		rendered;
 	mlx_image_t	*img;
 }				t_canvas;

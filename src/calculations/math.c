@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:41:44 by reerikai          #+#    #+#             */
-/*   Updated: 2025/05/14 12:59:42 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/05/15 12:46:41 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	equal(float a, float b)
 	float	epsilon;
 
 	epsilon = 0.00001; // Maybe define this in header?
-	if (abs(a - b) < epsilon)
+	if (fabs(a - b) < epsilon)
 		return (true);
 	return (false);
 }

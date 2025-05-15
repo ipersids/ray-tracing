@@ -6,7 +6,7 @@
 #    By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 17:34:34 by ipersids          #+#    #+#              #
-#    Updated: 2025/05/13 11:46:38 by ipersids         ###   ########.fr        #
+#    Updated: 2025/05/14 20:45:08 by ipersids         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,9 @@ SRCS			:= src/constructor/rt_init_info.c src/constructor/rt_init_objects.c \
 				   \
 				   src/hook/hook_close_window.c \
 				   \
-				   src/renderer/camera.c src/renderer/color.c src/renderer/ray.c
+				   src/renderer/camera.c src/renderer/color.c src/renderer/ray.c \
+				   \
+				   src/calculations/math.c
 				   
 SRC_MAIN		:= src/main.c
 

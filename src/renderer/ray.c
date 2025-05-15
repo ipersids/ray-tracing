@@ -1,18 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ray.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/13 02:04:21 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/13 02:04:34 by ipersids         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minirt.h"
 
-/// @todo: implement function to get ray from the eye-point
+/** @todo: implement function to get ray from the eye-point 
+ * 
+ *  @brief Calculates a ray from the eye-point (primary ray)
+ * 
+*/
 t_ray	rt_get_ray(t_camera *camera, int32_t px, int32_t py)
 {
 	(void)camera;
