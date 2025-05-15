@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 18:15:50 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/14 14:07:42 by reerikai         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 /**
  * @todo:
@@ -30,13 +19,15 @@
 # include <errno.h>				// strerror dependency
 # include <unistd.h>			// close, write, read
 # include <stdlib.h>			// malloc, free, exit
+# include <stdbool.h>			// `bool` data type
 
-# include "minirt_data.h"
+# include "minirt_data.h"		// custom data structures and constants
 
 /* ----------------------------- Initialisation  --------------------------- */
 
 void	rt_init_info(t_info *rt);
 int		rt_init_objects(t_counter *cnt, t_info *rt);
+int		rt_init_canvas(t_info *rt);
 
 /* ------------------------- Validation and Parsing  ----------------------- */
 
@@ -77,4 +68,11 @@ t_vec3	multiply_colors(t_vec3 a, t_vec3 b);
 float	magnitude(t_vec3 vec);
 float	dot_product(t_vec3 a, t_vec3 b);
 
+
+/* ------------------------- Canvas: MLX42 managment ------------------------ */
+
+void	rt_press_esc_hook(void *param);
+void	rt_close_window_hook(void *param);
+
 #endif // MINIRT_H
+
