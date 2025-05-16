@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 20:31:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/13 11:55:59 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/16 20:54:37 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	rt_init_canvas(t_info *rt)
 
 static int	init_window(t_canvas *window)
 {
-	int32_t		width;
-	int32_t		height;
+	int32_t	width;
+	int32_t	height;
 
 	width = WIDTH_DEFAULT;
 	height = HEIGHT_DEFAULT;
@@ -77,12 +77,12 @@ static int	init_window(t_canvas *window)
 }
 
 /// @todo:
-/// - add resize hook
 /// - add translation and rotation transformation
 static void	init_hook(t_info *rt)
 {
-	rt_camera_render(rt); /// @test
+	mlx_resize_hook(rt->win.mlx, rt_resize_hook, rt);
 	mlx_loop_hook(rt->win.mlx, rt_press_esc_hook, rt);
+	mlx_loop_hook(rt->win.mlx, rt_render_hook, rt);
 	mlx_close_hook(rt->win.mlx, rt_close_window_hook, rt);
 	mlx_loop(rt->win.mlx);
 }
