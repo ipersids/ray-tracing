@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 01:47:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/16 01:54:56 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/16 12:07:04 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	rt_camera_render(t_info *rt)
 	uint32_t	px;
 	uint32_t	py;
 	t_ray		ray;
-	t_color		ray_color;
+	t_color		ray_col;
 	uint32_t	rgba;
 
 	py = 0;
@@ -41,8 +41,8 @@ void	rt_camera_render(t_info *rt)
 		while (px < rt->win.img->width)
 		{
 			ray = rt_get_ray(&rt->camera, px, py);
-			ray_color = rt_get_ray_color(&ray);
-			rgba = rt_convert_to_rgba(&ray_color);
+			ray_col = ray_color(ray);
+			rgba = rt_convert_to_rgba(&ray_col);
 			mlx_put_pixel(rt->win.img, px, py, rgba);
 			++px;
 		}
@@ -89,8 +89,8 @@ static void	camera_init(t_camera *cam, t_canvas *win)
 	cam->px_delta_v = division(cam->vport_v, (float)win->img->height);
 	vp_center = addition(
 			cam->pos, multiplication(cam->forward, cam->focal_len));
-	cam->vport_upleft = subtractation(
-			subtractation(vp_center, division(cam->vport_u, 2.0f)),
+	cam->vport_upleft = subtraction(
+			subtraction(vp_center, division(cam->vport_u, 2.0f)),
 			division(cam->vport_v, 2.0f)
 			);
 	cam->px00_loc = addition(

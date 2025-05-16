@@ -6,7 +6,7 @@
 #    By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 17:34:34 by ipersids          #+#    #+#              #
-#    Updated: 2025/05/16 00:38:31 by ipersids         ###   ########.fr        #
+#    Updated: 2025/05/16 12:02:26 by ipersids         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,9 @@ SRCS			:= src/constructor/rt_init_info.c src/constructor/rt_init_objects.c \
 				   \
 				   src/calculations/math.c \
 				   \
-				   src/display-config/debug_utils.c
+				   src/display-config/debug_utils.c \
+				   \
+				   src/shapes/sphere.c
 				   
 SRC_MAIN		:= src/main.c
 

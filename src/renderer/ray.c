@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 01:38:23 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/16 01:51:01 by ipersids         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minirt.h"
 
 /* --------------------------- Public Functions ---------------------------- */
@@ -34,30 +22,26 @@ t_ray	rt_get_ray(t_camera *camera, int32_t px, int32_t py)
 	px_center = addition(camera->px00_loc, addition(
 				multiplication(camera->px_delta_u, px),
 				multiplication(camera->px_delta_v, py)));
-	ray_direction = subtractation(px_center, camera->pos);
+	ray_direction = subtraction(px_center, camera->pos);
 	return ((t_ray){camera->pos, ray_direction, RAY_CAMERA});
 }
 
 /// @todo: implement function to get color of the ray
-/**
- * @brief Calculates the color of a ray based on its direction.
- * 
- * This function generates a gradient color based on the normalized direction
- * of the ray. The gradient transitions from white to a sky-blue color.
- * 
- * @param ray Pointer to the ray structure.
- * @return t_color The calculated color for the ray.
- */
-t_color	rt_get_ray_color(const t_ray *ray)
+t_color	ray_color(t_ray ray)
 {
-	t_vec3	ray_dir_norm;
-	t_color	col;
+	t_color	color;
+	t_color	white;
+	t_color	blue;
+	t_vec3	unit_direction;
 	float	a;
 
-	ray_dir_norm = normalize(ray->dir);
-	a = 0.5f * (ray_dir_norm.y + 1.0);
-	col = addition(
-			multiplication((t_vec3){1.0f, 1.0f, 1.0f}, 1.0f - a),
-			multiplication((t_vec3){0.5f, 0.7f, 1.0f}, a));
-	return (col);
+	/// @todo move logic for hitting objects to the camera
+	if (hit_sphere((t_vec3){-50.0f, 0.0f, 70.0f}, 10, ray)) /// @test
+		return ((t_color){1.0f, 0.0f, 0.0f});
+	unit_direction = normalize(ray.dir);
+	a = 0.5 * (unit_direction.y + 1.0);
+	white = (t_color){1.0, 1.0, 1.0};
+	blue = (t_color){0.5, 0.7, 1.0};
+	color = addition(multiplication(white, 1.0 - a), multiplication(blue, a));
+	return (color);
 }

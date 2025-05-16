@@ -11,10 +11,15 @@ void		rt_camera_render(t_info *rt);
 /// @file src/camera/ray.c
 
 t_ray		rt_get_ray(t_camera *camera, int32_t x, int32_t y);
-t_color		rt_get_ray_color(const t_ray *ray);
+t_color		ray_color(t_ray ray);
 
 /// @file src/renderer/color.c
 
 uint32_t	rt_convert_to_rgba(const t_color *color);
+
+/* --------------------------- Shapes calculations -------------------------- */
+/// @dir src/shapes
+
+bool	hit_sphere(t_point center, float radius, t_ray ray);
 
 #endif // MINIRT_RENDERER_H

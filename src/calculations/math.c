@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:41:44 by reerikai          #+#    #+#             */
-/*   Updated: 2025/05/15 14:19:02 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/05/16 11:58:27 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_vec3	addition(t_vec3 vec_a, t_vec3 vec_b)
 	return (result);
 }
 
-t_vec3	subtractation(t_vec3 vec_a, t_vec3 vec_b)
+t_vec3	subtraction(t_vec3 vec_a, t_vec3 vec_b)
 {
 	t_vec3 result;
 
