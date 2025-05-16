@@ -172,6 +172,8 @@ typedef struct s_object
 
 // # define RGBA 4
 
+# define FPS 0.01666666667 // 1/60
+
 /**
  * @brief Structure representing a window data
  * Managed by MLX42 lib
@@ -184,6 +186,8 @@ typedef struct s_canvas
 	float		a_ratio;
 	t_vec3		world_up;
 	bool		rendered;
+	bool		resized;
+	double		elapsed_time;
 	mlx_image_t	*img;
 }				t_canvas;
 

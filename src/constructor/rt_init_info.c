@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/15 12:29:04 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/16 20:41:44 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,6 @@ static void	init_canvas(t_canvas *window)
 	window->a_ratio = ASPECT_RATIO;
 	window->world_up = WORLD_UP;
 	window->rendered = false;
+	window->resized = false;
+	window->elapsed_time = 0;
 }
