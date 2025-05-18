@@ -50,6 +50,7 @@ t_color	ray_color(t_ray ray)
 	t = hit_sphere((t_vec3){-50.0f, 0.0f, 70.0f}, 10, ray);
 	if (t > 0.0)
 	{
+		// SAVE THE T VALUE IN A STRUCT TO GO THROUGH LATER OF ALL HITS?
 		hit_location = ray_hit(ray, t);
 		n = normalize(subtraction(hit_location, (t_vec3){-50.0f, 0.0f, 70.0f}));
 		color = multiplication((t_color){n.x + 1, n.y + 1, n.z + 1}, 0.5f);
