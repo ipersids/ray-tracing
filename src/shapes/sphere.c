@@ -33,7 +33,7 @@ float	hit_sphere(t_point center, float radius, t_ray ray)
 	float	c;
 	float	discriminant;
 
-	oc = subtraction(center, ray.orig);
+	oc = subtraction(ray.orig, center);
 	a = dot_product(ray.dir, ray.dir);
 	b = 2.0 * dot_product(ray.dir, oc);
 	c = dot_product(oc, oc) - radius * radius;

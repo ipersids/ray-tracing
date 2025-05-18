@@ -22,5 +22,6 @@ uint32_t	rt_convert_to_rgba(const t_color *color);
 
 // bool	hit_sphere(t_point center, float radius, t_ray ray);
 float	hit_sphere(t_point center, float radius, t_ray ray);
+t_vec3	ray_hit(t_ray ray, float t);
 
 #endif // MINIRT_RENDERER_H
