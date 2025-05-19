@@ -27,6 +27,8 @@
 # include "minirt_renderer.h"	// camera, ray, colors related functions
 # include "display_config.h"	// debug print objects config
 
+# include "minirt_matrix.h"		// matrices math library 
+
 /* ----------------------------- Initialisation  --------------------------- */
 /// @dir src/constructor
 
