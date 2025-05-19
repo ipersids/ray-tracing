@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse_sphere.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:49:23 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/11 23:50:30 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/19 10:57:58 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 /**
  * @brief Parse sphere settings from a string.
- * 
+ *
  * @param rt Pointer to the ray tracing information structure.
  * @param line The input line containing sphere data.
  * @return int 0 on success, or an error code.

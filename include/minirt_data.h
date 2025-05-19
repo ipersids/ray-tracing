@@ -23,14 +23,14 @@
 
 /**
  * @brief Error codes
- * 
+ *
  * - ERR_SYSTEM: callback strerror(errno);
  * - ERR_MLX42: callback mlx_strerror(mlx_errno);
- * 
+ *
  * Internal program errors:
  * - ERR_AGRC: The program received the wrong number of arguments.
  * - ERR_EXTENSION: The file has an incorrect extension.
- * 
+ *
  * - ERR_MAX - limiter for array of error messages.
  */
 typedef enum s_error
@@ -200,6 +200,19 @@ typedef struct s_ray
 	t_vec3		dir;
 	t_ray_type	type;
 }				t_ray;
+
+typedef struct s_intersection
+{
+	float		t;
+	t_object	object;
+}			t_intersection;
+
+
+typedef struct s_intersections
+{
+	t_intersection	t_values[2];
+	int				count;
+}			t_intersections;
 
 /* -------------------------- Main minirt structure  ----------------------- */
 
