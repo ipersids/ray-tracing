@@ -34,34 +34,6 @@ t_vec3	ray_hit(t_ray ray, float t)
 	return addition(ray.orig, scaled_direction);
 }
 
-// t_color	ray_color(t_ray ray)
-// {
-// 	float	t;
-// 	float	a;
-// 	t_vec3	n;
-// 	t_vec3	unit_direction;
-// 	t_vec3	hit_location;
-// 	t_color	color;
-// 	t_color	white;
-// 	t_color	blue;
-
-// 	white = (t_color){0.0, 1.0, 0.5};
-// 	blue = (t_color){0.5, 0.7, 1.0};
-// 	t = hit_sphere((t_vec3){-50.0f, 0.0f, 70.0f}, 10, ray);
-// 	if (t > 0.0)
-// 	{
-// 		// SAVE THE T VALUE IN A STRUCT TO GO THROUGH LATER OF ALL HITS?
-// 		hit_location = ray_hit(ray, t);
-// 		n = normalize(subtraction(hit_location, (t_vec3){-50.0f, 0.0f, 70.0f}));
-// 		color = multiplication((t_color){n.x + 1, n.y + 1, n.z + 1}, 0.5f);
-// 		return (color);
-// 	}
-// 	unit_direction = normalize(ray.dir);
-// 	a = 0.5 * (unit_direction.y + 1.0);
-// 	color = addition(multiplication(white, 1.0 - a), multiplication(blue, a));
-// 	return (color);
-// }
-
 t_color	ray_color(t_ray ray)
 {
 	float			t;
@@ -107,5 +79,28 @@ float	find_closest_intersection(t_intersections hits)
 		}
 		i++;
 	}
+	return (result);
+}
+
+t_vec3	normal_at(t_sphere sphere, t_point world_point)
+{
+	t_vec3	object_point;
+	t_vec3	object_normal;
+	t_vec3	world_normal;
+
+	object_point = inverse(sphere.transform) * world_point;
+	object_normal = subtraction(world_point, sphere.pos);
+	world_normal = transpose(inverse(sphere.transform)) * object_normal;
+	world_normal = normalize(world_normal);
+	return(world_normal);
+}
+
+t_vec3	reflect(t_vec3 in, t_vec3 normal)
+{
+	t_vec3	result;
+	t_vec3	scaled_norm;
+
+	scaled_norm = multiplication(normal, 2 * dot_product(in, normal));
+	result = subtraction(in, scaled_norm);
 	return (result);
 }

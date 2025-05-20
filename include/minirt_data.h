@@ -214,6 +214,15 @@ typedef struct s_intersections
 	int				count;
 }			t_intersections;
 
+typedef	struct s_material
+{
+	t_color	color;				// Color on the surface
+	float	ambient;			// Backgroud lighting or light reflected from other objects (0.0-1.0)
+	float	diffuse;			// Light reflected from a matte surface (0.0-1.0)
+	float	specular;			// Hightlight, the bright spot on a curved surface (0.0-1.0)
+	float	shininess;			// The size and sharpness of the specular reflection (10-200)
+}
+
 /* -------------------------- Main minirt structure  ----------------------- */
 
 typedef struct s_info
