@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook_resize_window.c                               :+:      :+:    :+:   */
+/*   radians.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 19:54:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/20 15:29:25 by ipersids         ###   ########.fr       */
+/*   Created: 2025/05/19 15:10:03 by ipersids          #+#    #+#             */
+/*   Updated: 2025/05/20 15:47:35 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	rt_resize_hook(int32_t width, int32_t height, void *param)
-{
-	t_info	*rt;
+/* --------------------------- Public Functions ---------------------------- */
 
-	rt = (t_info *)param;
-	rt->win.a_ratio = (float)width / (float)height;
-	rt->win.width = width;
-	rt->win.height = height;
-	rt->win.rendered = false;
-	rt->win.resized = true;
+/**
+ * @brief Converts degrees to radians.
+ * 
+ * @param degrees Angle in degrees.
+ * @return float Angle in radians.
+ */
+float	radians(float degrees)
+{
+	return (degrees * M_PI / 180.0f);
 }

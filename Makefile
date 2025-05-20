@@ -52,9 +52,19 @@ SRCS			:= src/constructor/rt_init_info.c src/constructor/rt_init_objects.c \
 				   \
 				   src/calculations/math.c \
 				   \
-				   src/display-config/debug_utils.c \
+				   src/calculations/matrices/create_base_matrix.c \
+				   src/calculations/matrices/create_base_transform.c \
+				   src/calculations/matrices/create_shearing_transform.c \
+				   src/calculations/radians.c src/calculations/matrices/operations.c \
+				   src/calculations/matrices/get_submatrix.c \
+				   src/calculations/matrices/inverse.c \
 				   \
-				   src/shapes/sphere.c
+				   src/shapes/sphere.c \
+				   \
+				   \
+				   \
+				   src/display-config/debug_utils.c src/display-config/test_matrix_math.c \
+				   src/display-config/test_matrix_transformation.c
 				   
 SRC_MAIN		:= src/main.c
 
@@ -63,7 +73,7 @@ OBJ_MAIN		:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_MAIN))
 
 #for tarcking changes in header files
 H_FILES			:= include/minirt_data.h include/minirt.h include/minirt_renderer.h \
-				   include/display_config.h
+				   include/minirt_matrix.h include/display_config.h
 
 # RULES
 all: update-submodule build-submodule $(NAME)
