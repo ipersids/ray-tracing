@@ -20,6 +20,6 @@ uint32_t	rt_convert_to_rgba(const t_color *color);
 /* --------------------------- Shapes calculations -------------------------- */
 /// @dir src/shapes
 
-bool	hit_sphere(t_point center, float radius, t_ray ray);
+bool		hit_sphere(t_point center, float radius, t_ray ray);
 
 #endif // MINIRT_RENDERER_H

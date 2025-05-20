@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:06:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/16 01:45:13 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:39:15 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,4 +132,21 @@ void	debug_print_world(t_canvas *win)
 	printf("\t- image height: %d\n", win->img->height);
 	printf("\t- world_up: {%.2f, %.2f, %.2f}\n",
 		win->world_up.x, win->world_up.y, win->world_up.z);
+}
+
+void	debug_print_matrix(t_matrix *m, char *msg)
+{
+	size_t	row;
+
+	printf(PRINT_PURPLE"\n%s:\n"PRINT_DEFAULT, msg);
+	row = 0;
+	while (m->dimension > row)
+	{
+		printf(
+			"\t[%.5f, %.5f, %.5f, %.5f]\n",
+			m->data[row][0], m->data[row][1],
+			m->data[row][2], m->data[row][3]
+		);
+		++row;
+	}
 }

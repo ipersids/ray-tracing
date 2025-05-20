@@ -25,9 +25,9 @@
 
 # include "minirt_data.h"		// custom data structures and constants
 # include "minirt_renderer.h"	// camera, ray, colors related functions
-# include "display_config.h"	// debug print objects config
-
 # include "minirt_matrix.h"		// matrices math library 
+
+# include "display_config.h"	// debug print objects config
 
 /* ----------------------------- Initialisation  --------------------------- */
 /// @dir src/constructor
@@ -84,7 +84,7 @@ float	dot_product(t_vec3 a, t_vec3 b);
 
 void	rt_press_esc_hook(void *param);
 void	rt_close_window_hook(void *param);
-void	rt_resize_hook(int32_t width, int32_t height, void* param);
+void	rt_resize_hook(int32_t width, int32_t height, void *param);
 void	rt_render_hook(void *param);
 
 #endif // MINIRT_H
