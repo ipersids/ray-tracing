@@ -20,6 +20,10 @@ uint32_t	rt_convert_to_rgba(const t_color *color);
 /* --------------------------- Shapes calculations -------------------------- */
 /// @dir src/shapes
 
-bool		hit_sphere(t_point center, float radius, t_ray ray);
+t_intersections	hit_sphere(t_point center, float radius, t_ray ray);
+t_vec3	ray_hit(t_ray ray, float t);
+t_vec3	normal_at(t_sphere sphere, t_point world_point);
+t_vec3	reflect(t_vec3 in, t_vec3 normal);
+float	find_closest_intersection(t_intersections hits);
 
 #endif // MINIRT_RENDERER_H

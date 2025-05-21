@@ -121,10 +121,11 @@ typedef struct s_light
 
 typedef struct s_sphere
 {
-	t_point	pos;				// x,y,z of sphere center
-	float	diam;				// the sphere diameter
-	float	r;					// the sphere radius
-	t_color	color;				// R,G,B colors in range [0.0-1.0]
+	t_point		pos;				// x,y,z of sphere center
+	float		diam;				// the sphere diameter
+	float		r;					// the sphere radius
+	t_color		color;				// R,G,B colors in range [0.0-1.0]
+	t_matrix	transform;
 }			t_sphere;
 
 typedef struct s_plane
@@ -204,6 +205,28 @@ typedef struct s_ray
 	t_vec3		dir;
 	t_ray_type	type;
 }				t_ray;
+
+typedef struct s_intersection
+{
+	float		t;
+	t_object	object;
+}			t_intersection;
+
+
+typedef struct s_intersections
+{
+	t_intersection	t_values[2];
+	int				count;
+}			t_intersections;
+
+typedef	struct s_material
+{
+	t_color	color;				// Color on the surface
+	float	ambient;			// Backgroud lighting or light reflected from other objects (0.0-1.0)
+	float	diffuse;			// Light reflected from a matte surface (0.0-1.0)
+	float	specular;			// Hightlight, the bright spot on a curved surface (0.0-1.0)
+	float	shininess;			// The size and sharpness of the specular reflection (10-200)
+}
 
 /* -------------------------- Main minirt structure  ----------------------- */
 
