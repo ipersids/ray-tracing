@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inverse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 12:12:30 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/20 15:44:07 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:04:33 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,28 @@
 
 /**
  * @brief Attempts to compute the inverse of a matrix.
- * 
+ *
  * Calculates the inverse of matrix `m` and stores the result in `res`.
  * Returns false if the matrix is not invertible (determinant is zero).
- * 
+ *
  * @param m The matrix to invert.
  * @param res Pointer to store the resulting inverse matrix.
  * @return true if the matrix is invertible, false otherwise.
  */
+
+t_matrix	inverse(t_matrix matrix)
+{
+	t_matrix	inv;
+
+	if (!matrix_try_inverse(matrix, &inv))
+	{
+		ft_putstr_fd("Could not invert matrix\n", 2);
+		inv = matrix_identity();
+		return(inv);
+	}
+	return (inv);
+}
+
 bool	matrix_try_inverse(t_matrix m, t_matrix *res)
 {
 	float	det;
@@ -50,7 +64,7 @@ bool	matrix_try_inverse(t_matrix m, t_matrix *res)
 
 /**
  * @brief Calculates the determinant of a matrix.
- * 
+ *
  * @param m The matrix.
  * @return float The determinant value.
  */
@@ -77,9 +91,9 @@ float	matrix_determinant(t_matrix m)
 
 /**
  * @brief Calculates the cofactor of a matrix element.
- * 
+ *
  * The cofactor is the signed minor of the element at (row, col).
- * 
+ *
  * @param m The matrix.
  * @param row The row index.
  * @param col The column index.
@@ -97,10 +111,10 @@ float	matrix_cofactor(t_matrix m, size_t row, size_t col)
 
 /**
  * @brief Calculates the minor of a matrix element.
- * 
- * The minor is the determinant of the submatrix formed 
+ *
+ * The minor is the determinant of the submatrix formed
  * by removing the specified row and column.
- * 
+ *
  * @param m The matrix.
  * @param row The row to remove.
  * @param col The column to remove.
