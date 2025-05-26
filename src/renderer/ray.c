@@ -86,33 +86,6 @@ t_color	ray_color(t_ray ray, t_sphere sphere)
 	return (color);
 }
 
-t_vec3	normal_at(t_sphere sphere, t_point world_point)
-{
-	t_vec3		object_point;
-	t_vec3		object_normal;
-	t_vec3		world_normal;
-	t_matrix	inv;
-	t_matrix	inv_transpose;
-
-	inv = inverse(sphere.transform);
-	object_point = matrix_multiply_vec3(inv, world_point);
-	object_normal = subtraction(object_point, (t_point){0, 0, 0});
-	inv_transpose = matrix_transpose(inv);
-	world_normal = matrix_multiply_vec3(inv_transpose, object_normal);
-	world_normal = normalize(world_normal);
-	return(world_normal);
-}
-
-// t_vec3	reflect(t_vec3 in, t_vec3 normal)
-// {
-// 	t_vec3	result;
-// 	t_vec3	scaled_norm;
-
-// 	scaled_norm = multiplication(normal, 2 * dot_product(in, normal));
-// 	result = subtraction(in, scaled_norm);
-// 	return (result);
-// }
-
 void print_vec3(const char *label, t_vec3 v)
 {
 	printf("%s = (%.2f, %.2f, %.2f)\n", label, v.x, v.y, v.z);
@@ -124,12 +97,12 @@ t_sphere	init_sphere(t_sphere orig_sphere)
 
 	sphere.pos = orig_sphere.pos;
 	sphere.center = orig_sphere.center;
-	sphere.r = 1.0f;
+	sphere.r = orig_sphere.r;
 	sphere.diam = orig_sphere.diam;
 	sphere.scale = orig_sphere.scale;
 	sphere.color = orig_sphere.color;
 	sphere.transform = orig_sphere.transform;
 	sphere.inv_transform = orig_sphere.inv_transform;
 	sphere.inv_transpose = orig_sphere.inv_transpose;
-	return (sphere);
+	return(sphere);
 }
