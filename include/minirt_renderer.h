@@ -20,7 +20,7 @@ uint32_t	rt_convert_to_rgba(const t_color *color);
 /* --------------------------- Shapes calculations -------------------------- */
 /// @dir src/shapes
 
-t_intersections	hit_sphere(t_sphere sphere, t_ray ray);
+t_intersections	intersect_sphere(t_sphere sphere, t_ray ray);
 t_ray	transform_ray(t_ray ray, t_matrix matrix);
 
 t_sphere	init_sphere(void);

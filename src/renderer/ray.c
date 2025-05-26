@@ -69,8 +69,7 @@ t_color	ray_color(t_ray ray, t_sphere sphere)
 	white = (t_color){0.0, 1.0, 0.5};
 	blue = (t_color){0.5, 0.7, 1.0};
 	black = (t_color){0.0, 0.0, 0.0};
-	//hits = hit_sphere((t_vec3){-50.0f, 0.0f, 70.0f}, 10, ray);
-	hits = hit_sphere(sphere, ray);
+	hits = intersect_sphere(sphere, ray);
 	t = find_closest_intersection(hits);
 	if (t > 0.0)
 	{
@@ -117,15 +116,11 @@ t_vec3	normal_at(t_sphere sphere, t_point world_point)
 t_sphere	init_sphere(void)
 {
 	t_sphere	sphere;
-	// t_matrix	scale;
-	// t_matrix	trans;
+
 
 	sphere.pos = (t_point){-50.0f, 0.0f, 70.0f};
 	sphere.r = 10.0;
 	sphere.color = (t_color){1, 0, 0};
-	//scale = matrix_scaling(1, 0.5f, 1);
-	//trans = matrix_translation(0, 0, 5);
-	//sphere.transform = matrix_multiply(trans, scale);
 	sphere.transform = matrix_identity();
 	return (sphere);
 }

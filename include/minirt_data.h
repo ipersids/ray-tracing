@@ -219,6 +219,7 @@ typedef struct s_intersection
 typedef struct s_intersections
 {
 	t_intersection	t_values[2];
+	//float			t_values[2];
 	int				count;
 }			t_intersections;
 
