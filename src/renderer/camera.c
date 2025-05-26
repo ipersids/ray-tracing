@@ -6,7 +6,7 @@
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 01:47:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/26 12:44:40 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/05/26 16:49:39 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	camera_init(t_camera *cam, t_canvas *win);
  *
  * @param rt Pointer to the main program structure.
  */
+
 void	rt_camera_render(t_info *rt)
 {
 	uint32_t	px;
@@ -36,7 +37,6 @@ void	rt_camera_render(t_info *rt)
 	debug_print_camera(&rt->camera); /// @todo delete
 	debug_print_world(&rt->win); /// @todo delete
 	t_sphere		sphere;//
-
 	sphere = init_sphere(rt->objs[0].sp);//
 	while (py < rt->win.img->height)
 	{

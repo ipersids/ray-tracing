@@ -22,13 +22,19 @@ t_intersections	intersect_sphere(t_sphere sphere, t_ray ray)
 	float			discriminant;
 	float			t1;
 	float			t2;
-	t_matrix		scale;
+	// t_matrix		scale;
+	// t_matrix		rotate;
+	// t_matrix		combine;
+	// t_matrix		shearing;
 
-	scale = matrix_scaling(0, 20, 10);
-	set_sphere_transform(sphere, scale);
-
+	// rotate = matrix_rotation_z(M_PI);
+	// scale = matrix_scaling(0.5, 1, 1);
+	// float shear_values[6] = {1, 0, 0, 0, 0, 0};
+	// shearing = matrix_shearing(shear_values);
+	// combine = matrix_multiply(shearing, scale);
+	// set_sphere_transform(sphere, combine);
+	// t_ray transformed_ray = transform_ray(ray, scale);
 	t_ray transformed_ray = transform_ray(ray, sphere.inv_transform);
-	//t_ray transformed_ray = transform_ray(ray, scale);
 
 	oc = transformed_ray.orig;
 	a = dot_product(transformed_ray.dir, transformed_ray.dir);

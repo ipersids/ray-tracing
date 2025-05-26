@@ -53,6 +53,19 @@ float	find_closest_intersection(t_intersections hits)
 	return (result);
 }
 
+t_vec3	normal_at(t_sphere sphere, t_point world_point)
+{
+	t_vec3		object_point;
+	t_vec3		object_normal;
+	t_vec3		world_normal;
+
+	object_point = matrix_multiply_vec3(sphere.inv_transform, world_point);
+	object_normal = subtraction(object_point, sphere.pos);
+	world_normal = matrix_multiply_vec3(sphere.inv_transpose, object_normal);
+	world_normal = normalize(world_normal);
+	return(world_normal);
+}
+
 t_color	ray_color(t_ray ray, t_sphere sphere)
 {
 	float			t;
@@ -74,8 +87,8 @@ t_color	ray_color(t_ray ray, t_sphere sphere)
 	if (t > 0.0)
 	{
 		hit_location = ray_hit(ray, t);
-		n = normalize(subtraction(hit_location, sphere.pos));
-		//n = normal_at(sphere, hit_location);
+		//n = normalize(subtraction(hit_location, sphere.pos));
+		n = normal_at(sphere, hit_location);
 		color = multiplication(sphere.color, 1.5f);
 		return (color);
 	}
@@ -84,11 +97,6 @@ t_color	ray_color(t_ray ray, t_sphere sphere)
 	//color = addition(multiplication(white, 1.0 - a), multiplication(blue, a));
 	color = black;
 	return (color);
-}
-
-void print_vec3(const char *label, t_vec3 v)
-{
-	printf("%s = (%.2f, %.2f, %.2f)\n", label, v.x, v.y, v.z);
 }
 
 t_sphere	init_sphere(t_sphere orig_sphere)
