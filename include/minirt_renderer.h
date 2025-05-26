@@ -2,11 +2,15 @@
 # define MINIRT_RENDERER_H
 
 /* --------------------------- Camera and renderer -------------------------- */
-/// @dir src/camera
+/// @dir src/renderer
 
 /// @file src/renderer/camera.c 
 
 void		rt_camera_render(t_info *rt);
+
+/// @file src/renderer/color_at.c
+
+// t_color		rt_color_at(t_info *rt, t_ray *ray);
 
 /// @file src/camera/ray.c
 

@@ -48,6 +48,7 @@ int		rt_parse_light(t_info *rt, char *line);
 int		rt_parse_cylinder(t_info *rt, char *line);
 int		rt_parse_plane(t_info *rt, char *line);
 int		rt_parse_sphere(t_info *rt, char *line);
+int		rt_set_transformations(t_info *rt);
 
 /// @file src/parser/parser_utils.c
 

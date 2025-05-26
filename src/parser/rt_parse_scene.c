@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:58:48 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/01 01:49:39 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/26 10:44:46 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	rt_parse_scene(t_info *rt, char **scene)
 		}
 		++scene;
 	}
-	return (0);
+	exit_code = rt_set_transformations(rt);
+	return (exit_code);
 }
 
 /* ------------------- Private Function Implementation --------------------- */
