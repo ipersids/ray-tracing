@@ -49,8 +49,9 @@ SRCS			:= src/constructor/rt_init_info.c src/constructor/rt_init_objects.c \
 				   src/hook/hook_close_window.c src/hook/hook_resize_window.c \
 				   src/hook/hook_render_scene.c \
 				   \
-				   src/renderer/camera.c src/renderer/color.c src/renderer/ray.c \
+				   src/renderer/camera.c src/renderer/color.c \
 				   src/renderer/color_at.c src/renderer/intersect_world.c \
+				   src/renderer/ray.c src/renderer/ray_utils.c \
 				   \
 				   src/calculations/math.c \
 				   \

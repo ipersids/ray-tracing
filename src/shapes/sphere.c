@@ -3,15 +3,6 @@
 
 void	set_sphere_transform(t_sphere sphere, t_matrix transform);
 
-t_ray	transform_ray(t_ray ray, t_matrix matrix)
-{
-	t_ray	result;
-
-	result.orig = matrix_multiply_vec3(matrix, ray.orig);
-	result.dir = matrix_multiply_vec3(matrix, ray.dir);
-	return (result);
-}
-
 t_intersections	intersect_sphere(t_sphere sphere, t_ray ray)
 {
 	t_intersections	result;

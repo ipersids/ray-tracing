@@ -34,75 +34,7 @@ t_vec3	ray_hit(t_ray ray, float t)
 	return addition(ray.orig, scaled_direction);
 }
 
-float	find_closest_intersection(t_intersections hits)
-{
-	size_t		i;
-	float		result;
-
-	i = 0;
-	result = -1;
-	while (i < hits.count)
-	{
-		if (hits.t[i] > 0.0)
-		{
-			if (result < 0 || hits.t[i] < result)
-				result = hits.t[i];
-		}
-		i++;
-	}
-	return (result);
-}
-
-t_color	ray_color(t_ray ray, t_sphere sphere)
-{
-	float			t;
-	float			a;
-	t_intersections	hits;
-	t_vec3			n;
-	t_vec3			unit_direction;
-	t_vec3			hit_location;
-	t_color			color;
-	t_color			white;
-	t_color			blue;
-	t_color			black;
-
-	white = (t_color){0.0, 1.0, 0.5};
-	blue = (t_color){0.5, 0.7, 1.0};
-	black = (t_color){0.0, 0.0, 0.0};
-	hits = intersect_sphere(sphere, ray);
-	t = find_closest_intersection(hits);
-	if (t > 0.0)
-	{
-		hit_location = ray_hit(ray, t);
-		n = normalize(subtraction(hit_location, sphere.pos));
-		//n = normal_at(sphere, hit_location);
-		color = multiplication(sphere.color, 1.5f);
-		return (color);
-	}
-	unit_direction = normalize(ray.dir);
-	a = 0.5 * (unit_direction.y + 1.0);
-	//color = addition(multiplication(white, 1.0 - a), multiplication(blue, a));
-	color = black;
-	return (color);
-}
-
 void print_vec3(const char *label, t_vec3 v)
 {
 	printf("%s = (%.2f, %.2f, %.2f)\n", label, v.x, v.y, v.z);
-}
-
-t_sphere	init_sphere(t_sphere orig_sphere)
-{
-	t_sphere	sphere;
-
-	sphere.pos = orig_sphere.pos;
-	sphere.center = orig_sphere.center;
-	sphere.r = orig_sphere.r;
-	sphere.diam = orig_sphere.diam;
-	sphere.scale = orig_sphere.scale;
-	sphere.color = orig_sphere.color;
-	sphere.transform = orig_sphere.transform;
-	sphere.inv_transform = orig_sphere.inv_transform;
-	sphere.inv_transpose = orig_sphere.inv_transpose;
-	return(sphere);
 }

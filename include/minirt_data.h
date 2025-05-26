@@ -278,4 +278,14 @@ typedef struct s_counter
 	int	ambient;
 }		t_counter;
 
+typedef struct s_phong_vars
+{
+	float		t;
+	t_object	*obj;
+	t_vec3		point;
+	t_vec3		eyev;
+	bool		is_inside;
+	t_vec3		normalv;
+}				t_phong_vars;
+
 #endif // MINIRT_DATA_H
