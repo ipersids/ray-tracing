@@ -1,24 +1,6 @@
 #ifndef MINIRT_MATRIX_H
 # define MINIRT_MATRIX_H
 
-# define M_SIZE 4
-
-typedef struct s_matrix
-{
-	float	data[M_SIZE][M_SIZE];
-	size_t	dimension;
-}			t_matrix;
-
-typedef enum e_proportions
-{
-	XY,
-	XZ,
-	YX,
-	YZ,
-	ZX,
-	ZY
-}	t_proportions;
-
 /* -------------------------- Matrix constructors  ------------------------- */
 
 /// @file src/calculations/matrices/create_base_matrix.c
@@ -66,6 +48,7 @@ float		matrix_determinant(t_matrix m);
 float		matrix_cofactor(t_matrix m, size_t row, size_t col);
 float		matrix_minor(t_matrix m, size_t row, size_t col);
 bool		matrix_try_inverse(t_matrix m, t_matrix *res);
+t_matrix	inverse(t_matrix matrix); // THIS MIGHT BE NOT NEEDED
 
 /* -------------------------- Math helper functions ------------------------- */
 

@@ -19,18 +19,41 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
+# define EPSILON 0.00001
+
+
+/* ------------------- Matrices strucrtures  ----------------- */
+
+# define M_SIZE 4
+
+typedef struct s_matrix
+{
+	float	data[M_SIZE][M_SIZE];
+	size_t	dimension;
+}			t_matrix;
+
+typedef enum e_proportions
+{
+	XY,
+	XZ,
+	YX,
+	YZ,
+	ZX,
+	ZY
+}	t_proportions;
+
 /* ------------------- File validation and errors handling  ----------------- */
 
 /**
  * @brief Error codes
- * 
+ *
  * - ERR_SYSTEM: callback strerror(errno);
  * - ERR_MLX42: callback mlx_strerror(mlx_errno);
- * 
+ *
  * Internal program errors:
  * - ERR_AGRC: The program received the wrong number of arguments.
  * - ERR_EXTENSION: The file has an incorrect extension.
- * 
+ *
  * - ERR_MAX - limiter for array of error messages.
  */
 typedef enum s_error
@@ -45,6 +68,7 @@ typedef enum s_error
 	ERR_OBJECT_CONFIG,
 	ERR_OBJECT_CONFIG_LIMITS,
 	ERR_CAMERA_ORIENT_VECTOR,
+	ERR_MATRIX_NON_INVERSIBLE,
 	ERR_MAX
 }	t_error;
 
@@ -119,30 +143,41 @@ typedef struct s_light
 	t_color	color;				// (unused in mandatory part)
 }			t_light;
 
+# include "minirt_matrix.h"
+
 typedef struct s_sphere
 {
-	t_point	pos;				// x,y,z of sphere center
-	float	diam;				// the sphere diameter
-	float	r;					// the sphere radius
-	t_color	color;				// R,G,B colors in range [0.0-1.0]
-}			t_sphere;
+	t_point		pos;				// x,y,z of sphere center
+	float		diam;				// the sphere diameter
+	float		r;					// the sphere radius
+	t_point		center;
+	float		scale;
+	t_color		color;				// R,G,B colors in range [0.0-1.0]
+	t_matrix	transform;
+	t_matrix	inv_transform;
+	t_matrix	inv_transpose;
+}				t_sphere;
 
 typedef struct s_plane
 {
-	t_point	pos;				// x,y,z of a point on plane
-	t_vec3	dir;				// 3d norm. orientation vector
-	t_color	color;				// R,G,B colors in range [0.0-1.0]
-}			t_plane;
+	t_point		pos;				// x,y,z of a point on plane
+	t_vec3		dir;				// 3d norm. orientation vector
+	t_color		color;				// R,G,B colors in range [0.0-1.0]
+	t_matrix	transform;
+	t_matrix	inv_transform;
+}				t_plane;
 
 typedef struct s_cylinder
 {
-	t_point	pos;				// center point of cylinder base
-	t_vec3	dir;				// 3d norm. vector of cylinder axis
-	float	diam;				// the cylinder diameter
-	float	r;					// the cylinder radius
-	float	height;				// the cylinder height
-	t_color	color;				// R,G,B colors in range [0.0,1.0]
-}			t_cylinder;
+	t_point		pos;				// center point of cylinder base
+	t_vec3		dir;				// 3d norm. vector of cylinder axis
+	float		diam;				// the cylinder diameter
+	float		r;					// the cylinder radius
+	float		height;				// the cylinder height
+	t_color		color;				// R,G,B colors in range [0.0,1.0]
+	t_matrix	transform;
+	t_matrix	inv_transform;
+}				t_cylinder;
 
 typedef struct s_object
 {
@@ -152,6 +187,7 @@ typedef struct s_object
 		t_sphere	sp;
 		t_plane		pl;
 		t_cylinder	cy;
+		t_matrix	transform;
 	};
 }					t_object;
 
@@ -204,6 +240,18 @@ typedef struct s_ray
 	t_vec3		dir;
 	t_ray_type	type;
 }				t_ray;
+
+typedef struct s_intersection
+{
+	float	t;
+	size_t	i_object;
+}			t_intersection;
+
+typedef struct s_intersections
+{
+	float	t[2];
+	size_t	count;
+}			t_intersections;
 
 /* -------------------------- Main minirt structure  ----------------------- */
 
