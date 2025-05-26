@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:06:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/20 12:39:15 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/26 10:43:19 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,10 @@ void	debug_print_sp(t_sphere *sp)
 {
 	printf(PRINT_PURPLE"sphere:\n"PRINT_DEFAULT);
 	printf("\t- position: %.2f, %.2f, %.2f\n", sp->pos.x, sp->pos.y, sp->pos.z);
+	printf("\t- center: %.2f, %.2f, %.2f\n", sp->center.x, sp->center.y, sp->center.z);
 	printf("\t- diameter: %.2f\n", sp->diam);
 	printf("\t- radius: %.2f\n", sp->r);
+	printf("\t- scale: %.2f\n", sp->scale);
 	printf("\t- color: %.2f, %.2f, %.2f\n",
 		sp->color.x, sp->color.y, sp->color.z);
 }

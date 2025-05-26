@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:49:23 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/11 23:50:30 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/26 10:35:54 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	rt_parse_sphere(t_info *rt, char *line)
 	exit_code = rt_parse_float(&rt->objs[i].sp.diam, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
-	if (rt->objs[i].sp.diam > LIMIT_S || rt->objs[i].sp.diam < -LIMIT_S)
+	if (rt->objs[i].sp.diam > LIMIT_S || rt->objs[i].sp.diam < (2.0 * EPSILON))
 		return (ERR_OBJECT_CONFIG_LIMITS);
 	rt->objs[i].sp.r = rt->objs[i].sp.diam / 2.0;
 	exit_code = rt_parse_color(&rt->objs[i].sp.color, &line, &next);
