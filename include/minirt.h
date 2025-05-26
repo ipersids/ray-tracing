@@ -1,7 +1,7 @@
 /**
  * @note:
  * - lightning model: https://learnopengl.com/Lighting/Basic-Lighting
- * - Physically Based Rendering: From Theory to Implementation: 
+ * - Physically Based Rendering: From Theory to Implementation:
  *   https://pbr-book.org/4ed/contents (advanced)
  * - The Cherno Ray Tracing youtube playlist
  *   https://www.youtube.com/playlist?list=PLlrATfBNZ98edc5GshdBtREv5asFW3yXl
@@ -25,7 +25,7 @@
 
 # include "minirt_data.h"		// custom data structures and constants
 # include "minirt_renderer.h"	// camera, ray, colors related functions
-# include "minirt_matrix.h"		// matrices math library 
+# include "minirt_matrix.h"		// matrices math library
 
 # include "display_config.h"	// debug print objects config
 

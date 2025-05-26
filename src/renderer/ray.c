@@ -4,11 +4,11 @@
 
 /**
  * @brief Calculates a primary ray from the camera's eye-point to a pixel.
- * 
+ *
  * This function computes the ray direction for a given pixel on the viewport.
  * The ray originates from the camera's position and points toward the center
  * of the specified pixel.
- * 
+ *
  * @param camera Pointer to the camera structure.
  * @param px The x-coordinate of the pixel.
  * @param py The y-coordinate of the pixel.
@@ -22,26 +22,87 @@ t_ray	rt_get_ray(t_camera *camera, int32_t px, int32_t py)
 	px_center = addition(camera->px00_loc, addition(
 				multiplication(camera->px_delta_u, px),
 				multiplication(camera->px_delta_v, py)));
-	ray_direction = subtraction(px_center, camera->pos);
+	ray_direction = normalize(subtraction(px_center, camera->pos));
 	return ((t_ray){camera->pos, ray_direction, RAY_CAMERA});
 }
 
-/// @todo: implement function to get color of the ray
-t_color	ray_color(t_ray ray)
+t_vec3	ray_hit(t_ray ray, float t)
 {
-	t_color	color;
-	t_color	white;
-	t_color	blue;
-	t_vec3	unit_direction;
-	float	a;
+	t_vec3 scaled_direction;
 
-	/// @todo move logic for hitting objects to the camera
-	if (hit_sphere((t_vec3){-50.0f, 0.0f, 70.0f}, 10, ray)) /// @test
-		return ((t_color){1.0f, 0.0f, 0.0f});
+	scaled_direction = multiplication(ray.dir, t);
+	return addition(ray.orig, scaled_direction);
+}
+
+float	find_closest_intersection(t_intersections hits)
+{
+	size_t		i;
+	float		result;
+
+	i = 0;
+	result = -1;
+	while (i < hits.count)
+	{
+		if (hits.t[i] > 0.0)
+		{
+			if (result < 0 || hits.t[i] < result)
+				result = hits.t[i];
+		}
+		i++;
+	}
+	return (result);
+}
+
+t_color	ray_color(t_ray ray, t_sphere sphere)
+{
+	float			t;
+	float			a;
+	t_intersections	hits;
+	t_vec3			n;
+	t_vec3			unit_direction;
+	t_vec3			hit_location;
+	t_color			color;
+	t_color			white;
+	t_color			blue;
+	t_color			black;
+
+	white = (t_color){0.0, 1.0, 0.5};
+	blue = (t_color){0.5, 0.7, 1.0};
+	black = (t_color){0.0, 0.0, 0.0};
+	hits = intersect_sphere(sphere, ray);
+	t = find_closest_intersection(hits);
+	if (t > 0.0)
+	{
+		hit_location = ray_hit(ray, t);
+		n = normalize(subtraction(hit_location, sphere.pos));
+		//n = normal_at(sphere, hit_location);
+		color = multiplication(sphere.color, 1.5f);
+		return (color);
+	}
 	unit_direction = normalize(ray.dir);
 	a = 0.5 * (unit_direction.y + 1.0);
-	white = (t_color){1.0, 1.0, 1.0};
-	blue = (t_color){0.5, 0.7, 1.0};
-	color = addition(multiplication(white, 1.0 - a), multiplication(blue, a));
+	//color = addition(multiplication(white, 1.0 - a), multiplication(blue, a));
+	color = black;
 	return (color);
+}
+
+void print_vec3(const char *label, t_vec3 v)
+{
+	printf("%s = (%.2f, %.2f, %.2f)\n", label, v.x, v.y, v.z);
+}
+
+t_sphere	init_sphere(t_sphere orig_sphere)
+{
+	t_sphere	sphere;
+
+	sphere.pos = orig_sphere.pos;
+	sphere.center = orig_sphere.center;
+	sphere.r = orig_sphere.r;
+	sphere.diam = orig_sphere.diam;
+	sphere.scale = orig_sphere.scale;
+	sphere.color = orig_sphere.color;
+	sphere.transform = orig_sphere.transform;
+	sphere.inv_transform = orig_sphere.inv_transform;
+	sphere.inv_transpose = orig_sphere.inv_transpose;
+	return(sphere);
 }

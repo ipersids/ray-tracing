@@ -46,14 +46,14 @@ typedef enum e_proportions
 
 /**
  * @brief Error codes
- * 
+ *
  * - ERR_SYSTEM: callback strerror(errno);
  * - ERR_MLX42: callback mlx_strerror(mlx_errno);
- * 
+ *
  * Internal program errors:
  * - ERR_AGRC: The program received the wrong number of arguments.
  * - ERR_EXTENSION: The file has an incorrect extension.
- * 
+ *
  * - ERR_MAX - limiter for array of error messages.
  */
 typedef enum s_error
@@ -143,6 +143,8 @@ typedef struct s_light
 	t_color	color;				// (unused in mandatory part)
 }			t_light;
 
+# include "minirt_matrix.h"
+
 typedef struct s_sphere
 {
 	t_point		pos;				// x,y,z of sphere center
@@ -185,6 +187,7 @@ typedef struct s_object
 		t_sphere	sp;
 		t_plane		pl;
 		t_cylinder	cy;
+		t_matrix	transform;
 	};
 }					t_object;
 

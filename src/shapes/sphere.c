@@ -1,18 +1,57 @@
 
 #include "minirt.h"
 
-bool	hit_sphere(t_point center, float radius, t_ray ray)
-{
-	t_vec3	oc;
-	float	a;
-	float	b;
-	float	c;
-	float	discriminant; // Discriminant tells us whether there are 2, 1 or 0 solutions
+void	set_sphere_transform(t_sphere sphere, t_matrix transform);
 
-	oc = subtraction(center, ray.orig);
-	a = dot_product(ray.dir, ray.dir);
-	b = 2.0 * dot_product(ray.dir, oc);
-	c = dot_product(oc, oc) - radius * radius;
+t_ray	transform_ray(t_ray ray, t_matrix matrix)
+{
+	t_ray	result;
+
+	result.orig = matrix_multiply_vec3(matrix, ray.orig);
+	result.dir = matrix_multiply_vec3(matrix, ray.dir);
+	return (result);
+}
+
+t_intersections	intersect_sphere(t_sphere sphere, t_ray ray)
+{
+	t_intersections	result;
+	t_vec3			oc;
+	float			a;
+	float			b;
+	float			c;
+	float			discriminant;
+	float			t1;
+	float			t2;
+	t_matrix		scale;
+
+	scale = matrix_scaling(0, 20, 10);
+	set_sphere_transform(sphere, scale);
+
+	t_ray transformed_ray = transform_ray(ray, sphere.inv_transform);
+	//t_ray transformed_ray = transform_ray(ray, scale);
+
+	oc = transformed_ray.orig;
+	a = dot_product(transformed_ray.dir, transformed_ray.dir);
+	b = 2.0 * dot_product(transformed_ray.dir, oc);
+	c = dot_product(oc, oc) - sphere.r * sphere.r;
 	discriminant = (b * b) - (4 * a * c);
-	return (discriminant >= 0);
+	result.count = 0;
+	if (discriminant < 0)
+		return (result);
+	t1 = (-b - sqrtf(discriminant)) / (2.0 * a);
+	t2 = (-b + sqrtf(discriminant)) / (2.0 * a);
+	result.t[0] = t1;
+	result.t[1] = t2;
+	result.count = 2;
+	return (result);
+}
+
+void	set_sphere_default(t_sphere sphere)
+{
+	sphere.transform = matrix_identity();
+}
+
+void	set_sphere_transform(t_sphere sphere, t_matrix transform)
+{
+	sphere.transform = transform;
 }

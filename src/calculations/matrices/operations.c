@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 23:37:27 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/20 15:47:06 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/24 12:58:34 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 /**
  * @brief Multiplies two matrices.
- * 
+ *
  * @warning if matrices have different dimensiont result is undefined.
- * 
+ *
  * @param a First matrix.
  * @param b Second matrix.
  * @return t_matrix The result of a * b.
@@ -51,14 +51,14 @@ t_matrix	matrix_multiply(t_matrix a, t_matrix b)
 
 /**
  * @brief Multiplies a matrix by a 3D vector or point.
- * 
+ *
  * Applies the transformation matrix m to the vector v.
- * 
+ *
  * @param m The transformation matrix.
  * @param v The vector to transform.
  * @return t_vec3 The transformed vector.
  */
-t_vec3	matrix_multiply_vec3(t_matrix m, t_vec3 v)
+t_vec3	matrix_multiply_vec3(t_matrix m, t_vec3 v) // FOR POINTS
 {
 	t_vec3	res;
 
@@ -76,3 +76,7 @@ t_vec3	matrix_multiply_vec3(t_matrix m, t_vec3 v)
 			);
 	return (res);
 }
+
+
+// WHEN MULTIPLYING VECTORS WE SHOULD NOT MULTIPLY THE LAST ROW OF THE MATRIX
+// SO WE MIGHT NEED 2 FUNCTIONS TO MULTIPLY (POINTS AND VECS SEPARATE)
