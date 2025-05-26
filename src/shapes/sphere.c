@@ -8,7 +8,7 @@ t_ray	transform_ray(t_ray ray, t_matrix matrix)// REMOVE FROM HERE
 	t_ray	result;
 
 	result.orig = matrix_multiply_vec3(matrix, ray.orig);
-	result.dir = matrix_multiply_vector(matrix, ray.dir);
+	result.dir = matrix_multiply_vec3(matrix, ray.dir);
 	return (result);
 }
 
@@ -33,7 +33,12 @@ t_intersections	intersect_sphere(t_sphere sphere, t_ray ray)
 	float			t1;
 	float			t2;
 
+	//t_ray transformed_ray = transform_ray(ray, sphere.inv_transform);
+
 	oc = subtraction(ray.orig, sphere.pos);
+	//oc = transformed_ray.orig;
+	// a = dot_product(transformed_ray.dir, transformed_ray.dir);
+	// b = 2.0 * dot_product(transformed_ray.dir, oc);
 	a = dot_product(ray.dir, ray.dir);
 	b = 2.0 * dot_product(ray.dir, oc);
 	c = dot_product(oc, oc) - sphere.r * sphere.r;
@@ -43,10 +48,9 @@ t_intersections	intersect_sphere(t_sphere sphere, t_ray ray)
 		return (result);
 	t1 = (-b - sqrt(discriminant)) / (2.0 * a);
 	t2 = (-b + sqrt(discriminant)) / (2.0 * a);
-	result.t_values[0].t = t1;
-	result.t_values[1].t = t2;
-	if (t1 == t2)
-		printf("t1 = %.2f t2= %.2f\n", t1, t2);
+	result.t[0] = t1;
+	result.t[1] = t2;
+	//printf("t1 = %.2f t2= %.2f\n", t1, t2);
 	result.count = 2;
 	return (result);
 }

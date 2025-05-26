@@ -37,7 +37,8 @@ int	main(int argc, char **argv)
 // 	return (result);
 // }
 
-// void print_vec3(const char *label, t_vec3 v) {
+// void print_vec3(const char *label, t_vec3 v)
+// {
 // 	printf("%s = (%.2f, %.2f, %.2f)\n", label, v.x, v.y, v.z);
 // }
 

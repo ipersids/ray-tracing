@@ -27,6 +27,6 @@ t_ray	transform_ray(t_ray ray, t_matrix matrix)
 	t_ray	result;
 
 	result.orig = matrix_multiply_vec3(matrix, ray.orig);
-	result.dir = matrix_multiply_vector(matrix, ray.dir);
+	result.dir = matrix_multiply_vec3(matrix, ray.dir);
 	return (result);
 }

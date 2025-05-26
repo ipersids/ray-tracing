@@ -36,17 +36,17 @@ t_vec3	ray_hit(t_ray ray, float t)
 
 float	find_closest_intersection(t_intersections hits)
 {
-	int		i;
-	float	result;
+	size_t		i;
+	float		result;
 
 	i = 0;
 	result = -1;
 	while (i < hits.count)
 	{
-		if (hits.t_values[i].t > 0.0)
+		if (hits.t[i] > 0.0)
 		{
-			if (result < 0 || hits.t_values[i].t < result)
-				result = hits.t_values[i].t;
+			if (result < 0 || hits.t[i] < result)
+				result = hits.t[i];
 		}
 		i++;
 	}
@@ -113,14 +113,23 @@ t_vec3	normal_at(t_sphere sphere, t_point world_point)
 // 	return (result);
 // }
 
-t_sphere	init_sphere(void)
+void print_vec3(const char *label, t_vec3 v)
+{
+	printf("%s = (%.2f, %.2f, %.2f)\n", label, v.x, v.y, v.z);
+}
+
+t_sphere	init_sphere(t_sphere orig_sphere)
 {
 	t_sphere	sphere;
 
-
-	sphere.pos = (t_point){-50.0f, 0.0f, 70.0f};
-	sphere.r = 10.0;
-	sphere.color = (t_color){1, 0, 0};
-	sphere.transform = matrix_identity();
+	sphere.pos = orig_sphere.pos;
+	sphere.center = orig_sphere.center;
+	sphere.r = 1.0f;
+	sphere.diam = orig_sphere.diam;
+	sphere.scale = orig_sphere.scale;
+	sphere.color = orig_sphere.color;
+	sphere.transform = orig_sphere.transform;
+	sphere.inv_transform = orig_sphere.inv_transform;
+	sphere.inv_transpose = orig_sphere.inv_transpose;
 	return (sphere);
 }

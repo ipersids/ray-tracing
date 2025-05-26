@@ -6,7 +6,7 @@
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 01:47:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/22 13:27:59 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/05/26 12:44:40 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	rt_camera_render(t_info *rt)
 	debug_print_world(&rt->win); /// @todo delete
 	t_sphere		sphere;//
 
-	sphere = init_sphere();//
+	sphere = init_sphere(rt->objs[0].sp);//
 	while (py < rt->win.img->height)
 	{
 		px = 0;
