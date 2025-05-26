@@ -264,6 +264,8 @@ typedef struct s_info
 	t_object		*objs;		// Array to store scene's objects (sp, pl, cy)
 	size_t			n_objs;		// Amount of items in the *objs array
 	t_canvas		win;		// mlx window and images info struct
+	t_intersection	*ts;		// Intersection collection
+	size_t			n_ts;		// Amount t-values in intersection collection
 }					t_info;
 
 /* ------------------------- Parser helper structures ----------------------- */

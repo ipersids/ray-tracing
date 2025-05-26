@@ -50,6 +50,7 @@ SRCS			:= src/constructor/rt_init_info.c src/constructor/rt_init_objects.c \
 				   src/hook/hook_render_scene.c \
 				   \
 				   src/renderer/camera.c src/renderer/color.c src/renderer/ray.c \
+				   src/renderer/color_at.c src/renderer/intersect_world.c \
 				   \
 				   src/calculations/math.c \
 				   \

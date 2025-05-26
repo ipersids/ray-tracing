@@ -4,21 +4,11 @@
 /* --------------------------- Camera and renderer -------------------------- */
 /// @dir src/renderer
 
-/// @file src/renderer/camera.c
-
 void		rt_camera_render(t_info *rt);
-
-/// @file src/renderer/color_at.c
-
-// t_color		rt_color_at(t_info *rt, t_ray *ray);
-
-/// @file src/camera/ray.c
-
+t_color		rt_color_at(t_info *rt, t_ray *ray);
+void		rt_intersect_world(t_info *rt, t_ray *ray);
 t_ray		rt_get_ray(t_camera *camera, int32_t x, int32_t y);
 t_color		ray_color(t_ray ray, t_sphere sphere);
-
-/// @file src/renderer/color.c
-
 uint32_t	rt_convert_to_rgba(const t_color *color);
 
 /* --------------------------- Shapes calculations -------------------------- */

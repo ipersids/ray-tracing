@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 18:53:41 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/01 01:19:25 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/26 16:29:42 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	rt_init_objects(t_counter *cnt, t_info *rt)
 	if (1 <= cnt->figures)
 	{
 		rt->objs = ft_calloc(cnt->figures, sizeof(t_object));
-		if (!rt->objs)
+		rt->ts =ft_calloc(cnt->figures * 2, sizeof(t_intersection));
+		if (!rt->objs || !rt->ts)
 			return (ERR_SYSTEM);
 	}
 	if (1 <= cnt->lights)
