@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:06:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/26 15:42:59 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/27 16:00:05 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,24 @@ void	debug_print_camera(t_camera *cam)
 	printf("\t- FOV: %.2f\n\t- focal_len: %2.f\n", cam->fov, cam->focal_len);
 	printf("\t- right: %.2f, %.2f, %.2f\n",
 		cam->right.x, cam->right.y, cam->right.z);
-	printf("\t- up: %.2f, %.2f, %.2f\n", cam->up.x, cam->up.y, cam->up.z);
-	printf("\t- vport_h: %.2f\n", cam->vport_h);
-	printf("\t- vport_w: %.2f\n", cam->vport_w);
-	printf("\t- vport_u: %.2f, %.2f, %.2f\n",
-		cam->vport_u.x, cam->vport_u.y, cam->vport_u.z);
-	printf("\t- vport_v: %.2f, %.2f, %.2f\n",
-		cam->vport_v.x, cam->vport_v.y, cam->vport_v.z);
-	printf("\t- px_delta_u: %.2f, %.2f, %.2f\n",
-		cam->px_delta_u.x, cam->px_delta_u.y, cam->px_delta_u.z);
-	printf("\t- px_delta_v: %.2f, %.2f, %.2f\n",
-		cam->px_delta_v.x, cam->px_delta_v.y, cam->px_delta_v.z);
-	printf("\t- vport_upleft: %.2f, %.2f, %.2f\n",
-		cam->vport_upleft.x, cam->vport_upleft.y, cam->vport_upleft.z);
-	printf("\t- px00_loc: %.2f, %.2f, %.2f\n",
-		cam->px00_loc.x, cam->px00_loc.y, cam->px00_loc.z);
+	printf("\t- true_up: %.2f, %.2f, %.2f\n", cam->true_up.x, cam->true_up.y, cam->true_up.z);
+	// printf("\t- vport_h: %.2f\n", cam->vport_h);
+	// printf("\t- vport_w: %.2f\n", cam->vport_w);
+	// printf("\t- vport_u: %.2f, %.2f, %.2f\n",
+	// 	cam->vport_u.x, cam->vport_u.y, cam->vport_u.z);
+	// printf("\t- vport_v: %.2f, %.2f, %.2f\n",
+	// 	cam->vport_v.x, cam->vport_v.y, cam->vport_v.z);
+	// printf("\t- px_delta_u: %.2f, %.2f, %.2f\n",
+	// 	cam->px_delta_u.x, cam->px_delta_u.y, cam->px_delta_u.z);
+	// printf("\t- px_delta_v: %.2f, %.2f, %.2f\n",
+	// 	cam->px_delta_v.x, cam->px_delta_v.§y, cam->px_delta_v.z);
+	// printf("\t- vport_upleft: %.2f, %.2f, %.2f\n",
+	// 	cam->vport_upleft.x, cam->vport_upleft.y, cam->vport_upleft.z);
+	// printf("\t- px00_loc: %.2f, %.2f, %.2f\n",
+	// 	cam->px00_loc.x, cam->px00_loc.y, cam->px00_loc.z);
+
+	debug_print_matrix(&cam->transform, "Original matrix");
+	debug_print_matrix(&cam->inv_transform, "Inversed matrix");
 }
 
 void	debug_print_lights(t_info *rt)

@@ -17,8 +17,6 @@ uint32_t		rt_convert_to_rgba(const t_color *color);
 t_intersections	intersect_sphere(t_sphere sphere, t_ray ray);
 t_ray			transform_ray(t_ray ray, t_matrix matrix);
 
-t_sphere		init_sphere(t_sphere orig_sphere);
-
 //t_intersections	hit_sphere(t_point center, float radius, t_ray ray);
 t_vec3			ray_hit(t_ray ray, float t);
 t_vec3			normal_at(t_object *obj, t_point world_point);

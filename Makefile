@@ -44,7 +44,7 @@ SRCS			:= src/constructor/rt_init_info.c src/constructor/rt_init_objects.c \
 				   src/parser/rt_parse_scene.c src/parser/rt_read_scene.c \
 				   src/parser/rt_validate_input.c src/parser/rt_parse_cylinder.c \
 				   src/parser/rt_parse_plane.c src/parser/rt_parse_sphere.c \
-				   src/parser/objects_transform.c \
+				   src/parser/rt_set_transformations.c \
 				   \
 				   src/hook/hook_close_window.c src/hook/hook_resize_window.c \
 				   src/hook/hook_render_scene.c \
@@ -63,6 +63,8 @@ SRCS			:= src/constructor/rt_init_info.c src/constructor/rt_init_objects.c \
 				   src/calculations/matrices/inverse.c \
 				   \
 				   src/shapes/sphere.c \
+				   \
+				   src/transformation/objects_transform.c src/transformation/view_transform.c \
 				   \
 				   \
 				   \

@@ -68,6 +68,8 @@ typedef enum s_error
 	ERR_OBJECT_CONFIG,
 	ERR_OBJECT_CONFIG_LIMITS,
 	ERR_CAMERA_ORIENT_VECTOR,
+	ERR_CAMERA_GIMBAL_LOCK,
+	ERR_CAMERA_NON_INVERSIBLE,
 	ERR_MATRIX_NON_INVERSIBLE,
 	ERR_MAX
 }	t_error;
@@ -120,20 +122,23 @@ typedef struct s_ambient_light
 
 typedef struct s_camera
 {
-	t_point	pos;				// x,y,z of the camera position
-	t_vec3	forward;			// 3d norm. orientation vector
-	float	fov;				// Horizontal field of view, degrees [0.0,180.0]
+	t_point		pos;				// x,y,z of the camera position
+	t_vec3		forward;			// 3d norm. orientation vector
+	float		fov;				// Horizontal field of view, degrees [0.0,180.0]
 	t_point	px00_loc;
 	t_vec3	px_delta_u;
 	t_vec3	px_delta_v;
-	t_vec3	up;
-	t_vec3	right;
 	float	focal_len;
 	float	vport_h;
 	float	vport_w;
 	t_vec3	vport_u;
 	t_vec3	vport_v;
 	t_vec3	vport_upleft;
+
+	t_vec3		true_up;
+	t_vec3		right;
+	t_matrix	transform;
+	t_matrix	inv_transform;
 }			t_camera;
 
 typedef struct s_light

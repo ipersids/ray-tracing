@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 01:47:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/26 23:00:02 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:33:19 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ static void	camera_init(t_camera *cam, t_canvas *win)
 {
 	t_vec3	vp_center;
 
-	cam->right = normalize(cross_product(cam->forward, WORLD_UP));
-	cam->up = cross_product(cam->right, cam->forward);
+	cam->right = normalize(cross_product(cam->forward, win->world_up));
+	cam->true_up = cross_product(cam->right, cam->forward);
 	cam->vport_h = 2.0f * tan((cam->fov * M_PI / 180.0f) / 2.0f)
 		* cam->focal_len;
 	cam->vport_w = cam->vport_h * ((float)win->img->width / win->img->height);
 	cam->vport_u = multiplication(cam->right, cam->vport_w);
-	cam->vport_v = multiplication(cam->up, -cam->vport_h);
+	cam->vport_v = multiplication(cam->true_up, -cam->vport_h);
 	cam->px_delta_u = division(cam->vport_u, (float)win->img->width);
 	cam->px_delta_v = division(cam->vport_v, (float)win->img->height);
 	vp_center = addition(
