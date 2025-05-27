@@ -114,3 +114,68 @@ t_sphere	init_sphere(t_sphere orig_sphere)
 	sphere.inv_transpose = orig_sphere.inv_transpose;
 	return(sphere);
 }
+
+// t_plight	point_light(t_color intensity, t_point position)
+// {
+// 	t_plight	result;
+
+// 	result.intensity = intensity;
+// 	result.position = position;
+// 	return (result);
+// }
+
+// t_material	default_material(void)
+// {
+// 	t_material	result;
+
+// 	result.color = (t_color){1, 1, 1};
+// 	result.ambient = 0.1;
+// 	result.diffuse = 0.9;
+// 	result.specular = 0.9;
+// 	result.shininess = 200;
+// 	return (result);
+// }
+
+// void	set_material(t_sphere sphere, t_material material)
+// {
+// 	sphere.material = material;
+// }
+
+// t_color	lighting(t_material m, t_point pos, t_plight light, t_vec3 eyev, t_vec3 normalv)
+// {
+// 	t_color	effective_color;
+// 	t_color	ambient;
+// 	t_color	diffuse;
+// 	t_color	specular;
+// 	t_color	result;
+// 	t_vec3	lightv;
+// 	t_vec3	reflectv;
+// 	float	light_dot_normal;
+// 	float	reflect_dot_eye;
+// 	float	factor;
+
+// 	effective_color = multiply_colors(m.color, light.intensity);
+// 	lightv = normalize(subtraction(light.position, pos));
+// 	ambient	= multiplication(effective_color, m.ambient);
+// 	light_dot_normal = dot_product(lightv, normalv);
+// 	if (light_dot_normal < 0)
+// 	{
+// 		diffuse = (t_color){1, 1, 1};
+// 		specular = (t_color){1, 1, 1};
+// 	}
+// 	else
+// 	{
+// 		diffuse = multiplication(effective_color, m.diffuse * light_dot_normal);
+// 		reflectv = reflect(negation(lightv), normalv);
+// 		reflect_dot_eye = dot_product(reflectv, eyev);
+// 		if (reflect_dot_eye <= 0)
+// 			specular = (t_color){1, 1, 1};
+// 		else
+// 		{
+// 			factor = powf(reflect_dot_eye, m.shininess);
+// 			specular = multiplication(light.intensity, m.specular * factor);
+// 		}
+// 	}
+// 	result = addition(addition(ambient, diffuse), specular);
+// 	return (result);
+// }

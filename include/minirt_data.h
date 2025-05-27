@@ -145,6 +145,15 @@ typedef struct s_light
 
 # include "minirt_matrix.h"
 
+typedef	struct s_material
+{
+	t_color	color;				// Color on the surface
+	float	ambient;			// Backgroud lighting or light reflected from other objects (0.0-1.0)
+	float	diffuse;			// Light reflected from a matte surface (0.0-1.0)
+	float	specular;			// Hightlight, the bright spot on a curved surface (0.0-1.0)
+	float	shininess;			// The size and sharpness of the specular reflection (10-200)
+}			t_material;
+
 typedef struct s_sphere
 {
 	t_point		pos;				// x,y,z of sphere center
@@ -156,6 +165,7 @@ typedef struct s_sphere
 	t_matrix	transform;
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
+	t_material	material;
 }				t_sphere;
 
 typedef struct s_plane
@@ -253,20 +263,11 @@ typedef struct s_intersections
 	size_t	count;
 }			t_intersections;
 
-typedef	struct s_plight
+typedef	struct s_point_light
 {
-	t_color	color;
-	t_point	pos;
+	t_color	intensity;
+	t_point	position;
 }			t_plight;
-
-typedef	struct s_material
-{
-	t_color	color;				// Color on the surface
-	float	ambient;			// Backgroud lighting or light reflected from other objects (0.0-1.0)
-	float	diffuse;			// Light reflected from a matte surface (0.0-1.0)
-	float	specular;			// Hightlight, the bright spot on a curved surface (0.0-1.0)
-	float	shininess;			// The size and sharpness of the specular reflection (10-200)
-}			t_material;
 
 /* -------------------------- Main minirt structure  ----------------------- */
 
