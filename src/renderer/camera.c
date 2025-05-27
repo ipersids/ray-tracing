@@ -6,7 +6,7 @@
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 01:47:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/26 16:49:39 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/05/27 11:50:49 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,14 @@ void	rt_camera_render(t_info *rt)
 	camera_init(&rt->camera, &rt->win);
 	debug_print_camera(&rt->camera); /// @todo delete
 	debug_print_world(&rt->win); /// @todo delete
-	t_sphere		sphere;//
-	sphere = init_sphere(rt->objs[0].sp);//
+
 	while (py < rt->win.img->height)
 	{
 		px = 0;
 		while (px < rt->win.img->width)
 		{
 			ray = rt_get_ray(&rt->camera, px, py);
-			ray_col = ray_color(ray, sphere);
+			ray_col = rt_color_at(rt, &ray);
 			rgba = rt_convert_to_rgba(&ray_col);
 			mlx_put_pixel(rt->win.img, px, py, rgba);
 			++px;

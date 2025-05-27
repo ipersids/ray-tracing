@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 18:38:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/25 19:42:48 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/26 23:14:26 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,42 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
-static t_intersection	*intersect_world(t_info *rt, t_ray *ray);
-
-/// @test -->
-static t_intersections	sphere_intersect(t_sphere *sp, t_ray *ray);
-/// end @test <---
+static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt);
 
 /* --------------------------- Public Functions ---------------------------- */
 
 t_color	rt_color_at(t_info *rt, t_ray *ray)
 {
-	
+	t_intersection	*t;
+	t_phong_vars	vars;
+
+	t = NULL;
+	rt_intersect_world(rt, ray);
+	t = find_closest_intersection(rt->ts, rt->n_ts);
+	if (NULL == t)
+		return ((t_color){0.0f, 0.0f, 0.0f});
+	vars = prepare_shading(t, ray, rt);
+	(void)vars;
+	return ((t_color){1.0f, 0.2f, 0.0f});
 }
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static t_intersection	*intersect_world(t_info *rt, t_ray *ray)
+static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt)
 {
-	size_t			i;
-	t_intersections	xs;
+	t_phong_vars	vars;
 
-	i = 0;
-	while (i < rt->n_objs)
+	vars.t = t->t;
+	vars.obj = &rt->objs[t->i_object];
+	vars.point = ray_hit(*ray, t->t);
+	vars.eyev = negation(ray->dir);
+	vars.normalv = normal_at(vars.obj, vars.point);
+	if (dot_product(vars.normalv, vars.eyev) < 0.0f)
 	{
-		if (ELEMENT_SPHERE == rt->objs[i].id)
-			xs = sphere_intersect(&rt->objs[i].sp, ray);
-		++i;
+		vars.is_inside = true;
+		vars.normalv = negation(vars.normalv);
+		return (vars);
 	}
+	vars.is_inside = false;
+	return (vars);
 }
-
-/// @test -->
-/* ------------------- TESTING Function Implementation --------------------- */
-
-static t_intersections	sphere_intersect(t_sphere *sp, t_ray *ray)
-{
-	t_intersections	res;
-
-	return (res);
-}
-
-/// end @test <---

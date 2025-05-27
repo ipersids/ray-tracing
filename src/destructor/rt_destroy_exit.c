@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:10:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/09 21:04:43 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/26 16:30:32 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	rt_destroy_exit(t_info *rt, int exit_code)
 		mlx_delete_image(rt->win.mlx, rt->win.img);
 	if (NULL != rt->win.mlx)
 		mlx_terminate(rt->win.mlx);
+	if (NULL != rt->ts)
+		free(rt->ts);
 	if (EXIT_SUCCESS != exit_code)
 		rt_perror(exit_code);
 	exit(exit_code);
