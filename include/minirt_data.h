@@ -304,4 +304,17 @@ typedef struct s_phong_vars
 	t_vec3		normalv;
 }				t_phong_vars;
 
+typedef	struct	s_phong_color
+{
+	t_color	eff_col;
+	t_color	amb;
+	t_color	dif;
+	t_color	spec;
+	t_vec3	lightv;
+	t_vec3	reflectv;
+	float	l_dot_norm;
+	float	refl_dot_eye;
+	float	factor;
+}				t_phong_color;
+
 #endif // MINIRT_DATA_H

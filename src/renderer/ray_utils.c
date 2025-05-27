@@ -25,8 +25,6 @@ t_ray	transform_ray(t_ray ray, t_matrix matrix)
 	return (result);
 }
 
-//			THIS WILL BE NEEDED LATER
-
 t_vec3	normal_at(t_object *obj, t_point world_point)
 {
 	// if (ELEMENT_SPHERE == obj->id)
