@@ -34,7 +34,3 @@ t_vec3	ray_hit(t_ray ray, float t)
 	return addition(ray.orig, scaled_direction);
 }
 
-void print_vec3(const char *label, t_vec3 v)
-{
-	printf("%s = (%.2f, %.2f, %.2f)\n", label, v.x, v.y, v.z);
-}

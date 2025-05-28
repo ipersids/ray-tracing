@@ -28,8 +28,10 @@ t_intersections	intersect_sphere(t_sphere sphere, t_ray ray)
 	t_ray transformed_ray = transform_ray(ray, sphere.inv_transform);
 
 	oc = transformed_ray.orig;
+	//oc = subtraction(transformed_ray.orig, (t_point){0, 0, 0});
 	a = dot_product(transformed_ray.dir, transformed_ray.dir);
 	b = 2.0 * dot_product(transformed_ray.dir, oc);
+	//c = dot_product(oc, oc) - 1.0f;
 	c = dot_product(oc, oc) - sphere.r * sphere.r;
 	discriminant = (b * b) - (4 * a * c);
 	result.count = 0;
