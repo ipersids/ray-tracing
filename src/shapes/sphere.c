@@ -13,10 +13,10 @@ t_intersections	intersect_sphere(t_sphere sphere, t_ray ray)
 	float			discriminant;
 	float			t1;
 	float			t2;
-	t_matrix		scale;
+	// t_matrix		scale;
 
-	scale = matrix_scaling(0, 20, 10);
-	set_sphere_transform(sphere, scale);
+	// scale = matrix_scaling(0, 20, 10);
+	// set_sphere_transform(sphere, scale);
 
 	t_ray transformed_ray = transform_ray(ray, sphere.inv_transform);
 	//t_ray transformed_ray = transform_ray(ray, scale);

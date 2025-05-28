@@ -118,27 +118,20 @@ typedef struct s_ambient_light
 # define DEFAULT_CAMERA_ORIENTATION (t_vec3){0.0f, 0.0f, 1.0f}
 # define DEFAULT_CAMERA_FOV 70.0f
 # define CAMERA_SPEED 0.05f
-# define CAMERA_FOCAL_LENGTH 1.0f
 
 typedef struct s_camera
 {
 	t_point		pos;				// x,y,z of the camera position
 	t_vec3		forward;			// 3d norm. orientation vector
 	float		fov;				// Horizontal field of view, degrees [0.0,180.0]
-	t_point	px00_loc;
-	t_vec3	px_delta_u;
-	t_vec3	px_delta_v;
-	float	focal_len;
-	float	vport_h;
-	float	vport_w;
-	t_vec3	vport_u;
-	t_vec3	vport_v;
-	t_vec3	vport_upleft;
-
 	t_vec3		true_up;
-	t_vec3		right;
+	t_vec3		left;
 	t_matrix	transform;
 	t_matrix	inv_transform;
+
+	float		half_width;
+	float		half_height;
+	float		pixel_size;
 }			t_camera;
 
 typedef struct s_light
@@ -292,5 +285,15 @@ typedef struct s_phong_vars
 	bool		is_inside;
 	t_vec3		normalv;
 }				t_phong_vars;
+
+typedef struct s_ray_vars
+{
+	float	xoffset;
+	float	yoffset;
+	float	world_x;
+	float	world_y;
+	t_vec3	pixel;
+}			t_ray_vars;
+
 
 #endif // MINIRT_DATA_H

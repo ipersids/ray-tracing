@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:00:45 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/27 16:10:10 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/28 11:26:44 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 /**
  * @brief 
- * 
- * `cam->forward` and `world_up` suppose to be normalized
  * 
  * @note The inverse transformation could fail in several cases:
  * 		 - Degenerate camera (camera looking at itself)
@@ -31,17 +29,20 @@ int	rt_view_transform(t_camera *cam, t_vec3	world_up)
 {
 	t_matrix	orientation;
 	t_matrix	translation;
+	t_vec3		norm_forward;
 
-	cam->right = cross_product(cam->forward, world_up);
-	cam->true_up = cross_product(cam->right, cam->forward);
+	norm_forward = normalize(cam->forward);
+	world_up = normalize(world_up);
+	cam->left = cross_product(norm_forward, world_up);
+	cam->true_up = cross_product(cam->left, norm_forward);
 	orientation = (t_matrix){
-		{{cam->right.x, cam->right.y, cam->right.z, 0.0f},
+		{{cam->left.x, cam->left.y, cam->left.z, 0.0f},
 		{cam->true_up.x, cam->true_up.y, cam->true_up.z, 0.0f},
-		{-cam->forward.x, -cam->forward.y, -cam->forward.z, 0.0f},
+		{-norm_forward.x, -norm_forward.y, -norm_forward.z, 0.0f},
 		{0.0f, 0.0f, 0.0f, 1.0f}},
 		4
 	};
-	translation = matrix_translation(-cam->pos.x, -cam->pos.y, -cam->pos.z);
+	translation = matrix_translation(-(cam->pos.x), -(cam->pos.y), -(cam->pos.z));
 	cam->transform = matrix_multiply(orientation, translation);
 	if (false == matrix_try_inverse(cam->transform, &cam->inv_transform))
 		return (ERR_CAMERA_NON_INVERSIBLE);

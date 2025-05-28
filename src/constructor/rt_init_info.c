@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/16 20:41:44 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/28 01:33:30 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	init_camera(t_camera *cam)
 	cam->forward = DEFAULT_CAMERA_ORIENTATION;
 	cam->pos = DEFAULT_CAMERA_POSITION;
 	cam->fov = DEFAULT_CAMERA_FOV;
-	cam->focal_len = CAMERA_FOCAL_LENGTH;
+	cam->transform = matrix_identity();
 }
 
 static void	init_canvas(t_canvas *window)

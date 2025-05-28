@@ -69,7 +69,8 @@ SRCS			:= src/constructor/rt_init_info.c src/constructor/rt_init_objects.c \
 				   \
 				   \
 				   src/display-config/debug_utils.c src/display-config/test_matrix_math.c \
-				   src/display-config/test_matrix_transformation.c
+				   src/display-config/test_matrix_transformation.c src/display-config/test_camera.c \
+				   
 				   
 SRC_MAIN		:= src/main.c
 

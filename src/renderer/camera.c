@@ -6,15 +6,13 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 01:47:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/27 14:33:19 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:35:00 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /* --------------------- Private function prototypes ----------------------- */
-
-static void	camera_init(t_camera *cam, t_canvas *win);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -32,7 +30,8 @@ void	rt_camera_render(t_info *rt)
 	uint32_t	rgba;
 
 	py = 0;
-	camera_init(&rt->camera, &rt->win);
+	rt_camera_init(&rt->camera, &rt->win);
+	rt_view_transform(&rt->camera, rt->win.world_up);
 	debug_print_camera(&rt->camera); /// @todo delete
 	debug_print_world(&rt->win); /// @todo delete
 	
@@ -75,30 +74,50 @@ void	rt_camera_render(t_info *rt)
  * @param cam Pointer to the camera structure.
  * @param win Pointer to the canvas structure.
  */
-static void	camera_init(t_camera *cam, t_canvas *win)
-{
-	t_vec3	vp_center;
+// static void	camera_init(t_camera *cam, t_canvas *win)
+// {
+// 	t_vec3	vp_center;
 
-	cam->right = normalize(cross_product(cam->forward, win->world_up));
-	cam->true_up = cross_product(cam->right, cam->forward);
-	cam->vport_h = 2.0f * tan((cam->fov * M_PI / 180.0f) / 2.0f)
-		* cam->focal_len;
-	cam->vport_w = cam->vport_h * ((float)win->img->width / win->img->height);
-	cam->vport_u = multiplication(cam->right, cam->vport_w);
-	cam->vport_v = multiplication(cam->true_up, -cam->vport_h);
-	cam->px_delta_u = division(cam->vport_u, (float)win->img->width);
-	cam->px_delta_v = division(cam->vport_v, (float)win->img->height);
-	vp_center = addition(
-			cam->pos, multiplication(cam->forward, cam->focal_len));
-	cam->vport_upleft = subtraction(
-			subtraction(vp_center, division(cam->vport_u, 2.0f)),
-			division(cam->vport_v, 2.0f)
-			);
-	cam->px00_loc = addition(
-			cam->vport_upleft,
-			addition(
-				multiplication(cam->px_delta_u, 0.5f),
-				multiplication(cam->px_delta_v, 0.5f)
-				)
-			);
+// 	cam->right = normalize(cross_product(cam->forward, win->world_up));
+// 	cam->true_up = cross_product(cam->right, cam->forward);
+// 	cam->vport_h = 2.0f * tanf((cam->fov * M_PI / 180.0f) / 2.0f)
+// 		* cam->focal_len;
+// 	cam->vport_w = cam->vport_h * ((float)win->img->width / win->img->height);
+// 	cam->vport_u = multiplication(cam->right, cam->vport_w);
+// 	cam->vport_v = multiplication(cam->true_up, -cam->vport_h);
+// 	cam->px_delta_u = division(cam->vport_u, (float)win->img->width);
+// 	cam->px_delta_v = division(cam->vport_v, (float)win->img->height);
+// 	vp_center = addition(
+// 			cam->pos, multiplication(cam->forward, cam->focal_len));
+// 	cam->vport_upleft = subtraction(
+// 			subtraction(vp_center, division(cam->vport_u, 2.0f)),
+// 			division(cam->vport_v, 2.0f)
+// 			);
+// 	cam->px00_loc = addition(
+// 			cam->vport_upleft,
+// 			addition(
+// 				multiplication(cam->px_delta_u, 0.5f),
+// 				multiplication(cam->px_delta_v, 0.5f)
+// 				)
+// 			);
+// }
+
+void	rt_camera_init(t_camera *cam, t_canvas *win)
+{
+	float	half_view;
+	float	aspect_ratio;
+
+	half_view = tanf(radians(cam->fov) / 2.0f);
+	aspect_ratio = (float)win->width / (float)win->height;
+	if (aspect_ratio >= 1.0f)
+	{
+		cam->half_width = half_view;
+		cam->half_height = half_view / aspect_ratio;
+	}
+	else
+	{
+		cam->half_width = half_view * aspect_ratio;
+		cam->half_height = half_view;
+	}
+	cam->pixel_size = (cam->half_width * 2.0) / (float)win->width;
 }
