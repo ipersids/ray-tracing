@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:51:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/26 10:53:10 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/28 23:58:24 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
  * @return o in success, otherwise — error code.
  */
 static int	validate_args(int argc, char **argv, char ***content);
+
+static int	perform_computations(t_info *rt);
 
 /* --------------------------- Public functions ---------------------------- */
 
@@ -45,6 +47,9 @@ int	rt_validate_input(int argc, char **argv, t_info *rt)
 		return (exit_code);
 	exit_code = rt_parse_scene(rt, content);
 	rt_free_arr((void **)content, NULL_TERMINATED_ARR);
+	if (0 != exit_code)
+		return (exit_code);
+	exit_code = perform_computations(rt);
 	return (exit_code);
 }
 
@@ -72,5 +77,14 @@ static int	validate_args(int argc, char **argv, char ***content)
 		return (ERR_SYSTEM);
 	exit_code = rt_read_scene(fd, content);
 	close(fd);
+	return (exit_code);
+}
+
+static int	perform_computations(t_info *rt)
+{
+	int	exit_code;
+
+	exit_code = 0;
+	exit_code = rt_set_transformations(rt);
 	return (exit_code);
 }

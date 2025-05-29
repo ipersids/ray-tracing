@@ -24,8 +24,8 @@
 # include <stdbool.h>			// `bool` data type
 
 # include "minirt_data.h"		// custom data structures and constants
-# include "minirt_renderer.h"	// camera, ray, colors related functions
 # include "minirt_matrix.h"		// matrices math library
+# include "minirt_renderer.h"	// camera, ray, colors related functions
 
 # include "display_config.h"	// debug print objects config
 
@@ -78,6 +78,13 @@ t_vec3	multiply_colors(t_vec3 a, t_vec3 b);
 
 float	magnitude(t_vec3 vec);
 float	dot_product(t_vec3 a, t_vec3 b);
+
+/* ----------------------------- Transformations ---------------------------- */
+
+int		rt_sphere_transform(t_sphere *sp);
+int		rt_plane_transform(t_plane *pl);
+int		rt_cylinder_transform(t_cylinder *cy);
+int		rt_view_transform(t_camera *cam, t_vec3	world_up);
 
 /* ------------------------- Canvas: MLX42 managment ------------------------ */
 /// @dir src/hook

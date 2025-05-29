@@ -17,5 +17,6 @@ void	debug_print_matrix(t_matrix *m, char *msg);
 
 void	test_matrix_math(void);
 void	test_matrix_transformation(void);
+void 	test_camera(void);
 
 #endif // DISPLAY_CONFIG_H

@@ -19,7 +19,7 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define EPSILON 0.00001
+# define EPSILON 0.001
 
 
 /* ------------------- Matrices strucrtures  ----------------- */
@@ -68,6 +68,8 @@ typedef enum s_error
 	ERR_OBJECT_CONFIG,
 	ERR_OBJECT_CONFIG_LIMITS,
 	ERR_CAMERA_ORIENT_VECTOR,
+	ERR_CAMERA_GIMBAL_LOCK,
+	ERR_CAMERA_NON_INVERSIBLE,
 	ERR_MATRIX_NON_INVERSIBLE,
 	ERR_MAX
 }	t_error;
@@ -100,8 +102,15 @@ typedef struct s_vec3
 }			t_vec3;
 
 typedef t_vec3	t_point;
-
 typedef t_vec3	t_color;
+
+// typedef struct s_material
+// {
+// 	t_color	ambient_component; // material_color * ambient.color * ambient.ratio
+// 	float	diffuse;
+// 	float	specular;
+// 	float	shininess;
+// }			t_material;
 
 # define DEFAULT_AMBIENT_RATIO 0.2f
 # define DEFAULT_AMBIENT_COLOR (t_color){1.0f, 1.0f, 1.0f}
@@ -116,24 +125,19 @@ typedef struct s_ambient_light
 # define DEFAULT_CAMERA_ORIENTATION (t_vec3){0.0f, 0.0f, 1.0f}
 # define DEFAULT_CAMERA_FOV 70.0f
 # define CAMERA_SPEED 0.05f
-# define CAMERA_FOCAL_LENGTH 1.0f
 
 typedef struct s_camera
 {
-	t_point	pos;				// x,y,z of the camera position
-	t_vec3	forward;			// 3d norm. orientation vector
-	float	fov;				// Horizontal field of view, degrees [0.0,180.0]
-	t_point	px00_loc;
-	t_vec3	px_delta_u;
-	t_vec3	px_delta_v;
-	t_vec3	up;
-	t_vec3	right;
-	float	focal_len;
-	float	vport_h;
-	float	vport_w;
-	t_vec3	vport_u;
-	t_vec3	vport_v;
-	t_vec3	vport_upleft;
+	t_point		pos;				// x,y,z of the camera position
+	t_vec3		forward;			// 3d norm. orientation vector
+	float		fov;				// Horizontal field of view, degrees [0.0,180.0]
+	t_vec3		true_up;
+	t_vec3		left;
+	t_matrix	transform;
+	t_matrix	inv_transform;
+	float		half_width;
+	float		half_height;
+	float		pixel_size;
 }			t_camera;
 
 typedef struct s_light
@@ -141,9 +145,21 @@ typedef struct s_light
 	t_point	pos;				// x,y,z of the light point
 	float	bright;				// the light brightness ratio [0.0,1.0]
 	t_color	color;				// (unused in mandatory part)
+	t_color	intensity;			// multiplication(light.color, light.bright)
 }			t_light;
 
 # include "minirt_matrix.h"
+
+typedef	struct s_material
+{
+	t_color	color;				// Color on the surface
+	float	ambient;			// Backgroud lighting or light reflected from other objects (0.0-1.0)
+	t_color final_color;
+	t_color ambient_component;
+	float	diffuse;			// Light reflected from a matte surface (0.0-1.0)
+	float	specular;			// Hightlight, the bright spot on a curved surface (0.0-1.0)
+	float	shininess;			// The size and sharpness of the specular reflection (10-200)
+}			t_material;
 
 typedef struct s_sphere
 {
@@ -156,6 +172,7 @@ typedef struct s_sphere
 	t_matrix	transform;
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
+	t_material	material;
 }				t_sphere;
 
 typedef struct s_plane
@@ -253,6 +270,12 @@ typedef struct s_intersections
 	size_t	count;
 }			t_intersections;
 
+typedef	struct s_point_light
+{
+	t_color	intensity;
+	t_point	position;
+}			t_plight;
+
 /* -------------------------- Main minirt structure  ----------------------- */
 
 typedef struct s_info
@@ -264,6 +287,8 @@ typedef struct s_info
 	t_object		*objs;		// Array to store scene's objects (sp, pl, cy)
 	size_t			n_objs;		// Amount of items in the *objs array
 	t_canvas		win;		// mlx window and images info struct
+	t_intersection	*ts;		// Intersection collection
+	size_t			n_ts;		// Amount t-values in intersection collection
 }					t_info;
 
 /* ------------------------- Parser helper structures ----------------------- */
@@ -275,5 +300,37 @@ typedef struct s_counter
 	int	camera;
 	int	ambient;
 }		t_counter;
+
+typedef struct s_phong_vars
+{
+	float		t;
+	t_object	*obj;
+	t_vec3		point;
+	t_vec3		eyev;
+	bool		is_inside;
+	t_vec3		normalv;
+}				t_phong_vars;
+
+typedef	struct	s_phong_color
+{
+	t_color	eff_col;
+	t_color	amb;
+	t_color	dif;
+	t_color	spec;
+	t_vec3	lightv;
+	t_vec3	reflectv;
+	float	l_dot_norm;
+	float	refl_dot_eye;
+	float	factor;
+}				t_phong_color;
+
+typedef struct s_ray_vars
+{
+	float	xoffset;
+	float	yoffset;
+	float	world_x;
+	float	world_y;
+	t_vec3	pixel;
+}			t_ray_vars;
 
 #endif // MINIRT_DATA_H

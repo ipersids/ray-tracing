@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:11:33 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/20 14:29:58 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:14:28 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	test_matrix_math(void)
 			{0.0, 0.0, 0.0, 1.0}},
 		4};
 	t_vec3 v1 = {1.0, 2.0, 3.0};
-	t_vec3 v2 = matrix_multiply_vec3(m7, v1);
+	t_vec3 v2 = matrix_multiply_point(m7, v1);
 	assert(equal(v2.x, 18.0) == true);
     assert(equal(v2.y, 24.0) == true);
     assert(equal(v2.z, 33.0) == true);

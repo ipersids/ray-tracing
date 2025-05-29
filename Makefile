@@ -21,7 +21,7 @@ SUBM_LIBFT_LIB	:= $(SUBM_LIBFT_DIR)/libft$(LIB_EXT)
 
 # Compilation variables
 CC				:= clang
-CFLAGS			:= -Wall -Wextra -Werror
+CFLAGS			:= -Wall -Wextra -Werror -D RT_TEST=false
 HDRS			:= -Iinclude -I$(SUBM_MLX_DIR)/include -I$(SUBM_LIBFT_DIR)/include
 LIBS			:= -L$(SUBM_MLX_DIR)/build -lmlx42 \
 				   -L$(SUBM_LIBFT_DIR) -lft \
@@ -44,12 +44,14 @@ SRCS			:= src/constructor/rt_init_info.c src/constructor/rt_init_objects.c \
 				   src/parser/rt_parse_scene.c src/parser/rt_read_scene.c \
 				   src/parser/rt_validate_input.c src/parser/rt_parse_cylinder.c \
 				   src/parser/rt_parse_plane.c src/parser/rt_parse_sphere.c \
-				   src/parser/objects_transform.c \
+				   src/parser/rt_set_transformations.c \
 				   \
 				   src/hook/hook_close_window.c src/hook/hook_resize_window.c \
 				   src/hook/hook_render_scene.c \
 				   \
-				   src/renderer/camera.c src/renderer/color.c src/renderer/ray.c \
+				   src/renderer/camera.c src/renderer/color.c \
+				   src/renderer/color_at.c src/renderer/intersect_world.c \
+				   src/renderer/ray.c src/renderer/ray_utils.c \
 				   \
 				   src/calculations/math.c \
 				   \
@@ -62,10 +64,13 @@ SRCS			:= src/constructor/rt_init_info.c src/constructor/rt_init_objects.c \
 				   \
 				   src/shapes/sphere.c \
 				   \
+				   src/transformation/objects_transform.c src/transformation/view_transform.c \
+				   \
 				   \
 				   \
 				   src/display-config/debug_utils.c src/display-config/test_matrix_math.c \
-				   src/display-config/test_matrix_transformation.c
+				   src/display-config/test_matrix_transformation.c src/display-config/test_camera.c \
+				   
 				   
 SRC_MAIN		:= src/main.c
 
@@ -78,6 +83,9 @@ H_FILES			:= include/minirt_data.h include/minirt.h include/minirt_renderer.h \
 
 # RULES
 all: update-submodule build-submodule $(NAME)
+
+run: all
+	./miniRT scene/simple.rt
 
 $(NAME): $(OBJS) $(OBJ_MAIN)
 	$(CC) $(CFLAGS) $(OBJS) $(OBJ_MAIN) $(HDRS) $(LIBS) -o $(NAME)
@@ -107,5 +115,10 @@ build-submodule:
 	cd $(SUBM_MLX_DIR) && cmake -B build && cmake --build build -j4
 	@echo "\nMLX42 is ready.\n"
 	$(MAKE) -C $(SUBM_LIBFT_DIR) 
+
+# Target for testing
+test: CFLAGS := -g -D RT_TEST=true
+test: all
+	./miniRT
 
 .PHONY: all clean fclean re update-submodule build-submodule

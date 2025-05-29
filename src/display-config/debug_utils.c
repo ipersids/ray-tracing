@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   debug_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:06:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/26 12:52:07 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:51:43 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minirt.h"
 
@@ -30,24 +31,16 @@ void	debug_print_camera(t_camera *cam)
 		cam->pos.x, cam->pos.y, cam->pos.z);
 	printf("\t- forward: %.2f, %.2f, %.2f\n",
 		cam->forward.x, cam->forward.y, cam->forward.z);
-	printf("\t- FOV: %.2f\n\t- focal_len: %2.f\n", cam->fov, cam->focal_len);
-	printf("\t- right: %.2f, %.2f, %.2f\n",
-		cam->right.x, cam->right.y, cam->right.z);
-	printf("\t- up: %.2f, %.2f, %.2f\n", cam->up.x, cam->up.y, cam->up.z);
-	printf("\t- vport_h: %.2f\n", cam->vport_h);
-	printf("\t- vport_w: %.2f\n", cam->vport_w);
-	printf("\t- vport_u: %.2f, %.2f, %.2f\n",
-		cam->vport_u.x, cam->vport_u.y, cam->vport_u.z);
-	printf("\t- vport_v: %.2f, %.2f, %.2f\n",
-		cam->vport_v.x, cam->vport_v.y, cam->vport_v.z);
-	printf("\t- px_delta_u: %.2f, %.2f, %.2f\n",
-		cam->px_delta_u.x, cam->px_delta_u.y, cam->px_delta_u.z);
-	printf("\t- px_delta_v: %.2f, %.2f, %.2f\n",
-		cam->px_delta_v.x, cam->px_delta_v.y, cam->px_delta_v.z);
-	printf("\t- vport_upleft: %.2f, %.2f, %.2f\n",
-		cam->vport_upleft.x, cam->vport_upleft.y, cam->vport_upleft.z);
-	printf("\t- px00_loc: %.2f, %.2f, %.2f\n",
-		cam->px00_loc.x, cam->px00_loc.y, cam->px00_loc.z);
+	printf("\t- FOV: %.2f\n", cam->fov);
+	printf("\t- left: %f, %f, %f\n",
+		cam->left.x, cam->left.y, cam->left.z);
+	printf("\t- true_up: %f, %f, %f\n", cam->true_up.x, cam->true_up.y, cam->true_up.z);
+	printf("\t- half_height: %f\n", cam->half_height);
+	printf("\t- half_width: %f\n", cam->half_width);
+	printf("\t- pixel_size: %f\n", cam->pixel_size);
+
+	debug_print_matrix(&cam->transform, "Original matrix");
+	debug_print_matrix(&cam->inv_transform, "Inversed matrix");
 }
 
 void	debug_print_lights(t_info *rt)
@@ -122,10 +115,6 @@ void	debug_print_sp(t_sphere *sp)
 	printf("\t- scale: %.2f\n", sp->scale);
 	printf("\t- color: %.2f, %.2f, %.2f\n",
 		sp->color.x, sp->color.y, sp->color.z);
-
-	debug_print_matrix(&sp->transform, "Original matrix");
-	debug_print_matrix(&sp->inv_transform, "Inversed matrix");
-
 }
 
 void	debug_print_world(t_canvas *win)
@@ -149,7 +138,7 @@ void	debug_print_matrix(t_matrix *m, char *msg)
 	while (m->dimension > row)
 	{
 		printf(
-			"\t[%.5f, %.5f, %.5f, %.5f]\n",
+			"\t[%f, %f, %f, %f]\n",
 			m->data[row][0], m->data[row][1],
 			m->data[row][2], m->data[row][3]
 		);

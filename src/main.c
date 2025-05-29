@@ -5,9 +5,11 @@ static void	run_unit_tests(void)
 	printf(PRINT_GREEN"RUNNING UNIT TESTS:"PRINT_DEFAULT);
 	test_matrix_math();
 	test_matrix_transformation();
+	test_camera();
 	printf("\n\n");
 }
 
+#if RT_TEST == false
 int	main(int argc, char **argv)
 {
 	int		exit_code;
@@ -26,3 +28,10 @@ int	main(int argc, char **argv)
 	rt_destroy_exit(&rt, EXIT_SUCCESS);
 	return (exit_code);
 }
+# else
+int	main(void)
+{
+	run_unit_tests();
+	return (0);
+}
+#endif
