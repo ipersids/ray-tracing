@@ -1,5 +1,9 @@
 /**
- * @note:
+ * @note (project status)
+ * - src/parser/rt_parse_camera.c currently allowing only WORLD_UP at y-axis
+ * - src/parser/rt_parse_sphere.c sphere diam currently could not be less then (2.0 * EPSILON)
+ *
+ * @note (recourses):
  * - lightning model: https://learnopengl.com/Lighting/Basic-Lighting
  * - Physically Based Rendering: From Theory to Implementation:
  *   https://pbr-book.org/4ed/contents (advanced)
