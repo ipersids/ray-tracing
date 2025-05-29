@@ -6,7 +6,7 @@
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 18:38:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/27 15:44:32 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:18:40 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static t_color	lighting(t_phong_vars vars, t_material m, t_plight light);
 static t_material	default_material(void);
 static void	set_material(t_sphere *sphere, t_material material);
 static t_plight	point_light(t_point position, t_color intensity);
+static bool	light_behind_surface(float l_dot_norm);
 //static void	print_vector(char *msg, t_vec3 vec);
 
 //static t_color	lighting(t_material m, t_point pos, t_plight light, t_vec3 eyev, t_vec3 normalv);
@@ -38,7 +39,7 @@ t_color	rt_color_at(t_info *rt, t_ray *ray)
 	t = find_closest_intersection(rt->ts, rt->n_ts);
 	if (NULL == t)
 		return ((t_color){0.0f, 0.0f, 0.0f});
-	printf("t = %.2f\n", t->t);
+	//printf("t = %.2f\n", t->t);
 	vars = prepare_shading(t, ray, rt);
 	material = default_material();
 	material.color = (t_color){1, 0.2, 0};
@@ -109,7 +110,7 @@ static t_color	lighting(t_phong_vars vars, t_material m, t_plight light)
  	pc.lightv = normalize(subtraction(light.position, vars.point));
  	pc.amb = multiplication(pc.eff_col, m.ambient);
  	pc.l_dot_norm = dot_product(pc.lightv, vars.normalv);
- 	if (pc.l_dot_norm < 0)
+ 	if (light_behind_surface(pc.l_dot_norm))
  	{
  		pc.dif = (t_color){0,0,0};
  		pc.spec = (t_color){0,0,0};
@@ -129,6 +130,57 @@ static t_color	lighting(t_phong_vars vars, t_material m, t_plight light)
 	}
 	return(addition(addition(pc.amb, pc.dif), pc.spec));
 }
+
+static bool	light_behind_surface(float l_dot_norm)
+{
+	if (l_dot_norm < 0)
+		return (true);
+	return (false);
+}
+
+// static bool	in_shadow(world, t_point point, t_plight light)
+// {
+// 	float	distance_to_light;
+// 	t_vec3	direction;
+// 	t_ray	ray;
+
+// 	direction = subtraction(point, light.position);
+// 	distance_to_light = magnitude(direction);
+// 	ray = normalize(direction);
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 t_color	lighting(t_material m, t_point pos, t_plight light, t_vec3 eyev, t_vec3 normalv)
 {
