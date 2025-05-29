@@ -25,8 +25,6 @@ t_ray	transform_ray(t_ray ray, t_matrix matrix)
 	return (result);
 }
 
-//			THIS WILL BE NEEDED LATER
-
 t_vec3	normal_at(t_object *obj, t_point world_point)
 {
 	// if (ELEMENT_SPHERE == obj->id)
@@ -51,14 +49,12 @@ t_vec3	sphere_normal_at(t_sphere *sp, t_point world_point)
 	return (world_normal);
 }
 
-//			THIS WILL BE NEEDED LATER
+t_vec3	reflect(t_vec3 in, t_vec3 normal)
+{
+	t_vec3	result;
+	t_vec3	scaled_norm;
 
-// t_vec3	reflect(t_vec3 in, t_vec3 normal)
-// {
-// 	t_vec3	result;
-// 	t_vec3	scaled_norm;
-
-// 	scaled_norm = multiplication(normal, 2 * dot_product(in, normal));
-// 	result = subtraction(in, scaled_norm);
-// 	return (result);
-// }
+	scaled_norm = multiplication(normal, 2 * dot_product(in, normal));
+	result = subtraction(in, scaled_norm);
+	return (result);
+}

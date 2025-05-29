@@ -6,9 +6,10 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 01:47:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/28 14:35:00 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:52:39 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minirt.h"
 
@@ -21,6 +22,7 @@
  *
  * @param rt Pointer to the main program structure.
  */
+
 void	rt_camera_render(t_info *rt)
 {
 	uint32_t	px;
@@ -34,7 +36,7 @@ void	rt_camera_render(t_info *rt)
 	rt_view_transform(&rt->camera, rt->win.world_up);
 	debug_print_camera(&rt->camera); /// @todo delete
 	debug_print_world(&rt->win); /// @todo delete
-	
+
 	while (py < rt->win.img->height)
 	{
 		px = 0;

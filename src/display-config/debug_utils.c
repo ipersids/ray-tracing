@@ -6,9 +6,10 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:06:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/28 11:17:10 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:51:43 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minirt.h"
 
@@ -114,10 +115,6 @@ void	debug_print_sp(t_sphere *sp)
 	printf("\t- scale: %.2f\n", sp->scale);
 	printf("\t- color: %.2f, %.2f, %.2f\n",
 		sp->color.x, sp->color.y, sp->color.z);
-
-	debug_print_matrix(&sp->transform, "Original matrix");
-	debug_print_matrix(&sp->inv_transform, "Inversed matrix");
-
 }
 
 void	debug_print_world(t_canvas *win)

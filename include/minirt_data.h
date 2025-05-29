@@ -104,13 +104,13 @@ typedef struct s_vec3
 typedef t_vec3	t_point;
 typedef t_vec3	t_color;
 
-typedef struct s_material
-{
-	t_color	ambient_component; // material_color * ambient.color * ambient.ratio
-	float	diffuse;
-	float	specular;
-	float	shininess;
-}			t_material;
+// typedef struct s_material
+// {
+// 	t_color	ambient_component; // material_color * ambient.color * ambient.ratio
+// 	float	diffuse;
+// 	float	specular;
+// 	float	shininess;
+// }			t_material;
 
 # define DEFAULT_AMBIENT_RATIO 0.2f
 # define DEFAULT_AMBIENT_COLOR (t_color){1.0f, 1.0f, 1.0f}
@@ -150,6 +150,17 @@ typedef struct s_light
 
 # include "minirt_matrix.h"
 
+typedef	struct s_material
+{
+	t_color	color;				// Color on the surface
+	float	ambient;			// Backgroud lighting or light reflected from other objects (0.0-1.0)
+	t_color final_color;
+	t_color ambient_component;
+	float	diffuse;			// Light reflected from a matte surface (0.0-1.0)
+	float	specular;			// Hightlight, the bright spot on a curved surface (0.0-1.0)
+	float	shininess;			// The size and sharpness of the specular reflection (10-200)
+}			t_material;
+
 typedef struct s_sphere
 {
 	t_point		pos;				// x,y,z of sphere center
@@ -161,6 +172,7 @@ typedef struct s_sphere
 	t_matrix	transform;
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
+	t_material	material;
 }				t_sphere;
 
 typedef struct s_plane
@@ -258,6 +270,12 @@ typedef struct s_intersections
 	size_t	count;
 }			t_intersections;
 
+typedef	struct s_point_light
+{
+	t_color	intensity;
+	t_point	position;
+}			t_plight;
+
 /* -------------------------- Main minirt structure  ----------------------- */
 
 typedef struct s_info
@@ -293,6 +311,19 @@ typedef struct s_phong_vars
 	t_vec3		normalv;
 }				t_phong_vars;
 
+typedef	struct	s_phong_color
+{
+	t_color	eff_col;
+	t_color	amb;
+	t_color	dif;
+	t_color	spec;
+	t_vec3	lightv;
+	t_vec3	reflectv;
+	float	l_dot_norm;
+	float	refl_dot_eye;
+	float	factor;
+}				t_phong_color;
+
 typedef struct s_ray_vars
 {
 	float	xoffset;
@@ -301,6 +332,5 @@ typedef struct s_ray_vars
 	float	world_y;
 	t_vec3	pixel;
 }			t_ray_vars;
-
 
 #endif // MINIRT_DATA_H

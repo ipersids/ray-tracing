@@ -119,6 +119,6 @@ build-submodule:
 # Target for testing
 test: CFLAGS := -g -D RT_TEST=true
 test: all
-	./miniRT_test
+	./miniRT
 
 .PHONY: all clean fclean re update-submodule build-submodule
