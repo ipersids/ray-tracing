@@ -27,7 +27,9 @@ t_matrix	matrix_shearing(float proportions[6]);
 /// @file src/calculations/matrices/operations.c
 
 t_matrix	matrix_multiply(t_matrix a, t_matrix b);
-t_vec3		matrix_multiply_vec3(t_matrix m, t_vec3 v);
+// t_vec3		matrix_multiply_vec3(t_matrix m, t_vec3 v);
+t_vec3		matrix_multiply_point(t_matrix m, t_vec3 p);
+t_vec3		matrix_multiply_vector(t_matrix m, t_vec3 v);
 
 /// @file src/calculations/matrices/extract_submatrix.c
 

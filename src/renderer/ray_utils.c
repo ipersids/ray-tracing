@@ -9,7 +9,7 @@ t_intersection	*find_closest_intersection(t_intersection *ts, int n_ts)
 	i = 0;
 	while (i < n_ts)
 	{
-		if (ts[i].t >= 0.0f)
+		if (ts[i].t > EPSILON)
 			return (&ts[i]);
 		++i;
 	}
@@ -20,8 +20,8 @@ t_ray	transform_ray(t_ray ray, t_matrix matrix)
 {
 	t_ray	result;
 
-	result.orig = matrix_multiply_vec3(matrix, ray.orig);
-	result.dir = matrix_multiply_vec3(matrix, ray.dir);
+	result.orig = matrix_multiply_point(matrix, ray.orig);
+	result.dir = matrix_multiply_vector(matrix, ray.dir);
 	return (result);
 }
 
@@ -44,9 +44,9 @@ t_vec3	sphere_normal_at(t_sphere *sp, t_point world_point)
 	t_vec3		obj_normal;
 	t_vec3		world_normal;
 
-	obj_point = matrix_multiply_vec3(sp->inv_transform, world_point);
+	obj_point = matrix_multiply_point(sp->inv_transform, world_point);
 	obj_normal = subtraction(obj_point, sp->center);
-	world_normal = matrix_multiply_vec3(sp->inv_transpose, obj_normal);
+	world_normal = matrix_multiply_vector(sp->inv_transpose, obj_normal);
 	world_normal = normalize(world_normal);
 	return (world_normal);
 }

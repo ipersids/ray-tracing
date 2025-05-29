@@ -37,8 +37,8 @@ t_ray	rt_get_ray(t_camera *cam, int32_t px, int32_t py)
 	vars.world_x = cam->half_width - vars.xoffset;
 	vars.world_y = cam->half_height - vars.yoffset;
 	canvas_point = (t_vec3){vars.world_x, vars.world_y, -1.0f};
-	vars.pixel = matrix_multiply_vec3(cam->inv_transform, canvas_point);
-	ray.orig = matrix_multiply_vec3(cam->inv_transform, (t_vec3){0.0f, 0.0f, 0.0f});
+	vars.pixel = matrix_multiply_point(cam->inv_transform, canvas_point);
+	ray.orig = matrix_multiply_point(cam->inv_transform, (t_vec3){0.0f, 0.0f, 0.0f});
 	ray.dir = normalize(subtraction(vars.pixel, ray.orig));
 	ray.type = RAY_CAMERA;
 	return (ray);

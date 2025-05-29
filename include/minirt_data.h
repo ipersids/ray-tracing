@@ -19,7 +19,7 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define EPSILON 0.00001
+# define EPSILON 0.001
 
 
 /* ------------------- Matrices strucrtures  ----------------- */
@@ -102,8 +102,15 @@ typedef struct s_vec3
 }			t_vec3;
 
 typedef t_vec3	t_point;
-
 typedef t_vec3	t_color;
+
+typedef struct s_material
+{
+	t_color	ambient_component; // material_color * ambient.color * ambient.ratio
+	float	diffuse;
+	float	specular;
+	float	shininess;
+}			t_material;
 
 # define DEFAULT_AMBIENT_RATIO 0.2f
 # define DEFAULT_AMBIENT_COLOR (t_color){1.0f, 1.0f, 1.0f}
@@ -128,7 +135,6 @@ typedef struct s_camera
 	t_vec3		left;
 	t_matrix	transform;
 	t_matrix	inv_transform;
-
 	float		half_width;
 	float		half_height;
 	float		pixel_size;
@@ -139,6 +145,7 @@ typedef struct s_light
 	t_point	pos;				// x,y,z of the light point
 	float	bright;				// the light brightness ratio [0.0,1.0]
 	t_color	color;				// (unused in mandatory part)
+	t_color	intensity;			// multiplication(light.color, light.bright)
 }			t_light;
 
 # include "minirt_matrix.h"

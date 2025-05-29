@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 23:37:27 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/24 12:58:34 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:04:05 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +58,36 @@ t_matrix	matrix_multiply(t_matrix a, t_matrix b)
  * @param v The vector to transform.
  * @return t_vec3 The transformed vector.
  */
-t_vec3	matrix_multiply_vec3(t_matrix m, t_vec3 v) // FOR POINTS
+// point = includes translation
+t_vec3	matrix_multiply_point(t_matrix m, t_vec3 p)
 {
 	t_vec3	res;
 
 	res.x = (
-			m.data[0][0] * v.x + m.data[0][1] * v.y
-			+ m.data[0][2] * v.z + m.data[0][3]
+			m.data[0][0] * p.x + m.data[0][1] * p.y
+			+ m.data[0][2] * p.z + m.data[0][3]
 			);
 	res.y = (
-			m.data[1][0] * v.x + m.data[1][1] * v.y
-			+ m.data[1][2] * v.z + m.data[1][3]
+			m.data[1][0] * p.x + m.data[1][1] * p.y
+			+ m.data[1][2] * p.z + m.data[1][3]
 			);
 	res.z = (
-			m.data[2][0] * v.x + m.data[2][1] * v.y
-			+ m.data[2][2] * v.z + m.data[2][3]
+			m.data[2][0] * p.x + m.data[2][1] * p.y
+			+ m.data[2][2] * p.z + m.data[2][3]
 			);
-	return (res);
+	return res;
 }
 
+// vector = no translation
+t_vec3	matrix_multiply_vector(t_matrix m, t_vec3 v)
+{
+	t_vec3	res;
+
+	res.x = m.data[0][0] * v.x + m.data[0][1] * v.y + m.data[0][2] * v.z;
+	res.y = m.data[1][0] * v.x + m.data[1][1] * v.y + m.data[1][2] * v.z;
+	res.z = m.data[2][0] * v.x + m.data[2][1] * v.y + m.data[2][2] * v.z;
+	return res;
+}
 
 // WHEN MULTIPLYING VECTORS WE SHOULD NOT MULTIPLY THE LAST ROW OF THE MATRIX
 // SO WE MIGHT NEED 2 FUNCTIONS TO MULTIPLY (POINTS AND VECS SEPARATE)

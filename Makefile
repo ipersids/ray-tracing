@@ -21,7 +21,7 @@ SUBM_LIBFT_LIB	:= $(SUBM_LIBFT_DIR)/libft$(LIB_EXT)
 
 # Compilation variables
 CC				:= clang
-CFLAGS			:= -Wall -Wextra -Werror
+CFLAGS			:= -Wall -Wextra -Werror -D RT_TEST=false
 HDRS			:= -Iinclude -I$(SUBM_MLX_DIR)/include -I$(SUBM_LIBFT_DIR)/include
 LIBS			:= -L$(SUBM_MLX_DIR)/build -lmlx42 \
 				   -L$(SUBM_LIBFT_DIR) -lft \
@@ -84,6 +84,9 @@ H_FILES			:= include/minirt_data.h include/minirt.h include/minirt_renderer.h \
 # RULES
 all: update-submodule build-submodule $(NAME)
 
+run: all
+	./miniRT scene/simple.rt
+
 $(NAME): $(OBJS) $(OBJ_MAIN)
 	$(CC) $(CFLAGS) $(OBJS) $(OBJ_MAIN) $(HDRS) $(LIBS) -o $(NAME)
 
@@ -112,5 +115,10 @@ build-submodule:
 	cd $(SUBM_MLX_DIR) && cmake -B build && cmake --build build -j4
 	@echo "\nMLX42 is ready.\n"
 	$(MAKE) -C $(SUBM_LIBFT_DIR) 
+
+# Target for testing
+test: CFLAGS := -g -D RT_TEST=true
+test: all
+	./miniRT_test
 
 .PHONY: all clean fclean re update-submodule build-submodule
