@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/13 11:30:20 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/16 01:51:29 by ipersids         ###   ########.fr       */
+/*   Created: 2025/05/30 01:34:04 by ipersids          #+#    #+#             */
+/*   Updated: 2025/05/30 01:41:12 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@
 static inline float	rt_clampf(float n, float min, float max);
 
 /* --------------------------- Public Functions ---------------------------- */
+
+t_color	multiply_colors(t_color a, t_color b)
+{
+	t_color	result;
+
+	result.x = a.x * b.x;
+	result.y = a.y * b.y;
+	result.z = a.z * b.z;
+	return (result);
+}
 
 /**
  * @brief Converts a color in the range [0.0, 1.0] to 0xRRGGBBAA format.

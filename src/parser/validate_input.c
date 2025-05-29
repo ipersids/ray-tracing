@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_validate_input.c                                :+:      :+:    :+:   */
+/*   validate_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:51:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/28 23:58:24 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/30 01:47:53 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,8 @@ static int	perform_computations(t_info *rt)
 
 	exit_code = 0;
 	exit_code = rt_set_transformations(rt);
+	if (0 != exit_code)
+		return (exit_code);
+	// exit_code = rt_set_materials(rt);
 	return (exit_code);
 }

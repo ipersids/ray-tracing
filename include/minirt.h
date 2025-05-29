@@ -78,7 +78,8 @@ t_vec3	multiplication(t_vec3 vec, float multiplier);
 t_vec3	division(t_vec3 vec, float divider);
 t_vec3	normalize(t_vec3 vec);
 t_vec3	cross_product(t_vec3 a, t_vec3 b);
-t_vec3	multiply_colors(t_vec3 a, t_vec3 b);
+
+t_color	multiply_colors(t_color a, t_color b);
 
 float	magnitude(t_vec3 vec);
 float	dot_product(t_vec3 a, t_vec3 b);
