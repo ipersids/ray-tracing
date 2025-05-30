@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 18:38:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/30 15:55:46 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:07:54 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_color	rt_color_at(t_info *rt, t_ray *ray)
 	// vars.obj->material = default_material();
 	// vars.obj->material.color = vars.obj->sp.color;
 	light.position = rt->lights[0].pos;
-	light.intensity = (t_color){1.0f, 1.0f, 1.0f};
+	light.intensity = rt->lights[0].intensity;
 	result = lighting(vars, *vars.obj->material, light);
 	return (result);
 }

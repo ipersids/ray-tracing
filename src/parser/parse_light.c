@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:51:31 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/30 01:45:38 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:17:23 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	rt_parse_light(t_info *rt, char *line)
 	if (0 != exit_code)
 		return (exit_code);
 	rt->n_lights += 1;
+	rt->lights[i].intensity = multiply_color_scalar(
+		rt->lights[i].color, rt->lights[i].bright);
 	exit_code = rt_validate_end_of_line(&line, &next);
 	return (exit_code);
 }

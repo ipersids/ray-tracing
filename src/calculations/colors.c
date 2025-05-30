@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:34:04 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/30 01:41:12 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:15:58 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ t_color	multiply_colors(t_color a, t_color b)
 	result.x = a.x * b.x;
 	result.y = a.y * b.y;
 	result.z = a.z * b.z;
+	return (result);
+}
+
+t_color	multiply_color_scalar(t_color a, float scalar)
+{
+	t_color	result;
+
+	result.x = a.x * scalar;
+	result.y = a.y * scalar;
+	result.z = a.z * scalar;
 	return (result);
 }
 
