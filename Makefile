@@ -34,7 +34,7 @@ SRC_DIR			:= src
 
 # Sources and objects
 SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
-				   src/constructor/init_window.c \
+				   src/constructor/init_window.c src/constructor/init_material.c \
 				   \
 				   src/destructor/destroy_exit.c src/destructor/free_arr.c \
 				   src/destructor/handle_errors.c \
@@ -44,7 +44,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/parser/parse_scene.c src/parser/read_scene.c \
 				   src/parser/validate_input.c src/parser/parse_cylinder.c \
 				   src/parser/parse_plane.c src/parser/parse_sphere.c \
-				   src/parser/set_transformations.c \
+				   src/parser/set_transformations.c src/parser/set_material.c \
 				   \
 				   src/hook/hook_close_window.c src/hook/hook_resize_window.c \
 				   src/hook/hook_render_scene.c \

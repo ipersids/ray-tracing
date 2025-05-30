@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 18:00:31 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/30 01:45:08 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:28:14 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	rt_parse_ambient(t_info *rt, char *line)
 	exit_code = rt_parse_color(&rt->ambient.color, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
+	rt->ambient.intensity = multiplication(rt->ambient.color, rt->ambient.ratio);
 	exit_code = rt_validate_end_of_line(&line, &next);
 	return (exit_code);
 }

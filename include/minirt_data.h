@@ -104,14 +104,6 @@ typedef struct s_vec3
 typedef t_vec3	t_point;
 typedef t_vec3	t_color;
 
-// typedef struct s_material
-// {
-// 	t_color	ambient_component; // material_color * ambient.color * ambient.ratio
-// 	float	diffuse;
-// 	float	specular;
-// 	float	shininess;
-// }			t_material;
-
 # define DEFAULT_AMBIENT_RATIO 0.2f
 # define DEFAULT_AMBIENT_COLOR (t_color){1.0f, 1.0f, 1.0f}
 
@@ -119,6 +111,7 @@ typedef struct s_ambient_light
 {
 	float	ratio;				// amb. lighting ratio in range [0.0,1.0]
 	t_color	color;				// R,G,B colors in range [0.0-1.0]
+	t_color	intensity;			// multiplication(ambient.color, ambient.ratio)
 }			t_ambient_light;
 
 # define DEFAULT_CAMERA_POSITION (t_point){-50.0f, 0.0f, 20.0f}
@@ -148,14 +141,18 @@ typedef struct s_light
 	t_color	intensity;			// multiplication(light.color, light.bright)
 }			t_light;
 
-# include "minirt_matrix.h"
+typedef enum e_mtype
+{
+	MATERIAL_DEFAULT,
+	MATERIAL_MAX
+}	t_mtype;
 
 typedef	struct s_material
 {
-	t_color	color;				// Color on the surface
-	float	ambient;			// Backgroud lighting or light reflected from other objects (0.0-1.0)
-	t_color final_color;
-	t_color ambient_component;
+	t_mtype	type;
+	t_color color;				// equal object.color
+	t_color final_color;		// init to ambient_comp from start
+	t_color ambient_comp;		// t_color ambient.intensity * t_color object.color
 	float	diffuse;			// Light reflected from a matte surface (0.0-1.0)
 	float	specular;			// Hightlight, the bright spot on a curved surface (0.0-1.0)
 	float	shininess;			// The size and sharpness of the specular reflection (10-200)
@@ -182,6 +179,7 @@ typedef struct s_plane
 	t_color		color;				// R,G,B colors in range [0.0-1.0]
 	t_matrix	transform;
 	t_matrix	inv_transform;
+	t_material	material;
 }				t_plane;
 
 typedef struct s_cylinder
@@ -194,6 +192,7 @@ typedef struct s_cylinder
 	t_color		color;				// R,G,B colors in range [0.0,1.0]
 	t_matrix	transform;
 	t_matrix	inv_transform;
+	t_material	material;
 }				t_cylinder;
 
 typedef struct s_object
@@ -204,8 +203,8 @@ typedef struct s_object
 		t_sphere	sp;
 		t_plane		pl;
 		t_cylinder	cy;
-		t_matrix	transform;
 	};
+	t_material	*material;
 }					t_object;
 
 /* --------------------- MLX42 constants and structures  ------------------- */

@@ -39,6 +39,7 @@
 void	rt_init_info(t_info *rt);
 int		rt_init_objects(t_counter *cnt, t_info *rt);
 int		rt_init_canvas(t_info *rt);
+t_material	rt_init_material(t_color ambient, t_color obj_color, t_mtype type);
 
 /* ------------------------- Validation and Parsing  ----------------------- */
 /// @dir src/parser
@@ -53,6 +54,7 @@ int		rt_parse_cylinder(t_info *rt, char *line);
 int		rt_parse_plane(t_info *rt, char *line);
 int		rt_parse_sphere(t_info *rt, char *line);
 int		rt_set_transformations(t_info *rt);
+void	rt_set_material(t_color ambient, t_object *obj, t_mtype type);
 
 /// @file src/parser/parser_utils.c
 
