@@ -1,5 +1,9 @@
 /**
- * @note:
+ * @note (project status)
+ * - src/parser/rt_parse_camera.c currently allowing only WORLD_UP at y-axis
+ * - src/parser/rt_parse_sphere.c sphere diam currently could not be less then (2.0 * EPSILON)
+ *
+ * @note (recourses):
  * - lightning model: https://learnopengl.com/Lighting/Basic-Lighting
  * - Physically Based Rendering: From Theory to Implementation:
  *   https://pbr-book.org/4ed/contents (advanced)
@@ -35,6 +39,7 @@
 void	rt_init_info(t_info *rt);
 int		rt_init_objects(t_counter *cnt, t_info *rt);
 int		rt_init_canvas(t_info *rt);
+t_material	rt_init_material(t_color ambient, t_color obj_color, t_mtype type);
 
 /* ------------------------- Validation and Parsing  ----------------------- */
 /// @dir src/parser
@@ -49,6 +54,7 @@ int		rt_parse_cylinder(t_info *rt, char *line);
 int		rt_parse_plane(t_info *rt, char *line);
 int		rt_parse_sphere(t_info *rt, char *line);
 int		rt_set_transformations(t_info *rt);
+void	rt_set_material(t_color ambient, t_object *obj, t_mtype type);
 
 /// @file src/parser/parser_utils.c
 
@@ -74,7 +80,9 @@ t_vec3	multiplication(t_vec3 vec, float multiplier);
 t_vec3	division(t_vec3 vec, float divider);
 t_vec3	normalize(t_vec3 vec);
 t_vec3	cross_product(t_vec3 a, t_vec3 b);
-t_vec3	multiply_colors(t_vec3 a, t_vec3 b);
+
+t_color	multiply_colors(t_color a, t_color b);
+t_color	multiply_color_scalar(t_color a, float scalar);
 
 float	magnitude(t_vec3 vec);
 float	dot_product(t_vec3 a, t_vec3 b);

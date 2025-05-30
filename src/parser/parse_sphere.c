@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_parse_plane.c                                   :+:      :+:    :+:   */
+/*   parse_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 19:40:19 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/01 01:32:14 by ipersids         ###   ########.fr       */
+/*   Created: 2025/04/30 19:49:23 by ipersids          #+#    #+#             */
+/*   Updated: 2025/05/30 01:46:17 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 /* --------------------------- Public Functions ---------------------------- */
 
 /**
- * @brief Parse plane settings from a string.
+ * @brief Parse sphere settings from a string.
  * 
  * @param rt Pointer to the ray tracing information structure.
- * @param line The input line containing plane data.
+ * @param line The input line containing sphere data.
  * @return int 0 on success, or an error code.
  */
-int	rt_parse_plane(t_info *rt, char *line)
+int	rt_parse_sphere(t_info *rt, char *line)
 {
 	char	*next;
 	int		exit_code;
@@ -30,14 +30,19 @@ int	rt_parse_plane(t_info *rt, char *line)
 	next = NULL;
 	exit_code = 0;
 	i = rt->n_objs;
-	rt->objs[i].id = ELEMENT_PLANE;
-	exit_code = rt_parse_coord(&rt->objs[i].pl.pos, &line, &next, false);
+	rt->objs[i].id = ELEMENT_SPHERE;
+	exit_code = rt_parse_coord(&rt->objs[i].sp.pos, &line, &next, false);
 	if (0 != exit_code)
 		return (exit_code);
-	exit_code = rt_parse_coord(&rt->objs[i].pl.dir, &line, &next, true);
+	while (ft_isspace(*line))
+		line++;
+	exit_code = rt_parse_float(&rt->objs[i].sp.diam, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
-	exit_code = rt_parse_color(&rt->objs[i].pl.color, &line, &next);
+	if (rt->objs[i].sp.diam > LIMIT_S || rt->objs[i].sp.diam < (2.0 * EPSILON))
+		return (ERR_OBJECT_CONFIG_LIMITS);
+	rt->objs[i].sp.r = rt->objs[i].sp.diam / 2.0;
+	exit_code = rt_parse_color(&rt->objs[i].sp.color, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
 	exit_code = rt_validate_end_of_line(&line, &next);

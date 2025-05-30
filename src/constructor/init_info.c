@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_init_info.c                                     :+:      :+:    :+:   */
+/*   init_info.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/28 01:33:30 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:28:49 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	init_ambient(t_ambient_light *amb)
 {
 	amb->color = DEFAULT_AMBIENT_COLOR;
 	amb->ratio = DEFAULT_AMBIENT_RATIO;
+	amb->intensity = multiplication(amb->color, amb->ratio);
 }
 
 static void	init_camera(t_camera *cam)

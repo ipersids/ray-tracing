@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_set_transformations.c                           :+:      :+:    :+:   */
+/*   set_transformations.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:51:04 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/27 15:57:24 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:39:05 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	rt_set_transformations(t_info *rt)
 			exit_code = rt_cylinder_transform(&rt->objs[i].cy);
 		else
 			exit_code = ERR_OBJECT_TYPE;
+		rt_set_material(rt->ambient.intensity, &rt->objs[i], i % MATERIAL_MAX);
 		++i;
 	}
 	return (exit_code);
