@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:06:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/29 14:51:43 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:56:44 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,6 @@ void	debug_print_camera(t_camera *cam)
 	printf("\t- half_height: %f\n", cam->half_height);
 	printf("\t- half_width: %f\n", cam->half_width);
 	printf("\t- pixel_size: %f\n", cam->pixel_size);
-
-	debug_print_matrix(&cam->transform, "Original matrix");
-	debug_print_matrix(&cam->inv_transform, "Inversed matrix");
 }
 
 void	debug_print_lights(t_info *rt)
@@ -122,7 +119,6 @@ void	debug_print_world(t_canvas *win)
 	printf(PRINT_GREEN"\nWORLD:\n"PRINT_DEFAULT);
 	printf("\t- window width: %d\n", win->width);
 	printf("\t- window height: %d\n", win->height);
-	printf("\t- a_ratio: %.2f\n", win->a_ratio);
 	printf("\t- image width: %d\n", win->img->width);
 	printf("\t- image height: %d\n", win->img->height);
 	printf("\t- world_up: {%.2f, %.2f, %.2f}\n",
@@ -144,4 +140,9 @@ void	debug_print_matrix(t_matrix *m, char *msg)
 		);
 		++row;
 	}
+}
+
+void	debug_print_vector(char *msg, t_vec3 vec)
+{
+	printf("%s x = %.2f y = %.2f z = %.2f\n", msg, vec.x, vec.y, vec.z);
 }

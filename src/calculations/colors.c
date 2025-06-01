@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/13 11:30:20 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/16 01:51:29 by ipersids         ###   ########.fr       */
+/*   Created: 2025/05/30 01:34:04 by ipersids          #+#    #+#             */
+/*   Updated: 2025/06/01 12:47:06 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,40 @@
 static inline float	rt_clampf(float n, float min, float max);
 
 /* --------------------------- Public Functions ---------------------------- */
+
+/**
+ * @brief Multiplies two colors component-wise.
+ *
+ * @param a First color.
+ * @param b Second color.
+ * @return t_color The resulting color.
+ */
+t_color	multiply_colors(t_color a, t_color b)
+{
+	t_color	result;
+
+	result.x = a.x * b.x;
+	result.y = a.y * b.y;
+	result.z = a.z * b.z;
+	return (result);
+}
+
+/**
+ * @brief Multiplies a color by a scalar.
+ *
+ * @param a The color.
+ * @param scalar The scalar value.
+ * @return t_color The resulting color.
+ */
+t_color	multiply_color_scalar(t_color a, float scalar)
+{
+	t_color	result;
+
+	result.x = a.x * scalar;
+	result.y = a.y * scalar;
+	result.z = a.z * scalar;
+	return (result);
+}
 
 /**
  * @brief Converts a color in the range [0.0, 1.0] to 0xRRGGBBAA format.

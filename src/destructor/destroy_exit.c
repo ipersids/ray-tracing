@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_destroy_exit.c                                  :+:      :+:    :+:   */
+/*   destroy_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:10:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/26 16:30:32 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:53:00 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 /* --------------------------- Public Functions ---------------------------- */
 
+/**
+ * @brief Frees all allocated resources and exits the program.
+ * 
+ * @param rt Pointer to the main program structure.
+ * @param exit_code Exit code to return from the program.
+ */
 void	rt_destroy_exit(t_info *rt, int exit_code)
 {
 	if (NULL != rt->objs)

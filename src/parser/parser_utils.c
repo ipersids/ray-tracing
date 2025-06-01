@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 23:54:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/10 10:55:17 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:03:03 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	rt_parse_coord(t_point *pos, char **start, char **endptr, bool is_norm)
 		return (ERR_OBJECT_CONFIG);
 	if (pos->z > LIMIT_COORD || pos->z < -LIMIT_COORD)
 		return (ERR_OBJECT_CONFIG_LIMITS);
-	if (is_norm && (0.0 > pos->x || 0.0 > pos->y || 0.0 > pos->z))
+	if (is_norm && (-1.0 > pos->x || -1.0 > pos->y || -1.0 > pos->z))
 		return (ERR_OBJECT_CONFIG_LIMITS);
 	if (is_norm && (1.0 < pos->x || 1.0 < pos->y || 1.0 < pos->z))
 		return (ERR_OBJECT_CONFIG_LIMITS);
@@ -134,7 +134,7 @@ int	rt_validate_end_of_line(char **startptr, char **endptr)
 	*endptr = *startptr;
 	while (ft_isspace(**startptr))
 		++(*startptr);
-	if ('\0' != (**startptr))
+	if ('\0' != (**startptr) && '#' != (**startptr))
 		return (ERR_OBJECT_CONFIG);
 	return (0);
 }

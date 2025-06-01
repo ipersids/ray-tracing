@@ -21,7 +21,7 @@ SUBM_LIBFT_LIB	:= $(SUBM_LIBFT_DIR)/libft$(LIB_EXT)
 
 # Compilation variables
 CC				:= clang
-CFLAGS			:= -Wall -Wextra -Werror -D RT_TEST=false
+CFLAGS			:= -Wall -Wextra -Werror -D RT_TEST=false -g -fsanitize=address
 HDRS			:= -Iinclude -I$(SUBM_MLX_DIR)/include -I$(SUBM_LIBFT_DIR)/include
 LIBS			:= -L$(SUBM_MLX_DIR)/build -lmlx42 \
 				   -L$(SUBM_LIBFT_DIR) -lft \
@@ -33,36 +33,38 @@ OBJ_DIR			:= obj
 SRC_DIR			:= src
 
 # Sources and objects
-SRCS			:= src/constructor/rt_init_info.c src/constructor/rt_init_objects.c \
-				   src/constructor/rt_init_canvas.c \
+SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
+				   src/constructor/init_window.c src/constructor/init_material.c \
 				   \
-				   src/destructor/rt_destroy_exit.c src/destructor/rt_free_arr.c \
-				   src/destructor/rt_perror.c \
+				   src/destructor/destroy_exit.c src/destructor/free_arr.c \
+				   src/destructor/handle_errors.c \
 				   \
-				   src/parser/parser_utils.c src/parser/rt_parse_ambient.c \
-				   src/parser/rt_parse_camera.c src/parser/rt_parse_light.c \
-				   src/parser/rt_parse_scene.c src/parser/rt_read_scene.c \
-				   src/parser/rt_validate_input.c src/parser/rt_parse_cylinder.c \
-				   src/parser/rt_parse_plane.c src/parser/rt_parse_sphere.c \
-				   src/parser/rt_set_transformations.c \
+				   src/parser/parser_utils.c src/parser/parse_ambient.c \
+				   src/parser/parse_camera.c src/parser/parse_light.c \
+				   src/parser/parse_scene.c src/parser/read_scene.c \
+				   src/parser/validate_input.c src/parser/parse_cylinder.c \
+				   src/parser/parse_plane.c src/parser/parse_sphere.c \
+				   src/parser/set_transformations.c src/parser/set_material.c \
 				   \
 				   src/hook/hook_close_window.c src/hook/hook_resize_window.c \
 				   src/hook/hook_render_scene.c \
 				   \
-				   src/renderer/camera.c src/renderer/color.c \
-				   src/renderer/color_at.c src/renderer/intersect_world.c \
+				   src/renderer/camera.c src/renderer/color_at.c \
+				   src/renderer/intersect_world.c src/renderer/normal_at.c \
 				   src/renderer/ray.c src/renderer/ray_utils.c \
 				   \
-				   src/calculations/math.c \
-				   \
+				   src/calculations/vectors/vector_operations.c \
+				   src/calculations/vectors/vector_math.c src/calculations/colors.c \
+				   src/calculations/radians.c src/calculations/equal_floats.c \
 				   src/calculations/matrices/create_base_matrix.c \
 				   src/calculations/matrices/create_base_transform.c \
 				   src/calculations/matrices/create_shearing_transform.c \
-				   src/calculations/radians.c src/calculations/matrices/operations.c \
+				   src/calculations/matrices/matrix_operations.c \
 				   src/calculations/matrices/get_submatrix.c \
 				   src/calculations/matrices/inverse.c \
+				   src/calculations/matrices/rotation_between_vectors.c \
 				   \
-				   src/shapes/sphere.c \
+				   src/shapes/sphere.c src/shapes/plane.c \
 				   \
 				   src/transformation/objects_transform.c src/transformation/view_transform.c \
 				   \

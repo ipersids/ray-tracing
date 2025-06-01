@@ -12,6 +12,7 @@ void	debug_print_sp(t_sphere *sp);
 void	debug_print_world(t_canvas *win);
 void	debug_print_lights(t_info *rt);
 void	debug_print_matrix(t_matrix *m, char *msg);
+void	debug_print_vector(char *msg, t_vec3 vec);
 
 /// TESTS
 

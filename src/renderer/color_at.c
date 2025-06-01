@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 18:38:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/29 15:05:55 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:13:05 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,8 @@
 /* --------------------- Private function prototypes ----------------------- */
 
 static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt);
-static t_color	lighting(t_phong_vars vars, t_material m, t_plight light);
-static t_material	default_material(void);
-static void	set_material(t_sphere *sphere, t_material material);
-// static t_plight	point_light(t_point position, t_color intensity);
-static bool	light_behind_surface(float l_dot_norm);
-//static void	print_vector(char *msg, t_vec3 vec);
-
-//static t_color	lighting(t_material m, t_point pos, t_plight light, t_vec3 eyev, t_vec3 normalv);
+static t_color		lighting(t_phong_vars vars, t_material m, t_light *light);
+static bool			light_behind_surface(float l_dot_norm);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -31,32 +25,18 @@ t_color	rt_color_at(t_info *rt, t_ray *ray)
 	t_intersection	*t;
 	t_phong_vars	vars;
 	t_color			result;
-	t_material		material;//TODO REMOVE
-	t_plight		light;//TODO REMOVE
 
 	t = NULL;
 	rt_intersect_world(rt, ray);
 	t = find_closest_intersection(rt->ts, rt->n_ts);
 	if (NULL == t)
 		return ((t_color){0.0f, 0.0f, 0.0f});
-	//printf("t = %.2f\n", t->t);
 	vars = prepare_shading(t, ray, rt);
-	material = default_material();
-	material.color = vars.obj->sp.color;
-	set_material(&vars.obj->sp, material);
-	light.position = rt->lights[0].pos;
-	light.intensity = (t_color){1.0f, 1.0f, 1.0f};
-	result = lighting(vars, vars.obj->sp.material, light);
-	//print_vector("The result:", result);
+	result = lighting(vars, *vars.obj->material, rt->lights);
 	return (result);
 }
 
 /* ------------------- Private Function Implementation --------------------- */
-
-/* void	print_vector(char *msg, t_vec3 vec)
-{
-	printf("%s x = %.2f y = %.2f z = %.2f\n", msg, vec.x, vec.y, vec.z);
-} */
 
 static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt)
 {
@@ -77,39 +57,15 @@ static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt)
 	return (vars);
 }
 
-// static t_plight	point_light(t_point position, t_color intensity)
-// {
-// 	t_plight	result;
-
-// 	result.position = position;
-// 	result.intensity = intensity;
-// 	return (result);
-// }
-
-static t_material	default_material(void)
+static t_color	lighting(t_phong_vars vars, t_material m, t_light *light)
 {
-	t_material	result;
+ 	t_phong_color	pc;
 
-	result.color = (t_color){1, 1, 1};
-	result.ambient = 0.1;
-	result.diffuse = 0.9;
-	result.specular = 0.9;
-	result.shininess = 200.0;
-	return (result);
-}
-
-static void	set_material(t_sphere *sphere, t_material material)
-{
-	sphere->material = material;
-}
-
-static t_color	lighting(t_phong_vars vars, t_material m, t_plight light)
-{
- 	t_phong_color pc;
-
- 	pc.eff_col = multiply_colors(m.color, light.intensity);
- 	pc.lightv = normalize(subtraction(light.position, vars.point));
- 	pc.amb = multiplication(pc.eff_col, m.ambient);
+	if (!light)
+		return (m.ambient_comp);
+ 	pc.eff_col = multiply_colors(m.color, light[0].intensity);
+ 	pc.lightv = normalize(subtraction(light[0].pos, vars.point));
+ 	pc.amb = multiply_colors(pc.eff_col, m.ambient_comp);
  	pc.l_dot_norm = dot_product(pc.lightv, vars.normalv);
  	if (light_behind_surface(pc.l_dot_norm))
  	{
@@ -126,7 +82,7 @@ static t_color	lighting(t_phong_vars vars, t_material m, t_plight light)
  		else
  		{
  			pc.factor = powf(pc.refl_dot_eye, m.shininess);
- 			pc.spec = multiplication(light.intensity, m.specular * pc.factor);
+ 			pc.spec = multiplication(light[0].intensity, m.specular * pc.factor);
  		}
 	}
 	return(addition(addition(pc.amb, pc.dif), pc.spec));
