@@ -16,17 +16,6 @@ t_intersection	*find_closest_intersection(t_intersection *ts, int n_ts)
 	return (NULL);
 }
 
-t_vec3	normal_at(t_object *obj, t_point world_point)
-{
-	// if (ELEMENT_SPHERE == obj->id)
-	// 	return (sphere_normal_at(&obj->sp, world_point));
-	if (ELEMENT_PLANE == obj->id)
-		return (plane_normal_at(&obj->pl));
-	// if (ELEMENT_CYLINDER == obj->id)
-	// 	return (cylinder_normal_at(&obj->cy, world_point));
-	return (sphere_normal_at(&obj->sp, world_point));
-}
-
 t_vec3	reflect(t_vec3 in, t_vec3 normal)
 {
 	t_vec3	result;

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:05:03 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 02:08:01 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:11:23 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,38 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
+/**
+ * @brief Sorts an array of intersections using quick sort.
+ *
+ * @param arr Array of intersections.
+ * @param low Lower index.
+ * @param high Higher index.
+ */
 static void	quick_sort(t_intersection *arr, int low, int high);
 static int	partition(t_intersection *arr, int low, int high);
 static void	swap(t_intersection *t1, t_intersection *t2);
-static void add_intersections(const t_intersections *xs, t_info *rt, size_t i);
+
+/**
+ * @brief Adds all intersections from xs to the global intersection array.
+ *
+ * @param xs Pointer to the intersections structure.
+ * @param rt Pointer to the main program structure.
+ * @param i Index of the object being intersected.
+ */
+static void	add_intersections(const t_intersections *xs, t_info *rt, size_t i);
 
 /* --------------------------- Public Functions ---------------------------- */
 
+/**
+ * @brief Intersects a ray with all objects in the world.
+ *
+ * Iterates through all objects in the scene, computes intersections 
+ * with the given ray, and stores all intersections in the rt->ts array. 
+ * After collecting intersections, sorts them by distance using quick sort.
+ *
+ * @param rt Pointer to the main program structure.
+ * @param ray Pointer to the ray to test for intersections.
+ */
 void	rt_intersect_world(t_info *rt, t_ray *ray)
 {
 	size_t			i;
@@ -45,7 +70,7 @@ void	rt_intersect_world(t_info *rt, t_ray *ray)
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static void quick_sort(t_intersection *arr, int low, int high)
+static void	quick_sort(t_intersection *arr, int low, int high)
 {
 	int	i_pivot;
 
@@ -57,6 +82,14 @@ static void quick_sort(t_intersection *arr, int low, int high)
 	}
 }
 
+/**
+ * @brief Partitions the array for quick sort.
+ *
+ * @param arr Array of intersections.
+ * @param low Lower index.
+ * @param high Higher index.
+ * @return int The partition index.
+ */
 static int	partition(t_intersection *arr, int low, int high)
 {
 	t_intersection	pivot;
@@ -79,7 +112,13 @@ static int	partition(t_intersection *arr, int low, int high)
 	return (i + 1);
 }
 
-static void swap(t_intersection *t1, t_intersection *t2)
+/**
+ * @brief Swaps two intersection structures.
+ *
+ * @param t1 Pointer to the first intersection.
+ * @param t2 Pointer to the second intersection.
+ */
+static void	swap(t_intersection *t1, t_intersection *t2)
 {
 	t_intersection	tmp;
 
@@ -90,7 +129,7 @@ static void swap(t_intersection *t1, t_intersection *t2)
 	t2->i_object = tmp.i_object;
 }
 
-static void add_intersections(const t_intersections *xs, t_info *rt,  size_t i)
+static void	add_intersections(const t_intersections *xs, t_info *rt, size_t i)
 {
 	size_t	j;
 

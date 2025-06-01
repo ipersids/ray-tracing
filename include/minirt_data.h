@@ -236,7 +236,6 @@ typedef struct s_canvas
 	mlx_t		*mlx;
 	int32_t		width;
 	int32_t		height;
-	float		a_ratio;
 	t_vec3		world_up;
 	bool		rendered;
 	bool		resized;

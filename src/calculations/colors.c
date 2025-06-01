@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:34:04 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/30 16:15:58 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:47:06 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ static inline float	rt_clampf(float n, float min, float max);
 
 /* --------------------------- Public Functions ---------------------------- */
 
+/**
+ * @brief Multiplies two colors component-wise.
+ *
+ * @param a First color.
+ * @param b Second color.
+ * @return t_color The resulting color.
+ */
 t_color	multiply_colors(t_color a, t_color b)
 {
 	t_color	result;
@@ -36,6 +43,13 @@ t_color	multiply_colors(t_color a, t_color b)
 	return (result);
 }
 
+/**
+ * @brief Multiplies a color by a scalar.
+ *
+ * @param a The color.
+ * @param scalar The scalar value.
+ * @return t_color The resulting color.
+ */
 t_color	multiply_color_scalar(t_color a, float scalar)
 {
 	t_color	result;

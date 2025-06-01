@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inverse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 12:12:30 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/22 14:04:33 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:42:20 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* --------------------------- Public Functions ---------------------------- */
 
 /**
- * @brief Attempts to compute the inverse of a matrix.
+ * @brief Tries to compute the inverse of a matrix.
  *
  * Calculates the inverse of matrix `m` and stores the result in `res`.
  * Returns false if the matrix is not invertible (determinant is zero).
@@ -24,20 +24,6 @@
  * @param res Pointer to store the resulting inverse matrix.
  * @return true if the matrix is invertible, false otherwise.
  */
-
-t_matrix	inverse(t_matrix matrix)
-{
-	t_matrix	inv;
-
-	if (!matrix_try_inverse(matrix, &inv))
-	{
-		ft_putstr_fd("Could not invert matrix\n", 2);
-		inv = matrix_identity();
-		return(inv);
-	}
-	return (inv);
-}
-
 bool	matrix_try_inverse(t_matrix m, t_matrix *res)
 {
 	float	det;

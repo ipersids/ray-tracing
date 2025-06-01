@@ -50,16 +50,16 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/hook/hook_render_scene.c \
 				   \
 				   src/renderer/camera.c src/renderer/color_at.c \
-				   src/renderer/intersect_world.c \
+				   src/renderer/intersect_world.c src/renderer/normal_at.c \
 				   src/renderer/ray.c src/renderer/ray_utils.c \
 				   \
-				   src/calculations/math.c src/calculations/colors.c \
-				   src/calculations/radians.c \
-				   \
+				   src/calculations/vectors/vector_operations.c \
+				   src/calculations/vectors/vector_math.c src/calculations/colors.c \
+				   src/calculations/radians.c src/calculations/equal_floats.c \
 				   src/calculations/matrices/create_base_matrix.c \
 				   src/calculations/matrices/create_base_transform.c \
 				   src/calculations/matrices/create_shearing_transform.c \
-				   src/calculations/matrices/operations.c \
+				   src/calculations/matrices/matrix_operations.c \
 				   src/calculations/matrices/get_submatrix.c \
 				   src/calculations/matrices/inverse.c \
 				   src/calculations/matrices/rotation_between_vectors.c \

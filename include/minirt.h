@@ -5,6 +5,9 @@
  * - decide to give error or normalized with warning in case normal.magnitude() != 1.0;
  * 	 for now: addede normalize in transform.
  * - for now we support comments with `#` at the end line in the scene file config
+ * - unused rotations in src/calculations/matrices/create_base_transform.c
+ * - src/constructor/init_objects.c: allocations for intersections should change when 
+ * 	 cylinders will be added
  * 
  * @note (recourses):
  * - lightning model: https://learnopengl.com/Lighting/Basic-Lighting

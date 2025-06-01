@@ -6,29 +6,49 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 00:10:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 11:07:41 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:19:18 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/* --------------------------- Public Functions ---------------------------- */
+
+/**
+ * @brief Sets up the transformation matrices for a sphere.
+ *
+ * Applies translation and scaling to the sphere, computes its inverse 
+ * and transpose matrices, and normalizes its radius for further calculations.
+ *
+ * @param sp Pointer to the sphere structure.
+ * @return int 0 on success, or an error code if the matrix is not invertible.
+ */
 int	rt_sphere_transform(t_sphere *sp)
 {
 	t_matrix	translation;
 	t_matrix	scaling;
-	
+
 	translation = matrix_translation(sp->pos.x, sp->pos.y, sp->pos.z);
 	scaling = matrix_scaling(sp->r, sp->r, sp->r);
-	sp->transform = matrix_multiply(translation, scaling);   
+	sp->transform = matrix_multiply(translation, scaling);
 	sp->inv_transform = matrix_identity();
 	if (false == matrix_try_inverse(sp->transform, &sp->inv_transform))
 		return (ERR_MATRIX_NON_INVERSIBLE);
-	sp->inv_transpose = matrix_transpose(sp->inv_transform);   
+	sp->inv_transpose = matrix_transpose(sp->inv_transform);
 	sp->scale = sp->r;
 	sp->r = 1.0;
 	return (0);
 }
 
+/**
+ * @brief Sets up the transformation matrices for a plane.
+ *
+ * Applies translation and rotation to the plane, computes its inverse
+ * and transpose matrices, and normalizes its direction vector.
+ *
+ * @param pl Pointer to the plane structure.
+ * @return int 0 on success, or an error code if the matrix is not invertible.
+ */
 int	rt_plane_transform(t_plane *pl)
 {
 	const t_vec3	canonical_normal = (t_vec3){0.0f, 1.0f, 0.0f};

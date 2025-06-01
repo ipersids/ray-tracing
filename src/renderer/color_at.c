@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 18:38:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 10:55:47 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:13:05 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /* --------------------- Private function prototypes ----------------------- */
 
 static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt);
-static t_color	lighting(t_phong_vars vars, t_material m, t_light *light);
-static bool	light_behind_surface(float l_dot_norm);
+static t_color		lighting(t_phong_vars vars, t_material m, t_light *light);
+static bool			light_behind_surface(float l_dot_norm);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -32,11 +32,6 @@ t_color	rt_color_at(t_info *rt, t_ray *ray)
 	if (NULL == t)
 		return ((t_color){0.0f, 0.0f, 0.0f});
 	vars = prepare_shading(t, ray, rt);
-	// if (vars.obj->id == ELEMENT_PLANE)
-	// {
-	// 	printf("HERE\n");
-	// 	return ((t_color){1.0f, 1.0f, 1.0f});
-	// }
 	result = lighting(vars, *vars.obj->material, rt->lights);
 	return (result);
 }
@@ -64,7 +59,7 @@ static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt)
 
 static t_color	lighting(t_phong_vars vars, t_material m, t_light *light)
 {
- 	t_phong_color pc;
+ 	t_phong_color	pc;
 
 	if (!light)
 		return (m.ambient_comp);
