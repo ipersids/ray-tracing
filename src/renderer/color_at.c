@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 18:38:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/30 16:07:54 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:13:05 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /* --------------------- Private function prototypes ----------------------- */
 
 static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt);
-static t_color	lighting(t_phong_vars vars, t_material m, t_plight light);
-static bool	light_behind_surface(float l_dot_norm);
+static t_color		lighting(t_phong_vars vars, t_material m, t_light *light);
+static bool			light_behind_surface(float l_dot_norm);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -25,7 +25,6 @@ t_color	rt_color_at(t_info *rt, t_ray *ray)
 	t_intersection	*t;
 	t_phong_vars	vars;
 	t_color			result;
-	t_plight		light;//TODO REMOVE
 
 	t = NULL;
 	rt_intersect_world(rt, ray);
@@ -33,11 +32,7 @@ t_color	rt_color_at(t_info *rt, t_ray *ray)
 	if (NULL == t)
 		return ((t_color){0.0f, 0.0f, 0.0f});
 	vars = prepare_shading(t, ray, rt);
-	// vars.obj->material = default_material();
-	// vars.obj->material.color = vars.obj->sp.color;
-	light.position = rt->lights[0].pos;
-	light.intensity = rt->lights[0].intensity;
-	result = lighting(vars, *vars.obj->material, light);
+	result = lighting(vars, *vars.obj->material, rt->lights);
 	return (result);
 }
 
@@ -62,12 +57,14 @@ static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt)
 	return (vars);
 }
 
-static t_color	lighting(t_phong_vars vars, t_material m, t_plight light)
+static t_color	lighting(t_phong_vars vars, t_material m, t_light *light)
 {
- 	t_phong_color pc;
+ 	t_phong_color	pc;
 
- 	pc.eff_col = multiply_colors(m.color, light.intensity);
- 	pc.lightv = normalize(subtraction(light.position, vars.point));
+	if (!light)
+		return (m.ambient_comp);
+ 	pc.eff_col = multiply_colors(m.color, light[0].intensity);
+ 	pc.lightv = normalize(subtraction(light[0].pos, vars.point));
  	pc.amb = multiply_colors(pc.eff_col, m.ambient_comp);
  	pc.l_dot_norm = dot_product(pc.lightv, vars.normalv);
  	if (light_behind_surface(pc.l_dot_norm))
@@ -85,7 +82,7 @@ static t_color	lighting(t_phong_vars vars, t_material m, t_plight light)
  		else
  		{
  			pc.factor = powf(pc.refl_dot_eye, m.shininess);
- 			pc.spec = multiplication(light.intensity, m.specular * pc.factor);
+ 			pc.spec = multiplication(light[0].intensity, m.specular * pc.factor);
  		}
 	}
 	return(addition(addition(pc.amb, pc.dif), pc.spec));

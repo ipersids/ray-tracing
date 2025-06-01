@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.c                                       :+:      :+:    :+:   */
+/*   matrix_operations.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 23:37:27 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/29 13:04:05 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:34:44 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 /**
  * @brief Multiplies two matrices.
  *
- * @warning if matrices have different dimensiont result is undefined.
+ * Performs standard matrix multiplication between matrices a and b.
+ * @warning If matrices have different dimensions, result is undefined.
  *
  * @param a First matrix.
  * @param b Second matrix.
@@ -50,15 +51,15 @@ t_matrix	matrix_multiply(t_matrix a, t_matrix b)
 }
 
 /**
- * @brief Multiplies a matrix by a 3D vector or point.
+ * @brief Multiplies a matrix by a 3D point.
  *
- * Applies the transformation matrix m to the vector v.
+ * Applies the transformation matrix m to the point p, 
+ * including translation.
  *
  * @param m The transformation matrix.
- * @param v The vector to transform.
- * @return t_vec3 The transformed vector.
+ * @param p The point to transform.
+ * @return t_vec3 The transformed point.
  */
-// point = includes translation
 t_vec3	matrix_multiply_point(t_matrix m, t_vec3 p)
 {
 	t_vec3	res;
@@ -75,10 +76,19 @@ t_vec3	matrix_multiply_point(t_matrix m, t_vec3 p)
 			m.data[2][0] * p.x + m.data[2][1] * p.y
 			+ m.data[2][2] * p.z + m.data[2][3]
 			);
-	return res;
+	return (res);
 }
 
-// vector = no translation
+/**
+ * @brief Multiplies a matrix by a 3D vector.
+ *
+ * Applies the transformation matrix m to the vector v, 
+ * ignoring translation.
+ *
+ * @param m The transformation matrix.
+ * @param v The vector to transform.
+ * @return t_vec3 The transformed vector.
+ */
 t_vec3	matrix_multiply_vector(t_matrix m, t_vec3 v)
 {
 	t_vec3	res;
@@ -86,8 +96,5 @@ t_vec3	matrix_multiply_vector(t_matrix m, t_vec3 v)
 	res.x = m.data[0][0] * v.x + m.data[0][1] * v.y + m.data[0][2] * v.z;
 	res.y = m.data[1][0] * v.x + m.data[1][1] * v.y + m.data[1][2] * v.z;
 	res.z = m.data[2][0] * v.x + m.data[2][1] * v.y + m.data[2][2] * v.z;
-	return res;
+	return (res);
 }
-
-// WHEN MULTIPLYING VECTORS WE SHOULD NOT MULTIPLY THE LAST ROW OF THE MATRIX
-// SO WE MIGHT NEED 2 FUNCTIONS TO MULTIPLY (POINTS AND VECS SEPARATE)

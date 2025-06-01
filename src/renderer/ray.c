@@ -14,18 +14,6 @@
  * @param py The y-coordinate of the pixel.
  * @return t_ray The calculated ray with origin, direction, and type.
  */
-// t_ray	rt_get_ray(t_camera *cam, int32_t px, int32_t py)
-// {
-// 	t_point	px_center;
-// 	t_vec3	ray_direction;
-
-// 	px_center = addition(cam->px00_loc, addition(
-// 				multiplication(cam->px_delta_u, px),
-// 				multiplication(cam->px_delta_v, py)));
-// 	ray_direction = normalize(subtraction(px_center, cam->pos));
-// 	return ((t_ray){cam->pos, ray_direction, RAY_CAMERA});
-// }
-
 t_ray	rt_get_ray(t_camera *cam, int32_t px, int32_t py)
 {
 	t_ray_vars	vars;
@@ -52,3 +40,11 @@ t_vec3	ray_hit(t_ray ray, float t)
 	return addition(ray.orig, scaled_direction);
 }
 
+t_ray	transform_ray(t_ray ray, t_matrix matrix)
+{
+	t_ray	result;
+
+	result.orig = matrix_multiply_point(matrix, ray.orig);
+	result.dir = matrix_multiply_vector(matrix, ray.dir);
+	return (result);
+}

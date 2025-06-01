@@ -6,14 +6,26 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 14:39:26 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/30 15:59:21 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:49:27 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_material init_default(t_color ambient, t_color mcolor, t_mtype n);
+/* --------------------- Private function prototypes ----------------------- */
 
+static t_material	init_default(t_color ambient, t_color mcolor, t_mtype n);
+
+/* --------------------------- Public Functions ---------------------------- */
+
+/**
+ * @brief Initializes a material with given ambient and object color.
+ *
+ * @param ambient Ambient color.
+ * @param obj_color Object color.
+ * @param type Material type.
+ * @return t_material The initialized material.
+ */
 t_material	rt_init_material(t_color ambient, t_color obj_color, t_mtype type)
 {
 	t_color	ambient_component;
@@ -24,7 +36,9 @@ t_material	rt_init_material(t_color ambient, t_color obj_color, t_mtype type)
 	return (init_default(ambient_component, obj_color, MATERIAL_DEFAULT));
 }
 
-static t_material init_default(t_color ambient, t_color mcolor, t_mtype n)
+/* ------------------- Private Function Implementation --------------------- */
+
+static t_material	init_default(t_color ambient, t_color mcolor, t_mtype n)
 {
 	t_material	res;
 

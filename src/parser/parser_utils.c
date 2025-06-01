@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 23:54:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/29 18:34:06 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:03:03 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int	rt_validate_end_of_line(char **startptr, char **endptr)
 	*endptr = *startptr;
 	while (ft_isspace(**startptr))
 		++(*startptr);
-	if ('\0' != (**startptr))
+	if ('\0' != (**startptr) && '#' != (**startptr))
 		return (ERR_OBJECT_CONFIG);
 	return (0);
 }

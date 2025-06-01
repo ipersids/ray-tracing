@@ -25,4 +25,7 @@ t_vec3			sphere_normal_at(t_sphere *sp, t_point world_point);
 t_vec3			reflect(t_vec3 in, t_vec3 normal);
 t_intersection	*find_closest_intersection(t_intersection *ts, int n_ts);
 
+t_intersections	intersect_plane(const t_plane *pl, t_ray ray);
+t_vec3			plane_normal_at(const t_plane *pl);
+
 #endif // MINIRT_RENDERER_H

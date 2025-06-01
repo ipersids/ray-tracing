@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:06:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/30 15:59:41 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:56:44 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ void	debug_print_world(t_canvas *win)
 	printf(PRINT_GREEN"\nWORLD:\n"PRINT_DEFAULT);
 	printf("\t- window width: %d\n", win->width);
 	printf("\t- window height: %d\n", win->height);
-	printf("\t- a_ratio: %.2f\n", win->a_ratio);
 	printf("\t- image width: %d\n", win->img->width);
 	printf("\t- image height: %d\n", win->img->height);
 	printf("\t- world_up: {%.2f, %.2f, %.2f}\n",

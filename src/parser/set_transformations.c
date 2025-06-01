@@ -6,12 +6,20 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:51:04 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/30 14:39:05 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:00:42 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/* --------------------------- Public Functions ---------------------------- */
+
+/**
+ * @brief Sets up transformations and materials for all objects in the scene.
+ * 
+ * @param rt Pointer to the main program structure.
+ * @return int 0 on success, or an error code on failure.
+ */
 int	rt_set_transformations(t_info *rt)
 {
 	size_t	i;
