@@ -21,7 +21,7 @@ SUBM_LIBFT_LIB	:= $(SUBM_LIBFT_DIR)/libft$(LIB_EXT)
 
 # Compilation variables
 CC				:= clang
-CFLAGS			:= -Wall -Wextra -Werror -D RT_TEST=false
+CFLAGS			:= -Wall -Wextra -Werror -D RT_TEST=false -g -fsanitize=address
 HDRS			:= -Iinclude -I$(SUBM_MLX_DIR)/include -I$(SUBM_LIBFT_DIR)/include
 LIBS			:= -L$(SUBM_MLX_DIR)/build -lmlx42 \
 				   -L$(SUBM_LIBFT_DIR) -lft \
@@ -62,8 +62,9 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/calculations/matrices/operations.c \
 				   src/calculations/matrices/get_submatrix.c \
 				   src/calculations/matrices/inverse.c \
+				   src/calculations/matrices/rotation_between_vectors.c \
 				   \
-				   src/shapes/sphere.c \
+				   src/shapes/sphere.c src/shapes/plane.c \
 				   \
 				   src/transformation/objects_transform.c src/transformation/view_transform.c \
 				   \

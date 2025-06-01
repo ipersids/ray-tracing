@@ -2,7 +2,10 @@
  * @note (project status)
  * - src/parser/rt_parse_camera.c currently allowing only WORLD_UP at y-axis
  * - src/parser/rt_parse_sphere.c sphere diam currently could not be less then (2.0 * EPSILON)
- *
+ * - decide to give error or normalized with warning in case normal.magnitude() != 1.0;
+ * 	 for now: addede normalize in transform.
+ * - for now we support comments with `#` at the end line in the scene file config
+ * 
  * @note (recourses):
  * - lightning model: https://learnopengl.com/Lighting/Basic-Lighting
  * - Physically Based Rendering: From Theory to Implementation:

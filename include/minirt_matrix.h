@@ -3,23 +3,18 @@
 
 /* -------------------------- Matrix constructors  ------------------------- */
 
-/// @file src/calculations/matrices/create_base_matrix.c
+/// @file src/calculations/matrices/
 
 t_matrix	matrix_empty(void);
 t_matrix	matrix_identity(void);
 bool		matrix_equality(t_matrix a, t_matrix b);
 t_matrix	matrix_transpose(t_matrix self);
-
-/// @file src/calculations/matrices/create_base_transform.c
-
 t_matrix	matrix_translation(float x, float y, float z);
 t_matrix	matrix_scaling(float x, float y, float z);
 t_matrix	matrix_rotation_x(float radians);
 t_matrix	matrix_rotation_y(float radians);
 t_matrix	matrix_rotation_z(float radians);
-
-/// @file src/calculations/matrices/create_chaining_transform.c
-
+t_matrix	matrix_rotation(t_vec3 from_norm, t_vec3 to_norm);
 t_matrix	matrix_shearing(float proportions[6]);
 
 /* ------------------------------- Operations  ------------------------------ */
@@ -27,7 +22,6 @@ t_matrix	matrix_shearing(float proportions[6]);
 /// @file src/calculations/matrices/operations.c
 
 t_matrix	matrix_multiply(t_matrix a, t_matrix b);
-// t_vec3		matrix_multiply_vec3(t_matrix m, t_vec3 v);
 t_vec3		matrix_multiply_point(t_matrix m, t_vec3 p);
 t_vec3		matrix_multiply_vector(t_matrix m, t_vec3 v);
 

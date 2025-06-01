@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:05:03 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/26 21:30:25 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/01 02:08:01 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 static void	quick_sort(t_intersection *arr, int low, int high);
 static int	partition(t_intersection *arr, int low, int high);
 static void	swap(t_intersection *t1, t_intersection *t2);
+static void add_intersections(const t_intersections *xs, t_info *rt, size_t i);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -32,18 +33,11 @@ void	rt_intersect_world(t_info *rt, t_ray *ray)
 		if (ELEMENT_SPHERE == rt->objs[i].id)
 			xs = intersect_sphere(rt->objs[i].sp, *ray);
 		if (ELEMENT_PLANE == rt->objs[i].id)
-			xs.count = 0;// xs = intersect_plane(rt->objs[i].pl, *ray);
+			xs = intersect_plane(&rt->objs[i].pl, *ray);
 		if (ELEMENT_CYLINDER == rt->objs[i].id)
 			xs.count = 0;// xs = intersect_cylinder(rt->objs[i].cy, *ray);
 		if (0 < xs.count)
-		{
-			rt->ts[rt->n_ts].t = xs.t[0];
-			rt->ts[rt->n_ts].i_object = i;
-			++rt->n_ts;
-			rt->ts[rt->n_ts].t = xs.t[1];
-			rt->ts[rt->n_ts].i_object = i;
-			++rt->n_ts;
-		}
+			add_intersections(&xs, rt, i);
 		++i;
 	}
 	quick_sort(rt->ts, 0, rt->n_ts - 1);
@@ -94,4 +88,18 @@ static void swap(t_intersection *t1, t_intersection *t2)
 	t1->i_object = t2->i_object;
 	t2->t = tmp.t;
 	t2->i_object = tmp.i_object;
+}
+
+static void add_intersections(const t_intersections *xs, t_info *rt,  size_t i)
+{
+	size_t	j;
+
+	j = 0;
+	while (j < xs->count)
+	{
+		rt->ts[rt->n_ts].t = xs->t[j];
+		rt->ts[rt->n_ts].i_object = i;
+		++rt->n_ts;
+		++j;
+	}
 }

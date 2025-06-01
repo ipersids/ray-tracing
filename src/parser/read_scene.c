@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 11:05:03 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/30 01:46:38 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/01 11:31:39 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	rt_read_scene(int fd, char ***content)
 		nl = ft_strchr((*content)[row], '\n');
 		if (!is_empty_line(nl, (*content)[row]))
 			++row;
-		if (row > capacity)
+		if (row >= capacity)
 		{
 			(*content) = realloc_matrix((*content), row, &capacity, &exit_code);
 			if (!(*content))
