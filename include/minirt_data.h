@@ -248,6 +248,7 @@ typedef struct s_canvas
 typedef enum e_ray_type
 {
 	RAY_CAMERA,
+	RAY_SHADOW,
 }	t_ray_type;
 
 typedef struct s_ray

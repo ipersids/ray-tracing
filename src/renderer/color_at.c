@@ -15,8 +15,9 @@
 /* --------------------- Private function prototypes ----------------------- */
 
 static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt);
-static t_color		lighting(t_phong_vars vars, t_material m, t_light *light);
+static t_color		lighting(t_phong_vars vars, t_material m, t_light *light, bool in_shadow);
 static bool			light_behind_surface(float l_dot_norm);
+static bool			in_shadow(t_info *rt, t_point point);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -25,6 +26,7 @@ t_color	rt_color_at(t_info *rt, t_ray *ray)
 	t_intersection	*t;
 	t_phong_vars	vars;
 	t_color			result;
+	bool			shadowed;
 
 	t = NULL;
 	rt_intersect_world(rt, ray);
@@ -32,7 +34,8 @@ t_color	rt_color_at(t_info *rt, t_ray *ray)
 	if (NULL == t)
 		return ((t_color){0.0f, 0.0f, 0.0f});
 	vars = prepare_shading(t, ray, rt);
-	result = lighting(vars, *vars.obj->material, rt->lights);
+	shadowed = in_shadow(rt, vars.point);
+	result = lighting(vars, *vars.obj->material, rt->lights, shadowed);
 	return (result);
 }
 
@@ -57,7 +60,7 @@ static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt)
 	return (vars);
 }
 
-static t_color	lighting(t_phong_vars vars, t_material m, t_light *light)
+static t_color	lighting(t_phong_vars vars, t_material m, t_light *light, bool in_shadow)
 {
  	t_phong_color	pc;
 
@@ -66,6 +69,8 @@ static t_color	lighting(t_phong_vars vars, t_material m, t_light *light)
  	pc.eff_col = multiply_colors(m.color, light[0].intensity);
  	pc.lightv = normalize(subtraction(light[0].pos, vars.point));
  	pc.amb = multiply_colors(pc.eff_col, m.ambient_comp);
+	if (in_shadow)
+		return (pc.amb);
  	pc.l_dot_norm = dot_product(pc.lightv, vars.normalv);
  	if (light_behind_surface(pc.l_dot_norm))
  	{
@@ -95,16 +100,24 @@ static bool	light_behind_surface(float l_dot_norm)
 	return (false);
 }
 
-// static bool	in_shadow(world, t_point point, t_plight light)
-// {
-// 	float	distance_to_light;
-// 	t_vec3	direction;
-// 	t_ray	ray;
+static bool	in_shadow(t_info *rt, t_point point)
+{
+	float			distance_to_light;
+	t_vec3			dir_to_light;
+	t_vec3			direction;
+	t_ray			shadow_ray;
+	t_intersection	*hit;
 
-// 	direction = subtraction(point, light.position);
-// 	distance_to_light = magnitude(direction);
-// 	ray = normalize(direction);
-// }
+	dir_to_light = subtraction(rt->lights->pos, point);
+	distance_to_light = magnitude(dir_to_light);
+	direction = normalize(dir_to_light);
+	shadow_ray = (t_ray){point, direction, RAY_SHADOW};
+	rt_intersect_world(rt, &shadow_ray);
+	hit = find_closest_intersection(rt->ts, rt->n_ts);
+	if (hit && hit->t < distance_to_light)
+		return (true);
+	return (false);
+}
 
 
 
