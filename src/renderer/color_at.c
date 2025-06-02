@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_at.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 18:38:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 13:13:05 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/02 19:00:59 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt);
 static t_color		lighting(t_phong_vars vars, t_material m, t_light *light, bool in_shadow);
 static bool			light_behind_surface(float l_dot_norm);
 static bool			in_shadow(t_info *rt, t_point point);
+static void			set_dark(t_phong_color *pc);
+static void			set_color(t_phong_color *pc, t_material *m, t_phong_vars *vars, t_light light);
+static t_pat		stripe_pattern(t_color a, t_color b, t_pattype type);
+static t_color		stripe_pattern_at(t_pat *pattern, t_point point);
+//static t_pat		no_pattern();
+//static t_color		stripe_at_object(t_pat *pat, t_object obj, t_point point);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -35,6 +41,9 @@ t_color	rt_color_at(t_info *rt, t_ray *ray)
 		return ((t_color){0.0f, 0.0f, 0.0f});
 	vars = prepare_shading(t, ray, rt);
 	shadowed = in_shadow(rt, vars.point);
+	if (vars.obj->id == ELEMENT_SPHERE)
+		vars.obj->material->pattern = stripe_pattern((t_color){1,1,1}, (t_color){0,0,0}, PATTERN_STRIPE);
+	//vars.obj->material->pattern = no_pattern();
 	result = lighting(vars, *vars.obj->material, rt->lights, shadowed);
 	return (result);
 }
@@ -63,33 +72,25 @@ static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt)
 static t_color	lighting(t_phong_vars vars, t_material m, t_light *light, bool in_shadow)
 {
  	t_phong_color	pc;
+	t_color			surface_color;
 
 	if (!light)
 		return (m.ambient_comp);
- 	pc.eff_col = multiply_colors(m.color, light[0].intensity);
+	if (m.pattern.has_pattern == true)
+		surface_color = stripe_pattern_at(&m.pattern, vars.point);
+		//surface_color = stripe_at_object(&m.pattern, *vars.obj, vars.point);
+	else
+		surface_color = m.color;
+ 	pc.eff_col = multiply_colors(surface_color, light[0].intensity);
  	pc.lightv = normalize(subtraction(light[0].pos, vars.point));
  	pc.amb = multiply_colors(pc.eff_col, m.ambient_comp);
 	if (in_shadow)
 		return (pc.amb);
  	pc.l_dot_norm = dot_product(pc.lightv, vars.normalv);
  	if (light_behind_surface(pc.l_dot_norm))
- 	{
- 		pc.dif = (t_color){0,0,0};
- 		pc.spec = (t_color){0,0,0};
- 	}
+		set_dark(&pc);
  	else
- 	{
- 		pc.dif = multiplication(pc.eff_col, m.diffuse * pc.l_dot_norm);
- 		pc.reflectv = reflect(negation(pc.lightv), vars.normalv);
- 		pc.refl_dot_eye = dot_product(pc.reflectv, vars.eyev);
- 		if (pc.refl_dot_eye <= 0)
- 			pc.spec = (t_color){0,0,0};
- 		else
- 		{
- 			pc.factor = powf(pc.refl_dot_eye, m.shininess);
- 			pc.spec = multiplication(light[0].intensity, m.specular * pc.factor);
- 		}
-	}
+		set_color(&pc, &m, &vars, light[0]);
 	return(addition(addition(pc.amb, pc.dif), pc.spec));
 }
 
@@ -98,6 +99,26 @@ static bool	light_behind_surface(float l_dot_norm)
 	if (l_dot_norm < 0)
 		return (true);
 	return (false);
+}
+
+static void	set_dark(t_phong_color *pc)
+{
+	pc->dif = (t_color){0,0,0};
+	pc->spec = (t_color){0,0,0};
+}
+
+static void	set_color(t_phong_color *pc, t_material *m, t_phong_vars *vars, t_light light)
+{
+	pc->dif = multiplication(pc->eff_col, m->diffuse * pc->l_dot_norm);
+	pc->reflectv = reflect(negation(pc->lightv), vars->normalv);
+	pc->refl_dot_eye = dot_product(pc->reflectv, vars->eyev);
+	if (pc->refl_dot_eye <= 0)
+		pc->spec = (t_color){0,0,0};
+	else
+	{
+		pc->factor = powf(pc->refl_dot_eye, m->shininess);
+		pc->spec = multiplication(light.intensity, m->specular * pc->factor);
+	}
 }
 
 static bool	in_shadow(t_info *rt, t_point point)
@@ -119,7 +140,50 @@ static bool	in_shadow(t_info *rt, t_point point)
 	return (false);
 }
 
+static t_pat	stripe_pattern(t_color a, t_color b, t_pattype type)
+{
+	t_pat	pattern;
 
+	pattern.type = type;
+	pattern.color_a = a;
+	pattern.color_b = b;
+	pattern.has_pattern = true;
+	return (pattern);
+}
+
+// static t_pat	no_pattern()
+// {
+// 	t_pat	pattern;
+
+// 	pattern.has_pattern = false;
+// 	return (pattern);
+// }
+
+// static t_color	stripe_at_object(t_pat *pat, t_object obj, t_point point)
+// {
+// 	t_matrix	obj_inv;
+// 	t_matrix	pat_inv;
+// 	t_point		object_point;
+// 	t_point		pattern_point;
+// 	t_color		res;
+
+// 	if (!matrix_try_inverse(obj.transform, &obj_inv))
+// 		obj_inv = matrix_identity();
+// 	object_point = matrix_multiply_point(obj_inv, point);
+// 	if (!matrix_try_inverse(pat->transform, &pat_inv))
+// 		pat_inv = matrix_identity();
+// 	pattern_point = matrix_multiply_point(pat_inv, object_point);
+// 	res = stripe_pattern_at(pat, pattern_point);
+// 	return (res);
+// }
+
+static t_color	stripe_pattern_at(t_pat *pattern, t_point point)
+{
+	if ((int)floorf(point.x) % 2 == 0) // floof?
+		return (pattern->color_a);
+	else
+		return (pattern->color_b);
+}
 
 
 

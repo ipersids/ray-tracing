@@ -141,6 +141,23 @@ typedef struct s_light
 	t_color	intensity;			// multiplication(light.color, light.bright)
 }			t_light;
 
+typedef enum e_pattype
+{
+	PATTERN_STRIPE,
+	PATTERN_RING,
+	PATTERN_GRADIENT
+}			t_pattype;
+
+typedef struct	s_pat
+{
+	t_pattype 	type;
+	t_color		color_a;
+	t_color		color_b;
+	bool		has_pattern;
+	t_matrix	transform;
+	t_matrix	inv_transform;
+}			t_pat;
+
 typedef enum e_mtype
 {
 	MATERIAL_DEFAULT,
@@ -156,6 +173,7 @@ typedef	struct s_material
 	float	diffuse;			// Light reflected from a matte surface (0.0-1.0)
 	float	specular;			// Hightlight, the bright spot on a curved surface (0.0-1.0)
 	float	shininess;			// The size and sharpness of the specular reflection (10-200)
+	t_pat 	pattern;
 }			t_material;
 
 typedef struct s_sphere
