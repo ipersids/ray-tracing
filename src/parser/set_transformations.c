@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:51:04 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 13:00:42 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/02 13:53:59 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	rt_set_transformations(t_info *rt)
 
 	i = 0;
 	exit_code = 0;
-	if (0 != rt_view_transform(&rt->camera, WORLD_UP))
+	if (0 != rt_view_transform(&rt->camera, rt->win.world_up))
 		return (ERR_CAMERA_GIMBAL_LOCK);
 	while (rt->n_objs > i && 0 == exit_code)
 	{

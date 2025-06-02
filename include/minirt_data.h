@@ -1,28 +1,21 @@
 #ifndef MINIRT_DATA_H
 # define MINIRT_DATA_H
 
-# define EXTENSION ".rt"
+# include <stdbool.h>			// `bool` data type
 
-/**
- * @brief Colors palette
- */
-# define PRINT_RED "\033[0;31m"
-# define PRINT_GREEN "\033[0;32m"
-# define PRINT_PURPLE "\033[0;35m"
-# define PRINT_DEFAULT "\033[0m"
+/* ---------------------------- Vector  strucrtures ------------------------ */
 
-# ifndef IS_BONUS
-#  define IS_BONUS false
-# endif
+typedef struct s_vec3
+{
+	float	x;
+	float	y;
+	float	z;
+}			t_vec3;
 
-# ifndef M_PI
-#  define M_PI 3.14159265358979323846
-# endif
+typedef t_vec3	t_point;
+typedef t_vec3	t_color;
 
-# define EPSILON 0.001
-
-
-/* ------------------- Matrices strucrtures  ----------------- */
+/* --------------------------- Matrices strucrtures ------------------------ */
 
 # define M_SIZE 4
 
@@ -42,7 +35,36 @@ typedef enum e_proportions
 	ZY
 }	t_proportions;
 
+typedef struct s_submatrix_var
+{
+	t_matrix	res;
+	size_t		row;
+	size_t		col;
+	size_t		src_row;
+	size_t		src_col;
+}				t_subm_var;
+
 /* ------------------- File validation and errors handling  ----------------- */
+
+# define EXTENSION ".rt"
+
+/**
+ * @brief Colors palette
+ */
+# define PRINT_RED "\033[0;31m"
+# define PRINT_GREEN "\033[0;32m"
+# define PRINT_PURPLE "\033[0;35m"
+# define PRINT_DEFAULT "\033[0m"
+
+# ifndef IS_BONUS
+#  define IS_BONUS false
+# endif
+
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
+
+# define EPSILON 0.001
 
 /**
  * @brief Error codes
@@ -91,21 +113,8 @@ typedef enum e_type
 	ELEMENT_UKNOWN
 }	t_type;
 
-# define LIMIT_COORD 10000.0f
-# define LIMIT_S 10000.0f
-
-typedef struct s_vec3
-{
-	float	x;
-	float	y;
-	float	z;
-}			t_vec3;
-
-typedef t_vec3	t_point;
-typedef t_vec3	t_color;
-
-# define DEFAULT_AMBIENT_RATIO 0.2f
-# define DEFAULT_AMBIENT_COLOR (t_color){1.0f, 1.0f, 1.0f}
+# define LIMIT_COORD 1000.0f
+# define LIMIT_S 1000.0f
 
 typedef struct s_ambient_light
 {
@@ -114,16 +123,13 @@ typedef struct s_ambient_light
 	t_color	intensity;			// multiplication(ambient.color, ambient.ratio)
 }			t_ambient_light;
 
-# define DEFAULT_CAMERA_POSITION (t_point){-50.0f, 0.0f, 20.0f}
-# define DEFAULT_CAMERA_ORIENTATION (t_vec3){0.0f, 0.0f, 1.0f}
-# define DEFAULT_CAMERA_FOV 70.0f
 # define CAMERA_SPEED 0.05f
 
 typedef struct s_camera
 {
 	t_point		pos;				// x,y,z of the camera position
 	t_vec3		forward;			// 3d norm. orientation vector
-	float		fov;				// Horizontal field of view, degrees [0.0,180.0]
+	float		fov;				// Horizontal field of view [0.0,180.0]
 	t_vec3		true_up;
 	t_vec3		left;
 	t_matrix	transform;
@@ -147,15 +153,15 @@ typedef enum e_mtype
 	MATERIAL_MAX
 }	t_mtype;
 
-typedef	struct s_material
+typedef struct s_material
 {
 	t_mtype	type;
-	t_color color;				// equal object.color
-	t_color final_color;		// init to ambient_comp from start
-	t_color ambient_comp;		// t_color ambient.intensity * t_color object.color
-	float	diffuse;			// Light reflected from a matte surface (0.0-1.0)
-	float	specular;			// Hightlight, the bright spot on a curved surface (0.0-1.0)
-	float	shininess;			// The size and sharpness of the specular reflection (10-200)
+	t_color	color;				// equal object.color
+	t_color	final_color;		// init to ambient_comp from start
+	t_color	ambient_comp;		// ambient.intensity * object.color
+	float	diffuse;			// Light reflected from a surface (0.0-1.0)
+	float	specular;			// Bright spot on a surface (0.0-1.0)
+	float	shininess;			// Size and sharpness of spec. reflection
 }			t_material;
 
 typedef struct s_sphere
@@ -205,7 +211,7 @@ typedef struct s_object
 		t_plane		pl;
 		t_cylinder	cy;
 	};
-	t_material	*material;
+	t_material		*material;
 }					t_object;
 
 /* --------------------- MLX42 constants and structures  ------------------- */
@@ -218,14 +224,12 @@ typedef struct s_object
 # define WIDTH_DEFAULT 1280		// W = 16/9 * H
 # define HEIGHT_DEFAULT 720		// H = 9/16 * W
 # define ASPECT_RATIO 1.777778	// 16/9
-# define WORLD_UP (t_vec3){0.0f, 1.0f, 0.0f}
 
 // Window Title:
 # define NAME "Mini Ray Traycer"
 
-// # define RGBA 4
-
-# define FPS 0.01666666667 // 1/60
+// # define FPS 0.01666666667 // 1/60
+# define FPS 0.03333333333 // 1/30
 
 /**
  * @brief Structure representing a window data
@@ -270,7 +274,7 @@ typedef struct s_intersections
 	size_t	count;
 }			t_intersections;
 
-typedef	struct s_point_light
+typedef struct s_point_light
 {
 	t_color	intensity;
 	t_point	position;
@@ -311,7 +315,7 @@ typedef struct s_phong_vars
 	t_vec3		normalv;
 }				t_phong_vars;
 
-typedef	struct	s_phong_color
+typedef struct s_phong_color
 {
 	t_color	eff_col;
 	t_color	amb;

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 01:51:01 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 13:15:19 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/02 13:34:47 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
  * @param ray The ray to test for intersection.
  * @return t_intersections Structure containing intersection distances (t vals)
  */
-t_intersections	intersect_plane(const t_plane *pl, t_ray ray)
+t_intersections	rt_intersect_plane(const t_plane *pl, t_ray ray)
 {
 	t_intersections	xs;
 
@@ -47,7 +47,7 @@ t_intersections	intersect_plane(const t_plane *pl, t_ray ray)
  * @param pl Pointer to the plane structure.
  * @return t_vec3 The normal vector at the given point.
  */
-t_vec3	plane_normal_at(const t_plane *pl)
+t_vec3	rt_plane_normal_at(const t_plane *pl)
 {
 	const t_vec3	canonical_normal = (t_vec3){0.0f, 1.0f, 0.0f};
 	t_vec3			world_normal;

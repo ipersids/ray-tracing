@@ -6,11 +6,18 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:30:21 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/16 20:59:22 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/02 13:23:28 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+static inline double get_time_ms(void) {
+	struct timespec	ts;
+
+	clock_gettime(CLOCK_MONOTONIC, &ts);
+	return (ts.tv_sec * 1000.0 + ts.tv_nsec / 1000000.0);
+}
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -41,9 +48,13 @@ void	rt_render_hook(void *param)
 				rt_destroy_exit(rt, ERR_MLX42);
 			win->resized = false;
 		}
-		if (false == win->rendered)
+		if (true) // (false == win->rendered)
 		{
+			double start = get_time_ms();
 			rt_camera_render(rt);
+			double end = get_time_ms();
+			printf("Render: %s%.1f%s ms (%dx%d)\n", PRINT_RED, end - start,
+				PRINT_DEFAULT, rt->win.img->width, rt->win.img->height);
 			win->rendered = true;
 		}
 	}

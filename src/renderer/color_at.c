@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 18:38:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 13:13:05 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/02 13:36:24 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt)
 	vars.obj = &rt->objs[t->i_object];
 	vars.point = ray_hit(*ray, t->t);
 	vars.eyev = negation(ray->dir);
-	vars.normalv = normal_at(vars.obj, vars.point);
+	vars.normalv = rt_normal_at(vars.obj, vars.point);
 	if (dot_product(vars.normalv, vars.eyev) < 0.0f)
 	{
 		vars.is_inside = true;
