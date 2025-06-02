@@ -9,7 +9,7 @@
 t_vec3		addition(t_vec3 vec_a, t_vec3 vec_b);
 t_vec3		subtraction(t_vec3 vec_a, t_vec3 vec_b);
 t_vec3		negation(t_vec3 vec);
-t_vec3		multiplication(t_vec3 vec, float multiplier);
+t_vec3		multiplication(t_vec3 vec, float scale);
 t_vec3		division(t_vec3 vec, float divider);
 t_vec3		normalize(t_vec3 vec);
 t_vec3		cross_product(t_vec3 a, t_vec3 b);

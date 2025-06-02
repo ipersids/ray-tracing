@@ -21,7 +21,10 @@ SUBM_LIBFT_LIB	:= $(SUBM_LIBFT_DIR)/libft$(LIB_EXT)
 
 # Compilation variables
 CC				:= clang
-CFLAGS			:= -Wall -Wextra -Werror
+# Flags hints:
+# -O2 (level of optimisation) 
+# -flto (Link Time Optimization)
+CFLAGS			:= -O2 -flto -Wall -Wextra -Werror
 HDRS			:= -Iinclude -I$(SUBM_MLX_DIR)/include -I$(SUBM_LIBFT_DIR)/include
 LIBS			:= -L$(SUBM_MLX_DIR)/build -lmlx42 \
 				   -L$(SUBM_LIBFT_DIR) -lft \
@@ -55,7 +58,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   \
 				   src/calculations/vectors/vector_operations.c \
 				   src/calculations/vectors/vector_math.c src/calculations/colors.c \
-				   src/calculations/radians.c src/calculations/equal_floats.c \
+				   src/calculations/math_utils.c \
 				   src/calculations/matrices/create_base_matrix.c \
 				   src/calculations/matrices/create_base_transform.c \
 				   src/calculations/matrices/create_shearing_transform.c \

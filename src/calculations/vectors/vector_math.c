@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:41:44 by reerikai          #+#    #+#             */
-/*   Updated: 2025/06/01 12:29:41 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:21:28 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,9 @@ t_vec3	normalize(t_vec3 vec)
 	means they point in opposite directions.
 */
 
-float	dot_product(t_vec3 a, t_vec3 b)
+__attribute__((always_inline)) inline float	dot_product(t_vec3 a, t_vec3 b)
 {
-	float	result;
-
-	result = a.x * b.x + a.y * b.y + a.z * b.z;
-	return (result);
+	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
 /*
