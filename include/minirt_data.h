@@ -173,22 +173,13 @@ typedef enum e_mtype
 typedef struct s_material
 {
 	t_mtype	type;
-<<<<<<< HEAD
-	t_color color;				// equal object.color
-	t_color final_color;		// init to ambient_comp from start
-	t_color ambient_comp;		// t_color ambient.intensity * t_color object.color
-	float	diffuse;			// Light reflected from a matte surface (0.0-1.0)
-	float	specular;			// Hightlight, the bright spot on a curved surface (0.0-1.0)
-	float	shininess;			// The size and sharpness of the specular reflection (10-200)
-	t_pat 	pattern;
-=======
 	t_color	color;				// equal object.color
 	t_color	final_color;		// init to ambient_comp from start
 	t_color	ambient_comp;		// ambient.intensity * object.color
 	float	diffuse;			// Light reflected from a surface (0.0-1.0)
 	float	specular;			// Bright spot on a surface (0.0-1.0)
 	float	shininess;			// Size and sharpness of spec. reflection
->>>>>>> origin/main
+	t_pat	pattern;
 }			t_material;
 
 typedef struct s_sphere
@@ -341,6 +332,12 @@ typedef struct s_phong_vars
 	bool		is_inside;
 	t_vec3		normalv;
 }				t_phong_vars;
+
+# define BLACK (t_color){0, 0, 0}
+# define WHITE (t_color){1, 1, 1}
+# define RED (t_color){1, 0, 0}
+# define GREEN (t_color){0, 1, 0}
+# define BLUE (t_color){0, 0, 1}
 
 typedef struct s_phong_color
 {

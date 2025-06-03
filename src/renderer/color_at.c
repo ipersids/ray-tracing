@@ -6,7 +6,7 @@
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 18:38:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 13:22:15 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:37:28 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ static bool			light_behind_surface(float l_dot_norm);
 static bool			in_shadow(t_info *rt, t_point point);
 static void			set_dark(t_phong_color *pc);
 static void			set_color(t_phong_color *pc, t_material *m, t_phong_vars *vars, t_light light);
-static t_pat		stripe_pattern(t_color a, t_color b, t_pattype type);
-static t_color		stripe_pattern_at(t_pat *pattern, t_point point);
-//static t_pat		no_pattern();
-//static t_color		stripe_at_object(t_pat *pat, t_object obj, t_point point);
+static t_color		stripe_pattern_at(t_pat pattern, t_point point);
+static t_color		stripe_at_object(t_pat pattern, t_object obj, t_point w_point);
+static void			find_object(t_object object, t_matrix *obj_inv);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -41,9 +40,8 @@ t_color	rt_color_at(t_info *rt, t_ray *ray)
 		return ((t_color){0.0f, 0.0f, 0.0f});
 	vars = prepare_shading(t, ray, rt);
 	shadowed = in_shadow(rt, vars.point);
-	if (vars.obj->id == ELEMENT_SPHERE)
-		vars.obj->material->pattern = stripe_pattern((t_color){1,1,1}, (t_color){0,0,0}, PATTERN_STRIPE);
-	//vars.obj->material->pattern = no_pattern();
+	//if (vars.obj->id == ELEMENT_SPHERE)
+	//	vars.obj->material->pattern = stripe_pattern((t_color){1,1,1}, (t_color){0,0,0}, PATTERN_STRIPE);
 	result = lighting(vars, *vars.obj->material, rt->lights, shadowed);
 	return (result);
 }
@@ -77,8 +75,8 @@ static t_color	lighting(t_phong_vars vars, t_material m, t_light *light, bool in
 	if (!light)
 		return (m.ambient_comp);
 	if (m.pattern.has_pattern == true)
-		surface_color = stripe_pattern_at(&m.pattern, vars.point);
-		//surface_color = stripe_at_object(&m.pattern, *vars.obj, vars.point);
+		//surface_color = stripe_pattern_at(m.pattern, vars.point);
+		surface_color = stripe_at_object(m.pattern, *vars.obj, vars.point);
 	else
 		surface_color = m.color;
  	pc.eff_col = multiply_colors(surface_color, light[0].intensity);
@@ -140,118 +138,37 @@ static bool	in_shadow(t_info *rt, t_point point)
 	return (false);
 }
 
-static t_pat	stripe_pattern(t_color a, t_color b, t_pattype type)
+static t_color	stripe_at_object(t_pat pattern, t_object obj, t_point w_point)
 {
-	t_pat	pattern;
+	t_point		object_point;
+	t_point		pattern_point;
+	t_matrix	obj_inv;
 
-	pattern.type = type;
-	pattern.color_a = a;
-	pattern.color_b = b;
-	pattern.has_pattern = true;
-	return (pattern);
+	// ADD A FUNCTION TO CHECK WHICH OBJECT IT IS
+	find_object(obj, &obj_inv);
+
+	object_point = matrix_multiply_point(obj.sp.inv_transform, w_point);
+	pattern_point = matrix_multiply_point(pattern.inv_transform, object_point);
+	return (stripe_pattern_at(pattern, pattern_point));
 }
 
-// static t_pat	no_pattern()
-// {
-// 	t_pat	pattern;
-
-// 	pattern.has_pattern = false;
-// 	return (pattern);
-// }
-
-// static t_color	stripe_at_object(t_pat *pat, t_object obj, t_point point)
-// {
-// 	t_matrix	obj_inv;
-// 	t_matrix	pat_inv;
-// 	t_point		object_point;
-// 	t_point		pattern_point;
-// 	t_color		res;
-
-// 	if (!matrix_try_inverse(obj.transform, &obj_inv))
-// 		obj_inv = matrix_identity();
-// 	object_point = matrix_multiply_point(obj_inv, point);
-// 	if (!matrix_try_inverse(pat->transform, &pat_inv))
-// 		pat_inv = matrix_identity();
-// 	pattern_point = matrix_multiply_point(pat_inv, object_point);
-// 	res = stripe_pattern_at(pat, pattern_point);
-// 	return (res);
-// }
-
-static t_color	stripe_pattern_at(t_pat *pattern, t_point point)
+static t_color	stripe_pattern_at(t_pat pattern, t_point point)
 {
-	if ((int)floorf(point.z) % 2 == 0) // floof?
-		return (pattern->color_a);
+	//printf("Stripe X: %.2f → %s\n", point.x, (int)point.x % 2 == 0 ? "A" : "B");
+	if ((int)floorf(point.z) % 2 == 0)
+		return (pattern.color_a);
 	else
-		return (pattern->color_b);
+		return (pattern.color_b);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-t_color	lighting(t_material m, t_point pos, t_plight light, t_vec3 eyev, t_vec3 normalv)
+static void	find_object(t_object object, t_matrix *obj_inv)
 {
-	t_color	effective_color;
-	t_color	ambient;
-	t_color	diffuse;
-	t_color	specular;
-	t_color	result;
-	t_vec3	lightv;
-	t_vec3	reflectv;
-	float	light_dot_normal;
-	float	reflect_dot_eye;
-	float	factor;
-
-	effective_color = multiply_colors(m.color, light.intensity);
-	lightv = normalize(subtraction(light.position, pos));
-	ambient	= multiplication(effective_color, m.ambient);
-	light_dot_normal = dot_product(lightv, normalv);
-
-	if (light_dot_normal < 0)
-	{
-		diffuse = (t_color){0, 0, 0};
-		specular = (t_color){0, 0, 0};
-	}
+	if (object.id == ELEMENT_SPHERE)
+		obj_inv = &object.sp.inv_transform;
+	else if (object.id == ELEMENT_PLANE)
+		obj_inv = &object.pl.inv_transform;
+	else if (object.id == ELEMENT_CYLINDER)
+		obj_inv = &object.cy.inv_transform;
 	else
-	{
-		diffuse = multiplication(effective_color, m.diffuse * light_dot_normal);
-		reflectv = reflect(negation(lightv), normalv);
-		reflect_dot_eye = dot_product(reflectv, eyev);
-		if (reflect_dot_eye <= 0)
-			specular = (t_color){0, 0, 0};
-		else
-		{
-			factor = powf(reflect_dot_eye, m.shininess);
-			specular = multiplication(light.intensity, m.specular * factor);
-		}
-	}
-	result = addition(addition(ambient, diffuse), specular);
-	return (result);
-}*/
+		*obj_inv = matrix_identity();
+}
