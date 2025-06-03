@@ -123,8 +123,6 @@ typedef struct s_ambient_light
 	t_color	intensity;			// multiplication(ambient.color, ambient.ratio)
 }			t_ambient_light;
 
-# define CAMERA_SPEED 0.05f
-
 typedef struct s_camera
 {
 	t_point		pos;				// x,y,z of the camera position
@@ -137,6 +135,9 @@ typedef struct s_camera
 	float		half_width;
 	float		half_height;
 	float		pixel_size;
+	t_point		reset_pos;
+	float		reset_fov;
+	t_vec3		reset_forward;
 }			t_camera;
 
 typedef struct s_light
@@ -230,11 +231,11 @@ typedef struct s_object
 
 // # define FPS 0.01666666667 // 1/60
 # define FPS 0.03333333333 // 1/30
-
 # define CURSOR_SENSITIVITY 0.05f
-# define FOV_ZOOM_SPEED 5.0f
+# define FOV_ZOOM_SPEED 2.0f
 # define FOV_ZOOM_MIN 0.0f
 # define FOV_ZOOM_MAX 180.0f
+# define CAMERA_SPEED 5.0f
 
 typedef struct s_cursor
 {
