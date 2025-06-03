@@ -52,7 +52,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   \
 				   src/hook/hook_close_window.c src/hook/hook_resize_window.c \
 				   src/hook/hook_render_scene.c src/hook/hook_rotate_camera.c \
-				   src/hook/hook_handle_mouse.c \
+				   src/hook/hook_handle_mouse.c src/hook/hook_zoom_camera.c \
 				   \
 				   src/renderer/camera.c src/renderer/color_at.c \
 				   src/renderer/intersect_world.c src/renderer/normal_at.c \

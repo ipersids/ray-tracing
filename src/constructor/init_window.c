@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 20:31:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 19:13:38 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/03 19:31:41 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static int	init_window(t_canvas *window)
 /// - add translation and rotation transformation
 static void	init_hook(t_info *rt)
 {
+	mlx_scroll_hook(rt->win.mlx, rt_scroll_hook, rt);
 	mlx_cursor_hook(rt->win.mlx, rt_cursor_hook, rt);
 	mlx_mouse_hook(rt->win.mlx, rt_mouse_hook, rt);
 	mlx_resize_hook(rt->win.mlx, rt_resize_hook, rt);

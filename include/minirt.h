@@ -72,5 +72,6 @@ void		rt_resize_hook(int32_t width, int32_t height, void *param);
 void		rt_render_hook(void *param);
 void		rt_cursor_hook(double xpos, double ypos, void *param);
 void		rt_mouse_hook(mouse_key_t k, action_t a, modifier_key_t m, void *p);
+void		rt_scroll_hook(double xdelta, double ydelta, void *param);
 
 #endif // MINIRT_H

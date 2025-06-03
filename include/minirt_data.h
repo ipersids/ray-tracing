@@ -232,6 +232,7 @@ typedef struct s_object
 # define FPS 0.03333333333 // 1/30
 
 # define CURSOR_SENSITIVITY 0.05f
+# define CAMERA_ZOOM_SPEED 0.5f
 
 typedef struct s_cursor
 {
