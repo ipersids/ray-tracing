@@ -21,7 +21,10 @@ SUBM_LIBFT_LIB	:= $(SUBM_LIBFT_DIR)/libft$(LIB_EXT)
 
 # Compilation variables
 CC				:= clang
-CFLAGS			:= -Wall -Wextra -Werror -D RT_TEST=false -g -fsanitize=address
+# Flags hints:
+# -O2 (level of optimisation) 
+# -flto (Link Time Optimization)
+CFLAGS			:= -O2 -flto -Wall -Wextra -Werror
 HDRS			:= -Iinclude -I$(SUBM_MLX_DIR)/include -I$(SUBM_LIBFT_DIR)/include
 LIBS			:= -L$(SUBM_MLX_DIR)/build -lmlx42 \
 				   -L$(SUBM_LIBFT_DIR) -lft \
@@ -55,7 +58,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   \
 				   src/calculations/vectors/vector_operations.c \
 				   src/calculations/vectors/vector_math.c src/calculations/colors.c \
-				   src/calculations/radians.c src/calculations/equal_floats.c \
+				   src/calculations/math_utils.c \
 				   src/calculations/matrices/create_base_matrix.c \
 				   src/calculations/matrices/create_base_transform.c \
 				   src/calculations/matrices/create_shearing_transform.c \
@@ -81,7 +84,7 @@ OBJ_MAIN		:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_MAIN))
 
 #for tarcking changes in header files
 H_FILES			:= include/minirt_data.h include/minirt.h include/minirt_renderer.h \
-				   include/minirt_matrix.h include/display_config.h
+				   include/minirt_math.h include/minirt_parser.h include/display_config.h
 
 # RULES
 all: update-submodule build-submodule $(NAME)
@@ -116,11 +119,22 @@ update-submodule:
 build-submodule:
 	cd $(SUBM_MLX_DIR) && cmake -B build && cmake --build build -j4
 	@echo "\nMLX42 is ready.\n"
-	$(MAKE) -C $(SUBM_LIBFT_DIR) 
+	$(MAKE) -C $(SUBM_LIBFT_DIR)
 
-# Target for testing
-test: CFLAGS := -g -D RT_TEST=true
-test: all
-	./miniRT
+# TESTING
+TEST_MAIN		:= src/display-config/test_main.c
+OBJ_TEST_MAIN		:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(TEST_MAIN))
+
+NAME_TEST		:= miniRT_test
+CFLAGS_TEST		:= $(CFLAGS) -g -fsanitize=address
+
+test: update-submodule build-submodule $(NAME_TEST)
+	./miniRT_test
+
+$(NAME_TEST): $(OBJS) $(OBJ_TEST_MAIN)
+	$(CC) $(CFLAGS_TEST) $(OBJS) $(OBJ_TEST_MAIN) $(HDRS) $(LIBS) -o $(NAME_TEST)
+
+tclean:
+	$(RM) $(NAME_TEST)
 
 .PHONY: all clean fclean re update-submodule build-submodule

@@ -2,6 +2,7 @@
 # define DISPLAY_CONFIG_H
 
 # include <assert.h>
+# include <time.h>
 
 void	debug_print_info(t_info *rt);
 void	debug_print_camera(t_camera *camera);

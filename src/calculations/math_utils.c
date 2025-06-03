@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   equal_floats.c                                     :+:      :+:    :+:   */
+/*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/30 01:34:04 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 12:28:37 by ipersids         ###   ########.fr       */
+/*   Created: 2025/05/19 15:10:03 by ipersids          #+#    #+#             */
+/*   Updated: 2025/06/02 17:23:43 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-bool	equal(float a, float b)
-{
-	const float	epsilon = 0.00001;
+/* --------------------------- Public Functions ---------------------------- */
 
-	if (fabs(a - b) < epsilon)
-		return (true);
-	return (false);
+__attribute__((always_inline)) inline bool	equal(float a, float b)
+{
+	return (fabs(a - b) < 0.00001f);
+}
+
+/**
+ * @brief Converts degrees to radians.
+ * 
+ * @param degrees Angle in degrees.
+ * @return float Angle in radians.
+ */
+__attribute__((always_inline)) inline float	radians(float degrees)
+{
+	return (degrees * M_PI / 180.0f);
 }

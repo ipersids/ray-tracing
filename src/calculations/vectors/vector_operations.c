@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:41:44 by reerikai          #+#    #+#             */
-/*   Updated: 2025/06/01 12:30:14 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:06:49 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,16 @@
 	Point + Point = INVALID (Trying to add to different points in space)
 */
 
-t_vec3	addition(t_vec3 vec_a, t_vec3 vec_b)
+__attribute__((always_inline)) inline t_vec3
+	addition(t_vec3 vec_a, t_vec3 vec_b)
 {
-	t_vec3	result;
-
-	result.x = vec_a.x + vec_b.x;
-	result.y = vec_a.y + vec_b.y;
-	result.z = vec_a.z + vec_b.z;
-	return (result);
+	return ((t_vec3){vec_a.x + vec_b.x, vec_a.y + vec_b.y, vec_a.z + vec_b.z});
 }
 
-t_vec3	subtraction(t_vec3 vec_a, t_vec3 vec_b)
+__attribute__((always_inline)) inline t_vec3
+	subtraction(t_vec3 vec_a, t_vec3 vec_b)
 {
-	t_vec3	result;
-
-	result.x = vec_a.x - vec_b.x;
-	result.y = vec_a.y - vec_b.y;
-	result.z = vec_a.z - vec_b.z;
-	return (result);
+	return ((t_vec3){vec_a.x - vec_b.x, vec_a.y - vec_b.y, vec_a.z - vec_b.z});
 }
 
 /*
@@ -46,32 +38,20 @@ t_vec3	subtraction(t_vec3 vec_a, t_vec3 vec_b)
 	Changes for example (4, 2, 5) to (-4, -2, -5)
 */
 
-t_vec3	negation(t_vec3 vec)
+__attribute__((always_inline)) inline t_vec3
+	negation(t_vec3 vec)
 {
-	t_vec3	result;
-
-	result.x = -vec.x;
-	result.y = -vec.y;
-	result.z = -vec.z;
-	return (result);
+	return ((t_vec3){-vec.x, -vec.y, -vec.z});
 }
 
-t_vec3	multiplication(t_vec3 vec, float multiplier)
+__attribute__((always_inline)) inline t_vec3
+	multiplication(t_vec3 vec, float scale)
 {
-	t_vec3	result;
-
-	result.x = vec.x * multiplier;
-	result.y = vec.y * multiplier;
-	result.z = vec.z * multiplier;
-	return (result);
+	return ((t_vec3){vec.x * scale, vec.y * scale, vec.z * scale});
 }
 
-t_vec3	division(t_vec3 vec, float divider)
+__attribute__((always_inline)) inline t_vec3
+	division(t_vec3 vec, float divider)
 {
-	t_vec3	result;
-
-	result.x = vec.x / divider;
-	result.y = vec.y / divider;
-	result.z = vec.z / divider;
-	return (result);
+	return ((t_vec3){vec.x / divider, vec.y / divider, vec.z / divider});
 }
