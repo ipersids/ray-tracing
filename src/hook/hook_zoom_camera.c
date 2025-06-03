@@ -6,11 +6,13 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:29:31 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 20:26:48 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/03 23:30:53 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+/* --------------------------- Public Functions ---------------------------- */
 
 /**
  * @brief Zoom camera by FOV (Field of View)

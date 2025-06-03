@@ -6,11 +6,13 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 11:49:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 22:55:27 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/03 23:33:28 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+/* --------------------- Private function prototypes ----------------------- */
 
 static void	init_helpers(t_camera *camera);
 
@@ -55,6 +57,8 @@ int	rt_parse_camera(t_info *rt, char *line)
 	init_helpers(&rt->camera);
 	return (0);
 }
+
+/* ------------------- Private Function Implementation --------------------- */
 
 static void	init_helpers(t_camera *camera)
 {

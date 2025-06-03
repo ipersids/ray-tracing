@@ -6,17 +6,41 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:52:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 22:55:57 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/03 23:17:36 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/* --------------------- Private function prototypes ----------------------- */
+
+/// @brief Moves or resets the camera forward.
 static void	move_forward(t_info *rt, t_camera *cam, bool reset);
+
+/// @brief Moves the camera backward.
 static void	move_backward(t_info *rt, t_camera *cam);
+
+/// @brief Shifts the camera left.
 static void	move_left(t_info *rt, t_camera *cam);
+
+/// @brief Shifts the camera right.
 static void	move_right(t_info *rt, t_camera *cam);
 
+/* --------------------------- Public Functions ---------------------------- */
+
+/**
+ * @brief Handles key events and dispatches movement/reset.
+ * 
+ * Implements WASD-style camera movement for the ray tracer:
+ *   W - Move camera forward
+ *   S - Move camera backward
+ *   A - Strafe camera left
+ *   D - Strafe camera right
+ *   R - Reset camera to initial position and orientation
+ * 
+ * @param k Key function callback data.
+ * @param param Pointer to the main program structure.
+ */
 void	rt_key_hook(mlx_key_data_t k, void* param)
 {
 	t_info		*rt;
@@ -43,6 +67,8 @@ void	rt_key_hook(mlx_key_data_t k, void* param)
 		}
 	}
 }
+
+/* ------------------- Private Function Implementation --------------------- */
 
 static void	move_forward(t_info *rt, t_camera *cam, bool reset)
 {
@@ -76,6 +102,7 @@ static void	move_left(t_info *rt, t_camera *cam)
 	t_vec3	move_to;
 
 	cam->left = cross_product(cam->forward, rt->win.world_up);
+	cam->left = normalize(cam->left);
 	move_to = multiplication(cam->left, CAMERA_SPEED);
 	cam->pos = (t_point)addition(cam->pos, move_to);
 	rt->win.rendered = false;
@@ -86,6 +113,7 @@ static void	move_right(t_info *rt, t_camera *cam)
 	t_vec3	move_to;
 
 	cam->left = cross_product(cam->forward, rt->win.world_up);
+	cam->left = normalize(cam->left);
 	move_to = multiplication(cam->left, CAMERA_SPEED);
 	cam->pos = (t_point)subtraction(cam->pos, move_to);
 	rt->win.rendered = false;

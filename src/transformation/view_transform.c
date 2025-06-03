@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:00:45 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 16:52:48 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/03 23:37:55 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	rt_view_transform(t_camera *cam, t_vec3	world_up)
 	t_matrix	orientation;
 	t_matrix	transl;
 
-	world_up = normalize(world_up);
 	cam->left = cross_product(cam->forward, world_up);
 	cam->true_up = cross_product(cam->left, cam->forward);
 	orientation = ((t_matrix){

@@ -6,14 +6,36 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:48:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 20:27:22 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/03 23:30:35 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/* --------------------- Private function prototypes ----------------------- */
+
+/**
+ * @brief Applies the calculated rotation to the camera.
+ *
+ * @param rt Pointer to the main program structure (t_info*).
+ * @param cursor Pointer to the cursor state structure (t_cursor*).
+ * @note Exits the program if the camera transform fails.
+ */
 static void	handle_rotation(t_info *rt, t_cursor *cursor);
 
+/* --------------------------- Public Functions ---------------------------- */
+
+/**
+ * @brief Handles mouse movement events for camera rotation.
+ * 
+ * When dragging is active, calculates the offset of the cursor,
+ * updates `yaw` and `pitch`, clamps pitch to avoid flipping,
+ * and updates the camera's forward direction and view transform.
+ *
+ * @param xpos Current x position of the mouse.
+ * @param ypos Current y position of the mouse.
+ * @param param Pointer to the main program structure (t_info*).
+ */
 void	rt_cursor_hook(double xpos, double ypos, void *param)
 {
 	t_info		*rt;
@@ -41,6 +63,8 @@ void	rt_cursor_hook(double xpos, double ypos, void *param)
 	handle_rotation(rt, cursor);
 	rt->win.rendered = false;
 }
+
+/* ------------------- Private Function Implementation --------------------- */
 
 static void	handle_rotation(t_info *rt, t_cursor *cursor)
 {

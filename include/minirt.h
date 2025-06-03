@@ -10,6 +10,8 @@
  * - unused rotations in src/calculations/matrices/create_base_transform.c
  * - src/constructor/init_objects.c: allocations for intersections should 
  *   change when cylinders will be added
+ * - `yaw` and `pitch` clamped [-60.0, 60.0] in src/hook/hook_rotate_camera.c,
+ * 	 could it jump because of src/parser/set_cursor.c ?
  * 
  * @note (recourses):
  * - lightning model: https://learnopengl.com/Lighting/Basic-Lighting
