@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:34:04 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 12:47:06 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:26:06 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,10 @@ static inline float	rt_clampf(float n, float min, float max);
  * @param b Second color.
  * @return t_color The resulting color.
  */
-t_color	multiply_colors(t_color a, t_color b)
+__attribute__((always_inline)) inline t_color
+	multiply_colors(t_color a, t_color b)
 {
-	t_color	result;
-
-	result.x = a.x * b.x;
-	result.y = a.y * b.y;
-	result.z = a.z * b.z;
-	return (result);
+	return ((t_color){a.x * b.x, a.y * b.y, a.z * b.z});
 }
 
 /**
@@ -50,14 +46,10 @@ t_color	multiply_colors(t_color a, t_color b)
  * @param scalar The scalar value.
  * @return t_color The resulting color.
  */
-t_color	multiply_color_scalar(t_color a, float scalar)
+__attribute__((always_inline)) inline t_color
+	multiply_color_scalar(t_color a, float scalar)
 {
-	t_color	result;
-
-	result.x = a.x * scalar;
-	result.y = a.y * scalar;
-	result.z = a.z * scalar;
-	return (result);
+	return ((t_color){a.x * scalar, a.y * scalar, a.z * scalar});
 }
 
 /**
