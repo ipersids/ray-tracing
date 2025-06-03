@@ -231,13 +231,14 @@ typedef struct s_object
 // # define FPS 0.01666666667 // 1/60
 # define FPS 0.03333333333 // 1/30
 
-# define CURSOR_SENSITIVITY 0.01f
+# define CURSOR_SENSITIVITY 0.05f
 
 typedef struct s_cursor
 {
 	float	last_x;
 	float	last_y;
 	bool	is_first;
+	bool	is_dragging;
 	float	xoffset;
 	float	yoffset;
 	float	yaw;
