@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt_parser.c                                    :+:      :+:    :+:   */
+/*   minirt_parser.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 13:10:41 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/02 13:21:42 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:08:16 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		rt_parse_plane(t_info *rt, char *line);
 int		rt_parse_sphere(t_info *rt, char *line);
 int		rt_set_transformations(t_info *rt);
 void	rt_set_material(t_color ambient, t_object *obj, t_mtype type);
+int		rt_set_cursor(t_info *rt);
 
 /// @file src/parser/parser_utils.c
 

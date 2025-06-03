@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 11:49:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/02 13:53:39 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/03 16:53:23 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	rt_parse_camera(t_info *rt, char *line)
 		return (ERR_CAMERA_ORIENT_VECTOR);
 	if (equal(fabs(dot_product(rt->camera.forward, rt->win.world_up)), 1.0f))
 		return (ERR_CAMERA_GIMBAL_LOCK);
+	rt->camera.forward = normalize(rt->camera.forward);
 	while (ft_isspace(*line))
 		++line;
 	exit_code = rt_parse_float(&rt->camera.fov, &line, &next);

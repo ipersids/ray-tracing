@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:51:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/30 02:03:26 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:09:22 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ static int	perform_computations(t_info *rt)
 	exit_code = rt_set_transformations(rt);
 	if (0 != exit_code)
 		return (exit_code);
+	exit_code = rt_set_cursor(rt);
 	return (exit_code);
 }

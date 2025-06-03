@@ -48,9 +48,10 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/parser/validate_input.c src/parser/parse_cylinder.c \
 				   src/parser/parse_plane.c src/parser/parse_sphere.c \
 				   src/parser/set_transformations.c src/parser/set_material.c \
+				   src/parser/set_cursor.c \
 				   \
 				   src/hook/hook_close_window.c src/hook/hook_resize_window.c \
-				   src/hook/hook_render_scene.c \
+				   src/hook/hook_render_scene.c src/hook/hook_follow_cursor.c \
 				   \
 				   src/renderer/camera.c src/renderer/color_at.c \
 				   src/renderer/intersect_world.c src/renderer/normal_at.c \

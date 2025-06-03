@@ -231,6 +231,19 @@ typedef struct s_object
 // # define FPS 0.01666666667 // 1/60
 # define FPS 0.03333333333 // 1/30
 
+# define CURSOR_SENSITIVITY 0.01f
+
+typedef struct s_cursor
+{
+	float	last_x;
+	float	last_y;
+	bool	is_first;
+	float	xoffset;
+	float	yoffset;
+	float	yaw;
+	float	pitch;
+}			t_cursor;
+
 /**
  * @brief Structure representing a window data
  * Managed by MLX42 lib
@@ -245,6 +258,7 @@ typedef struct s_canvas
 	bool		resized;
 	double		elapsed_time;
 	mlx_image_t	*img;
+	t_cursor	cursor;
 }				t_canvas;
 
 /* ------------------------ Ray and render structures  --------------------- */

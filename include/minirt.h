@@ -5,7 +5,7 @@
  * 	 (2.0 * EPSILON)
  * - decide to give error or normalized with warning in case 
  * 	 normal.magnitude() != 1.0;
- * 	 for now: addede normalize in transform.
+ * 	 Make it consictent.
  * - for now we support comments with `#` at the end line in the scene file
  * - unused rotations in src/calculations/matrices/create_base_transform.c
  * - src/constructor/init_objects.c: allocations for intersections should 
@@ -70,5 +70,6 @@ void		rt_press_esc_hook(void *param);
 void		rt_close_window_hook(void *param);
 void		rt_resize_hook(int32_t width, int32_t height, void *param);
 void		rt_render_hook(void *param);
+void		rt_cursor_hook(double xpos, double ypos, void *param);
 
 #endif // MINIRT_H

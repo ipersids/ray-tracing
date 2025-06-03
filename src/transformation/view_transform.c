@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:00:45 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 13:26:18 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/03 16:52:48 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,14 @@ int	rt_view_transform(t_camera *cam, t_vec3	world_up)
 {
 	t_matrix	orientation;
 	t_matrix	transl;
-	t_vec3		norm_forward;
 
-	norm_forward = normalize(cam->forward);
 	world_up = normalize(world_up);
-	cam->left = cross_product(norm_forward, world_up);
-	cam->true_up = cross_product(cam->left, norm_forward);
+	cam->left = cross_product(cam->forward, world_up);
+	cam->true_up = cross_product(cam->left, cam->forward);
 	orientation = ((t_matrix){
 		{{cam->left.x, cam->left.y, cam->left.z, 0.0f},
 		{cam->true_up.x, cam->true_up.y, cam->true_up.z, 0.0f},
-		{-norm_forward.x, -norm_forward.y, -norm_forward.z, 0.0f},
+		{-cam->forward.x, -cam->forward.y, -cam->forward.z, 0.0f},
 		{0.0f, 0.0f, 0.0f, 1.0f}}, 4});
 	transl = matrix_translation(-(cam->pos.x), -(cam->pos.y), -(cam->pos.z));
 	cam->transform = matrix_multiply(orientation, transl);
