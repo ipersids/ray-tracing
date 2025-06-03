@@ -6,7 +6,7 @@
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 18:38:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/02 19:00:59 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:46:32 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ static t_pat	stripe_pattern(t_color a, t_color b, t_pattype type)
 
 static t_color	stripe_pattern_at(t_pat *pattern, t_point point)
 {
-	if ((int)floorf(point.x) % 2 == 0) // floof?
+	if ((int)floorf(point.z) % 2 == 0) // floof?
 		return (pattern->color_a);
 	else
 		return (pattern->color_b);
