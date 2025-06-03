@@ -232,7 +232,9 @@ typedef struct s_object
 # define FPS 0.03333333333 // 1/30
 
 # define CURSOR_SENSITIVITY 0.05f
-# define CAMERA_ZOOM_SPEED 0.5f
+# define FOV_ZOOM_SPEED 5.0f
+# define FOV_ZOOM_MIN 0.0f
+# define FOV_ZOOM_MAX 180.0f
 
 typedef struct s_cursor
 {

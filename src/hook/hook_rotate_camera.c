@@ -6,15 +6,13 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:48:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 19:17:14 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/03 20:27:22 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static void	handle_rotation(t_info *rt, t_cursor *cursor);
-
-// void mlx_mouse_hook(mlx_t* mlx, mlx_mousefunc func, void* param)
 
 void	rt_cursor_hook(double xpos, double ypos, void *param)
 {
