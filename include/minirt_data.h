@@ -236,6 +236,14 @@ typedef struct s_object
 # define FOV_ZOOM_MIN 0.0f
 # define FOV_ZOOM_MAX 180.0f
 # define CAMERA_SPEED 5.0f
+# define MOVEMENT_TIMEOUT 0.5f // second
+
+typedef enum e_render_quality
+{
+	RENDER_FULL_QUALITY = 1,
+	RENDER_HALF_QUALITY = 2,
+	RENDER_QUARTER_QUALITY = 4
+}	t_render_quality;
 
 typedef struct s_cursor
 {
@@ -262,6 +270,7 @@ typedef struct s_canvas
 	bool		rendered;
 	bool		resized;
 	double		elapsed_time;
+	double		move_elapsed_time;
 	mlx_image_t	*img;
 	t_cursor	cursor;
 }				t_canvas;

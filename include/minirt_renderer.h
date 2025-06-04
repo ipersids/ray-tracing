@@ -4,7 +4,7 @@
 /* --------------------------- Camera and renderer -------------------------- */
 /// @dir src/renderer
 
-void			rt_camera_render(t_info *rt);
+void			rt_camera_render(t_info *rt, t_render_quality skip_factor);
 void			rt_camera_init(t_camera *cam, t_canvas *win);
 t_color			rt_color_at(t_info *rt, t_ray *ray);
 t_vec3			rt_normal_at(t_object *obj, t_point world_point);

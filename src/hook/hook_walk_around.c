@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:52:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/04 22:02:41 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/05 00:41:22 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ static void	move_forward(t_info *rt, t_camera *cam, bool reset)
 		cam->pos = (t_point)addition(cam->pos, move_to);
 	}
 	rt->win.rendered = false;
+	rt->win.move_elapsed_time = 0;
+	printf("I'm HERE\n");
 }
 
 static void	move_backward(t_info *rt, t_camera *cam)
@@ -103,6 +105,7 @@ static void	move_backward(t_info *rt, t_camera *cam)
 	move_to = multiplication(cam->forward, CAMERA_SPEED);
 	cam->pos = (t_point)subtraction(cam->pos, move_to);
 	rt->win.rendered = false;
+	rt->win.move_elapsed_time = 0;
 }
 
 static void	move_left(t_info *rt, t_camera *cam)
@@ -114,6 +117,7 @@ static void	move_left(t_info *rt, t_camera *cam)
 	move_to = multiplication(cam->left, CAMERA_SPEED);
 	cam->pos = (t_point)addition(cam->pos, move_to);
 	rt->win.rendered = false;
+	rt->win.move_elapsed_time = 0;
 }
 
 static void	move_right(t_info *rt, t_camera *cam)
@@ -125,4 +129,5 @@ static void	move_right(t_info *rt, t_camera *cam)
 	move_to = multiplication(cam->left, CAMERA_SPEED);
 	cam->pos = (t_point)subtraction(cam->pos, move_to);
 	rt->win.rendered = false;
+	rt->win.move_elapsed_time = 0;
 }

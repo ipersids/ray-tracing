@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 01:47:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 13:05:49 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/05 00:10:34 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
  *
  * @param rt Pointer to the main program structure.
  */
-void	rt_camera_render(t_info *rt)
+void	rt_camera_render(t_info *rt, t_render_quality skip_factor)
 {
 	uint32_t	px;
 	uint32_t	py;
@@ -43,9 +43,9 @@ void	rt_camera_render(t_info *rt)
 			ray_col = rt_color_at(rt, &ray);
 			rgba = rt_convert_to_rgba(&ray_col);
 			mlx_put_pixel(rt->win.img, px, py, rgba);
-			++px;
+			px += skip_factor;
 		}
-		++py;
+		py += skip_factor;
 	}
 }
 

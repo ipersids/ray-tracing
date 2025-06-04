@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 22:57:34 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/05 00:47:48 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,5 @@ static void	init_canvas(t_canvas *window)
 	window->world_up = (t_vec3){0.0f, 1.0f, 0.0f};
 	window->rendered = false;
 	window->resized = false;
+	window->move_elapsed_time = MOVEMENT_TIMEOUT;
 }

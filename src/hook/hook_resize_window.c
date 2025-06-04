@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 19:54:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 12:55:58 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/04 23:40:49 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ void	rt_resize_hook(int32_t width, int32_t height, void *param)
 	rt->win.height = height;
 	rt->win.rendered = false;
 	rt->win.resized = true;
+	rt->win.move_elapsed_time = 0;
 }

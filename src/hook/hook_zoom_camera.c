@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:29:31 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 23:30:53 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/04 23:42:21 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	rt_scroll_hook(double xdelta, double ydelta, void* param)
 		rt->camera.fov = FOV_ZOOM_MAX;
 	printf("rt->camera.fov = %f\n", rt->camera.fov);
 	rt->win.rendered = false;
+	rt->win.move_elapsed_time = 0;
 }

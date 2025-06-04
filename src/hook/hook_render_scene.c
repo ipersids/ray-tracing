@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:30:21 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 15:15:41 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/05 02:04:56 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,30 @@ void	rt_render_hook(void *param)
 
 	rt = (t_info *)param;
 	win = &rt->win;
-	win->elapsed_time += win->mlx->delta_time;
-	if (win->elapsed_time >= FPS)
+	if (true == win->resized)
 	{
-		win->elapsed_time -= FPS;
-		if (true == win->resized)
-		{
-			if (!mlx_resize_image(win->img, win->width, win->height))
-				rt_destroy_exit(rt, ERR_MLX42);
-			win->resized = false;
-		}
-		if (false == win->rendered)
-		{
-			double start = get_time_ms();
-			rt_camera_render(rt);
-			double end = get_time_ms();
-			printf("Render: %s%.1f%s ms (%dx%d)\n", PRINT_RED, end - start,
-				PRINT_DEFAULT, rt->win.img->width, rt->win.img->height);
-			win->rendered = true;
-		}
+		if (!mlx_resize_image(win->img, win->width, win->height))
+			rt_destroy_exit(rt, ERR_MLX42);
+		win->resized = false;
+	}
+	if (win->move_elapsed_time <= MOVEMENT_TIMEOUT)
+	{
+		double start = get_time_ms();
+		printf("RENDER_FAST ");
+		win->move_elapsed_time += win->mlx->delta_time;
+		rt_camera_render(rt, RENDER_HALF_QUALITY);
+		double end = get_time_ms();
+		printf("Render: %s%.1f%s ms (%dx%d)\n", PRINT_RED, end - start,
+			PRINT_DEFAULT, rt->win.img->width, rt->win.img->height);
+		printf("win->move_elapsed_time = %f\n", win->move_elapsed_time);
+	}
+	else if (!win->rendered)
+	{
+		double start = get_time_ms();
+		rt_camera_render(rt, RENDER_FULL_QUALITY);
+		double end = get_time_ms();
+		printf("Render: %s%.1f%s ms (%dx%d)\n", PRINT_RED, end - start,
+			PRINT_DEFAULT, rt->win.img->width, rt->win.img->height);
+		win->rendered = true;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:48:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 23:30:35 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/04 23:41:28 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	rt_cursor_hook(double xpos, double ypos, void *param)
 	cursor->last_y = ypos;
 	handle_rotation(rt, cursor);
 	rt->win.rendered = false;
+	rt->win.move_elapsed_time = 0;
 }
 
 /* ------------------- Private Function Implementation --------------------- */
