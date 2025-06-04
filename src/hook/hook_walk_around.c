@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:52:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 23:17:36 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:02:41 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,19 @@ static void	move_right(t_info *rt, t_camera *cam);
  * @brief Handles key events and dispatches movement/reset.
  * 
  * Implements WASD-style camera movement for the ray tracer:
- *   W - Move camera forward
- *   S - Move camera backward
- *   A - Strafe camera left
- *   D - Strafe camera right
- *   R - Reset camera to initial position and orientation
+ * Direction depends on where camera is looking
+ * 
+ *      W (Forward)
+ *          ↑
+ *          |
+ *   A ←----●----→ D
+ * (Left)   |    (Right)
+ *          ↓
+ *      S (Backward)
+ *
+ * ● = Camera position
+ *
+ * R - Reset camera to initial position and orientation
  * 
  * @param k Key function callback data.
  * @param param Pointer to the main program structure.

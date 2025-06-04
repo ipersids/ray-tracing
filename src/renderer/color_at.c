@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 18:38:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/02 13:36:24 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:16:36 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_color	rt_color_at(t_info *rt, t_ray *ray)
 	if (NULL == t)
 		return ((t_color){0.0f, 0.0f, 0.0f});
 	vars = prepare_shading(t, ray, rt);
+	if (!rt->lights)
+		return (vars.obj->material->ambient_comp);
 	shadowed = in_shadow(rt, vars.point);
 	result = lighting(vars, *vars.obj->material, rt->lights, shadowed);
 	return (result);
