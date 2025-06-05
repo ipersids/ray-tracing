@@ -42,14 +42,6 @@ jobs:
         echo "CPATH=/opt/homebrew/include:$CPATH" >> $GITHUB_ENV
         echo "PKG_CONFIG_PATH=/opt/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH" >> $GITHUB_ENV
     
-    - name: Debug GLFW installation (macOS)
-      if: matrix.os == 'macos-latest'
-      run: |
-        echo "=== GLFW Location ==="
-        find /opt/homebrew -name "*glfw*" 2>/dev/null || true
-        ls -la /opt/homebrew/lib/libglfw* || true
-        pkg-config --libs glfw3 || true
-    
     - name: Build libft
       run: |
         if [ -d "lib/libft" ]; then
