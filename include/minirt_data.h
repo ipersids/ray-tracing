@@ -111,7 +111,8 @@ typedef enum e_type
 	ELEMENT_SPHERE,
 	ELEMENT_PLANE,
 	ELEMENT_CYLINDER,
-	ELEMENT_UKNOWN
+	ELEMENT_UKNOWN,
+	ELEMENT_CYLINDER_CAP,
 }	t_type;
 
 # define LIMIT_COORD 1000.0f
@@ -270,12 +271,14 @@ typedef struct s_intersection
 {
 	float	t;
 	size_t	i_object;
+	t_type	obj_type;
 }			t_intersection;
 
 typedef struct s_intersections
 {
 	float	t[2];
 	size_t	count;
+	t_type	obj_type;
 }			t_intersections;
 
 typedef struct s_point_light
