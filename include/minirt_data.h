@@ -93,6 +93,7 @@ typedef enum s_error
 	ERR_CAMERA_GIMBAL_LOCK,
 	ERR_CAMERA_NON_INVERSIBLE,
 	ERR_MATRIX_NON_INVERSIBLE,
+	ERROR_REALLOC_INTERSECTIONS,
 	ERR_MAX
 }	t_error;
 
@@ -110,7 +111,8 @@ typedef enum e_type
 	ELEMENT_SPHERE,
 	ELEMENT_PLANE,
 	ELEMENT_CYLINDER,
-	ELEMENT_UKNOWN
+	ELEMENT_UKNOWN,
+	ELEMENT_CYLINDER_CAP,
 }	t_type;
 
 # define LIMIT_COORD 1000.0f
@@ -195,10 +197,13 @@ typedef struct s_cylinder
 	t_vec3		dir;				// 3d norm. vector of cylinder axis
 	float		diam;				// the cylinder diameter
 	float		r;					// the cylinder radius
+	float		scale;
 	float		height;				// the cylinder height
+	float		half_height;
 	t_color		color;				// R,G,B colors in range [0.0,1.0]
 	t_matrix	transform;
 	t_matrix	inv_transform;
+	t_matrix	inv_transpose;
 	t_material	material;
 }				t_cylinder;
 
@@ -266,12 +271,14 @@ typedef struct s_intersection
 {
 	float	t;
 	size_t	i_object;
+	t_type	obj_type;
 }			t_intersection;
 
 typedef struct s_intersections
 {
 	float	t[2];
 	size_t	count;
+	t_type	obj_type;
 }			t_intersections;
 
 typedef struct s_point_light
@@ -284,15 +291,16 @@ typedef struct s_point_light
 
 typedef struct s_info
 {
-	t_ambient_light	ambient;	// Ambient lightning data
-	t_camera		camera;		// Camera data
-	t_light			*lights;	// Array to store lights on the scene
-	size_t			n_lights;	// Amount of lights in the *lights array
-	t_object		*objs;		// Array to store scene's objects (sp, pl, cy)
-	size_t			n_objs;		// Amount of items in the *objs array
-	t_canvas		win;		// mlx window and images info struct
-	t_intersection	*ts;		// Intersection collection
-	size_t			n_ts;		// Amount t-values in intersection collection
+	t_ambient_light	ambient;		// Ambient lightning data
+	t_camera		camera;			// Camera data
+	t_light			*lights;		// Array to store lights on the scene
+	size_t			n_lights;		// Amount of lights in the *lights array
+	t_object		*objs;			// Array to store scene's objects (sp, pl, cy)
+	size_t			n_objs;			// Amount of items in the *objs array
+	t_canvas		win;			// mlx window and images info struct
+	t_intersection	*ts;			// Intersection collection
+	size_t			n_ts;			// Amount t-values in intersection collection
+	size_t			capacity_ts;	// Current capacity in intersection collection
 }					t_info;
 
 /* ------------------------- Parser helper structures ----------------------- */
@@ -336,5 +344,17 @@ typedef struct s_ray_vars
 	float	world_y;
 	t_vec3	pixel;
 }			t_ray_vars;
+
+typedef struct s_intersect_vars
+{
+	float	a;
+	float	b;
+	float	c;
+	float	disc;	// discriminant value
+	float	t1;
+	float	t2;
+	float	y0;
+	float	y1;
+}			t_intersect_vars;
 
 #endif // MINIRT_DATA_H
