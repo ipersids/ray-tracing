@@ -341,4 +341,12 @@ typedef struct s_ray_vars
 	t_vec3	pixel;
 }			t_ray_vars;
 
+typedef struct s_intersect_vars
+{
+	float	a;
+	float	b;
+	float	c;
+	float	disc;	// discriminant value
+}			t_intersect_vars;
+
 #endif // MINIRT_DATA_H

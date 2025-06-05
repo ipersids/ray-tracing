@@ -12,3 +12,5 @@ pl -50,0,50    1,0,0       0,125,255    # Left wall (ocean)
 pl 50,0,50     -1,0,0      125,255,0    # Right wall (spring green)
 pl 0,0,150     0,0,-1      255,255,0    # Back wall (yellow)
 pl 0,50,50     0,-1,0      255,0,255    # Ceiling (magenta)
+
+cy -15,0,10 	0,1,0 14.2	21.42	10,0,255
