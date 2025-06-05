@@ -182,6 +182,7 @@ typedef struct s_material
 	float	diffuse;			// Light reflected from a surface (0.0-1.0)
 	float	specular;			// Bright spot on a surface (0.0-1.0)
 	float	shininess;			// Size and sharpness of spec. reflection
+	float	reflective;			// How reflective the material is (0 non reflective, 1 mirror)
 	t_pat	pattern;
 }			t_material;
 
@@ -274,6 +275,7 @@ typedef enum e_ray_type
 {
 	RAY_CAMERA,
 	RAY_SHADOW,
+	RAY_REFLECTION
 }	t_ray_type;
 
 typedef struct s_ray
@@ -334,6 +336,7 @@ typedef struct s_phong_vars
 	t_vec3		eyev;
 	bool		is_inside;
 	t_vec3		normalv;
+	t_vec3		reflectv;
 }				t_phong_vars;
 
 # define BLACK (t_color){0, 0, 0}

@@ -6,7 +6,7 @@
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 18:38:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 15:47:11 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:57:36 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt)
 	vars.point = ray_hit(*ray, t->t);
 	vars.eyev = negation(ray->dir);
 	vars.normalv = rt_normal_at(vars.obj, vars.point);
+	vars.reflectv = reflect(ray->dir, vars.normalv);
 	if (dot_product(vars.normalv, vars.eyev) < 0.0f)
 	{
 		vars.is_inside = true;
@@ -225,4 +226,16 @@ static void	find_object(t_object object, t_matrix *obj_inv)
 		*obj_inv = object.cy.inv_transform;
 	else
 		*obj_inv = matrix_identity();
+}
+
+t_color	reflected_color(t_info *rt, t_phong_vars vars)
+{
+	t_ray	reflected_ray;
+	t_color	reflected_color;
+
+	if (vars.obj->material->reflective == 0)
+		return (BLACK);
+	reflected_ray = (t_ray){vars.point, vars.reflectv, RAY_REFLECTION};
+	reflected_color = rt_color_at(rt, reflected_ray);
+	return (multiplication(reflected_color, vars.obj->material->reflective));
 }

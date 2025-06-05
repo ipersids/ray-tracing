@@ -6,7 +6,7 @@
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:55:39 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/05 10:16:52 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/06/05 12:56:36 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	rt_set_material(t_color ambient, t_object *obj, t_mtype type)
 	{
 		obj->sp.material = rt_init_material(ambient, obj->sp.color, type);
 		obj->material = &obj->sp.material;
-		obj->material->pattern = set_checker_pattern(BLACK, WHITE, 0.6f);
+		//obj->material->pattern = set_stripe_pattern(BLACK, WHITE, 0.6f);
 	}
 	else if (ELEMENT_CYLINDER == obj->id)
 	{
