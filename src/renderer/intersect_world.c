@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:05:03 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/05 13:13:33 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/06 00:24:15 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,12 @@ void	rt_intersect_world(t_info *rt, t_ray *ray)
 		if (ELEMENT_PLANE == rt->objs[i].id)
 			xs = rt_intersect_plane(&rt->objs[i].pl, *ray);
 		if (ELEMENT_CYLINDER == rt->objs[i].id)
+		{
 			xs = rt_intersect_cylinder(&rt->objs[i].cy, *ray);
-		if (0 < xs.count)
 			add_intersections(&xs, rt, i);
+			xs = rt_intersect_cap(&rt->objs[i].cy, *ray);
+		}
+		add_intersections(&xs, rt, i);
 		++i;
 	}
 	quick_sort(rt->ts, 0, rt->n_ts - 1);
@@ -125,8 +128,10 @@ static void	swap(t_intersection *t1, t_intersection *t2)
 	tmp = *t1;
 	t1->t = t2->t;
 	t1->i_object = t2->i_object;
+	t1->obj_type = t2->obj_type;
 	t2->t = tmp.t;
 	t2->i_object = tmp.i_object;
+	t2->obj_type = tmp.obj_type;
 }
 
 static void	add_intersections(const t_intersections *xs, t_info *rt, size_t i)
@@ -137,6 +142,8 @@ static void	add_intersections(const t_intersections *xs, t_info *rt, size_t i)
 
 	j = 0;
 	tmp = NULL;
+	if (0 >= xs->count)
+		return ;
 	if ((rt->n_ts + xs->count) >= rt->capacity_ts)
 	{
 		nsize = (rt->capacity_ts + xs->count) * 2;
@@ -150,6 +157,7 @@ static void	add_intersections(const t_intersections *xs, t_info *rt, size_t i)
 	{
 		rt->ts[rt->n_ts].t = xs->t[j];
 		rt->ts[rt->n_ts].i_object = i;
+		rt->ts[rt->n_ts].obj_type = xs->obj_type;
 		++rt->n_ts;
 		++j;
 	}
