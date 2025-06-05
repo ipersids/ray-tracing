@@ -27,14 +27,16 @@ static t_color		ring_pattern_at(t_pat pattern, t_point point);
 static t_color		checker_pattern_at(t_pat pattern, t_point point);
 static t_color		radiant_gradient_pattern_at(t_pat pattern, t_point point);
 static void			find_object(t_object object, t_matrix *obj_inv);
+t_color				reflected_color(t_info *rt, t_phong_vars vars, int remaining);
 
 /* --------------------------- Public Functions ---------------------------- */
 
-t_color	rt_color_at(t_info *rt, t_ray *ray)
+t_color	rt_color_at(t_info *rt, t_ray *ray, int remaining)
 {
 	t_intersection	*t;
 	t_phong_vars	vars;
-	t_color			result;
+	t_color			surface;
+	t_color			reflected;
 	bool			shadowed;
 
 	t = NULL;
@@ -44,8 +46,9 @@ t_color	rt_color_at(t_info *rt, t_ray *ray)
 		return ((t_color){0.0f, 0.0f, 0.0f});
 	vars = prepare_shading(t, ray, rt);
 	shadowed = in_shadow(rt, vars.point);
-	result = lighting(vars, *vars.obj->material, rt->lights, shadowed);
-	return (result);
+	surface = lighting(vars, *vars.obj->material, rt->lights, shadowed);
+	reflected = reflected_color(rt, vars, remaining);
+	return (addition(surface, reflected));
 }
 
 /* ------------------- Private Function Implementation --------------------- */
@@ -228,14 +231,16 @@ static void	find_object(t_object object, t_matrix *obj_inv)
 		*obj_inv = matrix_identity();
 }
 
-t_color	reflected_color(t_info *rt, t_phong_vars vars)
+t_color	reflected_color(t_info *rt, t_phong_vars vars, int remaining)
 {
 	t_ray	reflected_ray;
 	t_color	reflected_color;
 
 	if (vars.obj->material->reflective == 0)
 		return (BLACK);
+	if (remaining <= 0)
+		return (BLACK);
 	reflected_ray = (t_ray){vars.point, vars.reflectv, RAY_REFLECTION};
-	reflected_color = rt_color_at(rt, reflected_ray);
+	reflected_color = rt_color_at(rt, &reflected_ray, remaining - 1);
 	return (multiplication(reflected_color, vars.obj->material->reflective));
 }
