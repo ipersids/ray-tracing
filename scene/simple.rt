@@ -7,7 +7,7 @@ sp -15,0,10                   10      255,0,0
 sp 15,-3,-50                    12      0,255,0  
 sp 15,13,100                    8       0,0,255 
 
-pl 0,-10,60    0,1,-0.2    255,125,0    # Floor (orange)
+pl 0,-10,60    0,1,0   255,125,0    # Floor (orange)
 pl -50,0,50    1,0,0       0,125,255    # Left wall (ocean)
 pl 50,0,50     -1,0,0      125,255,0    # Right wall (spring green)
 pl 0,0,150     0,0,-1      255,255,0    # Back wall (yellow)

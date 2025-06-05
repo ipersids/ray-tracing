@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:05:03 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/02 13:33:02 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:13:33 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	rt_intersect_world(t_info *rt, t_ray *ray)
 		if (ELEMENT_PLANE == rt->objs[i].id)
 			xs = rt_intersect_plane(&rt->objs[i].pl, *ray);
 		if (ELEMENT_CYLINDER == rt->objs[i].id)
-			xs.count = 0;// xs = intersect_cylinder(rt->objs[i].cy, *ray);
+			xs = rt_intersect_cylinder(&rt->objs[i].cy, *ray);
 		if (0 < xs.count)
 			add_intersections(&xs, rt, i);
 		++i;
@@ -131,9 +131,21 @@ static void	swap(t_intersection *t1, t_intersection *t2)
 
 static void	add_intersections(const t_intersections *xs, t_info *rt, size_t i)
 {
-	size_t	j;
+	size_t			j;
+	t_intersection	*tmp;
+	size_t			nsize;
 
 	j = 0;
+	tmp = NULL;
+	if ((rt->n_ts + xs->count) >= rt->capacity_ts)
+	{
+		nsize = (rt->capacity_ts + xs->count) * 2;
+		tmp = ft_realloc(rt->ts, rt->capacity_ts, nsize * sizeof(t_intersection));
+		if (!tmp)
+			rt_destroy_exit(rt, ERROR_REALLOC_INTERSECTIONS);
+		rt->ts = tmp;
+		rt->capacity_ts = nsize;
+	}
 	while (j < xs->count)
 	{
 		rt->ts[rt->n_ts].t = xs->t[j];

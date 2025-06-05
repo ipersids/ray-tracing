@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 00:10:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/05 12:12:50 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/05 12:32:36 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	rt_sphere_transform(t_sphere *sp)
  *
  * @param pl Pointer to the plane structure.
  * @return int 0 on success, or an error code if the matrix is not invertible.
- * @note Infinite, defined by normal direction - transform rays to plane space
  */
 int	rt_plane_transform(t_plane *pl)
 {
@@ -57,7 +56,7 @@ int	rt_plane_transform(t_plane *pl)
 	t_matrix		rotation;
 
 	translation = matrix_translation(pl->pos.x, pl->pos.y, pl->pos.z);
-	rotation = matrix_rotation(pl->dir, canonical_normal);
+	rotation = matrix_rotation(canonical_normal, pl->dir);
 	pl->transform = matrix_multiply(translation, rotation);
 	pl->inv_transform = matrix_identity();
 	if (false == matrix_try_inverse(pl->transform, &pl->inv_transform))
@@ -66,7 +65,6 @@ int	rt_plane_transform(t_plane *pl)
 	return (0);
 }
 
-// Finite objects with complex geometry - transform object to world space
 int	rt_cylinder_transform(t_cylinder *cy)
 {
 	const t_vec3	canonical_normal = (t_vec3){0.0f, 1.0f, 0.0f};
