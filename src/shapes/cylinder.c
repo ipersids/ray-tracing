@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:30:27 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/05 15:11:34 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/05 23:33:55 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,16 @@ t_intersections	rt_intersect_cylinder(const t_cylinder *cy, t_ray ray)
 	t_intersect_vars	vars;
 
 	res.count = 0;
+	res.obj_type = ELEMENT_CYLINDER;
 	ray.dir = matrix_multiply_vector(cy->inv_transform, ray.dir);
 	ray.orig = matrix_multiply_point(cy->inv_transform, ray.orig);
 	vars.a = (ray.dir.x * ray.dir.x) + (ray.dir.z * ray.dir.z);
+	if (equal(vars.a, 0.0f))
+		return (res);
 	vars.b = (2 * ray.orig.x * ray.dir.x) + (2 * ray.orig.z * ray.dir.z);
 	vars.c = (ray.orig.x * ray.orig.x) + (ray.orig.z * ray.orig.z) - 1.0f;
 	vars.disc = (vars.b * vars.b) - (4 * vars.a * vars.c);
-	if (equal(vars.disc, 0.0f))
+	if (vars.disc < 0.0f)
 		return (res);
 	vars.t1 = (-vars.b - sqrtf(vars.disc)) / (2 * vars.a);
 	vars.t2 = (-vars.b + sqrtf(vars.disc)) / (2 * vars.a);
@@ -69,19 +72,20 @@ static void	swapf(float *t1, float *t2)
 static t_intersections	truncate_cy(const t_cylinder *cy,
 							t_intersect_vars *vars, const t_ray *ray)
 {
-	t_intersections		res;
+	t_intersections	res;
 
 	res.count = 0;
+	res.obj_type = ELEMENT_CYLINDER;
 	vars->y0 = ray->orig.y + (vars->t1 * ray->dir.y);
 	if (vars->y0 > -cy->half_height && vars->y0 < cy->half_height)
 	{
-		res.t[0] = vars->t1;
+		res.t[res.count] = vars->t1;
 		res.count += 1;
 	}
 	vars->y1 = ray->orig.y + (vars->t2 * ray->dir.y);
 	if (vars->y1 > -cy->half_height && vars->y1 < cy->half_height)
 	{
-		res.t[1] = vars->t2;
+		res.t[res.count] = vars->t2;
 		res.count += 1;
 	}
 	return (res);
