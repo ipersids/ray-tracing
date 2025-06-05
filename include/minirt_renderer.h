@@ -30,5 +30,6 @@ t_vec3			rt_plane_normal_at(const t_plane *pl);
 /* ------------------------- Cylinder calculations ------------------------- */
 
 t_intersections	rt_intersect_cylinder(const t_cylinder *cy, t_ray ray);
+t_vec3			rt_cylinder_normal_at(const t_cylinder *cy, t_point w_point);
 
 #endif // MINIRT_RENDERER_H

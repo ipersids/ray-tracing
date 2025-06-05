@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:12:23 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/02 13:32:52 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:16:30 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@
  */
 t_vec3	rt_normal_at(t_object *obj, t_point world_point)
 {
-	// if (ELEMENT_SPHERE == obj->id)
-	// 	return (sphere_normal_at(&obj->sp, world_point));
 	if (ELEMENT_PLANE == obj->id)
 		return (rt_plane_normal_at(&obj->pl));
-	// if (ELEMENT_CYLINDER == obj->id)
-	// 	return (cylinder_normal_at(&obj->cy, world_point));
+	if (ELEMENT_CYLINDER == obj->id)
+		return (rt_cylinder_normal_at(&obj->cy, world_point));
 	return (sphere_normal_at(&obj->sp, world_point));
 }
