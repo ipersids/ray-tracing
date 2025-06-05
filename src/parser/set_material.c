@@ -6,7 +6,7 @@
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:55:39 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 15:36:35 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:47:24 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ static t_pat	stripe_pattern(t_color a, t_color b, t_pattype type)
 	pattern.color_a = a;
 	pattern.color_b = b;
 	pattern.has_pattern = true;
-	pattern.transform = matrix_identity();
+	//pattern.transform = matrix_identity();
 	//pattern.transform = matrix_rotation_y(M_PI / 4);
-	//pattern.transform = matrix_scaling(0.6f, 0.2f, 1.0f);
+	pattern.transform = matrix_scaling(0.01f, 1.0f, 1.0f);
 	matrix_try_inverse(pattern.transform, &pattern.inv_transform);
 	return (pattern);
 }
