@@ -196,6 +196,7 @@ typedef struct s_cylinder
 	t_vec3		dir;				// 3d norm. vector of cylinder axis
 	float		diam;				// the cylinder diameter
 	float		r;					// the cylinder radius
+	float		scale;
 	float		height;				// the cylinder height
 	t_color		color;				// R,G,B colors in range [0.0,1.0]
 	t_matrix	transform;

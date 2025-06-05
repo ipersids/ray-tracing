@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 00:10:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/05 12:32:36 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:49:27 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@ int	rt_sphere_transform(t_sphere *sp)
 	t_matrix	scaling;
 
 	translation = matrix_translation(sp->pos.x, sp->pos.y, sp->pos.z);
-	scaling = matrix_scaling(sp->r, sp->r, sp->r);
+	scaling = matrix_scaling(sp->scale, sp->scale, sp->scale);
 	sp->transform = matrix_multiply(translation, scaling);
 	sp->inv_transform = matrix_identity();
 	if (false == matrix_try_inverse(sp->transform, &sp->inv_transform))
 		return (ERR_MATRIX_NON_INVERSIBLE);
 	sp->inv_transpose = matrix_transpose(sp->inv_transform);
-	sp->scale = sp->r;
-	sp->r = 1.0;
 	return (0);
 }
 
@@ -70,10 +68,13 @@ int	rt_cylinder_transform(t_cylinder *cy)
 	const t_vec3	canonical_normal = (t_vec3){0.0f, 1.0f, 0.0f};
 	t_matrix		translation;
 	t_matrix		rotation;
+	t_matrix		scaling;
 
 	translation = matrix_translation(cy->pos.x, cy->pos.y, cy->pos.z);
 	rotation = matrix_rotation(canonical_normal, cy->dir);
+	scaling = matrix_scaling(cy->scale, 1.0f, cy->scale);
 	cy->transform = matrix_multiply(translation, rotation);
+	cy->transform = matrix_multiply(cy->transform, scaling);
 	cy->inv_transform = matrix_identity();
 	if (false == matrix_try_inverse(cy->transform, &cy->inv_transform))
 		return (ERR_MATRIX_NON_INVERSIBLE);
