@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 00:10:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 13:19:18 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/05 12:12:50 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	rt_sphere_transform(t_sphere *sp)
  *
  * @param pl Pointer to the plane structure.
  * @return int 0 on success, or an error code if the matrix is not invertible.
+ * @note Infinite, defined by normal direction - transform rays to plane space
  */
 int	rt_plane_transform(t_plane *pl)
 {
@@ -62,12 +63,22 @@ int	rt_plane_transform(t_plane *pl)
 	if (false == matrix_try_inverse(pl->transform, &pl->inv_transform))
 		return (ERR_MATRIX_NON_INVERSIBLE);
 	pl->inv_transpose = matrix_transpose(pl->inv_transform);
-	pl->dir = normalize(pl->dir);
 	return (0);
 }
 
+// Finite objects with complex geometry - transform object to world space
 int	rt_cylinder_transform(t_cylinder *cy)
 {
-	(void)cy;
+	const t_vec3	canonical_normal = (t_vec3){0.0f, 1.0f, 0.0f};
+	t_matrix		translation;
+	t_matrix		rotation;
+
+	translation = matrix_translation(cy->pos.x, cy->pos.y, cy->pos.z);
+	rotation = matrix_rotation(canonical_normal, cy->dir);
+	cy->transform = matrix_multiply(translation, rotation);
+	cy->inv_transform = matrix_identity();
+	if (false == matrix_try_inverse(cy->transform, &cy->inv_transform))
+		return (ERR_MATRIX_NON_INVERSIBLE);
+	cy->inv_transpose = matrix_transpose(cy->inv_transform);
 	return (0);
 }

@@ -199,6 +199,7 @@ typedef struct s_cylinder
 	t_color		color;				// R,G,B colors in range [0.0,1.0]
 	t_matrix	transform;
 	t_matrix	inv_transform;
+	t_matrix	inv_transpose;
 	t_material	material;
 }				t_cylinder;
 
