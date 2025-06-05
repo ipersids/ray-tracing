@@ -151,7 +151,9 @@ typedef enum e_pattype
 {
 	PATTERN_STRIPE,
 	PATTERN_RING,
-	PATTERN_GRADIENT
+	PATTERN_GRADIENT,
+	PATTERN_CHECKER,
+	PATTERN_RADIANT_GRADIENT
 }			t_pattype;
 
 typedef struct	s_pat
@@ -159,9 +161,10 @@ typedef struct	s_pat
 	t_pattype 	type;
 	t_color		color_a;
 	t_color		color_b;
-	bool		has_pattern;
 	t_matrix	transform;
 	t_matrix	inv_transform;
+	float		scale;
+	bool		has_pattern;
 }			t_pat;
 
 typedef enum e_mtype

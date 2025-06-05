@@ -6,7 +6,7 @@
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:55:39 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 15:47:24 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/06/05 10:16:52 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 /* --------------------------- Public Functions ---------------------------- */
 
-static t_pat	stripe_pattern(t_color a, t_color b, t_pattype type);
+t_pat	set_stripe_pattern(t_color a, t_color b, float scale, float angle_rad);
+t_pat	set_checker_pattern(t_color a, t_color b, float scale);
+t_pat	set_gradient_pattern(t_color a, t_color b, float scale);
 
 /**
  * @brief Sets the material for an object based on its type.
@@ -23,13 +25,17 @@ static t_pat	stripe_pattern(t_color a, t_color b, t_pattype type);
  * @param obj Pointer to the object whose material will be set.
  * @param type The material type.
  */
+
+ 		/*						CHECKER PATTERN						*/
+ 		/*		FOR SPHERES A SMALL NUMBER FOR SCALE (0.4-0.6)		*/
+		/*			FOR PLANES A BIG NUMBER FOR SCALE (4-6)			*/
 void	rt_set_material(t_color ambient, t_object *obj, t_mtype type)
 {
 	if (ELEMENT_SPHERE == obj->id)
 	{
 		obj->sp.material = rt_init_material(ambient, obj->sp.color, type);
 		obj->material = &obj->sp.material;
-		obj->material->pattern = stripe_pattern(WHITE, BLACK, PATTERN_STRIPE);
+		obj->material->pattern = set_checker_pattern(BLACK, WHITE, 0.6f);
 	}
 	else if (ELEMENT_CYLINDER == obj->id)
 	{
@@ -40,21 +46,48 @@ void	rt_set_material(t_color ambient, t_object *obj, t_mtype type)
 	{
 		obj->pl.material = rt_init_material(ambient, obj->pl.color, type);
 		obj->material = &obj->pl.material;
-		obj->material->pattern = stripe_pattern(RED, GREEN, PATTERN_STRIPE);
+		obj->material->pattern = set_checker_pattern(WHITE, BLACK, 5.0f);
 	}
 }
 
-static t_pat	stripe_pattern(t_color a, t_color b, t_pattype type)
+t_pat	set_stripe_pattern(t_color a, t_color b, float scale, float angle_rad)
 {
-	t_pat	pattern;
+	t_pat		pattern;
+	t_matrix	scale_matrix;
+	t_matrix	rot_matrix;
 
-	pattern.type = type;
+	scale_matrix = matrix_scaling(scale, 1.0f, 1.0f);
+	rot_matrix = matrix_rotation_y(angle_rad);
+	pattern.type = PATTERN_STRIPE;
 	pattern.color_a = a;
 	pattern.color_b = b;
 	pattern.has_pattern = true;
-	//pattern.transform = matrix_identity();
-	//pattern.transform = matrix_rotation_y(M_PI / 4);
-	pattern.transform = matrix_scaling(0.01f, 1.0f, 1.0f);
+	pattern.transform = matrix_multiply(rot_matrix, scale_matrix);
+	matrix_try_inverse(pattern.transform, &pattern.inv_transform);
+	return (pattern);
+}
+
+t_pat	set_checker_pattern(t_color a, t_color b, float scale)
+{
+	t_pat	pattern;
+
+	pattern.type = PATTERN_CHECKER;
+	pattern.color_a = a;
+	pattern.color_b = b;
+	pattern.has_pattern = true;
+	pattern.transform = matrix_scaling(scale, scale, scale);
+	matrix_try_inverse(pattern.transform, &pattern.inv_transform);
+	return (pattern);
+}
+
+t_pat	set_gradient_pattern(t_color a, t_color b, float scale)
+{
+	t_pat	pattern;
+	pattern.type = PATTERN_GRADIENT;
+	pattern.color_a = a;
+	pattern.color_b = b;
+	pattern.has_pattern = true;
+	pattern.transform = matrix_scaling(scale, 1.0f, 1.0f);
 	matrix_try_inverse(pattern.transform, &pattern.inv_transform);
 	return (pattern);
 }
