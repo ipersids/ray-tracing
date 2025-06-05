@@ -1,0 +1,75 @@
+name: MiniRT Unit Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            name: "Ubuntu Linux"
+          - os: macos-latest  
+            name: "macOS"
+
+    runs-on: ${{ matrix.os }}
+    name: Build and Test on ${{ matrix.name }}
+
+    steps:
+    - name: Checkout code with submodules
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    
+    - name: System Info
+      run: |
+        echo "OS: $(uname -s)"
+        echo "Architecture: $(uname -m)"
+        echo "Runner: ${{ runner.os }}"
+    
+    - name: Install dependencies (Ubuntu)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake xorg-dev libglfw3-dev
+    
+    - name: Install dependencies (macOS)
+      if: matrix.os == 'macos-latest'
+      run: |
+        brew install cmake glfw
+    
+    - name: Build libft
+      run: |
+        if [ -d "lib/libft" ]; then
+          cd lib/libft && make && cd ../..
+        else
+          echo "libft directory not found"
+        fi
+    
+    - name: Build MLX42
+      run: |
+        if [ -d "lib/mlx42" ]; then
+          cd lib/mlx42
+          cmake -B build
+          cmake --build build
+          cd ../..
+        else
+          echo "MLX42 directory not found"
+        fi
+    
+    - name: Build MiniRT
+      run: make
+
+    - name: Verify binary
+      run: |
+        # Check for common binary names
+        if [ -f "miniRT" ]; then
+          ls -la miniRT
+          file miniRT
+        else
+          echo "Binary not found"
+        fi
+
+    - name: Build and run tests
+      run: |
+        make test
