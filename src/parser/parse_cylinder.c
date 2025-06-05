@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:35:22 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/05 13:49:09 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:53:13 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ static int	parse_diam_and_height(t_info *rt, char **startptr, char **endptr)
 		return (ERR_OBJECT_CONFIG_LIMITS);
 	rt->objs[i].cy.r = 1.0f;
 	rt->objs[i].cy.scale = rt->objs[i].cy.diam / 2.0f;
+	rt->objs[i].cy.half_height = rt->objs[i].cy.height / 2.0f;
 	return (0);
 }

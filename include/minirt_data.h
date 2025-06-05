@@ -198,6 +198,7 @@ typedef struct s_cylinder
 	float		r;					// the cylinder radius
 	float		scale;
 	float		height;				// the cylinder height
+	float		half_height;
 	t_color		color;				// R,G,B colors in range [0.0,1.0]
 	t_matrix	transform;
 	t_matrix	inv_transform;
@@ -347,6 +348,10 @@ typedef struct s_intersect_vars
 	float	b;
 	float	c;
 	float	disc;	// discriminant value
+	float	t1;
+	float	t2;
+	float	y0;
+	float	y1;
 }			t_intersect_vars;
 
 #endif // MINIRT_DATA_H
