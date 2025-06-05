@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:30:27 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/05 23:33:55 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/06 01:34:04 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,36 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
+/**
+ * @brief Swaps two float values.
+ * @param t1 Pointer to the first float.
+ * @param t2 Pointer to the second float.
+ */
 static void				swapf(float *t1, float *t2);
+
+/**
+ * @brief Truncates intersections to the finite height of the cylinder.
+ * @param cy Pointer to the cylinder structure.
+ * @param vars Pointer to the intersection variables.
+ * @param ray Pointer to the ray structure.
+ * @return t_intersections Structure containing valid intersection data.
+ */
 static t_intersections	truncate_cy(const t_cylinder *cy,
 							t_intersect_vars *vars, const t_ray *ray);
 
 /* --------------------------- Public Functions ---------------------------- */
 
+/**
+ * @brief Computes intersections of a ray with a finite cylinder.
+ *
+ * Transforms the ray into object space, solves the quadratic equation for
+ * intersection, and checks if the intersection points are within the cylinder
+ * finite height. Returns the intersection distances (t values) if they exist.
+ *
+ * @param cy Pointer to the cylinder structure.
+ * @param ray The ray to test for intersection.
+ * @return t_intersections Structure containing intersection data.
+ */
 t_intersections	rt_intersect_cylinder(const t_cylinder *cy, t_ray ray)
 {
 	t_intersections		res;
@@ -45,6 +69,16 @@ t_intersections	rt_intersect_cylinder(const t_cylinder *cy, t_ray ray)
 	return (res);
 }
 
+/**
+ * @brief Computes the normal vector at a point on the cylinder's surface.
+ *
+ * Transforms the point into object space, calculates the normal,
+ * and transforms it back to world space.
+ *
+ * @param cy Pointer to the cylinder structure.
+ * @param w_point The point in world coordinates.
+ * @return t_vec3 The normal vector at the given point.
+ */
 t_vec3	rt_cylinder_normal_at(const t_cylinder *cy, t_point w_point)
 {
 	t_vec3	obj_point;

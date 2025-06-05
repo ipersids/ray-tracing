@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 22:17:11 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/06 00:24:29 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/06 01:31:32 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,26 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
+/**
+ * @brief Checks if a given intersection t is within the cap's radius.
+ * @param ray Pointer to the ray structure.
+ * @param t The intersection distance along the ray.
+ * @return true if the intersection is within the cap, false otherwise.
+ */
 static inline bool	check_cap(const t_ray *ray, const float t);
 
 /* --------------------------- Public Functions ---------------------------- */
 
+/**
+ * @brief Computes intersections of a ray with the end caps of a cylinder.
+ *
+ * Checks for intersection with both the top and bottom caps of the cylinder,
+ * and returns the intersection distances (t values) if they exist.
+ *
+ * @param cy Pointer to the cylinder structure.
+ * @param ray The ray to test for intersection.
+ * @return t_intersections Structure containing intersection data.
+ */
 t_intersections	rt_intersect_cap(const t_cylinder *cy, t_ray ray)
 {
 	t_intersections	res;
@@ -44,6 +60,16 @@ t_intersections	rt_intersect_cap(const t_cylinder *cy, t_ray ray)
 	return (res);
 }
 
+/**
+ * @brief Computes the normal vector at a point on a cylinder cap.
+ *
+ * Determines if the point is on the top or bottom cap and returns the
+ * corresponding normal in world coordinates.
+ *
+ * @param cy Pointer to the cylinder structure.
+ * @param w_point The point in world coordinates.
+ * @return t_vec3 The normal vector at the given point.
+ */
 t_vec3	rt_cap_normal_at(const t_cylinder *cy, t_point w_point)
 {
 	t_vec3	obj_point;

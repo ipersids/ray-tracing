@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:05:03 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/06 00:24:15 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/06 01:26:03 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,12 +146,12 @@ static void	add_intersections(const t_intersections *xs, t_info *rt, size_t i)
 		return ;
 	if ((rt->n_ts + xs->count) >= rt->capacity_ts)
 	{
-		nsize = (rt->capacity_ts + xs->count) * 2;
-		tmp = ft_realloc(rt->ts, rt->capacity_ts, nsize * sizeof(t_intersection));
+		nsize = ((rt->capacity_ts + xs->count) * 2) * sizeof(t_intersection);
+		tmp = ft_realloc(rt->ts, rt->capacity_ts, nsize);
 		if (!tmp)
 			rt_destroy_exit(rt, ERROR_REALLOC_INTERSECTIONS);
 		rt->ts = tmp;
-		rt->capacity_ts = nsize;
+		rt->capacity_ts = (rt->capacity_ts + xs->count) * 2;
 	}
 	while (j < xs->count)
 	{

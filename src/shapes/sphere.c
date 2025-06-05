@@ -1,4 +1,3 @@
-
 #include "minirt.h"
 
 t_intersections	intersect_sphere(t_sphere sphere, t_ray ray)
@@ -9,7 +8,6 @@ t_intersections	intersect_sphere(t_sphere sphere, t_ray ray)
 
 	ray.dir = matrix_multiply_vector(sphere.inv_transform, ray.dir);
 	ray.orig = matrix_multiply_point(sphere.inv_transform, ray.orig);
-
 	oc = subtraction(ray.orig, sphere.center);
 	vars.a = dot_product(ray.dir, ray.dir);
 	vars.b = 2.0 * dot_product(ray.dir, oc);

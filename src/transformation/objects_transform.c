@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 00:10:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/05 13:49:27 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/06 01:35:29 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 
 /**
  * @brief Sets up the transformation matrices for a sphere.
- *
- * Applies translation and scaling to the sphere, computes its inverse 
- * and transpose matrices, and normalizes its radius for further calculations.
  *
  * @param sp Pointer to the sphere structure.
  * @return int 0 on success, or an error code if the matrix is not invertible.
@@ -41,9 +38,6 @@ int	rt_sphere_transform(t_sphere *sp)
 /**
  * @brief Sets up the transformation matrices for a plane.
  *
- * Applies translation and rotation to the plane, computes its inverse
- * and transpose matrices, and normalizes its direction vector.
- *
  * @param pl Pointer to the plane structure.
  * @return int 0 on success, or an error code if the matrix is not invertible.
  */
@@ -63,6 +57,12 @@ int	rt_plane_transform(t_plane *pl)
 	return (0);
 }
 
+/**
+ * @brief Sets up the transformation matrices for a cylinder.
+ *
+ * @param cy Pointer to the cylinder structure.
+ * @return int 0 on success, or an error code if the matrix is not invertible.
+ */
 int	rt_cylinder_transform(t_cylinder *cy)
 {
 	const t_vec3	canonical_normal = (t_vec3){0.0f, 1.0f, 0.0f};

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:12:23 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/06 00:27:27 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/06 01:20:33 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @brief Computes the normal vector at a given point on an object's surface.
  *
  * @param obj Pointer to the object.
- * @param world_point The point in world coordinates where the normal is calculated.
+ * @param world_point Point in world coordinates where the normal is calculated.
  * @return t_vec3 The normal vector at the given point.
  */
 t_vec3	rt_normal_at(t_object *obj, t_point world_point, t_type otype)
