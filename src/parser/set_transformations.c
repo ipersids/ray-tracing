@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:51:04 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/02 13:53:59 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/06 20:16:37 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	rt_set_transformations(t_info *rt)
 			exit_code = rt_plane_transform(&rt->objs[i].pl);
 		else if (ELEMENT_CYLINDER == rt->objs[i].id)
 			exit_code = rt_cylinder_transform(&rt->objs[i].cy);
+		else if (ELEMENT_CONE == rt->objs[i].id)
+			exit_code = 0; // rt_cone_transform(&rt->objs[i].co);
 		else
 			exit_code = ERR_OBJECT_TYPE;
 		rt_set_material(rt->ambient.intensity, &rt->objs[i], i % MATERIAL_MAX);

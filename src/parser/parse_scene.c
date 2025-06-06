@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:58:48 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/30 01:46:05 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/06 20:19:38 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ static t_type	get_object_type(char *line)
 		return (ELEMENT_PLANE);
 	if (ft_strncmp(line, "cy", 2) == 0 && ft_isspace(line[2]))
 		return (ELEMENT_CYLINDER);
+	if (IS_BONUS && ft_strncmp(line, "co", 2) == 0 && ft_isspace(line[2]))
+		return (ELEMENT_CONE);
 	return (ELEMENT_UKNOWN);
 }
 
@@ -139,6 +141,8 @@ static int	parse_line(t_info *rt, char *line)
 		exit_code = rt_parse_light(rt, line + 1);
 	else if (ELEMENT_CYLINDER == type)
 		exit_code = rt_parse_cylinder(rt, line + 2);
+	else if (ELEMENT_CONE == type)
+		exit_code = rt_parse_cone(rt, line + 2);
 	else if (ELEMENT_PLANE == type)
 		exit_code = rt_parse_plane(rt, line + 2);
 	else if (ELEMENT_SPHERE == type)

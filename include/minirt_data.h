@@ -57,7 +57,7 @@ typedef struct s_submatrix_var
 # define PRINT_DEFAULT "\033[0m"
 
 # ifndef IS_BONUS
-#  define IS_BONUS false
+#  define IS_BONUS 0
 # endif
 
 # ifndef M_PI
@@ -111,6 +111,7 @@ typedef enum e_type
 	ELEMENT_SPHERE,
 	ELEMENT_PLANE,
 	ELEMENT_CYLINDER,
+	ELEMENT_CONE,
 	ELEMENT_UKNOWN,
 	ELEMENT_CYLINDER_CAP,
 }	t_type;
@@ -230,6 +231,18 @@ typedef struct s_cylinder
 	t_material	material;
 }				t_cylinder;
 
+typedef struct s_cone
+{
+	t_point		pos;				// top of cone position
+	t_vec3		dir;				// 3d norm. vector of cone axis
+	float		scale;
+	float		height;
+	t_color		color;				// R,G,B colors in range [0.0,1.0]
+	t_matrix	inv_transform;
+	t_matrix	inv_transpose;
+	t_material	material;
+}				t_cone;
+
 typedef struct s_object
 {
 	t_type			id;
@@ -238,6 +251,7 @@ typedef struct s_object
 		t_sphere	sp;
 		t_plane		pl;
 		t_cylinder	cy;
+		t_cone		co;
 	};
 	t_material		*material;
 }					t_object;

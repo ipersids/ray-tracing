@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:06:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 12:56:44 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/06 20:14:51 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	debug_print_objects(t_info *rt)
 		printf("Object [%zu/%zu] -> ", i + 1, rt->n_objs);
 		if (ELEMENT_CYLINDER == rt->objs[i].id)
 			debug_print_cy(&rt->objs[i].cy);
+		else if (ELEMENT_CONE == rt->objs[i].id)
+			debug_print_co(&rt->objs[i].co);
 		else if (ELEMENT_PLANE == rt->objs[i].id)
 			debug_print_pl(&rt->objs[i].pl);
 		else if (ELEMENT_SPHERE == rt->objs[i].id)
@@ -90,6 +92,19 @@ void	debug_print_cy(t_cylinder *cy)
 	printf("\t- height: %.2f\n", cy->height);
 	printf("\t- color: %.2f, %.2f, %.2f\n",
 		cy->color.x, cy->color.y, cy->color.z);
+}
+
+
+void	debug_print_co(t_cone *co)
+{
+	printf(PRINT_PURPLE"cone:\n"PRINT_DEFAULT);
+	printf("\t- position: %.2f, %.2f, %.2f\n", co->pos.x, co->pos.y, co->pos.z);
+	printf("\t- direction: %.2f, %.2f, %.2f\n",
+		co->dir.x, co->dir.y, co->dir.z);
+	printf("\t- scale: %.2f\n", co->scale);
+	printf("\t- height: %.2f\n", co->height);
+	printf("\t- color: %.2f, %.2f, %.2f\n",
+		co->color.x, co->color.y, co->color.z);
 }
 
 void	debug_print_pl(t_plane *pl)
