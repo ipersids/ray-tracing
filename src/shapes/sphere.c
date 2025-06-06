@@ -1,32 +1,26 @@
-
 #include "minirt.h"
 
 t_intersections	intersect_sphere(t_sphere sphere, t_ray ray)
 {
-	t_intersections	result;
-	t_vec3			oc;
-	float			a;
-	float			b;
-	float			c;
-	float			discriminant;
-	float			t1;
-	float			t2;
+	t_intersections		result;
+	t_vec3				oc;
+	t_intersect_vars	vars;
 
 	ray.dir = matrix_multiply_vector(sphere.inv_transform, ray.dir);
 	ray.orig = matrix_multiply_point(sphere.inv_transform, ray.orig);
-
 	oc = subtraction(ray.orig, sphere.center);
-	a = dot_product(ray.dir, ray.dir);
-	b = 2.0 * dot_product(ray.dir, oc);
-	c = dot_product(oc, oc) - sphere.r * sphere.r;
-	discriminant = (b * b) - (4 * a * c);
+	vars.a = dot_product(ray.dir, ray.dir);
+	vars.b = 2.0 * dot_product(ray.dir, oc);
+	vars.c = dot_product(oc, oc) - sphere.r * sphere.r;
+	vars.disc = (vars.b * vars.b) - (4 * vars.a * vars.c);
 	result.count = 0;
-	if (discriminant < 0)
+	result.obj_type = ELEMENT_SPHERE;
+	if (vars.disc < 0.0f)
 		return (result);
-	t1 = (-b - sqrtf(discriminant)) / (2.0 * a);
-	t2 = (-b + sqrtf(discriminant)) / (2.0 * a);
-	result.t[0] = t1;
-	result.t[1] = t2;
+	vars.t1 = (-vars.b - sqrtf(vars.disc)) / (2.0 * vars.a);
+	vars.t2 = (-vars.b + sqrtf(vars.disc)) / (2.0 * vars.a);
+	result.t[0] = vars.t1;
+	result.t[1] = vars.t2;
 	result.count = 2;
 	return (result);
 }

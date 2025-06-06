@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:30:21 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/02 13:23:28 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/05 11:22:15 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	rt_render_hook(void *param)
 				rt_destroy_exit(rt, ERR_MLX42);
 			win->resized = false;
 		}
-		if (true) // (false == win->rendered)
+		if (false == win->rendered)
 		{
 			double start = get_time_ms();
 			rt_camera_render(rt);

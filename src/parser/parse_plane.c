@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:40:19 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/30 01:45:49 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/05 12:18:13 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	rt_parse_plane(t_info *rt, char *line)
 	exit_code = rt_parse_coord(&rt->objs[i].pl.dir, &line, &next, true);
 	if (0 != exit_code)
 		return (exit_code);
+	rt->objs[i].pl.dir = normalize(rt->objs[i].pl.dir);
 	exit_code = rt_parse_color(&rt->objs[i].pl.color, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
