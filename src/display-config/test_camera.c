@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 01:37:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/28 22:39:51 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/06 13:26:45 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void test_camera(void) {
 	win.height = 125;
 	win.world_up = (t_vec3){0.0, 1.0, 0.0};
 	cam.forward = subtraction((t_vec3){0.0, 0.0, -1.0}, cam.pos);
+	cam.forward = normalize(cam.forward);
 	rt_camera_init(&cam, &win);
 	assert(equal(cam.pixel_size, 0.01f));
 	win.width = 125;
@@ -38,15 +39,18 @@ void test_camera(void) {
 	rt_view_transform(&cam, win.world_up);
 	assert(matrix_equality(cam.transform, matrix_identity()));
 	cam.forward = subtraction((t_vec3){0.0, 0.0, 1.0}, cam.pos);
+	cam.forward = normalize(cam.forward);
 	rt_view_transform(&cam, win.world_up);
 	assert(matrix_equality(cam.transform, matrix_scaling(-1.0, 1.0, -1.0)));
 	cam.pos = (t_vec3){0.0, 0.0, 8.0};
 	cam.forward = subtraction((t_vec3){0.0, 0.0, 0.0}, cam.pos);
+	cam.forward = normalize(cam.forward);
 	rt_view_transform(&cam, win.world_up);
 	assert(matrix_equality(cam.transform, matrix_translation(0.0, 0.0, -8.0)));
 	cam.pos = (t_vec3){1.0, 3.0, 2.0};
 	cam.forward = subtraction((t_vec3){4.0, -2.0, 8.0}, cam.pos);
-	win.world_up = (t_vec3){1.0, 1.0, 0.0};
+	cam.forward = normalize(cam.forward);
+	win.world_up = normalize((t_vec3){1.0, 1.0, 0.0});
 	rt_view_transform(&cam, win.world_up);
 	t_matrix m = {
 		{
@@ -63,6 +67,7 @@ void test_camera(void) {
 	printf("TEST rt_get_ray(): ");
 	cam.pos = (t_vec3){0.0, 0.0, 0.0};
 	cam.forward = subtraction((t_vec3){0.0, 0.0, -1.0}, cam.pos);
+	cam.forward = normalize(cam.forward);
 	win.width = 201;
 	win.height = 101;
 	win.world_up = (t_vec3){0.0, 1.0, 0.0};
@@ -82,6 +87,7 @@ void test_camera(void) {
 	t_matrix tmp = cam.transform;
 	cam.pos = (t_vec3){0.0, 2.0, -5.0};
 	cam.forward = (t_vec3){0.707, 0, -0.707};
+	cam.forward = normalize(cam.forward);
 	cam.fov = 90.0;
 	rt_camera_init(&cam, &win);
 	rt_view_transform(&cam, win.world_up);

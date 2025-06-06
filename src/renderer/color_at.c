@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   color_at.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/25 18:38:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/06 15:18:10 by reerikai         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minirt.h"
 
 /* --------------------- Private function prototypes ----------------------- */
@@ -45,6 +33,8 @@ t_color	rt_color_at(t_info *rt, t_ray *ray, int remaining)
 	if (NULL == t)
 		return ((t_color){0.0f, 0.0f, 0.0f});
 	vars = prepare_shading(t, ray, rt);
+	if (!rt->lights)
+		return (vars.obj->material->ambient_comp);
 	shadowed = in_shadow(rt, vars.point);
 	surface = lighting(vars, *vars.obj->material, rt->lights, shadowed);
 	reflected = reflected_color(rt, vars, remaining);

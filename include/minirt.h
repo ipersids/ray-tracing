@@ -5,11 +5,13 @@
  * 	 (2.0 * EPSILON)
  * - decide to give error or normalized with warning in case 
  * 	 normal.magnitude() != 1.0;
- * 	 for now: addede normalize in transform.
+ * 	 Make it consictent.
  * - for now we support comments with `#` at the end line in the scene file
  * - unused rotations in src/calculations/matrices/create_base_transform.c
  * - src/constructor/init_objects.c: allocations for intersections should 
  *   change when cylinders will be added
+ * - `yaw` and `pitch` clamped [-60.0, 60.0] in src/hook/hook_rotate_camera.c,
+ * 	 could it jump because of src/parser/set_cursor.c ?
  * 
  * @note (recourses):
  * - lightning model: https://learnopengl.com/Lighting/Basic-Lighting
@@ -70,5 +72,9 @@ void		rt_press_esc_hook(void *param);
 void		rt_close_window_hook(void *param);
 void		rt_resize_hook(int32_t width, int32_t height, void *param);
 void		rt_render_hook(void *param);
+void		rt_cursor_hook(double xpos, double ypos, void *param);
+void		rt_mouse_hook(mouse_key_t k, action_t a, modifier_key_t m, void *p);
+void		rt_scroll_hook(double xdelta, double ydelta, void *param);
+void		rt_key_hook(mlx_key_data_t k, void* param);
 
 #endif // MINIRT_H

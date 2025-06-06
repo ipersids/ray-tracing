@@ -16,11 +16,11 @@ MiniRT is a rendering program that uses ray tracing technology to create realist
 ## Features  
 
 - [x] Scene description parsed from `.rt` files.  
-- [ ] Custom math and vector utilities.   
-- [ ] Real-time rendering with MLX42 (42 School's graphical library).  
+- [x] Custom math and vector utilities.   
+- [x] Real-time rendering with MLX42 (42 School's graphical library).  
 - [ ] Simple ray tracer supporting spheres, planes, and cylinders.  
-- [ ] Point and ambient lighting with basic shading.  
-- [ ] Camera with field of view and orientation control.  
+- [x] Point and ambient lighting with basic shading.  
+- [x] Camera with field of view and orientation control.  
 
 ## Project structure
 
@@ -29,6 +29,7 @@ ray-tracing/
 │
 ├── include/                  # Header files
 │   ├── minirt_data.h
+│   ├── ...
 │   └── minirt.h
 │
 ├── lib/                      # Libraries
@@ -42,6 +43,8 @@ ray-tracing/
 │   ├── constructor/
 │   │   └── *.c
 │   ├── destructor/
+│   │   └── *.c
+│   ├── .../
 │   │   └── *.c
 │   ├── parser/
 │   │   └── *.c

@@ -6,11 +6,15 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 11:49:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/02 13:53:39 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/03 23:33:28 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+/* --------------------- Private function prototypes ----------------------- */
+
+static void	init_helpers(t_camera *camera);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -50,5 +54,16 @@ int	rt_parse_camera(t_info *rt, char *line)
 		return (ERR_OBJECT_CONFIG);
 	if (0.0 > rt->camera.fov || 180.0 < rt->camera.fov)
 		return (ERR_OBJECT_CONFIG_LIMITS);
+	init_helpers(&rt->camera);
 	return (0);
+}
+
+/* ------------------- Private Function Implementation --------------------- */
+
+static void	init_helpers(t_camera *camera)
+{
+	camera->forward = normalize(camera->forward);
+	camera->reset_forward = camera->forward;
+	camera->reset_pos = camera->pos;
+	camera->reset_fov = camera->fov;
 }
