@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 01:37:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 20:15:45 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/06 13:26:45 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void test_camera(void) {
 	cam.pos = (t_vec3){1.0, 3.0, 2.0};
 	cam.forward = subtraction((t_vec3){4.0, -2.0, 8.0}, cam.pos);
 	cam.forward = normalize(cam.forward);
-	win.world_up = (t_vec3){1.0, 1.0, 0.0};
+	win.world_up = normalize((t_vec3){1.0, 1.0, 0.0});
 	rt_view_transform(&cam, win.world_up);
 	t_matrix m = {
 		{
