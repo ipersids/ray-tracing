@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:06:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/06 20:14:51 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/06 23:52:05 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 void	debug_print_info(t_info *rt)
 {
+	printf(PRINT_GREEN"INFO:\n"PRINT_DEFAULT);
+	printf("\t- capacity_ts: %zu\n", rt->capacity_ts);
+	printf("\t- lights: %p\n", rt->lights);
+	printf("\t- n_lights: %zu\n", rt->n_lights);
+	printf("\t- n_objs: %zu\n", rt->n_objs);
+	printf("\t- n_ts: %zu\n", rt->n_ts);
+	printf("\t- objs: %p\n", rt->objs);
+	printf("\t- ts: %p\n", rt->ts);
 	printf(PRINT_GREEN"AMBIENT:\n"PRINT_DEFAULT);
 	printf("\t- ratio: %.2f\n", rt->ambient.ratio);
 	printf("\t- color: %.2f, %.2f, %.2f\n",
