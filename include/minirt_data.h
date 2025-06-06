@@ -125,8 +125,6 @@ typedef struct s_ambient_light
 	t_color	intensity;			// multiplication(ambient.color, ambient.ratio)
 }			t_ambient_light;
 
-# define CAMERA_SPEED 0.05f
-
 typedef struct s_camera
 {
 	t_point		pos;				// x,y,z of the camera position
@@ -139,6 +137,9 @@ typedef struct s_camera
 	float		half_width;
 	float		half_height;
 	float		pixel_size;
+	t_point		reset_pos;
+	float		reset_fov;
+	t_vec3		reset_forward;
 }			t_camera;
 
 typedef struct s_light
@@ -148,6 +149,26 @@ typedef struct s_light
 	t_color	color;				// (unused in mandatory part)
 	t_color	intensity;			// multiplication(light.color, light.bright)
 }			t_light;
+
+typedef enum e_pattype
+{
+	PATTERN_STRIPE,
+	PATTERN_RING,
+	PATTERN_GRADIENT,
+	PATTERN_CHECKER,
+	PATTERN_RADIANT_GRADIENT
+}			t_pattype;
+
+typedef struct	s_pat
+{
+	t_pattype 	type;
+	t_color		color_a;
+	t_color		color_b;
+	t_matrix	transform;
+	t_matrix	inv_transform;
+	float		scale;
+	bool		has_pattern;
+}			t_pat;
 
 typedef enum e_mtype
 {
@@ -164,6 +185,8 @@ typedef struct s_material
 	float	diffuse;			// Light reflected from a surface (0.0-1.0)
 	float	specular;			// Bright spot on a surface (0.0-1.0)
 	float	shininess;			// Size and sharpness of spec. reflection
+	float	reflective;			// How reflective the material is (0 non reflective, 1 mirror)
+	t_pat	pattern;
 }			t_material;
 
 typedef struct s_sphere
@@ -235,6 +258,23 @@ typedef struct s_object
 
 // # define FPS 0.01666666667 // 1/60
 # define FPS 0.03333333333 // 1/30
+# define CURSOR_SENSITIVITY 0.05f
+# define FOV_ZOOM_SPEED 2.0f
+# define FOV_ZOOM_MIN 0.0f
+# define FOV_ZOOM_MAX 180.0f
+# define CAMERA_SPEED 5.0f
+
+typedef struct s_cursor
+{
+	float	last_x;
+	float	last_y;
+	bool	is_first;
+	bool	is_dragging;
+	float	xoffset;
+	float	yoffset;
+	float	yaw;
+	float	pitch;
+}			t_cursor;
 
 /**
  * @brief Structure representing a window data
@@ -250,6 +290,7 @@ typedef struct s_canvas
 	bool		resized;
 	double		elapsed_time;
 	mlx_image_t	*img;
+	t_cursor	cursor;
 }				t_canvas;
 
 /* ------------------------ Ray and render structures  --------------------- */
@@ -258,6 +299,7 @@ typedef enum e_ray_type
 {
 	RAY_CAMERA,
 	RAY_SHADOW,
+	RAY_REFLECTION
 }	t_ray_type;
 
 typedef struct s_ray
@@ -321,7 +363,14 @@ typedef struct s_phong_vars
 	t_vec3		eyev;
 	bool		is_inside;
 	t_vec3		normalv;
+	t_vec3		reflectv;
 }				t_phong_vars;
+
+# define BLACK (t_color){0, 0, 0}
+# define WHITE (t_color){1, 1, 1}
+# define RED (t_color){1, 0, 0}
+# define GREEN (t_color){0, 1, 0}
+# define BLUE (t_color){0, 0, 1}
 
 typedef struct s_phong_color
 {

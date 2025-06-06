@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:34:04 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/02 17:26:06 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:26:05 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 /**
  * @brief Clamps a float value to a specified range [min, max].
- * 
+ *
  * @param n The value to clamp.
  * @param min The minimum allowable value.
  * @param max The maximum allowable value.
@@ -54,11 +54,11 @@ __attribute__((always_inline)) inline t_color
 
 /**
  * @brief Converts a color in the range [0.0, 1.0] to 0xRRGGBBAA format.
- * 
+ *
  * The function clamps the color components (x, y, z) to the range [0.0, 1.0],
  * scales them to [0, 255], and packs them into a 32-bit integer in the format
  * 0xRRGGBBAA, where alpha (A) is always set to 255.
- * 
+ *
  * @param color Pointer to the t_color structure containing RGB values.
  * @return uint32_t The packed color in 0xRRGGBBAA format.
  */

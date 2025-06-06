@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/02 13:54:36 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:57:34 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,10 @@ static void	init_camera(t_camera *cam)
 
 static void	init_canvas(t_canvas *window)
 {
-	window->mlx = NULL;
+	ft_memset(window, 0, sizeof(window));
 	window->height = HEIGHT_DEFAULT;
 	window->width = WIDTH_DEFAULT;
-	window->img = NULL;
 	window->world_up = (t_vec3){0.0f, 1.0f, 0.0f};
 	window->rendered = false;
 	window->resized = false;
-	window->elapsed_time = 0;
 }
