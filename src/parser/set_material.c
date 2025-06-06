@@ -6,7 +6,7 @@
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:55:39 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/06 15:18:42 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/06/06 19:27:00 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 t_pat	set_stripe_pattern(t_color a, t_color b, float scale, float angle_rad);
 t_pat	set_checker_pattern(t_color a, t_color b, float scale);
 t_pat	set_gradient_pattern(t_color a, t_color b, float scale);
+
+void	set_glass(t_object *obj);
 
 /**
  * @brief Sets the material for an object based on its type.
@@ -35,6 +37,7 @@ void	rt_set_material(t_color ambient, t_object *obj, t_mtype type)
 	{
 		obj->sp.material = rt_init_material(ambient, obj->sp.color, type);
 		obj->material = &obj->sp.material;
+		set_glass(obj);
 		obj->material->reflective = 0.5;
 		//obj->material->pattern = set_stripe_pattern(BLACK, WHITE, 0.01f, M_PI / 3);
 	}
@@ -51,6 +54,12 @@ void	rt_set_material(t_color ambient, t_object *obj, t_mtype type)
 		//obj->material->reflective = 0.6f;
 		obj->material->pattern = set_checker_pattern(WHITE, BLACK, 10.0f);
 	}
+}
+
+void	set_glass(t_object *obj)
+{
+	obj->material->refract_ind = 1.5;
+	obj->material->transparency = 1.0;
 }
 
 t_pat	set_stripe_pattern(t_color a, t_color b, float scale, float angle_rad)

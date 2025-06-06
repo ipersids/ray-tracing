@@ -186,6 +186,8 @@ typedef struct s_material
 	float	specular;			// Bright spot on a surface (0.0-1.0)
 	float	shininess;			// Size and sharpness of spec. reflection
 	float	reflective;			// How reflective the material is (0 non reflective, 1 mirror)
+	float	transparency;
+	float	refract_ind;
 	t_pat	pattern;
 }			t_material;
 
@@ -358,6 +360,8 @@ typedef struct s_counter
 typedef struct s_phong_vars
 {
 	float		t;
+	float		n1;
+	float		n2;
 	t_object	*obj;
 	t_vec3		point;
 	t_vec3		eyev;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_material.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 14:39:26 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 12:49:27 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/06 18:47:50 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ static t_material	init_default(t_color ambient, t_color mcolor, t_mtype n)
 	res.specular = 0.9;
 	res.shininess = 200.0;
 	res.type = n;
+	res.transparency = 0.0;
+	res.refract_ind = 1.0;
 	return (res);
 }
