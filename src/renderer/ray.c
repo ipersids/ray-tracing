@@ -16,9 +16,10 @@
  */
 t_ray	rt_get_ray(t_camera *cam, int32_t px, int32_t py)
 {
-	t_ray_vars	vars;
-	t_ray		ray;
-	t_vec3		canvas_point;
+	const t_vec3	center = (t_vec3){0.0f, 0.0f, 0.0f};
+	t_ray_vars		vars;
+	t_ray			ray;
+	t_vec3			canvas_point;
 
 	vars.xoffset = ((float)px + 0.5f) * cam->pixel_size;
 	vars.yoffset = ((float)py + 0.5f) * cam->pixel_size;
@@ -26,7 +27,7 @@ t_ray	rt_get_ray(t_camera *cam, int32_t px, int32_t py)
 	vars.world_y = cam->half_height - vars.yoffset;
 	canvas_point = (t_vec3){vars.world_x, vars.world_y, -1.0f};
 	vars.pixel = matrix_multiply_point(cam->inv_transform, canvas_point);
-	ray.orig = matrix_multiply_point(cam->inv_transform, (t_vec3){0.0f, 0.0f, 0.0f});
+	ray.orig = matrix_multiply_point(cam->inv_transform, center);
 	ray.dir = normalize(subtraction(vars.pixel, ray.orig));
 	ray.type = RAY_CAMERA;
 	return (ray);
@@ -34,10 +35,10 @@ t_ray	rt_get_ray(t_camera *cam, int32_t px, int32_t py)
 
 t_vec3	ray_hit(t_ray ray, float t)
 {
-	t_vec3 scaled_direction;
+	t_vec3	scaled_direction;
 
 	scaled_direction = multiplication(ray.dir, t);
-	return addition(ray.orig, scaled_direction);
+	return (addition(ray.orig, scaled_direction));
 }
 
 t_ray	transform_ray(t_ray ray, t_matrix matrix)

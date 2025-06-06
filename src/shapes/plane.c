@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 01:51:01 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/02 13:34:47 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/05 23:31:54 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_intersections	rt_intersect_plane(const t_plane *pl, t_ray ray)
 	xs.count = 1;
 	xs.t[0] = -ray.orig.y / ray.dir.y;
 	xs.t[1] = xs.t[0];
+	xs.obj_type = ELEMENT_PLANE;
 	return (xs);
 }
 

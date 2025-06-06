@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:35:22 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/30 01:45:25 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:53:13 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	rt_parse_cylinder(t_info *rt, char *line)
 	exit_code = rt_parse_coord(&rt->objs[i].cy.dir, &line, &next, true);
 	if (0 != exit_code)
 		return (exit_code);
+	rt->objs[i].cy.dir = normalize(rt->objs[i].cy.dir);
 	exit_code = parse_diam_and_height(rt, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
@@ -83,6 +84,8 @@ static int	parse_diam_and_height(t_info *rt, char **startptr, char **endptr)
 		return (exit_code);
 	if (rt->objs[i].cy.height > LIMIT_S || rt->objs[i].cy.height < -LIMIT_S)
 		return (ERR_OBJECT_CONFIG_LIMITS);
-	rt->objs[i].cy.r = rt->objs[i].cy.diam / 2.0;
+	rt->objs[i].cy.r = 1.0f;
+	rt->objs[i].cy.scale = rt->objs[i].cy.diam / 2.0f;
+	rt->objs[i].cy.half_height = rt->objs[i].cy.height / 2.0f;
 	return (0);
 }

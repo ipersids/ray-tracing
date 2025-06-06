@@ -70,7 +70,8 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/calculations/matrices/inverse.c \
 				   src/calculations/matrices/rotation_between_vectors.c \
 				   \
-				   src/shapes/sphere.c src/shapes/plane.c \
+				   src/shapes/sphere.c src/shapes/plane.c src/shapes/cylinder.c \
+				   src/shapes/cylinder_caps.c \
 				   \
 				   src/transformation/objects_transform.c src/transformation/view_transform.c \
 				   \
