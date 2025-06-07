@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:51:04 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 00:12:55 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 00:49:21 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	rt_set_transformations(t_info *rt)
 			exit_code = rt_cone_transform(&rt->objs[i].co);
 		else
 			exit_code = ERR_OBJECT_TYPE;
-		rt_set_material(rt->ambient.intensity, &rt->objs[i], i % MATERIAL_MAX);
+		rt_set_material(rt->amb_intensity, &rt->objs[i], i % MATERIAL_MAX);
 		++i;
 	}
 	return (exit_code);

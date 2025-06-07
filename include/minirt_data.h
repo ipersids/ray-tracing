@@ -123,8 +123,8 @@ typedef enum e_type
 
 typedef struct s_ambient_light
 {
-	float	ratio;				// amb. lighting ratio in range [0.0,1.0]
-	t_color	color;				// R,G,B colors in range [0.0-1.0]
+	// float	ratio;				// amb. lighting ratio in range [0.0,1.0]
+	// t_color	color;				// R,G,B colors in range [0.0-1.0]
 	t_color	intensity;			// multiplication(ambient.color, ambient.ratio)
 }			t_ambient_light;
 
@@ -349,7 +349,7 @@ typedef struct s_point_light
 
 typedef struct s_info
 {
-	t_ambient_light	ambient;		// Ambient lightning data
+	t_color			amb_intensity;	// Ambient lightning data
 	t_camera		camera;			// Camera data
 	t_light			*lights;		// Array to store lights on the scene
 	size_t			n_lights;		// Amount of lights in the *lights array

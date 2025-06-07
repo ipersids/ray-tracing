@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:06:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 03:33:01 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 00:48:59 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ void	debug_print_info(t_info *rt)
 	printf("\t- objs: %p\n", rt->objs);
 	printf("\t- ts: %p\n", rt->ts);
 	printf(PRINT_GREEN"AMBIENT:\n"PRINT_DEFAULT);
-	printf("\t- ratio: %.2f\n", rt->ambient.ratio);
-	printf("\t- color: %.2f, %.2f, %.2f\n",
-		rt->ambient.color.x, rt->ambient.color.y, rt->ambient.color.z);
+	printf("\t- intensity: %.2f, %.2f, %.2f\n",
+		rt->amb_intensity.x, rt->amb_intensity.y, rt->amb_intensity.z);
 	debug_print_camera(&rt->camera);
 	debug_print_lights(rt);
 	debug_print_objects(rt);

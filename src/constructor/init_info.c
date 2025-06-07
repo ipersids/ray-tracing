@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 14:53:22 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 00:48:50 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @brief Initialize default ambient light settings.
  * @param ambient Pointer to the ambient light structure.
  */
-static void	init_ambient(t_ambient_light *ambient);
+static void	init_ambient(t_color *ambient_intencity);
 
 /**
  * @brief Initialize default camera settings.
@@ -41,18 +41,18 @@ static void	init_canvas(t_canvas *window);
 void	rt_init_info(t_info *rt)
 {
 	ft_memset(rt, 0, sizeof(t_info));
-	init_ambient(&rt->ambient);
+	init_ambient(&rt->amb_intensity);
 	init_camera(&rt->camera);
 	init_canvas(&rt->win);
 }
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static void	init_ambient(t_ambient_light *amb)
+static void	init_ambient(t_color *ambient_intencity)
 {
-	amb->color = (t_color){1.0f, 1.0f, 1.0f};
-	amb->ratio = 0.2f;
-	amb->intensity = multiplication(amb->color, amb->ratio);
+	const t_color	color = (t_color){1.0f, 1.0f, 1.0f};
+	const float		ratio = 0.1f;
+	*ambient_intencity = multiplication(color, ratio);
 }
 
 static void	init_camera(t_camera *cam)
