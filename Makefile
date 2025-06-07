@@ -100,7 +100,7 @@ H_FILES			:= include/minirt_data.h include/minirt.h include/minirt_renderer.h \
 all: update-submodule build-submodule $(NAME)
 
 run: all
-	./miniRT scene/simple.rt
+	./miniRT scene/shadow.rt
 
 $(NAME): $(OBJS) $(OBJ_MAIN)
 	$(CC) $(CFLAGS) $(OBJS) $(OBJ_MAIN) $(HDRS) $(LIBS) -o $(NAME)

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:52:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/04 22:02:41 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:57:21 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ static void	move_forward(t_info *rt, t_camera *cam, bool reset)
 		cam->pos = cam->reset_pos;
 		cam->forward = cam->reset_forward;
 		cam->fov = cam->reset_fov;
+		rt_set_cursor(rt);
 	}
 	else
 	{
