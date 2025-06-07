@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:05:03 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 03:26:43 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:33:26 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,7 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
-/**
- * @brief Sorts an array of intersections using quick sort.
- *
- * @param arr Array of intersections.
- * @param low Lower index.
- * @param high Higher index.
- */
-static void	quick_sort(t_intersection *arr, int low, int high);
-static int	partition(t_intersection *arr, int low, int high);
-static void	swap(t_intersection *t1, t_intersection *t2);
+static t_intersections	handle_bonus_shape(t_ray *ray, t_info *rt, size_t i);
 
 /**
  * @brief Adds all intersections from xs to the global intersection array.
@@ -63,77 +54,30 @@ void	rt_intersect_world(t_info *rt, t_ray *ray)
 		{
 			xs = rt_intersect_cylinder(&rt->objs[i].cy, *ray);
 			add_intersections(&xs, rt, i);
-			xs = rt_intersect_cap(&rt->objs[i].cy, *ray);
+			xs = rt_intersect_cylinder_cap(&rt->objs[i].cy, *ray);
 		}
-		else if (ELEMENT_CONE == rt->objs[i].id)
-			xs = rt_intersect_cone(&rt->objs[i].co, *ray);
+		else if (IS_BONUS)
+			xs = handle_bonus_shape(ray, rt, i);
 		add_intersections(&xs, rt, i);
 		++i;
 	}
-	quick_sort(rt->ts, 0, rt->n_ts - 1);
+	intersections_sort(rt->ts, 0, rt->n_ts - 1);
 }
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static void	quick_sort(t_intersection *arr, int low, int high)
+static t_intersections	handle_bonus_shape(t_ray *ray, t_info *rt, size_t i)
 {
-	int	i_pivot;
+	t_intersections	xs;
 
-	if (low < high)
+	xs.count = 0;
+	if (ELEMENT_CONE == rt->objs[i].id)
 	{
-		i_pivot = partition(arr, low, high);
-		quick_sort(arr, low, i_pivot - 1);
-		quick_sort(arr, i_pivot + 1, high);
+		xs = rt_intersect_cone(&rt->objs[i].co, *ray);
+		add_intersections(&xs, rt, i);
+		xs = rt_intersect_cone_cap(&rt->objs[i].co, *ray);
 	}
-}
-
-/**
- * @brief Partitions the array for quick sort.
- *
- * @param arr Array of intersections.
- * @param low Lower index.
- * @param high Higher index.
- * @return int The partition index.
- */
-static int	partition(t_intersection *arr, int low, int high)
-{
-	t_intersection	pivot;
-	int				i;
-	int				j;
-
-	pivot = arr[high];
-	i = low - 1;
-	j = low;
-	while (j < high)
-	{
-		if (arr[j].t <= pivot.t)
-		{
-			++i;
-			swap(&arr[i], &arr[j]);
-		}
-		++j;
-	}
-	swap(&arr[i + 1], &arr[high]);
-	return (i + 1);
-}
-
-/**
- * @brief Swaps two intersection structures.
- *
- * @param t1 Pointer to the first intersection.
- * @param t2 Pointer to the second intersection.
- */
-static void	swap(t_intersection *t1, t_intersection *t2)
-{
-	t_intersection	tmp;
-
-	tmp = *t1;
-	t1->t = t2->t;
-	t1->i_object = t2->i_object;
-	t1->obj_type = t2->obj_type;
-	t2->t = tmp.t;
-	t2->i_object = tmp.i_object;
-	t2->obj_type = tmp.obj_type;
+	return (xs);
 }
 
 static void	add_intersections(const t_intersections *xs, t_info *rt, size_t i)
