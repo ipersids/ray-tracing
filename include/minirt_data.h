@@ -64,7 +64,8 @@ typedef struct s_submatrix_var
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define EPSILON 0.001
+# define EPSILON 0.00001f
+# define SHADOW_BIAS 0.01f
 
 /**
  * @brief Error codes

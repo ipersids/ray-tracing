@@ -57,9 +57,10 @@ static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt)
 	{
 		vars.is_inside = true;
 		vars.normalv = negation(vars.normalv);
-		return (vars);
 	}
-	vars.is_inside = false;
+	else
+		vars.is_inside = false;
+	vars.point = addition(vars.point, multiplication(vars.normalv, SHADOW_BIAS));
 	return (vars);
 }
 
