@@ -22,5 +22,6 @@ void	test_matrix_math(void);
 void	test_matrix_transformation(void);
 void 	test_camera(void);
 void	test_cone(void);
+void 	test_parser(void);
 
 #endif // DISPLAY_CONFIG_H
