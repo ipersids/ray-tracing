@@ -122,13 +122,6 @@ typedef enum e_type
 # define LIMIT_COORD 1000.0f
 # define LIMIT_S 1000.0f
 
-typedef struct s_ambient_light
-{
-	// float	ratio;				// amb. lighting ratio in range [0.0,1.0]
-	// t_color	color;				// R,G,B colors in range [0.0-1.0]
-	t_color	intensity;			// multiplication(ambient.color, ambient.ratio)
-}			t_ambient_light;
-
 typedef struct s_camera
 {
 	t_point		pos;				// x,y,z of the camera position
@@ -149,8 +142,8 @@ typedef struct s_camera
 typedef struct s_light
 {
 	t_point	pos;				// x,y,z of the light point
-	float	bright;				// the light brightness ratio [0.0,1.0]
-	t_color	color;				// (unused in mandatory part)
+	// float	bright;				// the light brightness ratio [0.0,1.0]
+	// t_color	color;				// (unused in mandatory part)
 	t_color	intensity;			// multiplication(light.color, light.bright)
 }			t_light;
 
