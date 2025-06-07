@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 00:10:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 15:57:55 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 02:43:51 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ int	rt_sphere_transform(t_sphere *sp)
 {
 	t_matrix	translation;
 	t_matrix	scaling;
+	t_matrix	transform;
 
 	translation = matrix_translation(sp->pos.x, sp->pos.y, sp->pos.z);
 	scaling = matrix_scaling(sp->scale, sp->scale, sp->scale);
-	sp->transform = matrix_multiply(translation, scaling);
+	transform = matrix_multiply(translation, scaling);
 	sp->inv_transform = matrix_identity();
-	if (false == matrix_try_inverse(sp->transform, &sp->inv_transform))
+	if (false == matrix_try_inverse(transform, &sp->inv_transform))
 		return (ERR_MATRIX_NON_INVERSIBLE);
 	sp->inv_transpose = matrix_transpose(sp->inv_transform);
 	return (0);

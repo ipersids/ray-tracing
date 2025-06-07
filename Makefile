@@ -78,6 +78,10 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/shapes/cone_cap.c \
 				   \
 				   src/transformation/objects_transform.c src/transformation/view_transform.c \
+				   \
+				   \
+				   \
+				   src/display-config/debug_utils.c
 				   
 				   
 SRC_MAIN		:= src/main.c
@@ -141,7 +145,7 @@ $(OBJ_DIR)/%_bonus.o: $(SRC_DIR)/%.c $(H_FILES)
 	$(CC) $(CFLAGS_BONUS) $(HDRS)  -c $< -o $@
 
 # TESTING
-TEST_SRC		:= src/display-config/debug_utils.c src/display-config/test_matrix_math.c \
+TEST_SRC		:= src/display-config/test_matrix_math.c \
 				   src/display-config/test_matrix_transformation.c src/display-config/test_camera.c \
 				   src/display-config/test_cone.c src/display-config/test_parser.c
 

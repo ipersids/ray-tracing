@@ -142,8 +142,6 @@ typedef struct s_camera
 typedef struct s_light
 {
 	t_point	pos;				// x,y,z of the light point
-	// float	bright;				// the light brightness ratio [0.0,1.0]
-	// t_color	color;				// (unused in mandatory part)
 	t_color	intensity;			// multiplication(light.color, light.bright)
 }			t_light;
 
@@ -189,12 +187,8 @@ typedef struct s_material
 typedef struct s_sphere
 {
 	t_point		pos;				// x,y,z of sphere center
-	float		diam;				// the sphere diameter
-	float		r;					// the sphere radius
-	t_point		center;
-	float		scale;
+	float		scale;				// diameter / 2.0f
 	t_color		color;				// R,G,B colors in range [0.0-1.0]
-	t_matrix	transform;
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
 	t_material	material;
