@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:35:22 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/05 14:53:13 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 02:50:31 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,20 +72,19 @@ static int	parse_diam_and_height(t_info *rt, char **startptr, char **endptr)
 	i = rt->n_objs;
 	while (ft_isspace(**startptr))
 		++(*startptr);
-	exit_code = rt_parse_float(&rt->objs[i].cy.diam, startptr, endptr);
+	exit_code = rt_parse_float(&rt->objs[i].cy.scale, startptr, endptr);
 	if (0 != exit_code)
 		return (exit_code);
-	if (rt->objs[i].cy.diam > LIMIT_S || rt->objs[i].cy.diam < -LIMIT_S)
+	if (rt->objs[i].cy.scale > LIMIT_S || rt->objs[i].cy.scale < -LIMIT_S)
 		return (ERR_OBJECT_CONFIG_LIMITS);
 	while (ft_isspace(**startptr))
 		++(*startptr);
-	exit_code = rt_parse_float(&rt->objs[i].cy.height, startptr, endptr);
+	exit_code = rt_parse_float(&rt->objs[i].cy.half_height, startptr, endptr);
 	if (0 != exit_code)
 		return (exit_code);
-	if (rt->objs[i].cy.height > LIMIT_S || rt->objs[i].cy.height < -LIMIT_S)
+	if (rt->objs[i].cy.half_height > LIMIT_S || rt->objs[i].cy.half_height < -LIMIT_S)
 		return (ERR_OBJECT_CONFIG_LIMITS);
-	rt->objs[i].cy.r = 1.0f;
-	rt->objs[i].cy.scale = rt->objs[i].cy.diam / 2.0f;
-	rt->objs[i].cy.half_height = rt->objs[i].cy.height / 2.0f;
+	rt->objs[i].cy.scale = rt->objs[i].cy.scale / 2.0f;
+	rt->objs[i].cy.half_height = rt->objs[i].cy.half_height / 2.0f;
 	return (0);
 }

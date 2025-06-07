@@ -199,7 +199,6 @@ typedef struct s_plane
 	t_point		pos;				// x,y,z of a point on plane
 	t_vec3		dir;				// 3d norm. orientation vector
 	t_color		color;				// R,G,B colors in range [0.0-1.0]
-	t_matrix	transform;
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
 	t_material	material;
@@ -209,13 +208,9 @@ typedef struct s_cylinder
 {
 	t_point		pos;				// center point of cylinder base
 	t_vec3		dir;				// 3d norm. vector of cylinder axis
-	float		diam;				// the cylinder diameter
-	float		r;					// the cylinder radius
-	float		scale;
-	float		height;				// the cylinder height
-	float		half_height;
+	float		scale;				// diameter / 2.0f
+	float		half_height;		// height / 2.0f
 	t_color		color;				// R,G,B colors in range [0.0,1.0]
-	t_matrix	transform;
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
 	t_material	material;

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:06:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 02:45:29 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 02:51:37 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,8 @@ void	debug_print_cy(t_cylinder *cy)
 	printf("\t- position: %.2f, %.2f, %.2f\n", cy->pos.x, cy->pos.y, cy->pos.z);
 	printf("\t- direction: %.2f, %.2f, %.2f\n",
 		cy->dir.x, cy->dir.y, cy->dir.z);
-	printf("\t- diameter: %.2f\n", cy->diam);
-	printf("\t- radius: %.2f\n", cy->r);
-	printf("\t- height: %.2f\n", cy->height);
+	printf("\t- scale: %.2f\n", cy->scale);
+	printf("\t- half_height: %.2f\n", cy->half_height);
 	printf("\t- color: %.2f, %.2f, %.2f\n",
 		cy->color.x, cy->color.y, cy->color.z);
 }
