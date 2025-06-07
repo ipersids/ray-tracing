@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 13:10:41 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 23:36:42 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:53:52 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		rt_parse_ambient(t_info *rt, char *line);
 int		rt_parse_camera(t_info *rt, char *line);
 int		rt_parse_light(t_info *rt, char *line);
 int		rt_parse_cylinder(t_info *rt, char *line);
+int		rt_parse_cone(t_info *rt, char *line);
 int		rt_parse_plane(t_info *rt, char *line);
 int		rt_parse_sphere(t_info *rt, char *line);
 int		rt_set_transformations(t_info *rt);

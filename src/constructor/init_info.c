@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 22:57:34 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:53:22 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,10 @@ static void	init_canvas(t_canvas *window);
  */
 void	rt_init_info(t_info *rt)
 {
+	ft_memset(rt, 0, sizeof(t_info));
 	init_ambient(&rt->ambient);
 	init_camera(&rt->camera);
 	init_canvas(&rt->win);
-	rt->objs = NULL;
-	rt->n_objs = 0;
-	rt->lights = NULL;
-	rt->n_lights = 0;
 }
 
 /* ------------------- Private Function Implementation --------------------- */
@@ -60,7 +57,6 @@ static void	init_ambient(t_ambient_light *amb)
 
 static void	init_camera(t_camera *cam)
 {
-	ft_memset(cam, 0, sizeof(t_camera));
 	cam->forward = (t_vec3){0.0f, 0.0f, 1.0f};
 	cam->pos = (t_point){0.0f, 0.0f, -100.0f};
 	cam->fov = 40.0f;
@@ -69,7 +65,6 @@ static void	init_camera(t_camera *cam)
 
 static void	init_canvas(t_canvas *window)
 {
-	ft_memset(window, 0, sizeof(window));
 	window->height = HEIGHT_DEFAULT;
 	window->width = WIDTH_DEFAULT;
 	window->world_up = (t_vec3){0.0f, 1.0f, 0.0f};

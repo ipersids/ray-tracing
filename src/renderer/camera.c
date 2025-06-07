@@ -30,8 +30,10 @@ void	rt_camera_render(t_info *rt)
 	t_ray		ray;
 	t_color		ray_col;
 	uint32_t	rgba;
+	int			remaining; // THIS NEEDS TO BE PUT SOMEWHERE
 
 	py = 0;
+	remaining = 5;
 	rt_camera_init(&rt->camera, &rt->win);
 	rt_view_transform(&rt->camera, rt->win.world_up);
 	while (py < rt->win.img->height)
@@ -40,7 +42,7 @@ void	rt_camera_render(t_info *rt)
 		while (px < rt->win.img->width)
 		{
 			ray = rt_get_ray(&rt->camera, px, py);
-			ray_col = rt_color_at(rt, &ray);
+			ray_col = rt_color_at(rt, &ray, remaining);
 			rgba = rt_convert_to_rgba(&ray_col);
 			mlx_put_pixel(rt->win.img, px, py, rgba);
 			++px;

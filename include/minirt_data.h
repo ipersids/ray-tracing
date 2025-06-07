@@ -57,7 +57,7 @@ typedef struct s_submatrix_var
 # define PRINT_DEFAULT "\033[0m"
 
 # ifndef IS_BONUS
-#  define IS_BONUS false
+#  define IS_BONUS 0
 # endif
 
 # ifndef M_PI
@@ -111,6 +111,7 @@ typedef enum e_type
 	ELEMENT_SPHERE,
 	ELEMENT_PLANE,
 	ELEMENT_CYLINDER,
+	ELEMENT_CONE,
 	ELEMENT_UKNOWN,
 	ELEMENT_CYLINDER_CAP,
 }	t_type;
@@ -150,6 +151,26 @@ typedef struct s_light
 	t_color	intensity;			// multiplication(light.color, light.bright)
 }			t_light;
 
+typedef enum e_pattype
+{
+	PATTERN_STRIPE,
+	PATTERN_RING,
+	PATTERN_GRADIENT,
+	PATTERN_CHECKER,
+	PATTERN_RADIANT_GRADIENT
+}			t_pattype;
+
+typedef struct	s_pat
+{
+	t_pattype 	type;
+	t_color		color_a;
+	t_color		color_b;
+	t_matrix	transform;
+	t_matrix	inv_transform;
+	float		scale;
+	bool		has_pattern;
+}			t_pat;
+
 typedef enum e_mtype
 {
 	MATERIAL_DEFAULT,
@@ -165,6 +186,8 @@ typedef struct s_material
 	float	diffuse;			// Light reflected from a surface (0.0-1.0)
 	float	specular;			// Bright spot on a surface (0.0-1.0)
 	float	shininess;			// Size and sharpness of spec. reflection
+	float	reflective;			// How reflective the material is (0 non reflective, 1 mirror)
+	t_pat	pattern;
 }			t_material;
 
 typedef struct s_sphere
@@ -208,6 +231,18 @@ typedef struct s_cylinder
 	t_material	material;
 }				t_cylinder;
 
+typedef struct s_cone
+{
+	t_point		pos;				// tip position
+	t_vec3		dir;				// 3d norm. vector of cone axis
+	float		height;
+	float		scale;				// scale factor = 1.0f classic cone
+	t_color		color;				// R,G,B colors in range [0.0,1.0]
+	t_matrix	inv_transform;
+	t_matrix	inv_transpose;
+	t_material	material;
+}				t_cone;
+
 typedef struct s_object
 {
 	t_type			id;
@@ -216,6 +251,7 @@ typedef struct s_object
 		t_sphere	sp;
 		t_plane		pl;
 		t_cylinder	cy;
+		t_cone		co;
 	};
 	t_material		*material;
 }					t_object;
@@ -277,6 +313,7 @@ typedef enum e_ray_type
 {
 	RAY_CAMERA,
 	RAY_SHADOW,
+	RAY_REFLECTION
 }	t_ray_type;
 
 typedef struct s_ray
@@ -340,7 +377,14 @@ typedef struct s_phong_vars
 	t_vec3		eyev;
 	bool		is_inside;
 	t_vec3		normalv;
+	t_vec3		reflectv;
 }				t_phong_vars;
+
+# define BLACK (t_color){0, 0, 0}
+# define WHITE (t_color){1, 1, 1}
+# define RED (t_color){1, 0, 0}
+# define GREEN (t_color){0, 1, 0}
+# define BLUE (t_color){0, 0, 1}
 
 typedef struct s_phong_color
 {
