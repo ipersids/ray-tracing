@@ -114,6 +114,7 @@ typedef enum e_type
 	ELEMENT_CONE,
 	ELEMENT_UKNOWN,
 	ELEMENT_CYLINDER_CAP,
+	ELEMENT_CONE_CAP,
 }	t_type;
 
 # define LIMIT_COORD 1000.0f
