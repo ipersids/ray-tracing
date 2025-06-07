@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 14:39:26 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 12:49:27 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/06 23:55:48 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static t_material	init_default(t_color ambient, t_color mcolor, t_mtype n)
 {
 	t_material	res;
 
+	ft_memset(&res, 0, sizeof(t_material));
 	res.ambient_comp = ambient;
 	res.color = mcolor;
 	res.final_color = ambient;

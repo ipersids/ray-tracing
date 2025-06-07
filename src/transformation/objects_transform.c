@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 00:10:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/06 01:35:29 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:13:46 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,31 @@ int	rt_cylinder_transform(t_cylinder *cy)
 	if (false == matrix_try_inverse(cy->transform, &cy->inv_transform))
 		return (ERR_MATRIX_NON_INVERSIBLE);
 	cy->inv_transpose = matrix_transpose(cy->inv_transform);
+	return (0);
+}
+
+/**
+ * @brief Sets up the transformation matrices for a cone.
+ *
+ * @param co Pointer to the cone structure.
+ * @return int 0 on success, or an error code if the matrix is not invertible.
+ */
+int	rt_cone_transform(t_cone *co)
+{
+	const t_vec3	canonical_normal = (t_vec3){0.0f, 1.0f, 0.0f};
+	t_matrix		translation;
+	t_matrix		rotation;
+	t_matrix		transform;
+	t_matrix		scaling;
+
+	translation = matrix_translation(co->pos.x, co->pos.y, co->pos.z);
+	scaling = matrix_scaling(co->scale, 1.0, co->scale);
+	rotation = matrix_rotation(canonical_normal, co->dir);
+	transform = matrix_multiply(translation, scaling);
+	transform = matrix_multiply(transform, rotation);
+	co->inv_transform = matrix_identity();
+	if (false == matrix_try_inverse(transform, &co->inv_transform))
+		return (ERR_MATRIX_NON_INVERSIBLE);
+	co->inv_transpose = matrix_transpose(co->inv_transform);
 	return (0);
 }

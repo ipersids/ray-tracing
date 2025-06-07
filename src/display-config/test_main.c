@@ -6,6 +6,7 @@ static void	run_unit_tests(void)
 	test_matrix_math();
 	test_matrix_transformation();
 	test_camera();
+	test_cone();
 	printf("\n\n");
 }
 

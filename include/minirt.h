@@ -56,6 +56,7 @@ t_material	rt_init_material(t_color ambient, t_color obj_color, t_mtype type);
 int			rt_sphere_transform(t_sphere *sp);
 int			rt_plane_transform(t_plane *pl);
 int			rt_cylinder_transform(t_cylinder *cy);
+int			rt_cone_transform(t_cone *co);
 int			rt_view_transform(t_camera *cam, t_vec3	world_up);
 
 /* ---------------------- Error and memory management ---------------------- */

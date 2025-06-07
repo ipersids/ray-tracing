@@ -25,6 +25,7 @@ CC				:= clang
 # -O2 (level of optimisation) 
 # -flto (Link Time Optimization)
 CFLAGS			:= -O2 -flto -Wall -Wextra -Werror
+CFLAGS_BONUS 	:= $(CFLAGS) -D IS_BONUS=1
 HDRS			:= -Iinclude -I$(SUBM_MLX_DIR)/include -I$(SUBM_LIBFT_DIR)/include
 LIBS			:= -L$(SUBM_MLX_DIR)/build -lmlx42 \
 				   -L$(SUBM_LIBFT_DIR) -lft \
@@ -47,6 +48,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/parser/parse_scene.c src/parser/read_scene.c \
 				   src/parser/validate_input.c src/parser/parse_cylinder.c \
 				   src/parser/parse_plane.c src/parser/parse_sphere.c \
+				   src/parser/parse_cone.c \
 				   src/parser/set_transformations.c src/parser/set_material.c \
 				   src/parser/set_cursor.c \
 				   \
@@ -71,7 +73,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/calculations/matrices/rotation_between_vectors.c \
 				   \
 				   src/shapes/sphere.c src/shapes/plane.c src/shapes/cylinder.c \
-				   src/shapes/cylinder_caps.c \
+				   src/shapes/cylinder_caps.c src/shapes/cone.c \
 				   \
 				   src/transformation/objects_transform.c src/transformation/view_transform.c \
 				   \
@@ -79,12 +81,16 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   \
 				   src/display-config/debug_utils.c src/display-config/test_matrix_math.c \
 				   src/display-config/test_matrix_transformation.c src/display-config/test_camera.c \
+				   src/display-config/test_cone.c \
 				   
 				   
 SRC_MAIN		:= src/main.c
 
 OBJS			:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 OBJ_MAIN		:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_MAIN))
+
+OBJS_BONUS		:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%_bonus.o, $(SRCS))
+OBJ_MAIN_BONUS	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%_bonus.o, $(SRC_MAIN))
 
 #for tarcking changes in header files
 H_FILES			:= include/minirt_data.h include/minirt.h include/minirt_renderer.h \
@@ -109,7 +115,7 @@ clean:
 
 fclean: clean
 	$(RM_DIR) $(SUBM_MLX_DIR)/build 
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(NAME_BONUS)
 	$(MAKE) -C $(SUBM_LIBFT_DIR) fclean
 
 re: fclean all
@@ -125,9 +131,22 @@ build-submodule:
 	@echo "\nMLX42 is ready.\n"
 	$(MAKE) -C $(SUBM_LIBFT_DIR)
 
+# BONUS
+NAME_BONUS		:= miniRT_bonus
+
+bonus: update-submodule build-submodule $(NAME_BONUS)
+	./miniRT_bonus ./scene/simple.rt
+
+$(NAME_BONUS): $(OBJS_BONUS) $(OBJ_MAIN_BONUS)
+	$(CC) $(CFLAGS_BONUS) $(OBJS_BONUS) $(OBJ_MAIN_BONUS) $(HDRS) $(LIBS) -o $(NAME_BONUS)
+
+$(OBJ_DIR)/%_bonus.o: $(SRC_DIR)/%.c $(H_FILES)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS_BONUS) $(HDRS)  -c $< -o $@
+
 # TESTING
 TEST_MAIN		:= src/display-config/test_main.c
-OBJ_TEST_MAIN		:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(TEST_MAIN))
+OBJ_TEST_MAIN	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(TEST_MAIN))
 
 NAME_TEST		:= miniRT_test
 CFLAGS_TEST		:= $(CFLAGS) -g -fsanitize=address

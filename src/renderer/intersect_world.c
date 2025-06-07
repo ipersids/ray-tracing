@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:05:03 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/06 01:26:03 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/07 03:26:43 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,16 @@ void	rt_intersect_world(t_info *rt, t_ray *ray)
 	{
 		if (ELEMENT_SPHERE == rt->objs[i].id)
 			xs = intersect_sphere(rt->objs[i].sp, *ray);
-		if (ELEMENT_PLANE == rt->objs[i].id)
+		else if (ELEMENT_PLANE == rt->objs[i].id)
 			xs = rt_intersect_plane(&rt->objs[i].pl, *ray);
-		if (ELEMENT_CYLINDER == rt->objs[i].id)
+		else if (ELEMENT_CYLINDER == rt->objs[i].id)
 		{
 			xs = rt_intersect_cylinder(&rt->objs[i].cy, *ray);
 			add_intersections(&xs, rt, i);
 			xs = rt_intersect_cap(&rt->objs[i].cy, *ray);
 		}
+		else if (ELEMENT_CONE == rt->objs[i].id)
+			xs = rt_intersect_cone(&rt->objs[i].co, *ray);
 		add_intersections(&xs, rt, i);
 		++i;
 	}
