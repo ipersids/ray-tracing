@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 19:32:11 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/06 19:55:32 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:15:55 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
-static int	parse_diam_and_height(t_info *rt, char **startptr, char **endptr);
+static int	parse_radius_and_height(t_info *rt, char **startptr, char **endptr);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -24,7 +24,6 @@ int	rt_parse_cone(t_info *rt, char *line)
 	int		exit_code;
 	size_t	i;
 
-	printf("HERE");
 	next = NULL;
 	exit_code = 0;
 	i = rt->n_objs;
@@ -36,7 +35,7 @@ int	rt_parse_cone(t_info *rt, char *line)
 	if (0 != exit_code)
 		return (exit_code);
 	rt->objs[i].co.dir = normalize(rt->objs[i].co.dir);
-	exit_code = parse_diam_and_height(rt, &line, &next);
+	exit_code = parse_radius_and_height(rt, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
 	exit_code = rt_parse_color(&rt->objs[i].co.color, &line, &next);
@@ -49,7 +48,7 @@ int	rt_parse_cone(t_info *rt, char *line)
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static int	parse_diam_and_height(t_info *rt, char **startptr, char **endptr)
+static int	parse_radius_and_height(t_info *rt, char **startptr, char **endptr)
 {
 	int		exit_code;
 	size_t	i;
@@ -61,7 +60,7 @@ static int	parse_diam_and_height(t_info *rt, char **startptr, char **endptr)
 	exit_code = rt_parse_float(&rt->objs[i].co.scale, startptr, endptr);
 	if (0 != exit_code)
 		return (exit_code);
-	if (rt->objs[i].co.scale > LIMIT_S || rt->objs[i].co.scale < -LIMIT_S)
+	if (rt->objs[i].co.scale < EPSILON || rt->objs[i].co.scale > LIMIT_S)
 		return (ERR_OBJECT_CONFIG_LIMITS);
 	while (ft_isspace(**startptr))
 		++(*startptr);
@@ -70,6 +69,5 @@ static int	parse_diam_and_height(t_info *rt, char **startptr, char **endptr)
 		return (exit_code);
 	if (rt->objs[i].co.height > LIMIT_S || rt->objs[i].co.height < -LIMIT_S)
 		return (ERR_OBJECT_CONFIG_LIMITS);
-	rt->objs[i].co.scale = rt->objs[i].co.scale / 2.0f;;
 	return (0);
 }

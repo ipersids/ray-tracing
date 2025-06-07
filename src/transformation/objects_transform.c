@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 00:10:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 00:09:32 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:13:46 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,14 @@ int	rt_cone_transform(t_cone *co)
 	const t_vec3	canonical_normal = (t_vec3){0.0f, 1.0f, 0.0f};
 	t_matrix		translation;
 	t_matrix		rotation;
-	t_matrix		scaling;
 	t_matrix		transform;
+	t_matrix		scaling;
 
 	translation = matrix_translation(co->pos.x, co->pos.y, co->pos.z);
+	scaling = matrix_scaling(co->scale, 1.0, co->scale);
 	rotation = matrix_rotation(canonical_normal, co->dir);
-	scaling = matrix_scaling(co->scale, 1.0f, co->scale);
-	transform = matrix_multiply(translation, rotation);
-	transform = matrix_multiply(transform, scaling);
+	transform = matrix_multiply(translation, scaling);
+	transform = matrix_multiply(transform, rotation);
 	co->inv_transform = matrix_identity();
 	if (false == matrix_try_inverse(transform, &co->inv_transform))
 		return (ERR_MATRIX_NON_INVERSIBLE);

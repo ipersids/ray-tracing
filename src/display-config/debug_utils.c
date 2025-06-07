@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:06:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/06 23:52:05 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/07 03:33:01 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ void	debug_print_co(t_cone *co)
 	printf("\t- position: %.2f, %.2f, %.2f\n", co->pos.x, co->pos.y, co->pos.z);
 	printf("\t- direction: %.2f, %.2f, %.2f\n",
 		co->dir.x, co->dir.y, co->dir.z);
-	printf("\t- scale: %.2f\n", co->scale);
 	printf("\t- height: %.2f\n", co->height);
 	printf("\t- color: %.2f, %.2f, %.2f\n",
 		co->color.x, co->color.y, co->color.z);

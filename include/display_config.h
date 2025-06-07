@@ -21,5 +21,6 @@ void	debug_print_vector(char *msg, t_vec3 vec);
 void	test_matrix_math(void);
 void	test_matrix_transformation(void);
 void 	test_camera(void);
+void	test_cone(void);
 
 #endif // DISPLAY_CONFIG_H

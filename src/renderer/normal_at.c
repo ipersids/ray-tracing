@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:12:23 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/06 01:20:33 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/07 03:27:03 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ t_vec3	rt_normal_at(t_object *obj, t_point world_point, t_type otype)
 		return (rt_cylinder_normal_at(&obj->cy, world_point));
 	if (ELEMENT_CYLINDER_CAP == otype)
 		return (rt_cap_normal_at(&obj->cy, world_point));
+	if (ELEMENT_CONE == otype)
+		return (rt_cone_normal_at(&obj->co, world_point));
 	return (sphere_normal_at(&obj->sp, world_point));
 }

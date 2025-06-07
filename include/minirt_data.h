@@ -233,10 +233,10 @@ typedef struct s_cylinder
 
 typedef struct s_cone
 {
-	t_point		pos;				// top of cone position
+	t_point		pos;				// tip position
 	t_vec3		dir;				// 3d norm. vector of cone axis
-	float		scale;
 	float		height;
+	float		scale;				// scale factor = 1.0f classic cone
 	t_color		color;				// R,G,B colors in range [0.0,1.0]
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
