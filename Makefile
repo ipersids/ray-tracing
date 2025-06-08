@@ -154,7 +154,12 @@ TEST_MAIN		:= src/display-config/test_main.c
 OBJ_TEST_MAIN	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%_test.o, $(TEST_MAIN))
 
 NAME_TEST		:= miniRT_test
-CFLAGS_TEST		:= -O0 -g -fsanitize=address
+
+ifeq ($(OS),MacOS)
+	CFLAGS_TEST		:= -O0 -g -fsanitize=address
+else
+	CFLAGS_TEST		:= $(CFLAGS)
+endif
 
 test: update-submodule build-submodule $(NAME_TEST)
 	./miniRT_test
