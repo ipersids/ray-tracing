@@ -14,3 +14,5 @@ pl 0,50,50     0,-1,0      255,0,255    # Ceiling (magenta)
 
 cy 0,4,-30	0,1,0 5	24	0,0,255
 co 0,25,-30	0,-1,0 1	10	128,255,255
+
+# Now commented lines is allowed!

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 23:54:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 12:03:03 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:11:01 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ int	rt_parse_color(t_color *color, char **start, char **endptr)
 
 /**
  * @brief Validate the end of a line in a string.
+ * 
+ * Allows commented lines with `#` specifier 
  * 
  * @param startptr Pointer to the start of the string.
  * @param endptr Pointer to a pointer to the character where spaces ended.

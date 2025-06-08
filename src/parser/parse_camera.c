@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 11:49:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 15:45:04 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:23:37 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	rt_parse_camera(t_info *rt, char *line)
 	exit_code = rt_parse_coord(&rt->camera.forward, &line, &next, true);
 	if (0 != exit_code)
 		return (exit_code);
-	rt->camera.forward = normalize(rt->camera.forward);
 	if (equal(magnitude(rt->camera.forward), 0.0f))
 		return (ERR_CAMERA_ORIENT_VECTOR);
+	rt->camera.forward = normalize(rt->camera.forward);
 	if (fabs(dot_product(rt->camera.forward, rt->win.world_up)) > 0.999f)
 		return (ERR_CAMERA_GIMBAL_LOCK);
 	if (fabs(asinf(rt->camera.forward.y) * (180.0f / M_PI)) >= MAX_PITCH)

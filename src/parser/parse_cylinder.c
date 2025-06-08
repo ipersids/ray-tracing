@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:35:22 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 14:11:40 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:27:47 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	rt_parse_cylinder(t_info *rt, char *line)
 	size_t	i;
 
 	next = NULL;
-	exit_code = 0;
 	i = rt->n_objs;
 	rt->objs[i].id = ELEMENT_CYLINDER;
 	exit_code = rt_parse_coord(&rt->objs[i].cy.pos, &line, &next, false);
@@ -50,6 +49,8 @@ int	rt_parse_cylinder(t_info *rt, char *line)
 	exit_code = rt_parse_coord(&rt->objs[i].cy.dir, &line, &next, true);
 	if (0 != exit_code)
 		return (exit_code);
+	if (equal(magnitude(rt->objs[i].cy.dir), 0.0f))
+		return (ERR_OBJECT_ORIENT_VECTOR);
 	rt->objs[i].cy.dir = normalize(rt->objs[i].cy.dir);
 	exit_code = parse_diam_and_height(rt, &line, &next);
 	if (0 != exit_code)
