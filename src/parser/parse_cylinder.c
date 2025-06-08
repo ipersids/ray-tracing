@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:35:22 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/05 14:53:13 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:27:47 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
  * @param startptr Pointer to the start of the string.
  * @param endptr Pointer to a pointer to the character where parsing stopped.
  * @return int 0 on success, or an error code.
+ * @note could not be negative or approximately equal zero (less then EPSILON)
  */
 static int	parse_diam_and_height(t_info *rt, char **startptr, char **endptr);
 
@@ -40,7 +41,6 @@ int	rt_parse_cylinder(t_info *rt, char *line)
 	size_t	i;
 
 	next = NULL;
-	exit_code = 0;
 	i = rt->n_objs;
 	rt->objs[i].id = ELEMENT_CYLINDER;
 	exit_code = rt_parse_coord(&rt->objs[i].cy.pos, &line, &next, false);
@@ -49,6 +49,8 @@ int	rt_parse_cylinder(t_info *rt, char *line)
 	exit_code = rt_parse_coord(&rt->objs[i].cy.dir, &line, &next, true);
 	if (0 != exit_code)
 		return (exit_code);
+	if (equal(magnitude(rt->objs[i].cy.dir), 0.0f))
+		return (ERR_OBJECT_ORIENT_VECTOR);
 	rt->objs[i].cy.dir = normalize(rt->objs[i].cy.dir);
 	exit_code = parse_diam_and_height(rt, &line, &next);
 	if (0 != exit_code)
@@ -67,25 +69,27 @@ static int	parse_diam_and_height(t_info *rt, char **startptr, char **endptr)
 {
 	int		exit_code;
 	size_t	i;
+	float	max_limit;
 
 	exit_code = 0;
+	max_limit = MAX_SIZE / 2.0f;
 	i = rt->n_objs;
 	while (ft_isspace(**startptr))
 		++(*startptr);
-	exit_code = rt_parse_float(&rt->objs[i].cy.diam, startptr, endptr);
+	exit_code = rt_parse_float(&rt->objs[i].cy.scale, startptr, endptr);
 	if (0 != exit_code)
 		return (exit_code);
-	if (rt->objs[i].cy.diam > LIMIT_S || rt->objs[i].cy.diam < -LIMIT_S)
+	rt->objs[i].cy.scale = rt->objs[i].cy.scale / 2.0f;
+	if (rt->objs[i].cy.scale < MIN_SIZE || rt->objs[i].cy.scale > max_limit)
 		return (ERR_OBJECT_CONFIG_LIMITS);
 	while (ft_isspace(**startptr))
 		++(*startptr);
-	exit_code = rt_parse_float(&rt->objs[i].cy.height, startptr, endptr);
+	exit_code = rt_parse_float(&rt->objs[i].cy.half_height, startptr, endptr);
 	if (0 != exit_code)
 		return (exit_code);
-	if (rt->objs[i].cy.height > LIMIT_S || rt->objs[i].cy.height < -LIMIT_S)
+	rt->objs[i].cy.half_height = rt->objs[i].cy.half_height / 2.0f;
+	if (rt->objs[i].cy.half_height < MIN_SIZE
+		|| rt->objs[i].cy.half_height > max_limit)
 		return (ERR_OBJECT_CONFIG_LIMITS);
-	rt->objs[i].cy.r = 1.0f;
-	rt->objs[i].cy.scale = rt->objs[i].cy.diam / 2.0f;
-	rt->objs[i].cy.half_height = rt->objs[i].cy.height / 2.0f;
 	return (0);
 }

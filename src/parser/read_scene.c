@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 11:05:03 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 11:31:39 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:03:45 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	rt_read_scene(int fd, char ***content)
 		}
 		(*content)[row] = get_next_line(fd, FALSE);
 	}
+	if (0 == row && !(*content)[row])
+		return (ERROR_EMPTY_SCENE);
 	return (EXIT_SUCCESS);
 }
 
@@ -121,7 +123,7 @@ static bool	is_empty_line(char *nl, char *line)
 			break ;
 		i++;
 	}
-	if ('\0' == line[i])
+	if ('\0' == line[i] || '#' == line[i])
 	{
 		free(line);
 		return (true);

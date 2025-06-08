@@ -55,7 +55,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/hook/hook_close_window.c src/hook/hook_resize_window.c \
 				   src/hook/hook_render_scene.c src/hook/hook_rotate_camera.c \
 				   src/hook/hook_handle_mouse.c src/hook/hook_zoom_camera.c \
-				   src/hook/hook_walk_around.c \
+				   src/hook/hook_walk_around.c src/hook/reset_camera.c \
 				   \
 				   src/renderer/camera.c src/renderer/color_at.c \
 				   src/renderer/intersect_world.c src/renderer/normal_at.c \
@@ -81,9 +81,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   \
 				   \
 				   \
-				   src/display-config/debug_utils.c src/display-config/test_matrix_math.c \
-				   src/display-config/test_matrix_transformation.c src/display-config/test_camera.c \
-				   src/display-config/test_cone.c \
+				   src/display-config/debug_utils.c
 				   
 				   
 SRC_MAIN		:= src/main.c
@@ -147,19 +145,34 @@ $(OBJ_DIR)/%_bonus.o: $(SRC_DIR)/%.c $(H_FILES)
 	$(CC) $(CFLAGS_BONUS) $(HDRS)  -c $< -o $@
 
 # TESTING
+TEST_SRC		:= src/display-config/test_matrix_math.c \
+				   src/display-config/test_matrix_transformation.c src/display-config/test_camera.c \
+				   src/display-config/test_cone.c src/display-config/test_parser.c
+
+OBJ_TEST_SRC	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%_test.o, $(TEST_SRC))
 TEST_MAIN		:= src/display-config/test_main.c
-OBJ_TEST_MAIN	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(TEST_MAIN))
+OBJ_TEST_MAIN	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%_test.o, $(TEST_MAIN))
 
 NAME_TEST		:= miniRT_test
-CFLAGS_TEST		:= $(CFLAGS) -g -fsanitize=address
+
+ifeq ($(OS),MacOS)
+	CFLAGS_TEST		:= -O0 -g -fsanitize=address
+else
+	CFLAGS_TEST		:= $(CFLAGS)
+endif
 
 test: update-submodule build-submodule $(NAME_TEST)
 	./miniRT_test
 
-$(NAME_TEST): $(OBJS) $(OBJ_TEST_MAIN)
-	$(CC) $(CFLAGS_TEST) $(OBJS) $(OBJ_TEST_MAIN) $(HDRS) $(LIBS) -o $(NAME_TEST)
+$(NAME_TEST): $(OBJS) ${OBJ_TEST_SRC} $(OBJ_TEST_MAIN) $(TEST_SRC) $(TEST_MAIN)
+	$(CC) $(CFLAGS_TEST) $(OBJS) $(OBJ_TEST_SRC) $(OBJ_TEST_MAIN) $(HDRS) $(LIBS) -o $(NAME_TEST)
+
+$(OBJ_DIR)/%_test.o: $(SRC_DIR)/%.c $(H_FILES)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS_TEST) $(HDRS)  -c $< -o $@
 
 tclean:
+	$(RM_DIR) ${OBJ_TEST_SRC} $(OBJ_TEST_MAIN)
 	$(RM) $(NAME_TEST)
 
 .PHONY: all clean fclean re update-submodule build-submodule

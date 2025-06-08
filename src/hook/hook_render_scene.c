@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:30:21 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/06 13:16:11 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:48:34 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static inline double get_time_ms(void) {
 void	rt_render_hook(void *param)
 {
 	t_info		*rt;
-	t_canvas	*win;
+	t_window	*win;
 
 	rt = (t_info *)param;
 	win = &rt->win;

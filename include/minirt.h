@@ -48,7 +48,7 @@
 
 void		rt_init_info(t_info *rt);
 int			rt_init_objects(t_counter *cnt, t_info *rt);
-int			rt_init_canvas(t_info *rt);
+int			rt_init_window(t_info *rt);
 t_material	rt_init_material(t_color ambient, t_color obj_color, t_mtype type);
 
 /* ----------------------------- Transformations ---------------------------- */
@@ -66,7 +66,7 @@ void		rt_perror(int exit_code);
 void		rt_free_arr(void **arr, int i);
 void		rt_destroy_exit(t_info *rt, int exit_code);
 
-/* ------------------------- Canvas: MLX42 managment ------------------------ */
+/* ------------------------- Window: MLX42 managment ------------------------ */
 /// @dir src/hook
 
 void		rt_press_esc_hook(void *param);

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:00:45 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 23:37:55 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 11:52:52 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,20 @@ int	rt_view_transform(t_camera *cam, t_vec3	world_up)
 {
 	t_matrix	orientation;
 	t_matrix	transl;
+	t_matrix	transform;
+	t_vec3		left;
+	t_vec3		true_up;
 
-	cam->left = cross_product(cam->forward, world_up);
-	cam->true_up = cross_product(cam->left, cam->forward);
+	left = cross_product(cam->forward, world_up);
+	true_up = cross_product(left, cam->forward);
 	orientation = ((t_matrix){
-		{{cam->left.x, cam->left.y, cam->left.z, 0.0f},
-		{cam->true_up.x, cam->true_up.y, cam->true_up.z, 0.0f},
+		{{left.x, left.y, left.z, 0.0f},
+		{true_up.x, true_up.y, true_up.z, 0.0f},
 		{-cam->forward.x, -cam->forward.y, -cam->forward.z, 0.0f},
 		{0.0f, 0.0f, 0.0f, 1.0f}}, 4});
 	transl = matrix_translation(-(cam->pos.x), -(cam->pos.y), -(cam->pos.z));
-	cam->transform = matrix_multiply(orientation, transl);
-	if (false == matrix_try_inverse(cam->transform, &cam->inv_transform))
+	transform = matrix_multiply(orientation, transl);
+	if (false == matrix_try_inverse(transform, &cam->inv_transform))
 		return (ERR_CAMERA_NON_INVERSIBLE);
 	return (0);
 }

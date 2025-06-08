@@ -15,11 +15,11 @@ static t_color		ring_pattern_at(t_pat pattern, t_point point);
 static t_color		checker_pattern_at(t_pat pattern, t_point point);
 static t_color		radiant_gradient_pattern_at(t_pat pattern, t_point point);
 static void			find_object(t_object object, t_matrix *obj_inv);
-t_color				reflected_color(t_info *rt, t_phong_vars vars, int remaining);
+t_color				reflected_color(t_info *rt, t_phong_vars vars, int ray_bounces);
 
 /* --------------------------- Public Functions ---------------------------- */
 
-t_color	rt_color_at(t_info *rt, t_ray *ray, int remaining)
+t_color	rt_color_at(t_info *rt, t_ray *ray, int ray_bounces)
 {
 	t_intersection	*t;
 	t_phong_vars	vars;
@@ -37,7 +37,7 @@ t_color	rt_color_at(t_info *rt, t_ray *ray, int remaining)
 		return (vars.obj->material->ambient_comp);
 	shadowed = in_shadow(rt, vars.point);
 	surface = lighting(vars, *vars.obj->material, rt->lights, shadowed);
-	reflected = reflected_color(rt, vars, remaining);
+	reflected = reflected_color(rt, vars, ray_bounces);
 	return (addition(surface, reflected));
 }
 
@@ -57,9 +57,10 @@ static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt)
 	{
 		vars.is_inside = true;
 		vars.normalv = negation(vars.normalv);
-		return (vars);
 	}
-	vars.is_inside = false;
+	else
+		vars.is_inside = false;
+	vars.point = addition(vars.point, multiplication(vars.normalv, SHADOW_BIAS));
 	return (vars);
 }
 
@@ -221,16 +222,16 @@ static void	find_object(t_object object, t_matrix *obj_inv)
 		*obj_inv = matrix_identity();
 }
 
-t_color	reflected_color(t_info *rt, t_phong_vars vars, int remaining)
+t_color	reflected_color(t_info *rt, t_phong_vars vars, int ray_bounces)
 {
 	t_ray	reflected_ray;
 	t_color	reflected_color;
 
 	if (vars.obj->material->reflective == 0)
 		return (BLACK);
-	if (remaining <= 0)
+	if (ray_bounces <= 0)
 		return (BLACK);
 	reflected_ray = (t_ray){vars.point, vars.reflectv, RAY_REFLECTION};
-	reflected_color = rt_color_at(rt, &reflected_ray, remaining - 1);
+	reflected_color = rt_color_at(rt, &reflected_ray, ray_bounces - 1);
 	return (multiplication(reflected_color, vars.obj->material->reflective));
 }

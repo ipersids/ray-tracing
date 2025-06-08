@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 20:31:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 22:41:03 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:17:05 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 /**
  * @brief Initializes the MLX window with default settings.
- * @param window Pointer to the canvas structure to initialize.
+ * @param window Pointer to the window structure to initialize.
  * @return int 0 on success, error code on failure.
  */
-static int	init_window(t_canvas *window);
+static int	init_window(t_window *window);
 
 /**
  * @brief Sets up hooks for handling events in the MLX window.
@@ -30,15 +30,15 @@ static void	init_hook(t_info *rt);
 /* --------------------------- Public Functions ---------------------------- */
 
 /**
- * @brief Initializes the canvas for the ray tracer.
+ * @brief Initializes the window for the ray tracer.
  * 
- * I sets up MLX window and image for drawing content of scene 
+ * It sets up MLX window and image for drawing content of scene 
  * and sets up hooks for handling events in the MLX window.
  * 
  * @param rt Pointer to the main program structure.
  * @return int 0 on success, error code on failure.
  */
-int	rt_init_canvas(t_info *rt)
+int	rt_init_window(t_info *rt)
 {
 	int	exit_code;
 
@@ -54,7 +54,7 @@ int	rt_init_canvas(t_info *rt)
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static int	init_window(t_canvas *window)
+static int	init_window(t_window *window)
 {
 	int32_t	width;
 	int32_t	height;

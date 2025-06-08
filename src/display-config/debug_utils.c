@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:06:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 03:33:01 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:48:49 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ void	debug_print_info(t_info *rt)
 	printf("\t- objs: %p\n", rt->objs);
 	printf("\t- ts: %p\n", rt->ts);
 	printf(PRINT_GREEN"AMBIENT:\n"PRINT_DEFAULT);
-	printf("\t- ratio: %.2f\n", rt->ambient.ratio);
-	printf("\t- color: %.2f, %.2f, %.2f\n",
-		rt->ambient.color.x, rt->ambient.color.y, rt->ambient.color.z);
+	printf("\t- intensity: %.2f, %.2f, %.2f\n",
+		rt->amb_intensity.x, rt->amb_intensity.y, rt->amb_intensity.z);
 	debug_print_camera(&rt->camera);
 	debug_print_lights(rt);
 	debug_print_objects(rt);
@@ -40,9 +39,6 @@ void	debug_print_camera(t_camera *cam)
 	printf("\t- forward: %.2f, %.2f, %.2f\n",
 		cam->forward.x, cam->forward.y, cam->forward.z);
 	printf("\t- FOV: %.2f\n", cam->fov);
-	printf("\t- left: %f, %f, %f\n",
-		cam->left.x, cam->left.y, cam->left.z);
-	printf("\t- true_up: %f, %f, %f\n", cam->true_up.x, cam->true_up.y, cam->true_up.z);
 	printf("\t- half_height: %f\n", cam->half_height);
 	printf("\t- half_width: %f\n", cam->half_width);
 	printf("\t- pixel_size: %f\n", cam->pixel_size);
@@ -59,9 +55,8 @@ void	debug_print_lights(t_info *rt)
 		printf("Light [%zu/%zu]:\n", i + 1, rt->n_lights);
 		printf("\t- position: %.2f, %.2f, %.2f\n", rt->lights[i].pos.x,
 			rt->lights[i].pos.y, rt->lights[i].pos.z);
-		printf("\t- brightness: %.2f\n", rt->lights[i].bright);
-		printf("\t- color: %.2f, %.2f, %.2f\n", rt->lights[i].color.x,
-			rt->lights[i].color.y, rt->lights[i].color.z);
+		printf("\t- intensity: %.2f, %.2f, %.2f\n", rt->lights[i].intensity.x,
+			rt->lights[i].intensity.y, rt->lights[i].intensity.z);
 		++i;
 	}
 }
@@ -95,9 +90,8 @@ void	debug_print_cy(t_cylinder *cy)
 	printf("\t- position: %.2f, %.2f, %.2f\n", cy->pos.x, cy->pos.y, cy->pos.z);
 	printf("\t- direction: %.2f, %.2f, %.2f\n",
 		cy->dir.x, cy->dir.y, cy->dir.z);
-	printf("\t- diameter: %.2f\n", cy->diam);
-	printf("\t- radius: %.2f\n", cy->r);
-	printf("\t- height: %.2f\n", cy->height);
+	printf("\t- scale: %.2f\n", cy->scale);
+	printf("\t- half_height: %.2f\n", cy->half_height);
 	printf("\t- color: %.2f, %.2f, %.2f\n",
 		cy->color.x, cy->color.y, cy->color.z);
 }
@@ -128,15 +122,12 @@ void	debug_print_sp(t_sphere *sp)
 {
 	printf(PRINT_PURPLE"sphere:\n"PRINT_DEFAULT);
 	printf("\t- position: %.2f, %.2f, %.2f\n", sp->pos.x, sp->pos.y, sp->pos.z);
-	printf("\t- center: %.2f, %.2f, %.2f\n", sp->center.x, sp->center.y, sp->center.z);
-	printf("\t- diameter: %.2f\n", sp->diam);
-	printf("\t- radius: %.2f\n", sp->r);
 	printf("\t- scale: %.2f\n", sp->scale);
 	printf("\t- color: %.2f, %.2f, %.2f\n",
 		sp->color.x, sp->color.y, sp->color.z);
 }
 
-void	debug_print_world(t_canvas *win)
+void	debug_print_world(t_window *win)
 {
 	printf(PRINT_GREEN"\nWORLD:\n"PRINT_DEFAULT);
 	printf("\t- window width: %d\n", win->width);

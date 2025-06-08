@@ -9,7 +9,7 @@ int	main(int argc, char **argv)
 	exit_code = rt_validate_input(argc, argv, &rt);
 	if (0 != exit_code)
 		rt_destroy_exit(&rt, exit_code);
-	exit_code = rt_init_canvas(&rt);
+	exit_code = rt_init_window(&rt);
 	if (0 != exit_code)
 		rt_destroy_exit(&rt, exit_code);
 	rt_destroy_exit(&rt, EXIT_SUCCESS);

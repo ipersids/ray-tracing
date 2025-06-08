@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 14:53:22 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:20:47 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @brief Initialize default ambient light settings.
  * @param ambient Pointer to the ambient light structure.
  */
-static void	init_ambient(t_ambient_light *ambient);
+static void	init_ambient(t_color *ambient_intensity);
 
 /**
  * @brief Initialize default camera settings.
@@ -27,10 +27,10 @@ static void	init_ambient(t_ambient_light *ambient);
 static void	init_camera(t_camera *camera);
 
 /**
- * @brief Initializes the canvas with the necessary properties.
- * @param window A pointer to the `t_canvas` structure to be initialized.
+ * @brief Initializes the window with the necessary properties.
+ * @param window A pointer to the `t_window` structure to be initialized.
  */
-static void	init_canvas(t_canvas *window);
+static void	init_window(t_window *window);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -41,18 +41,18 @@ static void	init_canvas(t_canvas *window);
 void	rt_init_info(t_info *rt)
 {
 	ft_memset(rt, 0, sizeof(t_info));
-	init_ambient(&rt->ambient);
+	init_ambient(&rt->amb_intensity);
 	init_camera(&rt->camera);
-	init_canvas(&rt->win);
+	init_window(&rt->win);
 }
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static void	init_ambient(t_ambient_light *amb)
+static void	init_ambient(t_color *ambient_intensity)
 {
-	amb->color = (t_color){1.0f, 1.0f, 1.0f};
-	amb->ratio = 0.2f;
-	amb->intensity = multiplication(amb->color, amb->ratio);
+	const t_color	color = (t_color){1.0f, 1.0f, 1.0f};
+	const float		ratio = 0.1f;
+	*ambient_intensity = multiplication(color, ratio);
 }
 
 static void	init_camera(t_camera *cam)
@@ -60,10 +60,9 @@ static void	init_camera(t_camera *cam)
 	cam->forward = (t_vec3){0.0f, 0.0f, 1.0f};
 	cam->pos = (t_point){0.0f, 0.0f, -100.0f};
 	cam->fov = 40.0f;
-	cam->transform = matrix_identity();
 }
 
-static void	init_canvas(t_canvas *window)
+static void	init_window(t_window *window)
 {
 	window->height = HEIGHT_DEFAULT;
 	window->width = WIDTH_DEFAULT;

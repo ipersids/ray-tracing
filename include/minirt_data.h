@@ -64,7 +64,16 @@ typedef struct s_submatrix_var
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define EPSILON 0.001
+# define EPSILON 0.00001f
+# define SHADOW_BIAS 0.01f
+
+/**
+ * @brief Default recursion depth for ray tracing.
+ *
+ * This constant sets the default number of rays that can be recursively "shot"
+ * (e.g., for reflections) when calculating the color at a point.
+ */
+# define MAX_RAY_RECURSION_DEPTH 5
 
 /**
  * @brief Error codes
@@ -90,15 +99,18 @@ typedef enum s_error
 	ERR_OBJECT_CONFIG,
 	ERR_OBJECT_CONFIG_LIMITS,
 	ERR_CAMERA_ORIENT_VECTOR,
+	ERR_OBJECT_ORIENT_VECTOR,
 	ERR_CAMERA_GIMBAL_LOCK,
+	ERR_CAMERA_PITCH_ANGLE,
 	ERR_CAMERA_NON_INVERSIBLE,
 	ERR_MATRIX_NON_INVERSIBLE,
 	ERROR_REALLOC_INTERSECTIONS,
+	ERROR_EMPTY_SCENE,
 	ERR_MAX
 }	t_error;
 
 # define ERR_MODULO ERR_ARGC
-# define CAPACITY 10
+# define CAPACITY 10 // initial size of array for reading scene
 # define NULL_TERMINATED_ARR -1
 
 /* ---------------------------- Scene structures  -------------------------- */
@@ -118,37 +130,33 @@ typedef enum e_type
 }	t_type;
 
 # define LIMIT_COORD 1000.0f
-# define LIMIT_S 1000.0f
+# define MAX_SIZE 500.0f // size (height, width ...)
+# define MIN_SIZE 0.001f // size (height, width ...)
 
-typedef struct s_ambient_light
-{
-	float	ratio;				// amb. lighting ratio in range [0.0,1.0]
-	t_color	color;				// R,G,B colors in range [0.0-1.0]
-	t_color	intensity;			// multiplication(ambient.color, ambient.ratio)
-}			t_ambient_light;
+/**
+ * @brief Pitch angle limit
+ * 
+ * Prevents the camera from looking straight up or down, 
+ * which can cause gimbal lock or degenerate view matrices.
+ * 
+ * Fot minimum value used -MAX_PITCH
+ */
+# define MAX_PITCH 60.0f
 
 typedef struct s_camera
 {
 	t_point		pos;				// x,y,z of the camera position
 	t_vec3		forward;			// 3d norm. orientation vector
 	float		fov;				// Horizontal field of view [0.0,180.0]
-	t_vec3		true_up;
-	t_vec3		left;
-	t_matrix	transform;
 	t_matrix	inv_transform;
 	float		half_width;
 	float		half_height;
 	float		pixel_size;
-	t_point		reset_pos;
-	float		reset_fov;
-	t_vec3		reset_forward;
 }			t_camera;
 
 typedef struct s_light
 {
 	t_point	pos;				// x,y,z of the light point
-	float	bright;				// the light brightness ratio [0.0,1.0]
-	t_color	color;				// (unused in mandatory part)
 	t_color	intensity;			// multiplication(light.color, light.bright)
 }			t_light;
 
@@ -194,12 +202,8 @@ typedef struct s_material
 typedef struct s_sphere
 {
 	t_point		pos;				// x,y,z of sphere center
-	float		diam;				// the sphere diameter
-	float		r;					// the sphere radius
-	t_point		center;
-	float		scale;
+	float		scale;				// diameter / 2.0f
 	t_color		color;				// R,G,B colors in range [0.0-1.0]
-	t_matrix	transform;
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
 	t_material	material;
@@ -210,7 +214,6 @@ typedef struct s_plane
 	t_point		pos;				// x,y,z of a point on plane
 	t_vec3		dir;				// 3d norm. orientation vector
 	t_color		color;				// R,G,B colors in range [0.0-1.0]
-	t_matrix	transform;
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
 	t_material	material;
@@ -220,13 +223,9 @@ typedef struct s_cylinder
 {
 	t_point		pos;				// center point of cylinder base
 	t_vec3		dir;				// 3d norm. vector of cylinder axis
-	float		diam;				// the cylinder diameter
-	float		r;					// the cylinder radius
-	float		scale;
-	float		height;				// the cylinder height
-	float		half_height;
+	float		scale;				// diameter / 2.0f
+	float		half_height;		// height / 2.0f
 	t_color		color;				// R,G,B colors in range [0.0,1.0]
-	t_matrix	transform;
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
 	t_material	material;
@@ -283,19 +282,17 @@ typedef struct s_cursor
 {
 	float	last_x;
 	float	last_y;
-	bool	is_first;
-	bool	is_dragging;
-	float	xoffset;
-	float	yoffset;
 	float	yaw;
 	float	pitch;
+	bool	is_first;
+	bool	is_dragging;
 }			t_cursor;
 
 /**
  * @brief Structure representing a window data
  * Managed by MLX42 lib
  */
-typedef struct s_canvas
+typedef struct s_window
 {
 	mlx_t		*mlx;
 	int32_t		width;
@@ -306,7 +303,7 @@ typedef struct s_canvas
 	double		elapsed_time;
 	mlx_image_t	*img;
 	t_cursor	cursor;
-}				t_canvas;
+}				t_window;
 
 /* ------------------------ Ray and render structures  --------------------- */
 
@@ -348,13 +345,13 @@ typedef struct s_point_light
 
 typedef struct s_info
 {
-	t_ambient_light	ambient;		// Ambient lightning data
+	t_color			amb_intensity;	// Ambient lightning data
 	t_camera		camera;			// Camera data
 	t_light			*lights;		// Array to store lights on the scene
 	size_t			n_lights;		// Amount of lights in the *lights array
 	t_object		*objs;			// Array to store scene's objects (sp, pl, cy)
 	size_t			n_objs;			// Amount of items in the *objs array
-	t_canvas		win;			// mlx window and images info struct
+	t_window		win;			// mlx window and images info struct
 	t_intersection	*ts;			// Intersection collection
 	size_t			n_ts;			// Amount t-values in intersection collection
 	size_t			capacity_ts;	// Current capacity in intersection collection

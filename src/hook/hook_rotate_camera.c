@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:48:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 23:30:35 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:18:43 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@
  *
  * @param rt Pointer to the main program structure (t_info*).
  * @param cursor Pointer to the cursor state structure (t_cursor*).
+ * @param x Current x position of the mouse.
+ * @param y Current y position of the mouse.
  * @note Exits the program if the camera transform fails.
  */
-static void	handle_rotation(t_info *rt, t_cursor *cursor);
+static void	handle_rotation(t_info *rt, t_cursor *cursor, double x, double y);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -56,28 +58,30 @@ void	rt_cursor_hook(double xpos, double ypos, void *param)
 		cursor->is_first = false;
 		return ;
 	}
-	cursor->xoffset = xpos - cursor->last_x;
-	cursor->yoffset = ypos - cursor->last_y;
-	cursor->last_x = xpos;
-	cursor->last_y = ypos;
-	handle_rotation(rt, cursor);
+	handle_rotation(rt, cursor, xpos, ypos);
 	rt->win.rendered = false;
 }
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static void	handle_rotation(t_info *rt, t_cursor *cursor)
+static void	handle_rotation(t_info *rt, t_cursor *cursor, double x, double y)
 {
-	t_vec3		direction;
+	t_vec3	direction;
+	float	xoffset;
+	float	yoffset;
 	
-	cursor->xoffset *= CURSOR_SENSITIVITY;
-	cursor->yoffset *= CURSOR_SENSITIVITY;
-	cursor->yaw += cursor->xoffset;
-	cursor->pitch += cursor->yoffset;
-	if (60.0f < cursor->pitch)
-		cursor->pitch = 60.0f;
-	else if (-60.0f > cursor->pitch)
-		cursor->pitch = -60.0f;
+	xoffset = x - cursor->last_x;
+	yoffset = y - cursor->last_y;
+	cursor->last_x = x;
+	cursor->last_y = y;
+	xoffset *= CURSOR_SENSITIVITY;
+	yoffset *= CURSOR_SENSITIVITY;
+	cursor->yaw += xoffset;
+	cursor->pitch += yoffset;
+	if (MAX_PITCH < cursor->pitch)
+		cursor->pitch = MAX_PITCH;
+	else if (-MAX_PITCH > cursor->pitch)
+		cursor->pitch = -MAX_PITCH;
 	direction.x = sin(radians(cursor->yaw)) * cos(radians(cursor->pitch));
 	direction.y = -sin(radians(cursor->pitch));
 	direction.z = cos(radians(cursor->yaw)) * cos(radians(cursor->pitch));
