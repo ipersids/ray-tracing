@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 11:05:03 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 02:04:38 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:03:45 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ static bool	is_empty_line(char *nl, char *line)
 			break ;
 		i++;
 	}
-	if ('\0' == line[i])
+	if ('\0' == line[i] || '#' == line[i])
 	{
 		free(line);
 		return (true);
