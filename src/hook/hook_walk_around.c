@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:52:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 14:57:21 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:27:10 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* --------------------- Private function prototypes ----------------------- */
 
 /// @brief Moves or resets the camera forward.
-static void	move_forward(t_info *rt, t_camera *cam, bool reset);
+static void	move_forward(t_info *rt, t_camera *cam);
 
 /// @brief Moves the camera backward.
 static void	move_backward(t_info *rt, t_camera *cam);
@@ -57,7 +57,7 @@ void	rt_key_hook(mlx_key_data_t k, void* param)
 	rt = (t_info *)param;
  	camera = &rt->camera;
 	if (k.key == MLX_KEY_W && (k.action == MLX_PRESS || k.action == MLX_REPEAT))
-		move_forward(rt, camera, false);
+		move_forward(rt, camera);
 	if (k.key == MLX_KEY_S && (k.action == MLX_PRESS || k.action == MLX_REPEAT))
 		move_backward(rt, camera);
 	if (k.key == MLX_KEY_A && (k.action == MLX_PRESS || k.action == MLX_REPEAT))
@@ -65,7 +65,7 @@ void	rt_key_hook(mlx_key_data_t k, void* param)
 	if (k.key == MLX_KEY_D && (k.action == MLX_PRESS || k.action == MLX_REPEAT))
 		move_right(rt, camera);
 	if (k.key == MLX_KEY_R && (k.action == MLX_PRESS))
-		move_forward(rt, camera, true);
+		rt_reset_camera(rt);
 	if (!rt->win.rendered)
 	{
 		if (0 != rt_view_transform(&rt->camera, rt->win.world_up))
@@ -78,22 +78,12 @@ void	rt_key_hook(mlx_key_data_t k, void* param)
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static void	move_forward(t_info *rt, t_camera *cam, bool reset)
+static void	move_forward(t_info *rt, t_camera *cam)
 {
 	t_vec3	move_to;
 
-	if (reset)
-	{
-		cam->pos = cam->reset_pos;
-		cam->forward = cam->reset_forward;
-		cam->fov = cam->reset_fov;
-		rt_set_cursor(rt);
-	}
-	else
-	{
-		move_to = multiplication(cam->forward, CAMERA_SPEED);
-		cam->pos = (t_point)addition(cam->pos, move_to);
-	}
+	move_to = multiplication(cam->forward, CAMERA_SPEED);
+	cam->pos = (t_point)addition(cam->pos, move_to);
 	rt->win.rendered = false;
 }
 
@@ -109,10 +99,11 @@ static void	move_backward(t_info *rt, t_camera *cam)
 static void	move_left(t_info *rt, t_camera *cam)
 {
 	t_vec3	move_to;
+	t_vec3	left;
 
-	cam->left = cross_product(cam->forward, rt->win.world_up);
-	cam->left = normalize(cam->left);
-	move_to = multiplication(cam->left, CAMERA_SPEED);
+	left = cross_product(cam->forward, rt->win.world_up);
+	left = normalize(left);
+	move_to = multiplication(left, CAMERA_SPEED / 2.0f);
 	cam->pos = (t_point)addition(cam->pos, move_to);
 	rt->win.rendered = false;
 }
@@ -120,10 +111,11 @@ static void	move_left(t_info *rt, t_camera *cam)
 static void	move_right(t_info *rt, t_camera *cam)
 {
 	t_vec3	move_to;
+	t_vec3	left;
 
-	cam->left = cross_product(cam->forward, rt->win.world_up);
-	cam->left = normalize(cam->left);
-	move_to = multiplication(cam->left, CAMERA_SPEED);
+	left = cross_product(cam->forward, rt->win.world_up);
+	left = normalize(left);
+	move_to = multiplication(left, CAMERA_SPEED / 2.0f);
 	cam->pos = (t_point)subtraction(cam->pos, move_to);
 	rt->win.rendered = false;
 }

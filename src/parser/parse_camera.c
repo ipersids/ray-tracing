@@ -6,15 +6,11 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 11:49:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 23:33:28 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 11:54:09 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-/* --------------------- Private function prototypes ----------------------- */
-
-static void	init_helpers(t_camera *camera);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -47,6 +43,7 @@ int	rt_parse_camera(t_info *rt, char *line)
 		return (ERR_CAMERA_ORIENT_VECTOR);
 	if (equal(fabs(dot_product(rt->camera.forward, rt->win.world_up)), 1.0f))
 		return (ERR_CAMERA_GIMBAL_LOCK);
+	rt->camera.forward = normalize(rt->camera.forward);
 	while (ft_isspace(*line))
 		++line;
 	exit_code = rt_parse_float(&rt->camera.fov, &line, &next);
@@ -54,16 +51,5 @@ int	rt_parse_camera(t_info *rt, char *line)
 		return (ERR_OBJECT_CONFIG);
 	if (0.0 > rt->camera.fov || 180.0 < rt->camera.fov)
 		return (ERR_OBJECT_CONFIG_LIMITS);
-	init_helpers(&rt->camera);
 	return (0);
-}
-
-/* ------------------- Private Function Implementation --------------------- */
-
-static void	init_helpers(t_camera *camera)
-{
-	camera->forward = normalize(camera->forward);
-	camera->reset_forward = camera->forward;
-	camera->reset_pos = camera->pos;
-	camera->reset_fov = camera->fov;
 }

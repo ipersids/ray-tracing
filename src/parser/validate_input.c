@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:51:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 01:38:33 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:20:16 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ static int	perform_computations(t_info *rt)
 	exit_code = rt_set_transformations(rt);
 	if (0 != exit_code)
 		return (exit_code);
+	rt_save_camera_settings(&rt->camera);
 	rt_set_cursor(rt);
 	return (exit_code);
 }

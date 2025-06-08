@@ -68,6 +68,14 @@ typedef struct s_submatrix_var
 # define SHADOW_BIAS 0.01f
 
 /**
+ * @brief Default recursion depth for ray tracing.
+ *
+ * This constant sets the default number of rays that can be recursively "shot"
+ * (e.g., for reflections) when calculating the color at a point.
+ */
+# define MAX_RAY_RECURSION_DEPTH 5
+
+/**
  * @brief Error codes
  *
  * - ERR_SYSTEM: callback strerror(errno);
@@ -127,16 +135,10 @@ typedef struct s_camera
 	t_point		pos;				// x,y,z of the camera position
 	t_vec3		forward;			// 3d norm. orientation vector
 	float		fov;				// Horizontal field of view [0.0,180.0]
-	t_vec3		true_up;
-	t_vec3		left;
-	t_matrix	transform;
 	t_matrix	inv_transform;
 	float		half_width;
 	float		half_height;
 	float		pixel_size;
-	t_point		reset_pos;
-	float		reset_fov;
-	t_vec3		reset_forward;
 }			t_camera;
 
 typedef struct s_light

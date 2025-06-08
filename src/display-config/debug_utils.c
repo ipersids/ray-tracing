@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:06:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 02:51:37 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:23:27 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,6 @@ void	debug_print_camera(t_camera *cam)
 	printf("\t- forward: %.2f, %.2f, %.2f\n",
 		cam->forward.x, cam->forward.y, cam->forward.z);
 	printf("\t- FOV: %.2f\n", cam->fov);
-	printf("\t- left: %f, %f, %f\n",
-		cam->left.x, cam->left.y, cam->left.z);
-	printf("\t- true_up: %f, %f, %f\n", cam->true_up.x, cam->true_up.y, cam->true_up.z);
 	printf("\t- half_height: %f\n", cam->half_height);
 	printf("\t- half_width: %f\n", cam->half_width);
 	printf("\t- pixel_size: %f\n", cam->pixel_size);

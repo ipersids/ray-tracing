@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 00:48:50 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:23:13 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static void	init_camera(t_camera *cam)
 	cam->forward = (t_vec3){0.0f, 0.0f, 1.0f};
 	cam->pos = (t_point){0.0f, 0.0f, -100.0f};
 	cam->fov = 40.0f;
-	cam->transform = matrix_identity();
 }
 
 static void	init_canvas(t_canvas *window)
