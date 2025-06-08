@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 01:47:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 11:18:50 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:50:48 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	rt_camera_render(t_info *rt)
  * based on the field of view and the aspect ratio of the window.
  *
  * @param cam Pointer to the camera structure.
- * @param win Pointer to the canvas/window structure.
+ * @param win Pointer to the window structure.
  */
-void	rt_camera_init(t_camera *cam, t_canvas *win)
+void	rt_camera_init(t_camera *cam, t_window *win)
 {
 	float	half_view;
 	float	aspect_ratio;

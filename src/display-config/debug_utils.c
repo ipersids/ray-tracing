@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:06:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 12:23:27 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:48:49 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	debug_print_sp(t_sphere *sp)
 		sp->color.x, sp->color.y, sp->color.z);
 }
 
-void	debug_print_world(t_canvas *win)
+void	debug_print_world(t_window *win)
 {
 	printf(PRINT_GREEN"\nWORLD:\n"PRINT_DEFAULT);
 	printf("\t- window width: %d\n", win->width);

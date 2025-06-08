@@ -5,7 +5,7 @@
 /// @dir src/renderer
 
 void			rt_camera_render(t_info *rt);
-void			rt_camera_init(t_camera *cam, t_canvas *win);
+void			rt_camera_init(t_camera *cam, t_window *win);
 void			rt_reset_camera(t_info *rt);
 void			rt_save_camera_settings(t_camera *camera);
 t_color			rt_color_at(t_info *rt, t_ray *ray, int ray_bounces);

@@ -282,19 +282,17 @@ typedef struct s_cursor
 {
 	float	last_x;
 	float	last_y;
-	bool	is_first;
-	bool	is_dragging;
-	float	xoffset;
-	float	yoffset;
 	float	yaw;
 	float	pitch;
+	bool	is_first;
+	bool	is_dragging;
 }			t_cursor;
 
 /**
  * @brief Structure representing a window data
  * Managed by MLX42 lib
  */
-typedef struct s_canvas
+typedef struct s_window
 {
 	mlx_t		*mlx;
 	int32_t		width;
@@ -305,7 +303,7 @@ typedef struct s_canvas
 	double		elapsed_time;
 	mlx_image_t	*img;
 	t_cursor	cursor;
-}				t_canvas;
+}				t_window;
 
 /* ------------------------ Ray and render structures  --------------------- */
 
@@ -353,7 +351,7 @@ typedef struct s_info
 	size_t			n_lights;		// Amount of lights in the *lights array
 	t_object		*objs;			// Array to store scene's objects (sp, pl, cy)
 	size_t			n_objs;			// Amount of items in the *objs array
-	t_canvas		win;			// mlx window and images info struct
+	t_window		win;			// mlx window and images info struct
 	t_intersection	*ts;			// Intersection collection
 	size_t			n_ts;			// Amount t-values in intersection collection
 	size_t			capacity_ts;	// Current capacity in intersection collection

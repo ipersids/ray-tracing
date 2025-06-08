@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 01:37:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 12:42:25 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:50:55 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void test_camera(void) {
 	t_camera cam = {0};
-	t_canvas win = {0};
+	t_window win = {0};
 	t_ray ray = {0};
 	t_matrix transform;
 

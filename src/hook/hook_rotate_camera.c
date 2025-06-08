@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:48:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 15:40:41 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:42:31 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * @param cursor Pointer to the cursor state structure (t_cursor*).
  * @note Exits the program if the camera transform fails.
  */
-static void	handle_rotation(t_info *rt, t_cursor *cursor);
+static void	handle_rotation(t_info *rt, t_cursor *cursor, double x, double y);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -56,24 +56,26 @@ void	rt_cursor_hook(double xpos, double ypos, void *param)
 		cursor->is_first = false;
 		return ;
 	}
-	cursor->xoffset = xpos - cursor->last_x;
-	cursor->yoffset = ypos - cursor->last_y;
-	cursor->last_x = xpos;
-	cursor->last_y = ypos;
-	handle_rotation(rt, cursor);
+	handle_rotation(rt, cursor, xpos, ypos);
 	rt->win.rendered = false;
 }
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static void	handle_rotation(t_info *rt, t_cursor *cursor)
+static void	handle_rotation(t_info *rt, t_cursor *cursor, double x, double y)
 {
-	t_vec3		direction;
+	t_vec3	direction;
+	float	xoffset;
+	float	yoffset;
 	
-	cursor->xoffset *= CURSOR_SENSITIVITY;
-	cursor->yoffset *= CURSOR_SENSITIVITY;
-	cursor->yaw += cursor->xoffset;
-	cursor->pitch += cursor->yoffset;
+	xoffset = x - cursor->last_x;
+	yoffset = y - cursor->last_y;
+	cursor->last_x = x;
+	cursor->last_y = y;
+	xoffset *= CURSOR_SENSITIVITY;
+	yoffset *= CURSOR_SENSITIVITY;
+	cursor->yaw += xoffset;
+	cursor->pitch += yoffset;
 	if (MAX_PITCH < cursor->pitch)
 		cursor->pitch = MAX_PITCH;
 	else if (-MAX_PITCH > cursor->pitch)

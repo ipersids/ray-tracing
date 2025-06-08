@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 12:23:13 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:50:25 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static void	init_ambient(t_color *ambient_intencity);
 static void	init_camera(t_camera *camera);
 
 /**
- * @brief Initializes the canvas with the necessary properties.
- * @param window A pointer to the `t_canvas` structure to be initialized.
+ * @brief Initializes the window with the necessary properties.
+ * @param window A pointer to the `t_window` structure to be initialized.
  */
-static void	init_canvas(t_canvas *window);
+static void	init_window(t_window *window);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -43,7 +43,7 @@ void	rt_init_info(t_info *rt)
 	ft_memset(rt, 0, sizeof(t_info));
 	init_ambient(&rt->amb_intensity);
 	init_camera(&rt->camera);
-	init_canvas(&rt->win);
+	init_window(&rt->win);
 }
 
 /* ------------------- Private Function Implementation --------------------- */
@@ -62,7 +62,7 @@ static void	init_camera(t_camera *cam)
 	cam->fov = 40.0f;
 }
 
-static void	init_canvas(t_canvas *window)
+static void	init_window(t_window *window)
 {
 	window->height = HEIGHT_DEFAULT;
 	window->width = WIDTH_DEFAULT;
