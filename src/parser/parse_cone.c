@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 19:32:11 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 16:05:23 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 14:12:09 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ static int	parse_radius_and_height(t_info *rt, char **startptr, char **endptr)
 	exit_code = rt_parse_float(&rt->objs[i].co.scale, startptr, endptr);
 	if (0 != exit_code)
 		return (exit_code);
-	if (rt->objs[i].co.scale < EPSILON || rt->objs[i].co.scale > LIMIT_S)
+	if (rt->objs[i].co.scale < MIN_SIZE || rt->objs[i].co.scale > MAX_SIZE / 2)
 		return (ERR_OBJECT_CONFIG_LIMITS);
 	while (ft_isspace(**startptr))
 		++(*startptr);
 	exit_code = rt_parse_float(&rt->objs[i].co.height, startptr, endptr);
 	if (0 != exit_code)
 		return (exit_code);
-	if (rt->objs[i].co.height < EPSILON || rt->objs[i].co.height > LIMIT_S)
+	if (rt->objs[i].co.height < MIN_SIZE || rt->objs[i].co.height > MAX_SIZE)
 		return (ERR_OBJECT_CONFIG_LIMITS);
 	return (0);
 }

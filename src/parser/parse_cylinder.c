@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:35:22 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 02:50:31 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 14:11:40 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
  * @param startptr Pointer to the start of the string.
  * @param endptr Pointer to a pointer to the character where parsing stopped.
  * @return int 0 on success, or an error code.
+ * @note could not be negative or approximately equal zero (less then EPSILON)
  */
 static int	parse_diam_and_height(t_info *rt, char **startptr, char **endptr);
 
@@ -67,24 +68,27 @@ static int	parse_diam_and_height(t_info *rt, char **startptr, char **endptr)
 {
 	int		exit_code;
 	size_t	i;
+	float	max_limit;
 
 	exit_code = 0;
+	max_limit = MAX_SIZE / 2.0f;
 	i = rt->n_objs;
 	while (ft_isspace(**startptr))
 		++(*startptr);
 	exit_code = rt_parse_float(&rt->objs[i].cy.scale, startptr, endptr);
 	if (0 != exit_code)
 		return (exit_code);
-	if (rt->objs[i].cy.scale > LIMIT_S || rt->objs[i].cy.scale < -LIMIT_S)
+	rt->objs[i].cy.scale = rt->objs[i].cy.scale / 2.0f;
+	if (rt->objs[i].cy.scale < MIN_SIZE || rt->objs[i].cy.scale > max_limit)
 		return (ERR_OBJECT_CONFIG_LIMITS);
 	while (ft_isspace(**startptr))
 		++(*startptr);
 	exit_code = rt_parse_float(&rt->objs[i].cy.half_height, startptr, endptr);
 	if (0 != exit_code)
 		return (exit_code);
-	if (rt->objs[i].cy.half_height > LIMIT_S || rt->objs[i].cy.half_height < -LIMIT_S)
-		return (ERR_OBJECT_CONFIG_LIMITS);
-	rt->objs[i].cy.scale = rt->objs[i].cy.scale / 2.0f;
 	rt->objs[i].cy.half_height = rt->objs[i].cy.half_height / 2.0f;
+	if (rt->objs[i].cy.half_height < MIN_SIZE
+		|| rt->objs[i].cy.half_height > max_limit)
+		return (ERR_OBJECT_CONFIG_LIMITS);
 	return (0);
 }

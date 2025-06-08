@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:48:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 23:30:35 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:40:41 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ static void	handle_rotation(t_info *rt, t_cursor *cursor)
 	cursor->yoffset *= CURSOR_SENSITIVITY;
 	cursor->yaw += cursor->xoffset;
 	cursor->pitch += cursor->yoffset;
-	if (60.0f < cursor->pitch)
-		cursor->pitch = 60.0f;
-	else if (-60.0f > cursor->pitch)
-		cursor->pitch = -60.0f;
+	if (MAX_PITCH < cursor->pitch)
+		cursor->pitch = MAX_PITCH;
+	else if (-MAX_PITCH > cursor->pitch)
+		cursor->pitch = -MAX_PITCH;
 	direction.x = sin(radians(cursor->yaw)) * cos(radians(cursor->pitch));
 	direction.y = -sin(radians(cursor->pitch));
 	direction.z = cos(radians(cursor->yaw)) * cos(radians(cursor->pitch));

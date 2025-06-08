@@ -100,6 +100,7 @@ typedef enum s_error
 	ERR_OBJECT_CONFIG_LIMITS,
 	ERR_CAMERA_ORIENT_VECTOR,
 	ERR_CAMERA_GIMBAL_LOCK,
+	ERR_CAMERA_PITCH_ANGLE,
 	ERR_CAMERA_NON_INVERSIBLE,
 	ERR_MATRIX_NON_INVERSIBLE,
 	ERROR_REALLOC_INTERSECTIONS,
@@ -108,7 +109,7 @@ typedef enum s_error
 }	t_error;
 
 # define ERR_MODULO ERR_ARGC
-# define CAPACITY 10
+# define CAPACITY 10 // initual size of array for reading scene
 # define NULL_TERMINATED_ARR -1
 
 /* ---------------------------- Scene structures  -------------------------- */
@@ -128,7 +129,18 @@ typedef enum e_type
 }	t_type;
 
 # define LIMIT_COORD 1000.0f
-# define LIMIT_S 1000.0f
+# define MAX_SIZE 500.0f // size (height, width ...)
+# define MIN_SIZE 0.001f // size (height, width ...)
+
+/**
+ * @brief Pitch angle limit
+ * 
+ * Prevents the camera from looking straight up or down, 
+ * which can cause gimbal lock or degenerate view matrices.
+ * 
+ * Fot minimum value used -MAX_PITCH
+ */
+# define MAX_PITCH 60.0f
 
 typedef struct s_camera
 {

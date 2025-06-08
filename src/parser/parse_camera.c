@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 11:49:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 11:54:09 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:45:04 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
  * 		 - Camera from and to positions are the same (look at itself)
  * 		 - Camera forward and world up vectors are parallel (gimbal lock)
  * 		 - Values exceeded their limits (ex. 0.0-1.0 for normalized vectors)
+ * 		 - Camera pitch angle is outside the range ±60 degrees
  */
 int	rt_parse_camera(t_info *rt, char *line)
 {
@@ -32,18 +33,19 @@ int	rt_parse_camera(t_info *rt, char *line)
 	int		exit_code;
 
 	next = NULL;
-	exit_code = 0;
 	exit_code = rt_parse_coord(&rt->camera.pos, &line, &next, false);
 	if (0 != exit_code)
 		return (exit_code);
 	exit_code = rt_parse_coord(&rt->camera.forward, &line, &next, true);
 	if (0 != exit_code)
 		return (exit_code);
+	rt->camera.forward = normalize(rt->camera.forward);
 	if (equal(magnitude(rt->camera.forward), 0.0f))
 		return (ERR_CAMERA_ORIENT_VECTOR);
-	if (equal(fabs(dot_product(rt->camera.forward, rt->win.world_up)), 1.0f))
+	if (fabs(dot_product(rt->camera.forward, rt->win.world_up)) > 0.999f)
 		return (ERR_CAMERA_GIMBAL_LOCK);
-	rt->camera.forward = normalize(rt->camera.forward);
+	if (fabs(asinf(rt->camera.forward.y) * (180.0f / M_PI)) >= MAX_PITCH)
+		return (ERR_CAMERA_PITCH_ANGLE);
 	while (ft_isspace(*line))
 		++line;
 	exit_code = rt_parse_float(&rt->camera.fov, &line, &next);
