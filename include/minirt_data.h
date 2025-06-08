@@ -110,7 +110,7 @@ typedef enum s_error
 }	t_error;
 
 # define ERR_MODULO ERR_ARGC
-# define CAPACITY 10 // initual size of array for reading scene
+# define CAPACITY 10 // initial size of array for reading scene
 # define NULL_TERMINATED_ARR -1
 
 /* ---------------------------- Scene structures  -------------------------- */

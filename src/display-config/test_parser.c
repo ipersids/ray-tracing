@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 00:51:58 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 02:19:41 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:43:31 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	free_and_init(t_info *rt)
 }
 
 void test_parser(void) {
-t_info rt;
+	t_info rt;
     int exit_code;
     char *valid_file[] = {"", "scene/shadow.rt"};
     char *invalid_files[] = {
@@ -108,17 +108,76 @@ static void test_rt_parse_scene_invalid(void) {
         NULL
     };
 
+	// Invalid FOV (too high)
+    char *invalid_scene_5[] = {
+        "A 0.2 255,255,255",
+        "C 0,0,0 0,0,1 200",
+        "L 10,10,10 0.7 255,255,255",
+        NULL
+    };
+
+	// Plane with zero direction vector
+    char *invalid_scene_6[] = {
+        "A 0.2 255,255,255",
+        "C 0,0,0 0,0,1 70",
+        "L 10,10,10 0.7 255,255,255",
+        "pl 0,10,0 0,0,0 255,255,255",
+        NULL
+    };
+
+	// Invalid color value (out of range)
+    char *invalid_scene_7[] = {
+        "A 0.2 255,255,255",
+        "C 0,0,0 0,0,1 70",
+        "L 10,10,10 0.7 255,255,255",
+        "sp 0,0,20 10 300,0,0",
+        NULL
+    };
+
+	// Camera forward parallel to world up (gimbal lock)
+    char *invalid_scene_8[] = {
+    	" A 0.3 255,255,255",
+		"C 0,-1,-150 0,1,0 40",
+		"L -25,45,-30 0.8 255,255,255",
+        NULL
+    };
+
+	// Camera pitch exceeds +60 degrees
+	// normalized y component > sin(60°)
+    char *invalid_scene_9[] = {
+        "A 0.2 255,255,255",
+        "C 0,0,0 0,0.89,0.1 70",
+        "L 10,10,10 0.7 255,255,255",
+        NULL
+    };
+
+	// Sphere with negative radius
+    char *invalid_scene_10[] = {
+        "A 0.2 255,255,255",
+        "C 0,0,0 0,0,1 70",
+        "L 10,10,10 0.7 255,255,255",
+        "sp 0,0,20 -5 255,0,0",
+        NULL
+    };
+
     // Array of pointers to all invalid scenes
     char **invalid_scenes[] = {
         invalid_scene_1,
         invalid_scene_2,
         invalid_scene_3,
         invalid_scene_4,
+        invalid_scene_5,
+        invalid_scene_6,
+        invalid_scene_7,
+        invalid_scene_8,
+        invalid_scene_9,
+		invalid_scene_10,
         NULL
     };
 
     for (int i = 0; invalid_scenes[i] != NULL; ++i) {
         exit_code = rt_parse_scene(&rt, invalid_scenes[i]);
+		printf("[%d] exit_code = %d\n", i, exit_code);
         assert(exit_code != 0);
 		// rt_perror(exit_code);
         free_and_init(&rt);

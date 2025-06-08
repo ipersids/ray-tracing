@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 16:50:25 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:20:47 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @brief Initialize default ambient light settings.
  * @param ambient Pointer to the ambient light structure.
  */
-static void	init_ambient(t_color *ambient_intencity);
+static void	init_ambient(t_color *ambient_intensity);
 
 /**
  * @brief Initialize default camera settings.
@@ -48,11 +48,11 @@ void	rt_init_info(t_info *rt)
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static void	init_ambient(t_color *ambient_intencity)
+static void	init_ambient(t_color *ambient_intensity)
 {
 	const t_color	color = (t_color){1.0f, 1.0f, 1.0f};
 	const float		ratio = 0.1f;
-	*ambient_intencity = multiplication(color, ratio);
+	*ambient_intensity = multiplication(color, ratio);
 }
 
 static void	init_camera(t_camera *cam)

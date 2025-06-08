@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:48:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 16:42:31 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:18:43 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
  *
  * @param rt Pointer to the main program structure (t_info*).
  * @param cursor Pointer to the cursor state structure (t_cursor*).
+ * @param x Current x position of the mouse.
+ * @param y Current y position of the mouse.
  * @note Exits the program if the camera transform fails.
  */
 static void	handle_rotation(t_info *rt, t_cursor *cursor, double x, double y);

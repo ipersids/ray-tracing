@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:19:51 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 16:26:30 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:19:52 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static const char	*get_error_message(int exit_code)
 		"Camera forward vector cannot be aprox_eq(0.0, 0.0, 0.0)",
 		"Object direction vector cannot be aprox_eq(0.0, 0.0, 0.0)",
 		"Camera forward vector and world up (0.0, 1.0, 0.0) cannot be parallel",
-		"Camera pitch angel exced ±60 degrees",
+		"Camera pitch angel exceeds ±60 degrees",
 		"Transform matrix must be invertible (degenerate camera)",
 		"Transform matrix must be invertible (degenerate object)",
 		"Reallocation of intersections failed",

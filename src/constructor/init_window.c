@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 20:31:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 16:50:41 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:17:05 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	init_hook(t_info *rt);
 /**
  * @brief Initializes the window for the ray tracer.
  * 
- * I sets up MLX window and image for drawing content of scene 
+ * It sets up MLX window and image for drawing content of scene 
  * and sets up hooks for handling events in the MLX window.
  * 
  * @param rt Pointer to the main program structure.
