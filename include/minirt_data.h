@@ -61,6 +61,9 @@ typedef struct s_submatrix_var
 #  define IS_BONUS 0
 # endif
 
+# define PREVIOUS 0
+# define CURRENT 1
+
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif
@@ -143,6 +146,7 @@ typedef enum e_type
  * Fot minimum value used -MAX_PITCH
  */
 # define MAX_PITCH 60.0f
+# define Z_DRIFT_DAMPING 1.0f
 
 typedef struct s_camera
 {
@@ -285,7 +289,6 @@ typedef struct s_cursor
 	float		last_y;
 	float		yaw;
 	float		pitch;
-	bool		is_dragging;
 	bool		is_camera;
 	bool		is_object;
 	t_object	*obj_to_move;
@@ -361,9 +364,6 @@ typedef struct s_info
 }					t_info;
 
 /* ------------------------- Parser helper structures ----------------------- */
-
-# define PREVIOUS 0
-# define CURRENT 1
 
 typedef struct s_counter
 {

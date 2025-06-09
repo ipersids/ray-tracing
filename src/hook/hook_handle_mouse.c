@@ -6,11 +6,13 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:51:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/09 03:43:34 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/09 13:33:05 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+/* --------------------- Private function prototypes ----------------------- */
 
 static void	haldle_camera(t_window *win, action_t action);
 static void	haldle_object(t_info *rt, t_window *win, action_t action);
@@ -42,19 +44,17 @@ void	rt_mouse_hook(mouse_key_t k, action_t a, modifier_key_t m, void *p)
 		haldle_object(rt, win, a);
 }
 
+/* ------------------- Private Function Implementation --------------------- */
 
 static void	haldle_camera(t_window *win, action_t action)
 {
 	if (action == MLX_PRESS)
 	{
-		win->cursor.is_dragging = true;
 		win->cursor.is_camera = true;
+		win->cursor.is_object = false;
 	}
 	else if (action == MLX_RELEASE)
-	{
 		win->cursor.is_camera = false;
-		win->cursor.is_dragging = false;
-	}
 }
 
 static void	haldle_object(t_info *rt, t_window *win, action_t action)
@@ -68,7 +68,7 @@ static void	haldle_object(t_info *rt, t_window *win, action_t action)
 	(void)win;
 	if (action == MLX_PRESS)
 	{
-		win->cursor.is_dragging = false;
+		win->cursor.is_camera = false;
 		mlx_get_mouse_pos(win->mlx, &x, &y);
 		t_ray ray = rt_get_ray(&rt->camera, x, y);
 		rt_intersect_world(rt, &ray);
@@ -80,7 +80,5 @@ static void	haldle_object(t_info *rt, t_window *win, action_t action)
 		}
 	}
 	else if (action == MLX_RELEASE)
-	{
 		win->cursor.is_object = false;
-	}
 }

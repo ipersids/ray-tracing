@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:51:04 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 14:22:57 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/09 12:41:49 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,13 @@ int	rt_set_transformations(t_info *rt)
 
 	i = 0;
 	exit_code = 0;
-	if (0 != rt_view_transform(&rt->camera, rt->win.world_up))
+	if (0 != rt_update_transform(rt, NULL, ELEMENT_CAMERA))
 		return (ERR_CAMERA_NON_INVERSIBLE);
-	while (rt->n_objs > i && 0 == exit_code)
+	while (rt->n_objs > i && !exit_code)
 	{
-		if (ELEMENT_SPHERE == rt->objs[i].id)
-			exit_code = rt_sphere_transform(&rt->objs[i].sp);
-		else if (ELEMENT_PLANE == rt->objs[i].id)
-			exit_code = rt_plane_transform(&rt->objs[i].pl);
-		else if (ELEMENT_CYLINDER == rt->objs[i].id)
-			exit_code = rt_cylinder_transform(&rt->objs[i].cy);
-		else if (ELEMENT_CONE == rt->objs[i].id)
-			exit_code = rt_cone_transform(&rt->objs[i].co);
-		else
-			exit_code = ERR_OBJECT_TYPE;
-		rt_set_material(rt->amb_intensity, &rt->objs[i], i % MATERIAL_MAX);
+		exit_code = rt_update_transform(rt, &rt->objs[i], rt->objs[i].id);
+		if (!exit_code)
+			rt_set_material(rt->amb_intensity, &rt->objs[i], i % MATERIAL_MAX);
 		++i;
 	}
 	return (exit_code);

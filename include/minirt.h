@@ -1,17 +1,6 @@
 /**
  * @note (project status)
- * - src/parser/rt_parse_camera.c currently allowing only word up at y-axis
- * - src/parser/rt_parse_sphere.c sphere diam currently could not be less then
- * 	 (2.0 * EPSILON)
- * - decide to give error or normalized with warning in case 
- * 	 normal.magnitude() != 1.0;
- * 	 Make it consictent.
  * - for now we support comments with `#` at the end line in the scene file
- * - unused rotations in src/calculations/matrices/create_base_transform.c
- * - src/constructor/init_objects.c: allocations for intersections should 
- *   change when cylinders will be added
- * - `yaw` and `pitch` clamped [-60.0, 60.0] in src/hook/hook_rotate_camera.c,
- * 	 could it jump because of src/parser/set_cursor.c ?
  * 
  * @note (recourses):
  * - lightning model: https://learnopengl.com/Lighting/Basic-Lighting
@@ -59,6 +48,8 @@ int			rt_cylinder_transform(t_cylinder *cy);
 int			rt_cone_transform(t_cone *co);
 int			rt_view_transform(t_camera *cam, t_vec3	world_up);
 
+int			rt_update_transform(t_info *rt, void *obj, t_type id);
+
 /* ---------------------- Error and memory management ---------------------- */
 /// @dir src/destructor
 
@@ -77,8 +68,11 @@ void		rt_cursor_hook(double xpos, double ypos, void *param);
 void		rt_mouse_hook(mouse_key_t k, action_t a, modifier_key_t m, void *p);
 void		rt_scroll_hook(double xdelta, double ydelta, void *param);
 void		rt_key_hook(mlx_key_data_t k, void* param);
+
 void		rt_rotate_camera(t_info *rt, t_cursor *cursor, double x, double y);
 void		rt_move_object(t_info *rt, t_cursor *cursor, double x, double y);
+
+int			rt_perform_movement(t_info *rt, t_object *obj, double dx, double dy);
 t_vec3		rt_calculate_movement(t_info *rt, t_point pos, float dx, float dy);
 
 #endif // MINIRT_H

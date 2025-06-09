@@ -55,9 +55,9 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/hook/hook_close_window.c src/hook/hook_resize_window.c \
 				   src/hook/hook_render_scene.c src/hook/hook_handle_cursor.c \
 				   src/hook/hook_handle_mouse.c src/hook/hook_zoom_camera.c \
-				   src/hook/hook_walk_around.c src/hook/reset_camera.c \
-				   src/hook/rotate_camera.c src/hook/move_object.c \
-				   src/hook/cast_ray.c \
+				   src/hook/hook_walk_around.c src/hook/move_camera.c \
+				   src/hook/move_object.c src/hook/cast_ray.c \
+				   src/hook/reset_camera.c \
 				   \
 				   src/renderer/camera.c src/renderer/color_at.c \
 				   src/renderer/intersect_world.c src/renderer/normal_at.c \
@@ -80,6 +80,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/shapes/cone_cap.c \
 				   \
 				   src/transformation/objects_transform.c src/transformation/view_transform.c \
+				   src/transformation/update_transfom.c \
 				   \
 				   \
 				   \
