@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:30:21 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 16:48:34 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:57:59 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	rt_render_hook(void *param)
 			rt_camera_render(rt);
 			double end = get_time_ms();
 			printf("Render: %s%.1f%s ms (%dx%d)\n", PRINT_RED, end - start,
-				PRINT_DEFAULT, rt->win.img->width, rt->win.img->height);
+				PRINT_DEFAULT, rt->win.img->width, rt->win.img->height); // delete
 			win->rendered = true;
 		}
 	}

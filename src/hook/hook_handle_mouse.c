@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:51:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/09 13:33:05 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:54:37 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,20 @@ static void	haldle_camera(t_window *win, action_t action)
 
 static void	haldle_object(t_info *rt, t_window *win, action_t action)
 {
-	int32_t	x;
-	int32_t	y;
+	t_intersection	*t;
+	t_ray			ray;
+	int32_t			x;
+	int32_t			y;
 
 	x = 0;
 	y = 0;
-	(void)rt;
-	(void)win;
 	if (action == MLX_PRESS)
 	{
 		win->cursor.is_camera = false;
 		mlx_get_mouse_pos(win->mlx, &x, &y);
-		t_ray ray = rt_get_ray(&rt->camera, x, y);
+		ray = rt_get_ray(&rt->camera, x, y);
 		rt_intersect_world(rt, &ray);
-		t_intersection *t = find_closest_intersection(rt->ts, rt->n_ts);
+		t = find_closest_intersection(rt->ts, rt->n_ts);
 		if (NULL != t)
 		{
 			win->cursor.is_object = true;

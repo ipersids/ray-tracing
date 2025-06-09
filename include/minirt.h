@@ -72,7 +72,7 @@ void		rt_key_hook(mlx_key_data_t k, void* param);
 void		rt_rotate_camera(t_info *rt, t_cursor *cursor, double x, double y);
 void		rt_move_object(t_info *rt, t_cursor *cursor, double x, double y);
 
-int			rt_perform_movement(t_info *rt, t_object *obj, double dx, double dy);
-t_vec3		rt_calculate_movement(t_info *rt, t_point pos, float dx, float dy);
+t_point		rt_get_ray_based_move(t_info *rt, t_point pos, float dx, float dy);
+t_point		rt_get_depth_based_move(t_info *rt, t_point pos, float dy);
 
 #endif // MINIRT_H

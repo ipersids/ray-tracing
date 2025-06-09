@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:52:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 12:27:10 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:56:25 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ static void	move_right(t_info *rt, t_camera *cam);
  * @param k Key function callback data.
  * @param param Pointer to the main program structure.
  */
-void	rt_key_hook(mlx_key_data_t k, void* param)
+void	rt_key_hook(mlx_key_data_t k, void *param)
 {
 	t_info		*rt;
 	t_camera	*camera;
 
 	rt = (t_info *)param;
- 	camera = &rt->camera;
+	camera = &rt->camera;
 	if (k.key == MLX_KEY_W && (k.action == MLX_PRESS || k.action == MLX_REPEAT))
 		move_forward(rt, camera);
 	if (k.key == MLX_KEY_S && (k.action == MLX_PRESS || k.action == MLX_REPEAT))

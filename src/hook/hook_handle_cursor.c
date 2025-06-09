@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:48:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/09 14:11:29 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:57:40 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	rt_cursor_hook(double xpos, double ypos, void *param)
 	}
 	if (cursor->is_object && mlx_is_key_down(rt->win.mlx, MLX_KEY_LEFT_SHIFT))
 	{
-		printf("OBJECT pretends to be rotated\n");
+		printf("OBJECT pretends to be rotated\n"); // delete
 		cursor->last_x = xpos;
 		cursor->last_y = ypos;
 	}

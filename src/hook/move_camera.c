@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:35:17 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/09 13:23:57 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:55:29 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	rt_rotate_camera(t_info *rt, t_cursor *cursor, double x, double y)
 	t_vec3	direction;
 	float	xoffset;
 	float	yoffset;
-	
+
 	xoffset = x - cursor->last_x;
 	yoffset = y - cursor->last_y;
 	cursor->last_x = x;
