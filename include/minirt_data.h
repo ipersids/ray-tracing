@@ -2,6 +2,7 @@
 # define MINIRT_DATA_H
 
 # include <stdbool.h>			// `bool` data type
+# include <limits.h>
 
 /* ---------------------------- Vector  strucrtures ------------------------ */
 
@@ -280,13 +281,15 @@ typedef struct s_object
 
 typedef struct s_cursor
 {
-	float	last_x;
-	float	last_y;
-	float	yaw;
-	float	pitch;
-	bool	is_first;
-	bool	is_dragging;
-}			t_cursor;
+	float		last_x;
+	float		last_y;
+	float		yaw;
+	float		pitch;
+	bool		is_dragging;
+	bool		is_camera;
+	bool		is_object;
+	t_object	*obj_to_move;
+}				t_cursor;
 
 /**
  * @brief Structure representing a window data
@@ -358,6 +361,9 @@ typedef struct s_info
 }					t_info;
 
 /* ------------------------- Parser helper structures ----------------------- */
+
+# define PREVIOUS 0
+# define CURRENT 1
 
 typedef struct s_counter
 {

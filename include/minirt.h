@@ -77,5 +77,8 @@ void		rt_cursor_hook(double xpos, double ypos, void *param);
 void		rt_mouse_hook(mouse_key_t k, action_t a, modifier_key_t m, void *p);
 void		rt_scroll_hook(double xdelta, double ydelta, void *param);
 void		rt_key_hook(mlx_key_data_t k, void* param);
+void		rt_rotate_camera(t_info *rt, t_cursor *cursor, double x, double y);
+void		rt_move_object(t_info *rt, t_cursor *cursor, double x, double y);
+t_vec3		rt_calculate_movement(t_info *rt, t_point pos, float dx, float dy);
 
 #endif // MINIRT_H
