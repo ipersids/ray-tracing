@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:51:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/09 16:54:37 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:20:10 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
-static void	haldle_camera(t_window *win, action_t action);
-static void	haldle_object(t_info *rt, t_window *win, action_t action);
+static void	handle_camera(t_window *win, action_t action);
+static void	handle_object(t_info *rt, t_window *win, action_t action);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -39,14 +39,14 @@ void	rt_mouse_hook(mouse_key_t k, action_t a, modifier_key_t m, void *p)
 	rt = (t_info *)p;
 	win = (t_window *)&rt->win;
 	if (k == MLX_MOUSE_BUTTON_LEFT && !win->cursor.is_object)
-		haldle_camera(win, a);
+		handle_camera(win, a);
 	if (k == MLX_MOUSE_BUTTON_RIGHT && !win->cursor.is_camera)
-		haldle_object(rt, win, a);
+		handle_object(rt, win, a);
 }
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static void	haldle_camera(t_window *win, action_t action)
+static void	handle_camera(t_window *win, action_t action)
 {
 	if (action == MLX_PRESS)
 	{
@@ -57,7 +57,7 @@ static void	haldle_camera(t_window *win, action_t action)
 		win->cursor.is_camera = false;
 }
 
-static void	haldle_object(t_info *rt, t_window *win, action_t action)
+static void	handle_object(t_info *rt, t_window *win, action_t action)
 {
 	t_intersection	*t;
 	t_ray			ray;

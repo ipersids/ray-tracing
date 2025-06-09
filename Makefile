@@ -80,7 +80,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/shapes/cone_cap.c \
 				   \
 				   src/transformation/objects_transform.c src/transformation/view_transform.c \
-				   src/transformation/update_transfom.c \
+				   src/transformation/update_transform.c \
 				   \
 				   \
 				   \

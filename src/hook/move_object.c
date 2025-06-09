@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:48:21 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/09 16:55:09 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:22:15 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,12 @@ static int	perform_movement(t_info *rt, t_object *obj, double dx, double dy)
 		pos = &obj->cy.pos;
 	else if (IS_BONUS && ELEMENT_CONE == obj->id)
 		pos = &obj->co.pos;
-	if (NULL != pos)
-	{
-		if (mlx_is_key_down(rt->win.mlx, MLX_KEY_LEFT_CONTROL))
-			*pos = rt_get_depth_based_move(rt, *pos, dy);
-		else
-			*pos = rt_get_ray_based_move(rt, *pos, dx, dy);
-		exit_code = rt_update_transform(rt, obj, obj->id);
-	}
+	if (!pos)
+		return (ERR_OBJECT_TYPE);
+	if (mlx_is_key_down(rt->win.mlx, MLX_KEY_LEFT_CONTROL))
+		*pos = rt_get_depth_based_move(rt, *pos, dy);
+	else
+		*pos = rt_get_ray_based_move(rt, *pos, dx, dy);
+	exit_code = rt_update_transform(rt, obj, obj->id);
 	return (exit_code);
 }

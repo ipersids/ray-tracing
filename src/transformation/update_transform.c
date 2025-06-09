@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_transfom.c                                  :+:      :+:    :+:   */
+/*   update_transform.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:28:48 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/09 13:10:39 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:17:00 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	rt_update_transform(t_info *rt, void *obj, t_type id)
 		exit_code = rt_cylinder_transform(&(shape->cy));
 	else if (IS_BONUS && ELEMENT_CONE == id)
 		exit_code = rt_cone_transform(&(shape->co));
-	else if (ELEMENT_UKNOWN <= id)
+	else if (ELEMENT_UNKNOWN <= id)
 		exit_code = ERR_OBJECT_TYPE;
 	return (exit_code);
 }
