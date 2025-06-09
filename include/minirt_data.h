@@ -2,6 +2,7 @@
 # define MINIRT_DATA_H
 
 # include <stdbool.h>			// `bool` data type
+# include <limits.h>
 
 /* ---------------------------- Vector  strucrtures ------------------------ */
 
@@ -59,6 +60,9 @@ typedef struct s_submatrix_var
 # ifndef IS_BONUS
 #  define IS_BONUS 0
 # endif
+
+# define PREVIOUS 0
+# define CURRENT 1
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -124,7 +128,7 @@ typedef enum e_type
 	ELEMENT_PLANE,
 	ELEMENT_CYLINDER,
 	ELEMENT_CONE,
-	ELEMENT_UKNOWN,
+	ELEMENT_UNKNOWN,
 	ELEMENT_CYLINDER_CAP,
 	ELEMENT_CONE_CAP,
 }	t_type;
@@ -142,6 +146,7 @@ typedef enum e_type
  * Fot minimum value used -MAX_PITCH
  */
 # define MAX_PITCH 60.0f
+# define Z_DRIFT_DAMPING 1.0f
 
 typedef struct s_camera
 {
@@ -280,13 +285,14 @@ typedef struct s_object
 
 typedef struct s_cursor
 {
-	float	last_x;
-	float	last_y;
-	float	yaw;
-	float	pitch;
-	bool	is_first;
-	bool	is_dragging;
-}			t_cursor;
+	float		last_x;
+	float		last_y;
+	float		yaw;
+	float		pitch;
+	bool		is_camera;
+	bool		is_object;
+	t_object	*obj_to_move;
+}				t_cursor;
 
 /**
  * @brief Structure representing a window data

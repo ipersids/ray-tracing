@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:46:10 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 16:12:07 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/09 13:31:25 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,4 @@ void	rt_set_cursor(t_info *rt)
 		rt->win.cursor.yaw -= 360.0f;
 	while (-180.0f > rt->win.cursor.yaw)
 		rt->win.cursor.yaw += 360.0f;
-	rt->win.cursor.is_first = true;
-	rt->win.cursor.is_dragging = false;
 }

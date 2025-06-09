@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:58:48 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 02:11:41 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:17:30 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static t_type	get_object_type(char *line)
 		return (ELEMENT_CYLINDER);
 	if (IS_BONUS && ft_strncmp(line, "co", 2) == 0 && ft_isspace(line[2]))
 		return (ELEMENT_CONE);
-	return (ELEMENT_UKNOWN);
+	return (ELEMENT_UNKNOWN);
 }
 
 static int	validate_object_type(t_counter *cnt, char **scene)
@@ -113,7 +113,7 @@ static int	validate_object_type(t_counter *cnt, char **scene)
 			cnt->camera += 1;
 		else if (ELEMENT_LIGHT == type)
 			cnt->lights += 1;
-		else if (ELEMENT_UKNOWN != type)
+		else if (ELEMENT_UNKNOWN != type)
 			cnt->figures += 1;
 		else
 			return (ERR_OBJECT_TYPE);

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook_rotate_camera.c                               :+:      :+:    :+:   */
+/*   move_camera.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 15:48:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 20:18:43 by ipersids         ###   ########.fr       */
+/*   Created: 2025/06/09 02:35:17 by ipersids          #+#    #+#             */
+/*   Updated: 2025/06/09 16:55:29 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/* --------------------- Private function prototypes ----------------------- */
+/* --------------------------- Public Functions ---------------------------- */
 
 /**
  * @brief Applies the calculated rotation to the camera.
@@ -23,53 +23,12 @@
  * @param y Current y position of the mouse.
  * @note Exits the program if the camera transform fails.
  */
-static void	handle_rotation(t_info *rt, t_cursor *cursor, double x, double y);
-
-/* --------------------------- Public Functions ---------------------------- */
-
-/**
- * @brief Handles mouse movement events for camera rotation.
- * 
- * When dragging is active, calculates the offset of the cursor,
- * updates `yaw` and `pitch`, clamps pitch to avoid flipping,
- * and updates the camera's forward direction and view transform.
- *
- * @param xpos Current x position of the mouse.
- * @param ypos Current y position of the mouse.
- * @param param Pointer to the main program structure (t_info*).
- */
-void	rt_cursor_hook(double xpos, double ypos, void *param)
-{
-	t_info		*rt;
-	t_cursor	*cursor;
-
-	rt = (t_info *)param;
-	cursor = &rt->win.cursor;
-	if (!cursor->is_dragging)
-	{
-		cursor->last_x = xpos;
-		cursor->last_y = ypos;
-		return ;
-	}
-	if (cursor->is_first)
-	{
-		cursor->last_x = xpos;
-		cursor->last_y = ypos;
-		cursor->is_first = false;
-		return ;
-	}
-	handle_rotation(rt, cursor, xpos, ypos);
-	rt->win.rendered = false;
-}
-
-/* ------------------- Private Function Implementation --------------------- */
-
-static void	handle_rotation(t_info *rt, t_cursor *cursor, double x, double y)
+void	rt_rotate_camera(t_info *rt, t_cursor *cursor, double x, double y)
 {
 	t_vec3	direction;
 	float	xoffset;
 	float	yoffset;
-	
+
 	xoffset = x - cursor->last_x;
 	yoffset = y - cursor->last_y;
 	cursor->last_x = x;
