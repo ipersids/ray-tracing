@@ -70,6 +70,7 @@ void		rt_scroll_hook(double xdelta, double ydelta, void *param);
 void		rt_key_hook(mlx_key_data_t k, void* param);
 
 void		rt_rotate_camera(t_info *rt, t_cursor *cursor, double x, double y);
+void		rt_move_camera(t_info *rt, mlx_key_data_t *key);
 void		rt_move_object(t_info *rt, t_cursor *cursor, double x, double y);
 
 t_point		rt_get_ray_based_move(t_info *rt, t_point pos, float dx, float dy);
