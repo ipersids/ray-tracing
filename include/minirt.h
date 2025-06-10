@@ -72,6 +72,7 @@ void		rt_key_hook(mlx_key_data_t k, void* param);
 void		rt_rotate_camera(t_info *rt, t_cursor *cursor, double x, double y);
 void		rt_move_camera(t_info *rt, mlx_key_data_t *key);
 void		rt_move_object(t_info *rt, t_cursor *cursor, double x, double y);
+void		rt_scale_object(t_info *rt, t_object *obj, mlx_key_data_t *key);
 
 t_point		rt_get_ray_based_move(t_info *rt, t_point pos, float dx, float dy);
 t_point		rt_get_depth_based_move(t_info *rt, t_point pos, float dy);

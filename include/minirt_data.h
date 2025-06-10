@@ -135,7 +135,7 @@ typedef enum e_type
 
 # define LIMIT_COORD 1000.0f
 # define MAX_SIZE 500.0f // size (height, width ...)
-# define MIN_SIZE 0.001f // size (height, width ...)
+# define MIN_SIZE 0.1f // size (height, width ...)
 
 /**
  * @brief Pitch angle limit
