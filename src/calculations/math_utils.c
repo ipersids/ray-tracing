@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:10:03 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 14:10:19 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/09 20:46:26 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,22 @@ __attribute__((always_inline)) inline void	swapf(float *t1, float *t2)
 	tmp = *t1;
 	*t1 = *t2;
 	*t2 = tmp;
+}
+
+/**
+ * @brief Clamps a float value to a specified range [min, max].
+ *
+ * @param n The value to clamp.
+ * @param min The minimum allowable value.
+ * @param max The maximum allowable value.
+ * @return float The clamped value.
+ */
+__attribute__((always_inline)) inline float
+	clampf(float n, float min, float max)
+{
+	if (n < min)
+		return (min);
+	if (n > max)
+		return (max);
+	return (n);
 }

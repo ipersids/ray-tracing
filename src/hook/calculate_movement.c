@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:56:08 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/09 16:51:11 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/09 21:07:56 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,10 @@ t_point	rt_get_ray_based_move(t_info *rt, t_point pos, float dx, float dy)
 
 t_point	rt_get_depth_based_move(t_info *rt, t_point pos, float dy)
 {
-	const float	limiter = 0.1f;
-	const float	sensitivity = 0.002f;
-	float		depth;
-	t_point		point;
 	t_vec3		move;
 
-	point = matrix_multiply_point(rt->camera.inv_transform, pos);
-	depth = -point.z;
-	if (depth < limiter)
-		depth = limiter;
-	move = multiplication(rt->camera.forward, -dy * depth * sensitivity);
+	move = (t_vec3){0.0f, 0.0f, -dy * CURSOR_SENSITIVITY};
+	move = matrix_multiply_vector(rt->camera.inv_transform, move);
 	return (addition(pos, move));
 }
 

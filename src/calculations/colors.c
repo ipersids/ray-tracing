@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:34:04 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 13:26:05 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/06/09 20:48:03 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-/* --------------------- Private function prototypes ----------------------- */
-
-/**
- * @brief Clamps a float value to a specified range [min, max].
- *
- * @param n The value to clamp.
- * @param min The minimum allowable value.
- * @param max The maximum allowable value.
- * @return float The clamped value.
- */
-static inline float	rt_clampf(float n, float min, float max);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -69,20 +57,9 @@ uint32_t	rt_convert_to_rgba(const t_color *color)
 	int32_t	b;
 	int32_t	a;
 
-	r = (int32_t)(rt_clampf(color->x, 0.0f, 1.0f) * 255.0f);
-	g = (int32_t)(rt_clampf(color->y, 0.0f, 1.0f) * 255.0f);
-	b = (int32_t)(rt_clampf(color->z, 0.0f, 1.0f) * 255.0f);
+	r = (int32_t)(clampf(color->x, 0.0f, 1.0f) * 255.0f);
+	g = (int32_t)(clampf(color->y, 0.0f, 1.0f) * 255.0f);
+	b = (int32_t)(clampf(color->z, 0.0f, 1.0f) * 255.0f);
 	a = 255;
 	return ((r << 24) | (g << 16) | (b << 8) | a);
-}
-
-/* ------------------- Private Function Implementation --------------------- */
-
-static inline float	rt_clampf(float n, float min, float max)
-{
-	if (n < min)
-		return (min);
-	if (n > max)
-		return (max);
-	return (n);
 }
