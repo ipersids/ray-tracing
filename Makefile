@@ -58,6 +58,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/hook/hook_handle_keys.c src/hook/move_camera.c \
 				   src/hook/move_object.c src/hook/calculate_movement.c \
 				   src/hook/reset_camera.c src/hook/scale_object.c \
+				   src/hook/rotate_camera.c src/hook/rotate_object.c \
 				   \
 				   src/renderer/camera.c src/renderer/color_at.c \
 				   src/renderer/intersect_world.c src/renderer/normal_at.c \

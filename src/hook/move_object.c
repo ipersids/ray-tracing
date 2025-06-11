@@ -6,13 +6,17 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:48:21 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/09 17:22:15 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 11:45:14 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/* --------------------- Private function prototypes ----------------------- */
+
 static int	perform_movement(t_info *rt, t_object *obj, double dx, double dy);
+
+/* --------------------------- Public Functions ---------------------------- */
 
 void	rt_move_object(t_info *rt, t_cursor *cursor, double x, double y)
 {
@@ -28,10 +32,13 @@ void	rt_move_object(t_info *rt, t_cursor *cursor, double x, double y)
 	exit_code = perform_movement(rt, cursor->obj_to_move, xoffset, yoffset);
 	if (0 != exit_code)
 	{
-		ft_putstr_fd("Object movement fails:\n", STDERR_FILENO);
+		ft_putstr_fd("Object transform fails (movement):\n", STDERR_FILENO);
 		rt_destroy_exit(rt, exit_code);
 	}
+	rt->win.rendered = false;
 }
+
+/* ------------------- Private Function Implementation --------------------- */
 
 static int	perform_movement(t_info *rt, t_object *obj, double dx, double dy)
 {

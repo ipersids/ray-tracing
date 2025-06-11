@@ -145,8 +145,10 @@ typedef enum e_type
  * 
  * Fot minimum value used -MAX_PITCH
  */
-# define MAX_PITCH 60.0f
+# define MAX_PITCH_CAMERA 60.0f
+# define MAX_PITCH_OBJECT 89.0f
 # define Z_DRIFT_DAMPING 1.0f
+# define ROTATION_STEP 5.0f
 
 typedef struct s_camera
 {

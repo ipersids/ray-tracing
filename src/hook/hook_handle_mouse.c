@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:51:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/09 17:20:10 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 13:47:28 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void	handle_camera(t_window *win, action_t action)
 		win->cursor.is_camera = false;
 }
 
+/// @todo create intersect_world lite
 static void	handle_object(t_info *rt, t_window *win, action_t action)
 {
 	t_intersection	*t;

@@ -6,15 +6,19 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:39:00 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/10 18:11:33 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 11:39:59 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/* --------------------- Private function prototypes ----------------------- */
+
 static bool	scale_sphere(t_sphere *sp, float factor);
 static bool	scale_cylinder(t_cylinder *cy, float factor);
 static bool	scale_cone(t_cone *cy, float factor);
+
+/* --------------------------- Public Functions ---------------------------- */
 
 void	rt_scale_object(t_info *rt, t_object *obj, mlx_key_data_t *key)
 {
@@ -35,7 +39,10 @@ void	rt_scale_object(t_info *rt, t_object *obj, mlx_key_data_t *key)
 		return ;
 	if (0 != rt_update_transform(rt, obj, obj->id))
 		rt_destroy_exit(rt, ERR_MATRIX_NON_INVERSIBLE);
+	rt->win.rendered = false;
 }
+
+/* ------------------- Private Function Implementation --------------------- */
 
 static bool	scale_sphere(t_sphere *sp, float factor)
 {
