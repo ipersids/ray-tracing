@@ -149,13 +149,12 @@ $(OBJ_DIR)/%_bonus.o: $(SRC_DIR)/%.c $(H_FILES)
 	$(CC) $(CFLAGS_BONUS) $(HDRS)  -c $< -o $@
 
 # TESTING
-TEST_SRC		:= tests/test_matrix_math.c \
+TEST_SRC		:= tests/test_main.c \
+				   tests/test_matrix_math.c \
 				   tests/test_matrix_transformation.c tests/test_camera.c \
 				   tests/test_cone.c tests/test_parser.c
 
-OBJ_TEST_SRC	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%_test.o, $(TEST_SRC))
-TEST_MAIN		:= tests/test_main.c
-OBJ_TEST_MAIN	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%_test.o, $(TEST_MAIN))
+OBJ_TEST_SRC	:= $(patsubst %.c, $(OBJ_DIR)/%_test.o, $(TEST_SRC))
 
 NAME_TEST		:= miniRT_test
 
@@ -168,15 +167,15 @@ endif
 test: update-submodule build-submodule $(NAME_TEST)
 	./miniRT_test
 
-$(NAME_TEST): $(OBJS) ${OBJ_TEST_SRC} $(OBJ_TEST_MAIN) $(TEST_SRC) $(TEST_MAIN)
-	$(CC) $(CFLAGS_TEST) $(OBJS) $(OBJ_TEST_SRC) $(OBJ_TEST_MAIN) $(HDRS) $(LIBS) -o $(NAME_TEST)
+$(NAME_TEST): $(OBJS) ${OBJ_TEST_SRC}
+	$(CC) $(CFLAGS_TEST) $(OBJS) $(OBJ_TEST_SRC) $(HDRS) $(LIBS) -o $(NAME_TEST)
 
-$(OBJ_DIR)/%_test.o: $(SRC_DIR)/%.c $(H_FILES)
+$(OBJ_DIR)/tests/%_test.o: tests/%.c $(H_FILES)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS_TEST) $(HDRS)  -c $< -o $@
 
 tclean:
-	$(RM_DIR) ${OBJ_TEST_SRC} $(OBJ_TEST_MAIN)
+	$(RM_DIR) $(OBJ_DIR)/tests
 	$(RM) $(NAME_TEST)
 
 .PHONY: all clean fclean re update-submodule build-submodule
