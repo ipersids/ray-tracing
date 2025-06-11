@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:55:39 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 16:18:31 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:23:04 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,27 @@ void	rt_set_material(t_color ambient, t_object *obj, t_mtype type)
 {
 	if (ELEMENT_SPHERE == obj->id)
 	{
-		obj->sp.material = rt_init_material(ambient, obj->sp.color, type);
+		obj->sp.material = rt_init_material(ambient, obj->color, type);
 		obj->material = &obj->sp.material;
 		obj->material->reflective = 0.5;
 		//obj->material->pattern = set_stripe_pattern(BLACK, WHITE, 0.01f, M_PI / 3);
 	}
 	else if (ELEMENT_CYLINDER == obj->id)
 	{
-		obj->cy.material = rt_init_material(ambient, obj->cy.color, type);
+		obj->cy.material = rt_init_material(ambient, obj->color, type);
 		obj->material = &obj->cy.material;
 		obj->material->reflective = 0.5;
 	}
 	else if (ELEMENT_PLANE == obj->id)
 	{
-		obj->pl.material = rt_init_material(ambient, obj->pl.color, type);
+		obj->pl.material = rt_init_material(ambient, obj->color, type);
 		obj->material = &obj->pl.material;
 		//obj->material->reflective = 0.6f;
 		obj->material->pattern = set_checker_pattern(WHITE, BLACK, 10.0f);
 	}
 	else if (ELEMENT_CONE == obj->id)
 	{
-		obj->co.material = rt_init_material(ambient, obj->co.color, type);
+		obj->co.material = rt_init_material(ambient, obj->color, type);
 		obj->material = &obj->co.material;
 		obj->material->reflective = 0.6f;
 		// obj->material->pattern = set_gradient_pattern(WHITE, BLACK, 10.0f);

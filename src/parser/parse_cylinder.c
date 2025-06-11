@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:35:22 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 16:27:47 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:22:14 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	rt_parse_cylinder(t_info *rt, char *line)
 	exit_code = parse_diam_and_height(rt, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
-	exit_code = rt_parse_color(&rt->objs[i].cy.color, &line, &next);
+	exit_code = rt_parse_color(&rt->objs[i].color, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
 	exit_code = rt_validate_end_of_line(&line, &next);

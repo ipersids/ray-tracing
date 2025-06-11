@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 19:32:11 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 16:27:03 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:22:08 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	rt_parse_cone(t_info *rt, char *line)
 	exit_code = parse_radius_and_height(rt, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
-	exit_code = rt_parse_color(&rt->objs[i].co.color, &line, &next);
+	exit_code = rt_parse_color(&rt->objs[i].color, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
 	exit_code = rt_validate_end_of_line(&line, &next);

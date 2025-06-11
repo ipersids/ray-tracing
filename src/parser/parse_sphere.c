@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:49:23 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 13:48:33 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:22:34 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	rt_parse_sphere(t_info *rt, char *line)
 	if (rt->objs[i].sp.scale < MIN_SIZE || rt->objs[i].sp.scale > MAX_SIZE)
 		return (ERR_OBJECT_CONFIG_LIMITS);
 	rt->objs[i].sp.scale = rt->objs[i].sp.scale / 2.0f;
-	exit_code = rt_parse_color(&rt->objs[i].sp.color, &line, &next);
+	exit_code = rt_parse_color(&rt->objs[i].color, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
 	exit_code = rt_validate_end_of_line(&line, &next);

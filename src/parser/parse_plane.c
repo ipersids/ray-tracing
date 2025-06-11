@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:40:19 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 16:28:22 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:22:24 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	rt_parse_plane(t_info *rt, char *line)
 	if (equal(magnitude(rt->objs[i].pl.dir), 0.0f))
 		return (ERR_OBJECT_ORIENT_VECTOR);
 	rt->objs[i].pl.dir = normalize(rt->objs[i].pl.dir);
-	exit_code = rt_parse_color(&rt->objs[i].pl.color, &line, &next);
+	exit_code = rt_parse_color(&rt->objs[i].color, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
 	exit_code = rt_validate_end_of_line(&line, &next);

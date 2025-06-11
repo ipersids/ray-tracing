@@ -2,7 +2,7 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
-static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt);
+static t_phong_vars	precompute_data(t_intersection *t, t_ray *ray, t_info *rt);
 static t_color		lighting(t_phong_vars vars, t_material m, t_light *light, bool in_shadow);
 static bool			light_behind_surface(float l_dot_norm);
 static bool			in_shadow(t_info *rt, t_point point);
@@ -32,7 +32,7 @@ t_color	rt_color_at(t_info *rt, t_ray *ray, int ray_bounces)
 	t = find_closest_intersection(rt->ts, rt->n_ts);
 	if (NULL == t)
 		return ((t_color){0.0f, 0.0f, 0.0f});
-	vars = prepare_shading(t, ray, rt);
+	vars = precompute_data(t, ray, rt);
 	if (!rt->lights)
 		return (vars.obj->material->ambient_comp);
 	shadowed = in_shadow(rt, vars.point);
@@ -43,7 +43,7 @@ t_color	rt_color_at(t_info *rt, t_ray *ray, int ray_bounces)
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt)
+static t_phong_vars	precompute_data(t_intersection *t, t_ray *ray, t_info *rt)
 {
 	t_phong_vars	vars;
 
