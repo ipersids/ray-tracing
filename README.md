@@ -5,6 +5,8 @@
 
 </div>
 
+[![MiniRT Unit Tests](https://github.com/ipersids/ray-tracing/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/ipersids/ray-tracing/actions/workflows/unit-tests.yml)
+
 #### Introduction   
 MiniRT is a rendering program that uses ray tracing technology to create realistic images with a given configuration.  
 
