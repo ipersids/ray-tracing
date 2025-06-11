@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:51:04 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 22:20:05 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 23:07:41 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ int	rt_set_transformations(t_info *rt)
 	exit_code = 0;
 	while (rt->n_objs > i && !exit_code)
 	{
-		exit_code = rt_update_transform(rt, &rt->objs[i], rt->objs[i].id);
-		if (!exit_code)
-			rt_set_material(rt, &rt->objs[i]);
+		rt_set_material(rt, &rt->objs[i]);
 		++i;
 	}
 	return (exit_code);

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:35:22 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 19:22:14 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 23:06:49 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
  * @note could not be negative or approximately equal zero (less then EPSILON)
  */
 static int	parse_diam_and_height(t_info *rt, char **startptr, char **endptr);
+
+static int	parse_direction(t_info *rt, char **line, char **next);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -46,24 +48,39 @@ int	rt_parse_cylinder(t_info *rt, char *line)
 	exit_code = rt_parse_coord(&rt->objs[i].cy.pos, &line, &next, false);
 	if (0 != exit_code)
 		return (exit_code);
-	exit_code = rt_parse_coord(&rt->objs[i].cy.dir, &line, &next, true);
+	exit_code = parse_direction(rt, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
-	if (equal(magnitude(rt->objs[i].cy.dir), 0.0f))
-		return (ERR_OBJECT_ORIENT_VECTOR);
-	rt->objs[i].cy.dir = normalize(rt->objs[i].cy.dir);
 	exit_code = parse_diam_and_height(rt, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
 	exit_code = rt_parse_color(&rt->objs[i].color, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
+	if (0 != rt_update_transform(rt, &rt->objs[i], rt->objs[i].id))
+		return (ERR_MATRIX_NON_INVERSIBLE);
 	exit_code = rt_validate_end_of_line(&line, &next);
 	rt->n_objs += 1;
 	return (exit_code);
 }
 
 /* ------------------- Private Function Implementation --------------------- */
+
+static int	parse_direction(t_info *rt, char **line, char **next)
+{
+	int		exit_code;
+	size_t	i;
+
+	exit_code = 0;
+	i = rt->n_objs;
+	exit_code = rt_parse_coord(&rt->objs[i].cy.dir, line, next, true);
+	if (0 != exit_code)
+		return (exit_code);
+	if (equal(magnitude(rt->objs[i].cy.dir), 0.0f))
+		return (ERR_OBJECT_ORIENT_VECTOR);
+	rt->objs[i].cy.dir = normalize(rt->objs[i].cy.dir);
+	return (exit_code);
+}
 
 static int	parse_diam_and_height(t_info *rt, char **startptr, char **endptr)
 {

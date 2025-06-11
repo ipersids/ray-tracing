@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:40:19 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 19:22:24 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 23:06:00 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	rt_parse_plane(t_info *rt, char *line)
 	size_t	i;
 
 	next = NULL;
-	exit_code = 0;
 	i = rt->n_objs;
 	rt->objs[i].id = ELEMENT_PLANE;
 	exit_code = rt_parse_coord(&rt->objs[i].pl.pos, &line, &next, false);
@@ -43,6 +42,8 @@ int	rt_parse_plane(t_info *rt, char *line)
 	exit_code = rt_parse_color(&rt->objs[i].color, &line, &next);
 	if (0 != exit_code)
 		return (exit_code);
+	if (0 != rt_update_transform(rt, &rt->objs[i], rt->objs[i].id))
+		return (ERR_MATRIX_NON_INVERSIBLE);
 	exit_code = rt_validate_end_of_line(&line, &next);
 	rt->n_objs += 1;
 	return (exit_code);
