@@ -10,17 +10,36 @@ MiniRT is a rendering program that uses ray tracing technology to create realist
 
 #### Table of Contents  
 - [Features](#features)  
+- [Controls](#controls)
 - [Project structure](#project-structure)  
 - [Installation](#installation)  
 
 ## Features  
 
 - [x] Scene description parsed from `.rt` files.  
-- [x] Custom math and vector utilities.   
-- [x] Real-time rendering with MLX42 (42 School's graphical library).  
-- [ ] Simple ray tracer supporting spheres, planes, and cylinders.  
+- [x] Custom math, matrix and vector utilities.   
+- [x] Real-time rendering with MLX42 graphical library.  
+- [x] Simple ray tracer supporting spheres, planes, cylinders, and cones.  
 - [x] Point and ambient lighting with basic shading.  
 - [x] Camera with field of view and orientation control.  
+- [x] Shading, shadows and patterns.
+- [x] Reflection.
+- [ ] Refraction.
+
+## Controls
+
+| Action                                 | Key / Mouse                             | Description                                      |
+|----------------------------------------|-----------------------------------------|--------------------------------------------------|
+| Move camera                            | `W` / `A` / `S` / `D`                   | Move camera forward, left, back, right           |
+| Rotate camera                          | Left Mouse Drag                         | Rotate camera view                               |
+| Reset camera                           | `R`                                     | Reset camera to default position/orientation     |
+| Zoom camera                            | Mouse Scroll                            | Zoom in/out (FOV)                                |
+| Select & manipulate object             | Right Mouse Button                      | Select object under cursor for manipulation      |
+| Move selected object (screen plane)    | Right Mouse Drag                        | Move object in screen plane                      |
+| Move selected object (depth)           | `Ctrl` + Right Mouse Drag               | Move object along view direction                 |
+| Rotate selected object                 | `W` / `A` / `S` / `D` (object selected) | Rotate object (pitch/yaw)                        |
+| Scale selected object                  | `+` / `-` (object selected)             | Scale object up/down                             |
+| Exit                                   | `ESC`                                   | Exit program                                     |
 
 ## Project structure
 
