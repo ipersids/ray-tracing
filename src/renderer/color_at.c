@@ -34,7 +34,7 @@ t_color	rt_color_at(t_info *rt, t_ray *ray, int ray_bounces)
 		return ((t_color){0.0f, 0.0f, 0.0f});
 	vars = precompute_data(t, ray, rt);
 	if (!rt->lights)
-		return (vars.obj->material->ambient_comp);
+		return (multiply_colors(vars.obj->color, rt->amb_intensity));
 	shadowed = in_shadow(rt, vars.point);
 	surface = lighting(vars, *vars.obj->material, rt->lights, shadowed);
 	reflected = reflected_color(rt, vars, ray_bounces);
@@ -49,6 +49,7 @@ static t_phong_vars	precompute_data(t_intersection *t, t_ray *ray, t_info *rt)
 
 	vars.t = t->t;
 	vars.obj = &rt->objs[t->i_object];
+	// vars.amb_component = multiply_colors(vars.obj->color, rt->amb_intensity);
 	vars.point = ray_hit(*ray, t->t);
 	vars.eyev = negation(ray->dir);
 	vars.normalv = rt_normal_at(vars.obj, vars.point, t->obj_type);
@@ -70,14 +71,14 @@ static t_color	lighting(t_phong_vars vars, t_material m, t_light *light, bool in
 	t_color			surface_color;
 
 	if (!light)
-		return (m.ambient_comp);
+		return (vars.obj->amb_component);
 	if (m.pattern.has_pattern == true)
 		surface_color = pattern_at_object(m.pattern, *vars.obj, vars.point);
 	else
-		surface_color = m.color;
+		surface_color = vars.obj->color;
  	pc.eff_col = multiply_colors(surface_color, light[0].intensity);
  	pc.lightv = normalize(subtraction(light[0].pos, vars.point));
- 	pc.amb = multiply_colors(pc.eff_col, m.ambient_comp);
+ 	pc.amb = multiply_colors(pc.eff_col, vars.obj->amb_component);
 	if (in_shadow)
 		return (pc.amb);
  	pc.l_dot_norm = dot_product(pc.lightv, vars.normalv);

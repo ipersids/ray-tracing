@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:51:04 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/09 12:41:49 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 22:20:05 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,11 @@ int	rt_set_transformations(t_info *rt)
 
 	i = 0;
 	exit_code = 0;
-	if (0 != rt_update_transform(rt, NULL, ELEMENT_CAMERA))
-		return (ERR_CAMERA_NON_INVERSIBLE);
 	while (rt->n_objs > i && !exit_code)
 	{
 		exit_code = rt_update_transform(rt, &rt->objs[i], rt->objs[i].id);
 		if (!exit_code)
-			rt_set_material(rt->amb_intensity, &rt->objs[i], i % MATERIAL_MAX);
+			rt_set_material(rt, &rt->objs[i]);
 		++i;
 	}
 	return (exit_code);

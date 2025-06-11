@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 20:20:47 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 20:28:51 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	rt_init_info(t_info *rt)
 	init_ambient(&rt->amb_intensity);
 	init_camera(&rt->camera);
 	init_window(&rt->win);
+	rt_init_material(rt->materials);
 }
 
 /* ------------------- Private Function Implementation --------------------- */

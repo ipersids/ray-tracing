@@ -37,9 +37,12 @@
 /// @dir src/constructor
 
 void		rt_init_info(t_info *rt);
-int			rt_init_objects(t_counter *cnt, t_info *rt);
+int			rt_allocate_memory(t_counter *cnt, t_info *rt);
 int			rt_init_window(t_info *rt);
-t_material	rt_init_material(t_color ambient, t_color obj_color, t_mtype type);
+void		rt_init_cursor(t_info *rt);
+void		rt_init_material(t_material *materials);
+
+t_material	init_default_material(void);
 
 /* ----------------------------- Transformations ---------------------------- */
 

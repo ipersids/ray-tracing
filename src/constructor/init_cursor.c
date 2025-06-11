@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_cursor.c                                       :+:      :+:    :+:   */
+/*   init_cursor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:46:10 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 13:52:44 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 22:21:57 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  * 
  * @param rt Pointer to the main program structure (t_info*).
  */
-void	rt_set_cursor(t_info *rt)
+void	rt_init_cursor(t_info *rt)
 {
 	t_vec3	*forward;
 

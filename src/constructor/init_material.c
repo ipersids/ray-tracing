@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 14:39:26 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 18:57:32 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 22:06:01 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
-static t_material	init_default(t_color ambient, t_color mcolor);
+// static t_material	init_default_material(void);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -26,28 +26,22 @@ static t_material	init_default(t_color ambient, t_color mcolor);
  * @param type Material type.
  * @return t_material The initialized material.
  */
-t_material	rt_init_material(t_color ambient, t_color obj_color, t_mtype type)
+void	rt_init_material(t_material *materials)
 {
-	t_color	ambient_component;
-
-	ambient_component = multiply_colors(ambient, obj_color);
-	if (MATERIAL_DEFAULT == type)
-		return (init_default(ambient_component, obj_color));
-	return (init_default(ambient_component, obj_color));
+	materials[MATERIAL_DEFAULT] = init_default_material();
 }
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static t_material	init_default(t_color ambient, t_color mcolor)
+t_material	init_default_material(void)
 {
 	t_material	res;
 
-	(void)mcolor;
-	ft_memset(&res, 0, sizeof(t_material));
-	res.ambient_comp = ambient;
-	res.color = mcolor;
-	res.diffuse = 0.9;
-	res.specular = 0.9;
-	res.shininess = 200.0;
+	res.diffuse = 0.9f;
+	res.specular = 0.9f;
+	res.shininess = 200.0f;
+	res.reflective = 0.0f;
+	res.refractive = 1.0f;
+	res.trasporancy = 0.0f;
 	return (res);
 }

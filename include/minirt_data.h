@@ -173,7 +173,8 @@ typedef enum e_pattype
 	PATTERN_RING,
 	PATTERN_GRADIENT,
 	PATTERN_CHECKER,
-	PATTERN_RADIANT_GRADIENT
+	PATTERN_RADIANT_GRADIENT,
+	PATTERN_MAX
 }			t_pattype;
 
 typedef struct	s_pat
@@ -212,7 +213,6 @@ typedef struct s_sphere
 	float		scale;				// diameter / 2.0f
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
-	t_material	material;
 }				t_sphere;
 
 typedef struct s_plane
@@ -221,7 +221,6 @@ typedef struct s_plane
 	t_vec3		dir;				// 3d norm. orientation vector
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
-	t_material	material;
 }				t_plane;
 
 typedef struct s_cylinder
@@ -232,7 +231,6 @@ typedef struct s_cylinder
 	float		half_height;		// height / 2.0f
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
-	t_material	material;
 }				t_cylinder;
 
 typedef struct s_cone
@@ -243,7 +241,6 @@ typedef struct s_cone
 	float		scale;				// scale factor = 1.0f classic cone
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
-	t_material	material;
 }				t_cone;
 
 typedef struct s_object
@@ -257,6 +254,7 @@ typedef struct s_object
 		t_cone		co;
 	};
 	t_color			color;			// R,G,B colors in range [0.0-1.0]
+	t_color			amb_component;
 	t_material		*material;
 }					t_object;
 
@@ -360,6 +358,8 @@ typedef struct s_info
 	t_intersection	*ts;			// Intersection collection
 	size_t			n_ts;			// Amount t-values in intersection collection
 	size_t			capacity_ts;	// Current capacity in intersection collection
+	t_pat			patterns[PATTERN_MAX];
+	t_material		materials[MATERIAL_MAX];
 }					t_info;
 
 /* ------------------------- Parser helper structures ----------------------- */

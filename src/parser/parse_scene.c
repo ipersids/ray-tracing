@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:58:48 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/09 17:17:30 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 20:24:54 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	rt_parse_scene(t_info *rt, char **scene)
 	exit_code = validate_object_type(&cnt, scene);
 	if (0 != exit_code)
 		return (exit_code);
-	exit_code = rt_init_objects(&cnt, rt);
+	exit_code = rt_allocate_memory(&cnt, rt);
 	if (0 != exit_code)
 		return (exit_code);
 	while (NULL != (*scene))

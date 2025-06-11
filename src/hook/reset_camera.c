@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 11:58:08 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 14:14:20 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 22:24:16 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	handle_camera_settings(t_camera *camera, bool update_saved);
 void	rt_reset_camera(t_info *rt)
 {
 	handle_camera_settings(&rt->camera, false);
-	rt_set_cursor(rt);
+	rt_init_cursor(rt);
 	rt->win.rendered = false;
 }
 

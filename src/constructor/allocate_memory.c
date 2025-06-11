@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_objects.c                                     :+:      :+:    :+:   */
+/*   allocate_memory.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 18:53:41 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/05 13:13:19 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 20:24:02 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * @param rt Pointer to the ray tracing information structure.
  * @return int Returns 0 on success, or ERR_SYSTEM on memory allocation failure.
  */
-int	rt_init_objects(t_counter *cnt, t_info *rt)
+int	rt_allocate_memory(t_counter *cnt, t_info *rt)
 {
 	if (1 <= cnt->figures)
 	{
