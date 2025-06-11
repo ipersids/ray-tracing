@@ -40,7 +40,6 @@ void		rt_init_info(t_info *rt);
 int			rt_allocate_memory(t_counter *cnt, t_info *rt);
 int			rt_init_window(t_info *rt);
 void		rt_init_cursor(t_info *rt);
-void		rt_init_material(t_material *materials);
 
 t_material	init_default_material(void);
 
@@ -53,6 +52,20 @@ int			rt_cone_transform(t_cone *co);
 int			rt_view_transform(t_camera *cam, t_vec3	world_up);
 
 int			rt_update_transform(t_info *rt, void *obj, t_type id);
+
+/* ------------------------ Materials and patterns ------------------------- */
+
+t_material	init_default_material(void);
+t_material	init_lambertian_material(void);
+t_material	init_plastic_material(void);
+t_material	init_metal_material(void);
+t_material	init_rasted_metal_material(void);
+t_material	init_ceramic_material(void);
+t_material	init_mirror_material(void);
+t_material	init_glass_material(void);
+t_material	init_diamond_material(void);
+t_material	init_water_material(void);
+t_material	init_ice_material(void);
 
 /* ---------------------- Error and memory management ---------------------- */
 /// @dir src/destructor

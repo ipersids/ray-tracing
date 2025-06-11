@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 20:28:51 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/12 01:05:58 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ static void	init_camera(t_camera *camera);
  * @param window A pointer to the `t_window` structure to be initialized.
  */
 static void	init_window(t_window *window);
+
+/**
+ * @brief Initializes a material with given ambient and object color.
+ */
+static void	rt_init_material(t_material *materials);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -70,4 +75,19 @@ static void	init_window(t_window *window)
 	window->world_up = (t_vec3){0.0f, 1.0f, 0.0f};
 	window->rendered = false;
 	window->resized = false;
+}
+
+static void	rt_init_material(t_material *materials)
+{
+	materials[MATERIAL_DEFAULT] = init_default_material();
+	materials[MATERIAL_LAMBERTIAN] = init_lambertian_material();
+	materials[MATERIAL_METALL] = init_metal_material();
+	materials[MATERIAL_RUSTED_METALL] = init_rasted_metal_material();
+	materials[MATERIAL_GLASS] = init_glass_material();
+	materials[MATERIAL_DIAMOND] = init_diamond_material();
+	materials[MATERIAL_PLASTIC] = init_plastic_material();
+	materials[MATERIAL_CERAMIC] = init_ceramic_material();
+	materials[MATERIAL_MIRROR] = init_mirror_material();
+	materials[MATERIAL_WATER] = init_water_material();
+	materials[MATERIAL_ICE] = init_ice_material();
 }

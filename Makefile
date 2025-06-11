@@ -38,8 +38,10 @@ SRC_DIR			:= src
 
 # Sources and objects
 SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
-				   src/constructor/init_window.c src/constructor/init_material.c \
-				   src/constructor/init_cursor.c \
+				   src/constructor/init_window.c src/constructor/init_cursor.c \
+				   \
+				   src/materials/diffuse_materials.c src/materials/reflective_materials.c \
+				   src/materials/refractive_materials.c \
 				   \
 				   src/destructor/destroy_exit.c src/destructor/free_arr.c \
 				   src/destructor/handle_errors.c \
