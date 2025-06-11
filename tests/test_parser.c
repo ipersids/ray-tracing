@@ -6,11 +6,11 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 00:51:58 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 20:43:31 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:13:42 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_tests.h"
 
 static void test_rt_parse_scene_invalid(void);
 
