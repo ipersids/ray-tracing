@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:51:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 13:47:28 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:09:31 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,19 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
+/**
+ * @brief Handles enabling/disabling camera manipulation mode.
+ * @param win Pointer to the window structure.
+ * @param action Mouse action (MLX_PRESS or MLX_RELEASE).
+ */
 static void	handle_camera(t_window *win, action_t action);
+
+/**
+ * @brief Handles enabling/disabling object manipulation mode.
+ * @param rt Pointer to the main program structure.
+ * @param win Pointer to the window structure.
+ * @param action Mouse action (MLX_PRESS or MLX_RELEASE).
+ */
 static void	handle_object(t_info *rt, t_window *win, action_t action);
 
 /* --------------------------- Public Functions ---------------------------- */
@@ -22,8 +34,16 @@ static void	handle_object(t_info *rt, t_window *win, action_t action);
 /**
  * @brief Handles mouse button events and updates cursor state.
  * 
- * When the left mouse button is pressed, dragging mode is enabled and the
- * current mouse position is stored. When released, dragging mode is disabled.
+ * - Left mouse button:
+ * 	 Enables camera dragging mode (unless object manipulation is active).
+ *   When pressed, sets camera manipulation active and disables object.
+ *   When released, disables camera manipulation.
+ * - Right mouse button:
+ * 	 Enables object selection and manipulation (unless camera is active).
+ *   When pressed, casts a ray from the mouse position, 
+ * 	 finds the closest object under the cursor,
+ *   and enables object manipulation if an object is hit.
+ *   When released, disables object manipulation.
  * 
  * @param k Mouse button identifier.
  * @param a Action type (MLX_PRESS or MLX_RELEASE).
@@ -57,7 +77,6 @@ static void	handle_camera(t_window *win, action_t action)
 		win->cursor.is_camera = false;
 }
 
-/// @todo create intersect_world lite
 static void	handle_object(t_info *rt, t_window *win, action_t action)
 {
 	t_intersection	*t;
@@ -72,8 +91,10 @@ static void	handle_object(t_info *rt, t_window *win, action_t action)
 		win->cursor.is_camera = false;
 		mlx_get_mouse_pos(win->mlx, &x, &y);
 		ray = rt_get_ray(&rt->camera, x, y);
+		/// @todo create intersect_world lite ->
 		rt_intersect_world(rt, &ray);
 		t = find_closest_intersection(rt->ts, rt->n_ts);
+		// <- end todo
 		if (NULL != t)
 		{
 			win->cursor.is_object = true;

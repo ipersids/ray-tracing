@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 11:58:08 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 12:43:27 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:14:20 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,24 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
+/**
+ * @brief Handles saving or restoring camera settings.
+ *
+ * If update_saved is true or this is the first call, saves the camera's current
+ * position, forward vector, and FOV as the reset state. Otherwise, restores the
+ * camera's settings from the saved state.
+ *
+ * @param camera Pointer to the camera structure.
+ * @param update_saved If true, save current settings; if false, restore them.
+ */
 static void	handle_camera_settings(t_camera *camera, bool update_saved);
 
 /* --------------------------- Public Functions ---------------------------- */
 
+/**
+ * @brief Resets the camera to its saved/default position, direction, and FOV.
+ * @param rt Pointer to the main program structure.
+ */
 void	rt_reset_camera(t_info *rt)
 {
 	handle_camera_settings(&rt->camera, false);
@@ -25,6 +39,10 @@ void	rt_reset_camera(t_info *rt)
 	rt->win.rendered = false;
 }
 
+/**
+ * @brief Saves the current camera settings as the reset/default state.
+ * @param camera Pointer to the camera structure.
+ */
 void	rt_save_camera_settings(t_camera *camera)
 {
 	handle_camera_settings(camera, true);

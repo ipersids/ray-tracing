@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:52:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 12:40:10 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:04:58 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,19 @@
 /* --------------------------- Public Functions ---------------------------- */
 
 /**
- * @brief Handles key events and dispatches movement/reset.
- * 
- * @param k Key function callback data.
- * @param param Pointer to the main program structure.
+ * @brief Handles keyboard events for camera and object manipulation.
+ *
+ * If object manipulation is active and WASD is pressed:
+ * 	-> rotates the selected object.
+ * If WASD is pressed (and not manipulating an object):
+ * 	-> moves the camera.
+ * If 'R' is pressed:
+ * 	-> resets the camera to its default position and orientation.
+ * If '-' or '=' ('+') is pressed while manipulating an object:
+ * 	-> scales the selected object.
+ *
+ * @param k Key function callback data (mlx_key_data_t).
+ * @param param Pointer to the main program structure (t_info*).
  */
 void	rt_key_hook(mlx_key_data_t k, void *param)
 {

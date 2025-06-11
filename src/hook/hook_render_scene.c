@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:30:21 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/09 16:57:59 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:10:55 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@ static inline double get_time_ms(void) {
 /* --------------------------- Public Functions ---------------------------- */
 
 /**
- * @brief Hook function to render the scene at a fixed frame rate.
- * 
- * 1. Update elapsed time using the delta time provided by MLX.
- * 2. Render the scene if enough time has passed (based on FPS) and
- *		- if window was resized 
- *		- or if scene has been changed
- *	
- * @param param Pointer to the main program structure (`t_info`).
+ * @brief Hook function to render the scene when needed.
+ *
+ * - Updates the elapsed time using the delta time provided by MLX.
+ * - If the window was resized, resizes the image buffer 
+ *   and resets the resized flag.
+ * - If the scene has not been rendered since the last change, 
+ *   renders the scene, and sets the rendered flag.
+ *
+ * @param param Pointer to the main program structure (t_info*).
  */
 void	rt_render_hook(void *param)
 {
@@ -39,23 +40,19 @@ void	rt_render_hook(void *param)
 	rt = (t_info *)param;
 	win = &rt->win;
 	win->elapsed_time += win->mlx->delta_time;
-	if (win->elapsed_time >= FPS)
+	if (true == win->resized)
 	{
-		win->elapsed_time -= FPS;
-		if (true == win->resized)
-		{
-			if (!mlx_resize_image(win->img, win->width, win->height))
-				rt_destroy_exit(rt, ERR_MLX42);
-			win->resized = false;
-		}
-		if (false == win->rendered)
-		{
-			double start = get_time_ms();
-			rt_camera_render(rt);
-			double end = get_time_ms();
-			printf("Render: %s%.1f%s ms (%dx%d)\n", PRINT_RED, end - start,
-				PRINT_DEFAULT, rt->win.img->width, rt->win.img->height); // delete
-			win->rendered = true;
-		}
+		if (!mlx_resize_image(win->img, win->width, win->height))
+			rt_destroy_exit(rt, ERR_MLX42);
+		win->resized = false;
+	}
+	if (false == win->rendered)
+	{
+		double start = get_time_ms();
+		rt_camera_render(rt);
+		double end = get_time_ms();
+		printf("Render: %s%.1f%s ms (%dx%d)\n", PRINT_RED, end - start,
+			PRINT_DEFAULT, rt->win.img->width, rt->win.img->height); // delete
+		win->rendered = true;
 	}
 }

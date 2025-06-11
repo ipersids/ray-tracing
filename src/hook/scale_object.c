@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:39:00 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 11:39:59 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:33:03 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@ static bool	scale_cone(t_cone *cy, float factor);
 
 /* --------------------------- Public Functions ---------------------------- */
 
+/**
+ * @brief Scales the selected object based on keyboard input.
+ *
+ * Increases or decreases the size of the selected object (sphere, cylinder, 
+ * or cone) when the '=' ('+') or '-' key is pressed.
+ * If the new size would exceed allowed limits -> operation is canceled.
+ * If the object's transform cannot be updated -> program exits with an error.
+ *
+ * @param rt Pointer to the main program structure.
+ * @param obj Pointer to the object to scale.
+ * @param key Pointer to the key event data.
+ */
 void	rt_scale_object(t_info *rt, t_object *obj, mlx_key_data_t *key)
 {
 	float	factor;

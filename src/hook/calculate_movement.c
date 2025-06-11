@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:56:08 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/09 21:07:56 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:01:11 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,29 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
+/**
+ * @brief Projects a point on a ray.
+ * @param pos Pointer to the original point.
+ * @param ray Pointer to the ray.
+ * @return The projected point on the ray.
+ */
 static t_point	project_position(const t_point *pos, const t_ray *ray);
 
 /* --------------------------- Public Functions ---------------------------- */
 
+/**
+ * @brief Calculates a new position based on ray movement.
+ *
+ * Computes the new position of an object by projecting its current position
+ * onto two rays (before and after a cursor move), 
+ * and applying the difference.
+ *
+ * @param rt Pointer to the main program structure.
+ * @param pos The current position.
+ * @param dx Change in x (screen space).
+ * @param dy Change in y (screen space).
+ * @return The new position after movement.
+ */
 t_point	rt_get_ray_based_move(t_info *rt, t_point pos, float dx, float dy)
 {
 	t_ray		ray[2];
@@ -34,6 +53,17 @@ t_point	rt_get_ray_based_move(t_info *rt, t_point pos, float dx, float dy)
 	return (addition(pos, move));
 }
 
+/**
+ * @brief Calculates a new position based on depth movement.
+ *
+ * Moves the position along the camera's view direction, 
+ * scaled by dy and sensitivity.
+ *
+ * @param rt Pointer to the main program structure.
+ * @param pos The current position.
+ * @param dy Change in y (screen space).
+ * @return The new position after movement.
+ */
 t_point	rt_get_depth_based_move(t_info *rt, t_point pos, float dy)
 {
 	t_vec3		move;

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:48:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 11:38:20 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:03:21 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 /* --------------------------- Public Functions ---------------------------- */
 
 /**
- * @brief Handles mouse movement events for camera rotation.
+ * @brief Handles mouse movement events for camera and object manipulation.
  * 
- * When dragging is active, calculates the offset of the cursor,
- * updates `yaw` and `pitch`, clamps pitch to avoid flipping,
- * and updates the camera's forward direction and view transform.
+ * If neither camera nor object manipulation is active: 
+ * 	-> updates the cursor's last position.
+ * If object manipulation is active:
+ * 	-> calls rt_move_object to move the selected object.
+ * If camera manipulation is active:
+ * 	-> calls rt_rotate_camera to rotate the camera.
  *
  * @param xpos Current x position of the mouse.
  * @param ypos Current y position of the mouse.
