@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:46:10 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/09 13:31:25 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 13:52:44 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	rt_set_cursor(t_info *rt)
 
 	forward = &rt->camera.forward;
 	rt->win.cursor.pitch = asinf(-forward->y) * (180.0f / M_PI);
-	if (MAX_PITCH < rt->win.cursor.pitch)
-		rt->win.cursor.pitch = MAX_PITCH;
-	else if (-MAX_PITCH > rt->win.cursor.pitch)
-		rt->win.cursor.pitch = -MAX_PITCH;
+	if (MAX_PITCH_CAMERA < rt->win.cursor.pitch)
+		rt->win.cursor.pitch = MAX_PITCH_CAMERA;
+	else if (-MAX_PITCH_CAMERA > rt->win.cursor.pitch)
+		rt->win.cursor.pitch = -MAX_PITCH_CAMERA;
 	rt->win.cursor.yaw = atan2f(forward->x, forward->z) * (180.0f / M_PI);
 	while (180.0f < rt->win.cursor.yaw)
 		rt->win.cursor.yaw -= 360.0f;

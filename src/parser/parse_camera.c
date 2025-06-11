@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 11:49:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 16:23:37 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 13:52:14 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	rt_parse_camera(t_info *rt, char *line)
 	rt->camera.forward = normalize(rt->camera.forward);
 	if (fabs(dot_product(rt->camera.forward, rt->win.world_up)) > 0.999f)
 		return (ERR_CAMERA_GIMBAL_LOCK);
-	if (fabs(asinf(rt->camera.forward.y) * (180.0f / M_PI)) >= MAX_PITCH)
+	if (fabs(asinf(rt->camera.forward.y) * (180.0f / M_PI)) >= MAX_PITCH_CAMERA)
 		return (ERR_CAMERA_PITCH_ANGLE);
 	while (ft_isspace(*line))
 		++line;

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 02:56:08 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/09 16:51:11 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:01:11 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,29 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
+/**
+ * @brief Projects a point on a ray.
+ * @param pos Pointer to the original point.
+ * @param ray Pointer to the ray.
+ * @return The projected point on the ray.
+ */
 static t_point	project_position(const t_point *pos, const t_ray *ray);
 
 /* --------------------------- Public Functions ---------------------------- */
 
+/**
+ * @brief Calculates a new position based on ray movement.
+ *
+ * Computes the new position of an object by projecting its current position
+ * onto two rays (before and after a cursor move), 
+ * and applying the difference.
+ *
+ * @param rt Pointer to the main program structure.
+ * @param pos The current position.
+ * @param dx Change in x (screen space).
+ * @param dy Change in y (screen space).
+ * @return The new position after movement.
+ */
 t_point	rt_get_ray_based_move(t_info *rt, t_point pos, float dx, float dy)
 {
 	t_ray		ray[2];
@@ -34,19 +53,23 @@ t_point	rt_get_ray_based_move(t_info *rt, t_point pos, float dx, float dy)
 	return (addition(pos, move));
 }
 
+/**
+ * @brief Calculates a new position based on depth movement.
+ *
+ * Moves the position along the camera's view direction, 
+ * scaled by dy and sensitivity.
+ *
+ * @param rt Pointer to the main program structure.
+ * @param pos The current position.
+ * @param dy Change in y (screen space).
+ * @return The new position after movement.
+ */
 t_point	rt_get_depth_based_move(t_info *rt, t_point pos, float dy)
 {
-	const float	limiter = 0.1f;
-	const float	sensitivity = 0.002f;
-	float		depth;
-	t_point		point;
 	t_vec3		move;
 
-	point = matrix_multiply_point(rt->camera.inv_transform, pos);
-	depth = -point.z;
-	if (depth < limiter)
-		depth = limiter;
-	move = multiplication(rt->camera.forward, -dy * depth * sensitivity);
+	move = (t_vec3){0.0f, 0.0f, -dy * CURSOR_SENSITIVITY};
+	move = matrix_multiply_vector(rt->camera.inv_transform, move);
 	return (addition(pos, move));
 }
 

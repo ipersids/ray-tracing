@@ -6,11 +6,11 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 00:37:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 13:54:45 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:12:15 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_tests.h"
 
 void	test_cone(void)
 {

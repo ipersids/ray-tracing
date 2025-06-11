@@ -135,7 +135,7 @@ typedef enum e_type
 
 # define LIMIT_COORD 1000.0f
 # define MAX_SIZE 500.0f // size (height, width ...)
-# define MIN_SIZE 0.001f // size (height, width ...)
+# define MIN_SIZE 0.1f // size (height, width ...)
 
 /**
  * @brief Pitch angle limit
@@ -145,8 +145,10 @@ typedef enum e_type
  * 
  * Fot minimum value used -MAX_PITCH
  */
-# define MAX_PITCH 60.0f
+# define MAX_PITCH_CAMERA 60.0f
+# define MAX_PITCH_OBJECT 89.0f
 # define Z_DRIFT_DAMPING 1.0f
+# define ROTATION_STEP 5.0f
 
 typedef struct s_camera
 {

@@ -6,11 +6,11 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:21:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/05/29 13:13:51 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:12:25 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_tests.h"
 
 void	test_matrix_transformation(void)
 {

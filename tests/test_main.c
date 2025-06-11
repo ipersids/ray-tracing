@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "minirt_tests.h"
 
 static void	run_unit_tests(void)
 {

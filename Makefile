@@ -55,9 +55,10 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/hook/hook_close_window.c src/hook/hook_resize_window.c \
 				   src/hook/hook_render_scene.c src/hook/hook_handle_cursor.c \
 				   src/hook/hook_handle_mouse.c src/hook/hook_zoom_camera.c \
-				   src/hook/hook_walk_around.c src/hook/move_camera.c \
+				   src/hook/hook_handle_keys.c src/hook/move_camera.c \
 				   src/hook/move_object.c src/hook/calculate_movement.c \
-				   src/hook/reset_camera.c \
+				   src/hook/reset_camera.c src/hook/scale_object.c \
+				   src/hook/rotate_camera.c src/hook/rotate_object.c \
 				   \
 				   src/renderer/camera.c src/renderer/color_at.c \
 				   src/renderer/intersect_world.c src/renderer/normal_at.c \
@@ -148,12 +149,12 @@ $(OBJ_DIR)/%_bonus.o: $(SRC_DIR)/%.c $(H_FILES)
 	$(CC) $(CFLAGS_BONUS) $(HDRS)  -c $< -o $@
 
 # TESTING
-TEST_SRC		:= src/display-config/test_matrix_math.c \
-				   src/display-config/test_matrix_transformation.c src/display-config/test_camera.c \
-				   src/display-config/test_cone.c src/display-config/test_parser.c
+TEST_SRC		:= tests/test_matrix_math.c \
+				   tests/test_matrix_transformation.c tests/test_camera.c \
+				   tests/test_cone.c tests/test_parser.c
 
 OBJ_TEST_SRC	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%_test.o, $(TEST_SRC))
-TEST_MAIN		:= src/display-config/test_main.c
+TEST_MAIN		:= tests/test_main.c
 OBJ_TEST_MAIN	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%_test.o, $(TEST_MAIN))
 
 NAME_TEST		:= miniRT_test

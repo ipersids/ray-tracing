@@ -6,11 +6,11 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 01:37:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 16:50:55 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:12:11 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_tests.h"
 
 void test_camera(void) {
 	t_camera cam = {0};
