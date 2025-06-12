@@ -6,19 +6,13 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/12 01:05:58 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:41:55 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /* --------------------- Private function prototypes ----------------------- */
-
-/**
- * @brief Initialize default ambient light settings.
- * @param ambient Pointer to the ambient light structure.
- */
-static void	init_ambient(t_color *ambient_intensity);
 
 /**
  * @brief Initialize default camera settings.
@@ -32,10 +26,9 @@ static void	init_camera(t_camera *camera);
  */
 static void	init_window(t_window *window);
 
-/**
- * @brief Initializes a material with given ambient and object color.
- */
-static void	rt_init_material(t_material *materials);
+
+static void	init_material(t_material *materials);
+static void	init_pattern(t_pat *patterns);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -45,21 +38,18 @@ static void	rt_init_material(t_material *materials);
  */
 void	rt_init_info(t_info *rt)
 {
+	const t_color	color = (t_color){1.0f, 1.0f, 1.0f};
+	const float		ratio = 0.1f;
+
 	ft_memset(rt, 0, sizeof(t_info));
-	init_ambient(&rt->amb_intensity);
+	rt->amb_intensity = multiplication(color, ratio);
 	init_camera(&rt->camera);
 	init_window(&rt->win);
-	rt_init_material(rt->materials);
+	init_material(rt->materials);
+	init_pattern(rt->patterns);
 }
 
 /* ------------------- Private Function Implementation --------------------- */
-
-static void	init_ambient(t_color *ambient_intensity)
-{
-	const t_color	color = (t_color){1.0f, 1.0f, 1.0f};
-	const float		ratio = 0.1f;
-	*ambient_intensity = multiplication(color, ratio);
-}
 
 static void	init_camera(t_camera *cam)
 {
@@ -77,7 +67,7 @@ static void	init_window(t_window *window)
 	window->resized = false;
 }
 
-static void	rt_init_material(t_material *materials)
+static void	init_material(t_material *materials)
 {
 	materials[MATERIAL_DEFAULT] = init_default_material();
 	materials[MATERIAL_LAMBERTIAN] = init_lambertian_material();
@@ -90,4 +80,13 @@ static void	rt_init_material(t_material *materials)
 	materials[MATERIAL_MIRROR] = init_mirror_material();
 	materials[MATERIAL_WATER] = init_water_material();
 	materials[MATERIAL_ICE] = init_ice_material();
+}
+
+static void	init_pattern(t_pat *patterns)
+{
+	patterns[PATTERN_STRIPE] = set_stripe_pattern();
+	patterns[PATTERN_GRADIENT] = set_gradient_pattern();
+	patterns[PATTERN_CHECKER] = set_checker_pattern();
+	// patterns[PATTERN_RADIANT_GRADIENT] = init_glass_pattern();
+	// patterns[PATTERN_RING] = init_lambertian_pattern();
 }

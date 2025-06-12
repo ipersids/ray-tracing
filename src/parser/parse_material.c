@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 11:49:27 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/12 13:19:46 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:43:03 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	rt_parse_material(t_info *rt, char **start)
 	if (MATERIAL_MAX == m_type)
 		return (ERROR_MATERIAL);
 	rt->objs[rt->n_objs].material = &rt->materials[m_type];
-	while (ft_isalpha(**start) || ft_isspace(**start))
+	while (ft_isalpha(**start) || '_' == (**start))
 		++(*start);
 	return (0);
 }

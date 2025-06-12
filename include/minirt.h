@@ -67,6 +67,13 @@ t_material	init_diamond_material(void);
 t_material	init_water_material(void);
 t_material	init_ice_material(void);
 
+// t_pat	set_stripe_pattern(t_color a, t_color b, float scale, float angle_rad);
+// t_pat	set_checker_pattern(t_color a, t_color b, float scale);
+// t_pat	set_gradient_pattern(t_color a, t_color b, float scale);
+t_pat		set_stripe_pattern(void);
+t_pat		set_checker_pattern(void);
+t_pat		set_gradient_pattern(void);
+
 /* ---------------------- Error and memory management ---------------------- */
 /// @dir src/destructor
 

@@ -111,6 +111,7 @@ typedef enum s_error
 	ERROR_REALLOC_INTERSECTIONS,
 	ERROR_EMPTY_SCENE,
 	ERROR_MATERIAL,
+	ERROR_PATTERN,
 	ERR_MAX
 }	t_error;
 
@@ -171,10 +172,10 @@ typedef struct s_light
 typedef enum e_pattype
 {
 	PATTERN_STRIPE,
-	PATTERN_RING,
 	PATTERN_GRADIENT,
 	PATTERN_CHECKER,
-	PATTERN_RADIANT_GRADIENT,
+	// PATTERN_RING,
+	// PATTERN_RADIANT_GRADIENT,
 	PATTERN_MAX
 }			t_pattype;
 
@@ -213,7 +214,6 @@ typedef struct s_material
 	float	reflective;			// 0 non reflective, 1 mirror
 	float	refractive;			// index of refraction (1 vacuum, 1.52 glass)
 	float	trasporancy;		// 0 - not allowing light to pass through
-	t_pat	pattern;
 }			t_material;
 
 typedef struct s_sphere

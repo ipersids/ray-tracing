@@ -41,7 +41,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   src/constructor/init_window.c src/constructor/init_cursor.c \
 				   \
 				   src/materials/diffuse_materials.c src/materials/reflective_materials.c \
-				   src/materials/refractive_materials.c \
+				   src/materials/refractive_materials.c src/materials/patterns.c \
 				   \
 				   src/destructor/destroy_exit.c src/destructor/free_arr.c \
 				   src/destructor/handle_errors.c \
@@ -52,6 +52,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   src/parser/validate_input.c src/parser/parse_cylinder.c \
 				   src/parser/parse_plane.c src/parser/parse_sphere.c \
 				   src/parser/parse_cone.c src/parser/parse_material.c \
+				   src/parser/parse_pattern.c \
 				   \
 				   src/hook/hook_close_window.c src/hook/hook_resize_window.c \
 				   src/hook/hook_render_scene.c src/hook/hook_handle_cursor.c \
@@ -84,7 +85,6 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   src/transformation/objects_transform.c src/transformation/view_transform.c \
 				   src/transformation/update_transform.c \
 				   \
-				   src/materials/set_material.c \
 				   \
 				   \
 				   src/display-config/debug_utils.c

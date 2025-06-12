@@ -11,9 +11,9 @@ static void			set_color(t_phong_color *pc, t_material *m, t_phong_vars *vars, t_
 static t_color		pattern_at_object(t_pat pattern, t_object obj, t_point w_point);
 static t_color		stripe_pattern_at(t_pat pattern, t_point point);
 static t_color		gradient_pattern_at(t_pat pattern, t_point point);
-static t_color		ring_pattern_at(t_pat pattern, t_point point);
+// static t_color		ring_pattern_at(t_pat pattern, t_point point);
 static t_color		checker_pattern_at(t_pat pattern, t_point point);
-static t_color		radiant_gradient_pattern_at(t_pat pattern, t_point point);
+// static t_color		radiant_gradient_pattern_at(t_pat pattern, t_point point);
 static void			find_object(t_object object, t_matrix *obj_inv);
 t_color				reflected_color(t_info *rt, t_phong_vars vars, int ray_bounces);
 
@@ -72,7 +72,7 @@ static t_color	lighting(t_phong_vars vars, t_material m, t_light *light, bool in
 	if (!light)
 		return (vars.obj->amb_component);
 	if (vars.obj->has_pattern == true)
-		surface_color = pattern_at_object(m.pattern, *vars.obj, vars.point);
+		surface_color = pattern_at_object(*vars.obj->pattern, *vars.obj, vars.point);
 	else
 		surface_color = vars.obj->color;
  	pc.eff_col = multiply_colors(surface_color, light[0].intensity);
@@ -147,12 +147,12 @@ static t_color	pattern_at_object(t_pat pattern, t_object obj, t_point w_point)
 		return (stripe_pattern_at(pattern, pattern_point));
 	else if (pattern.type == PATTERN_GRADIENT)
 		return (gradient_pattern_at(pattern, pattern_point));
-	else if (pattern.type == PATTERN_RING)
-		return (ring_pattern_at(pattern, pattern_point));
+	// else if (pattern.type == PATTERN_RING)
+	// 	return (ring_pattern_at(pattern, pattern_point));
 	else if (pattern.type == PATTERN_CHECKER)
 		return (checker_pattern_at(pattern, pattern_point));
-	else if (pattern.type == PATTERN_RADIANT_GRADIENT)
-		return (radiant_gradient_pattern_at(pattern, pattern_point));
+	// else if (pattern.type == PATTERN_RADIANT_GRADIENT)
+	// 	return (radiant_gradient_pattern_at(pattern, pattern_point));
 	return (BLACK);
 }
 
@@ -176,16 +176,16 @@ static t_color	gradient_pattern_at(t_pat pattern, t_point point)
 	return (addition(pattern.color_a, (multiply_color_scalar(distance, fraction))));
 }
 
-static t_color	ring_pattern_at(t_pat pattern, t_point point)
-{
-	float	distance;
+// static t_color	ring_pattern_at(t_pat pattern, t_point point)
+// {
+// 	float	distance;
 
-	distance = sqrtf(point.x * point.x + point.z * point.z);
-	if ((int)floorf(distance) % 2 == 0)
-		return (pattern.color_a);
-	else
-		return (pattern.color_b);
-}
+// 	distance = sqrtf(point.x * point.x + point.z * point.z);
+// 	if ((int)floorf(distance) % 2 == 0)
+// 		return (pattern.color_a);
+// 	else
+// 		return (pattern.color_b);
+// }
 
 static t_color	checker_pattern_at(t_pat pattern, t_point point)
 {
@@ -198,17 +198,17 @@ static t_color	checker_pattern_at(t_pat pattern, t_point point)
 }
 
 
-static t_color	radiant_gradient_pattern_at(t_pat pattern, t_point point)
-{
-	float	fraction;
-	float	distance;
-	t_color	col_distance;
+// static t_color	radiant_gradient_pattern_at(t_pat pattern, t_point point)
+// {
+// 	float	fraction;
+// 	float	distance;
+// 	t_color	col_distance;
 
-	distance = sqrtf(point.x * point.x + point.z * point.z);
-	fraction = distance - floorf(distance);
-	col_distance = subtraction(pattern.color_b, pattern.color_a);
-	return (addition(pattern.color_a, (multiply_color_scalar(col_distance, fraction))));
-}
+// 	distance = sqrtf(point.x * point.x + point.z * point.z);
+// 	fraction = distance - floorf(distance);
+// 	col_distance = subtraction(pattern.color_b, pattern.color_a);
+// 	return (addition(pattern.color_a, (multiply_color_scalar(col_distance, fraction))));
+// }
 
 static void	find_object(t_object object, t_matrix *obj_inv)
 {

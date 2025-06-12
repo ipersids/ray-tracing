@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 13:10:41 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/12 13:20:07 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:44:46 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ int		rt_parse_coord(t_point *pos, char **start, char **endptr, bool is_norm);
 int		rt_validate_end_of_line(char **startptr);
 int		rt_parse_bonus_settings(t_info *rt, char **line);
 int		rt_parse_material(t_info *rt, char **start);
+int		rt_parse_pattern(t_info *rt, char **start);
 
 #endif // MINIRT_PARSER_H
