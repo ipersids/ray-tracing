@@ -207,8 +207,6 @@ typedef enum e_mtype
 
 typedef struct s_material
 {
-	t_color	color;				// equal object.color
-	t_color	ambient_comp;		// ambient.intensity * object.color
 	float	diffuse;			// Light reflected from a surface (0.0-1.0)
 	float	specular;			// Bright spot on a surface (0.0-1.0)
 	float	shininess;			// Size and sharpness of spec. reflection
@@ -265,7 +263,7 @@ typedef struct s_object
 		t_cone		co;
 	};
 	t_color			color;			// R,G,B colors in range [0.0-1.0]
-	t_color			amb_component;
+	t_color			amb_component;	// ambient.intensity * object.color
 	t_material		*material;
 	bool			has_pattern;
 	t_pat			*pattern;
