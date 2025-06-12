@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 00:51:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/12 00:57:41 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:54:17 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_material	init_plastic_material(void)
 	res.diffuse = 0.7f;
 	res.specular = 0.5f;
 	res.shininess = 80.0f;
-	res.reflective = 0.1f;
+	res.reflective = 0.015f;
 	res.refractive = 1.4f;
 	res.trasporancy = 0.0f;
 	return (res);

@@ -169,6 +169,8 @@ typedef struct s_light
 	t_color	intensity;			// multiplication(light.color, light.bright)
 }			t_light;
 
+# define PATTERN_SHIFT 0.01f
+
 typedef enum e_pattype
 {
 	PATTERN_STRIPE,

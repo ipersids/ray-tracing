@@ -42,6 +42,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   \
 				   src/materials/diffuse_materials.c src/materials/reflective_materials.c \
 				   src/materials/refractive_materials.c src/materials/patterns.c \
+				   src/materials/get_pattern.c \
 				   \
 				   src/destructor/destroy_exit.c src/destructor/free_arr.c \
 				   src/destructor/handle_errors.c \

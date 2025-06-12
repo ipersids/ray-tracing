@@ -74,6 +74,13 @@ t_pat		set_stripe_pattern(void);
 t_pat		set_checker_pattern(void);
 t_pat		set_gradient_pattern(void);
 
+t_color		pattern_at_object(t_pat pattern, t_object obj, t_point w_point);
+t_color		stripe_pattern_at(t_pat pattern, t_point point);
+t_color		gradient_pattern_at(t_pat pattern, t_point point);
+t_color		checker_pattern_at(t_pat pattern, t_point point);
+// t_color		radiant_gradient_pattern_at(t_pat pattern, t_point point);
+// t_color		ring_pattern_at(t_pat pattern, t_point point);
+
 /* ---------------------- Error and memory management ---------------------- */
 /// @dir src/destructor
 
