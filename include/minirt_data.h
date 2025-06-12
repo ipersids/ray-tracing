@@ -215,7 +215,7 @@ typedef struct s_material
 	float	shininess;			// Size and sharpness of spec. reflection
 	float	reflective;			// 0 non reflective, 1 mirror
 	float	refractive;			// index of refraction (1 vacuum, 1.52 glass)
-	float	trasporancy;		// 0 - not allowing light to pass through
+	float	transparency;		// 0 - not allowing light to pass through
 }			t_material;
 
 typedef struct s_sphere

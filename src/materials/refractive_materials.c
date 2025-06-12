@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 00:53:58 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/12 00:57:29 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/12 21:30:31 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_material	init_glass_material(void)
 	res.shininess = 300.0f;
 	res.reflective = 0.1f;
 	res.refractive = 1.52f;
-	res.trasporancy = 0.9f;
+	res.transparency = 0.9f;
 	return (res);
 }
 
@@ -54,7 +54,7 @@ t_material	init_diamond_material(void)
 	res.shininess = 500.0f;
 	res.reflective = 0.2f;
 	res.refractive = 2.42f;
-	res.trasporancy = 0.95f;
+	res.transparency = 0.95f;
 	return (res);
 }
 
@@ -75,7 +75,7 @@ t_material	init_water_material(void)
 	res.shininess = 200.0f;
 	res.reflective = 0.2f;
 	res.refractive = 1.33f;
-	res.trasporancy = 0.8f;
+	res.transparency = 0.8f;
 	return (res);
 }
 
@@ -96,6 +96,6 @@ t_material	init_ice_material(void)
 	res.shininess = 150.0f;
 	res.reflective = 0.3f;
 	res.refractive = 1.31f;
-	res.trasporancy = 0.7f;
+	res.transparency = 0.7f;
 	return (res);
 }

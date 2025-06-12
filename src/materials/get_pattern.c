@@ -40,7 +40,7 @@ t_color	gradient_pattern_at(t_pat pattern, t_point point)
 
 	distance = subtraction(pattern.color_b, pattern.color_a);
 	//fraction = fabsf(point.x) - floorf(fabsf(point.x));
-	fraction = point.x - floor(point.x);
+	fraction = point.x - floorf(point.x);
 	//printf("Gradient at x=%.2f -> %.2f\n", point.z, fraction);
 	return (addition(pattern.color_a, (multiply_color_scalar(distance, fraction))));
 }

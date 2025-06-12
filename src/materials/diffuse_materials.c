@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 00:51:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/12 17:54:17 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/12 21:29:50 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_material	init_default_material(void)
 	res.shininess = 200.0f;
 	res.reflective = 0.0f;
 	res.refractive = 1.0f;
-	res.trasporancy = 0.0f;
+	res.transparency = 0.0f;
 	return (res);
 }
 
@@ -44,7 +44,7 @@ t_material	init_lambertian_material(void)
 	res.shininess = 1.0f;
 	res.reflective = 0.0f;
 	res.refractive = 1.0f;
-	res.trasporancy = 0.0f;
+	res.transparency = 0.0f;
 	return (res);
 }
 
@@ -65,6 +65,6 @@ t_material	init_plastic_material(void)
 	res.shininess = 80.0f;
 	res.reflective = 0.015f;
 	res.refractive = 1.4f;
-	res.trasporancy = 0.0f;
+	res.transparency = 0.0f;
 	return (res);
 }
