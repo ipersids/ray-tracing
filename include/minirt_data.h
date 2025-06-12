@@ -117,6 +117,7 @@ typedef enum e_type
 
 # define LIMIT_COORD 1000.0f
 # define LIMIT_S 1000.0f
+# define MAX_CONTAINERS 6
 
 typedef struct s_ambient_light
 {
@@ -244,6 +245,13 @@ typedef struct s_object
 	t_material		*material;
 }					t_object;
 
+typedef struct s_obj_containter
+{
+	t_object	*objs[MAX_CONTAINERS];
+	int			obj_count;
+}				t_obj_container;
+
+
 /* --------------------- MLX42 constants and structures  ------------------- */
 
 // Default resolutions for window (16:9 aspect ratio):
@@ -301,7 +309,8 @@ typedef enum e_ray_type
 {
 	RAY_CAMERA,
 	RAY_SHADOW,
-	RAY_REFLECTION
+	RAY_REFLECTION,
+	RAY_REFRACTION
 }	t_ray_type;
 
 typedef struct s_ray
@@ -368,6 +377,7 @@ typedef struct s_phong_vars
 	bool		is_inside;
 	t_vec3		normalv;
 	t_vec3		reflectv;
+	t_vec3		under_point;
 }				t_phong_vars;
 
 # define BLACK (t_color){0, 0, 0}
@@ -410,4 +420,4 @@ typedef struct s_intersect_vars
 	float	y1;
 }			t_intersect_vars;
 
-#endif // MINIRT_DATA_H
+#endif // MINIRT_DATA_H;
