@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 23:54:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 16:11:01 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:36:08 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,12 +131,35 @@ int	rt_parse_color(t_color *color, char **start, char **endptr)
  * @param endptr Pointer to a pointer to the character where spaces ended.
  * @return int 0 on success, or an error code.
  */
-int	rt_validate_end_of_line(char **startptr, char **endptr)
+int	rt_validate_end_of_line(char **startptr)
 {
-	*endptr = *startptr;
 	while (ft_isspace(**startptr))
 		++(*startptr);
 	if ('\0' != (**startptr) && '#' != (**startptr))
 		return (ERR_OBJECT_CONFIG);
 	return (0);
+}
+
+int	rt_parse_bonus_settings(t_info *rt, char **line)
+{
+	int		exit_code;
+	size_t	i;
+
+	i = rt->n_objs;
+	rt->objs[i].material = &rt->materials[MATERIAL_DEFAULT];
+	rt->objs[i].has_pattern = false;
+	exit_code = rt_validate_end_of_line(line);
+	if (!IS_BONUS || (IS_BONUS && 0 == exit_code))
+		return (exit_code);
+	exit_code = rt_parse_material(rt, line);
+	if (0 != exit_code)
+		return (exit_code);
+	exit_code = rt_validate_end_of_line(line);
+	if (0 == exit_code)
+		return (exit_code);
+	exit_code = rt_parse_pattern(rt, line);
+	if (0 != exit_code)
+		return (exit_code);
+	exit_code = rt_validate_end_of_line(line);
+	return (exit_code);
 }

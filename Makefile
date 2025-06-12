@@ -37,8 +37,12 @@ OBJ_DIR			:= obj
 SRC_DIR			:= src
 
 # Sources and objects
-SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
-				   src/constructor/init_window.c src/constructor/init_material.c \
+SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
+				   src/constructor/init_window.c src/constructor/init_cursor.c \
+				   \
+				   src/materials/diffuse_materials.c src/materials/reflective_materials.c \
+				   src/materials/refractive_materials.c src/materials/patterns.c \
+				   src/materials/get_pattern.c \
 				   \
 				   src/destructor/destroy_exit.c src/destructor/free_arr.c \
 				   src/destructor/handle_errors.c \
@@ -48,9 +52,8 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/parser/parse_scene.c src/parser/read_scene.c \
 				   src/parser/validate_input.c src/parser/parse_cylinder.c \
 				   src/parser/parse_plane.c src/parser/parse_sphere.c \
-				   src/parser/parse_cone.c \
-				   src/parser/set_transformations.c src/parser/set_material.c \
-				   src/parser/set_cursor.c \
+				   src/parser/parse_cone.c src/parser/parse_material.c \
+				   src/parser/parse_pattern.c \
 				   \
 				   src/hook/hook_close_window.c src/hook/hook_resize_window.c \
 				   src/hook/hook_render_scene.c src/hook/hook_handle_cursor.c \
@@ -149,13 +152,12 @@ $(OBJ_DIR)/%_bonus.o: $(SRC_DIR)/%.c $(H_FILES)
 	$(CC) $(CFLAGS_BONUS) $(HDRS)  -c $< -o $@
 
 # TESTING
-TEST_SRC		:= tests/test_matrix_math.c \
+TEST_SRC		:= tests/test_main.c \
+				   tests/test_matrix_math.c \
 				   tests/test_matrix_transformation.c tests/test_camera.c \
 				   tests/test_cone.c tests/test_parser.c
 
-OBJ_TEST_SRC	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%_test.o, $(TEST_SRC))
-TEST_MAIN		:= tests/test_main.c
-OBJ_TEST_MAIN	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%_test.o, $(TEST_MAIN))
+OBJ_TEST_SRC	:= $(patsubst %.c, $(OBJ_DIR)/%_test.o, $(TEST_SRC))
 
 NAME_TEST		:= miniRT_test
 
@@ -168,15 +170,15 @@ endif
 test: update-submodule build-submodule $(NAME_TEST)
 	./miniRT_test
 
-$(NAME_TEST): $(OBJS) ${OBJ_TEST_SRC} $(OBJ_TEST_MAIN) $(TEST_SRC) $(TEST_MAIN)
-	$(CC) $(CFLAGS_TEST) $(OBJS) $(OBJ_TEST_SRC) $(OBJ_TEST_MAIN) $(HDRS) $(LIBS) -o $(NAME_TEST)
+$(NAME_TEST): $(OBJS) ${OBJ_TEST_SRC}
+	$(CC) $(CFLAGS_TEST) $(OBJS) $(OBJ_TEST_SRC) $(HDRS) $(LIBS) -o $(NAME_TEST)
 
-$(OBJ_DIR)/%_test.o: $(SRC_DIR)/%.c $(H_FILES)
+$(OBJ_DIR)/tests/%_test.o: tests/%.c $(H_FILES)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS_TEST) $(HDRS)  -c $< -o $@
 
 tclean:
-	$(RM_DIR) ${OBJ_TEST_SRC} $(OBJ_TEST_MAIN)
+	$(RM_DIR) $(OBJ_DIR)/tests
 	$(RM) $(NAME_TEST)
 
 .PHONY: all clean fclean re update-submodule build-submodule

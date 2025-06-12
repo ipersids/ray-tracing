@@ -110,11 +110,13 @@ typedef enum s_error
 	ERR_MATRIX_NON_INVERSIBLE,
 	ERROR_REALLOC_INTERSECTIONS,
 	ERROR_EMPTY_SCENE,
+	ERROR_MATERIAL,
+	ERROR_PATTERN,
 	ERR_MAX
 }	t_error;
 
 # define ERR_MODULO ERR_ARGC
-# define CAPACITY 10 // initial size of array for reading scene
+# define CAPACITY 20 // initial size of array for reading scene
 # define NULL_TERMINATED_ARR -1
 
 /* ---------------------------- Scene structures  -------------------------- */
@@ -167,13 +169,16 @@ typedef struct s_light
 	t_color	intensity;			// multiplication(light.color, light.bright)
 }			t_light;
 
+# define PATTERN_SHIFT 0.01f
+
 typedef enum e_pattype
 {
 	PATTERN_STRIPE,
-	PATTERN_RING,
 	PATTERN_GRADIENT,
 	PATTERN_CHECKER,
-	PATTERN_RADIANT_GRADIENT
+	// PATTERN_RING,
+	// PATTERN_RADIANT_GRADIENT,
+	PATTERN_MAX
 }			t_pattype;
 
 typedef struct	s_pat
@@ -185,45 +190,48 @@ typedef struct	s_pat
 	t_matrix	inv_transform;
 	float		scale;
 	bool		has_pattern;
-}			t_pat;
+}				t_pat;
 
 typedef enum e_mtype
 {
 	MATERIAL_DEFAULT,
+	MATERIAL_LAMBERTIAN,
+	MATERIAL_METALL,
+	MATERIAL_RUSTED_METALL,
+	MATERIAL_GLASS,
+	MATERIAL_DIAMOND,
+	MATERIAL_PLASTIC,
+	MATERIAL_CERAMIC,
+	MATERIAL_MIRROR,
+	MATERIAL_WATER,
+	MATERIAL_ICE,
 	MATERIAL_MAX
 }	t_mtype;
 
 typedef struct s_material
 {
-	t_mtype	type;
-	t_color	color;				// equal object.color
-	t_color	final_color;		// init to ambient_comp from start
-	t_color	ambient_comp;		// ambient.intensity * object.color
 	float	diffuse;			// Light reflected from a surface (0.0-1.0)
 	float	specular;			// Bright spot on a surface (0.0-1.0)
 	float	shininess;			// Size and sharpness of spec. reflection
-	float	reflective;			// How reflective the material is (0 non reflective, 1 mirror)
-	t_pat	pattern;
+	float	reflective;			// 0 non reflective, 1 mirror
+	float	refractive;			// index of refraction (1 vacuum, 1.52 glass)
+	float	transparency;		// 0 - not allowing light to pass through
 }			t_material;
 
 typedef struct s_sphere
 {
 	t_point		pos;				// x,y,z of sphere center
 	float		scale;				// diameter / 2.0f
-	t_color		color;				// R,G,B colors in range [0.0-1.0]
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
-	t_material	material;
 }				t_sphere;
 
 typedef struct s_plane
 {
 	t_point		pos;				// x,y,z of a point on plane
 	t_vec3		dir;				// 3d norm. orientation vector
-	t_color		color;				// R,G,B colors in range [0.0-1.0]
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
-	t_material	material;
 }				t_plane;
 
 typedef struct s_cylinder
@@ -232,10 +240,8 @@ typedef struct s_cylinder
 	t_vec3		dir;				// 3d norm. vector of cylinder axis
 	float		scale;				// diameter / 2.0f
 	float		half_height;		// height / 2.0f
-	t_color		color;				// R,G,B colors in range [0.0,1.0]
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
-	t_material	material;
 }				t_cylinder;
 
 typedef struct s_cone
@@ -244,10 +250,8 @@ typedef struct s_cone
 	t_vec3		dir;				// 3d norm. vector of cone axis
 	float		height;
 	float		scale;				// scale factor = 1.0f classic cone
-	t_color		color;				// R,G,B colors in range [0.0,1.0]
 	t_matrix	inv_transform;
 	t_matrix	inv_transpose;
-	t_material	material;
 }				t_cone;
 
 typedef struct s_object
@@ -260,7 +264,11 @@ typedef struct s_object
 		t_cylinder	cy;
 		t_cone		co;
 	};
+	t_color			color;			// R,G,B colors in range [0.0-1.0]
+	t_color			amb_component;	// ambient.intensity * object.color
 	t_material		*material;
+	bool			has_pattern;
+	t_pat			*pattern;
 }					t_object;
 
 /* --------------------- MLX42 constants and structures  ------------------- */
@@ -363,6 +371,8 @@ typedef struct s_info
 	t_intersection	*ts;			// Intersection collection
 	size_t			n_ts;			// Amount t-values in intersection collection
 	size_t			capacity_ts;	// Current capacity in intersection collection
+	t_pat			patterns[PATTERN_MAX];
+	t_material		materials[MATERIAL_MAX];
 }					t_info;
 
 /* ------------------------- Parser helper structures ----------------------- */

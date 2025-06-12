@@ -37,9 +37,11 @@
 /// @dir src/constructor
 
 void		rt_init_info(t_info *rt);
-int			rt_init_objects(t_counter *cnt, t_info *rt);
+int			rt_allocate_memory(t_counter *cnt, t_info *rt);
 int			rt_init_window(t_info *rt);
-t_material	rt_init_material(t_color ambient, t_color obj_color, t_mtype type);
+void		rt_init_cursor(t_info *rt);
+
+t_material	init_default_material(void);
 
 /* ----------------------------- Transformations ---------------------------- */
 
@@ -50,6 +52,34 @@ int			rt_cone_transform(t_cone *co);
 int			rt_view_transform(t_camera *cam, t_vec3	world_up);
 
 int			rt_update_transform(t_info *rt, void *obj, t_type id);
+
+/* ------------------------ Materials and patterns ------------------------- */
+
+t_material	init_default_material(void);
+t_material	init_lambertian_material(void);
+t_material	init_plastic_material(void);
+t_material	init_metal_material(void);
+t_material	init_rasted_metal_material(void);
+t_material	init_ceramic_material(void);
+t_material	init_mirror_material(void);
+t_material	init_glass_material(void);
+t_material	init_diamond_material(void);
+t_material	init_water_material(void);
+t_material	init_ice_material(void);
+
+// t_pat	set_stripe_pattern(t_color a, t_color b, float scale, float angle_rad);
+// t_pat	set_checker_pattern(t_color a, t_color b, float scale);
+// t_pat	set_gradient_pattern(t_color a, t_color b, float scale);
+t_pat		set_stripe_pattern(void);
+t_pat		set_checker_pattern(void);
+t_pat		set_gradient_pattern(void);
+
+t_color		pattern_at_object(t_pat pattern, t_object obj, t_point w_point);
+t_color		stripe_pattern_at(t_pat pattern, t_point point);
+t_color		gradient_pattern_at(t_pat pattern, t_point point);
+t_color		checker_pattern_at(t_pat pattern, t_point point);
+// t_color		radiant_gradient_pattern_at(t_pat pattern, t_point point);
+// t_color		ring_pattern_at(t_pat pattern, t_point point);
 
 /* ---------------------- Error and memory management ---------------------- */
 /// @dir src/destructor
