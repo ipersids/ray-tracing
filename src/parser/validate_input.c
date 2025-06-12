@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:51:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 22:27:50 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/12 13:20:32 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
  */
 static int	validate_args(int argc, char **argv, char ***content);
 
-static int	perform_computations(t_info *rt);
-
 /* --------------------------- Public functions ---------------------------- */
 
 /**
@@ -39,6 +37,8 @@ int	rt_validate_input(int argc, char **argv, t_info *rt)
 {
 	int		exit_code;
 	char	**content;
+	size_t	i;
+	t_color	ambient;
 
 	content = NULL;
 	exit_code = 0;
@@ -49,7 +49,13 @@ int	rt_validate_input(int argc, char **argv, t_info *rt)
 	rt_free_arr((void **)content, NULL_TERMINATED_ARR);
 	if (0 != exit_code)
 		return (exit_code);
-	exit_code = perform_computations(rt);
+	i = 0;
+	ambient = rt->amb_intensity;
+	while (i < rt->n_objs)
+	{
+		rt->objs[i].amb_component = multiply_colors(rt->objs[i].color, ambient);
+		++i;
+	}
 	return (exit_code);
 }
 
@@ -75,16 +81,7 @@ static int	validate_args(int argc, char **argv, char ***content)
 	fd = open(argv[1], O_RDONLY);
 	if (-1 == fd)
 		return (ERR_SYSTEM);
-	exit_code = rt_read_scene(fd, content);
+	exit_code = rt_read_scene(fd, content, CAPACITY);
 	close(fd);
-	return (exit_code);
-}
-
-static int	perform_computations(t_info *rt)
-{
-	int	exit_code;
-
-	exit_code = 0;
-	exit_code = rt_set_transformations(rt);
 	return (exit_code);
 }

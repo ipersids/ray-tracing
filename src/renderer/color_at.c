@@ -49,7 +49,6 @@ static t_phong_vars	precompute_data(t_intersection *t, t_ray *ray, t_info *rt)
 
 	vars.t = t->t;
 	vars.obj = &rt->objs[t->i_object];
-	// vars.amb_component = multiply_colors(vars.obj->color, rt->amb_intensity);
 	vars.point = ray_hit(*ray, t->t);
 	vars.eyev = negation(ray->dir);
 	vars.normalv = rt_normal_at(vars.obj, vars.point, t->obj_type);
@@ -72,7 +71,7 @@ static t_color	lighting(t_phong_vars vars, t_material m, t_light *light, bool in
 
 	if (!light)
 		return (vars.obj->amb_component);
-	if (m.pattern.has_pattern == true)
+	if (vars.obj->has_pattern == true)
 		surface_color = pattern_at_object(m.pattern, *vars.obj, vars.point);
 	else
 		surface_color = vars.obj->color;

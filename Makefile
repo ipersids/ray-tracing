@@ -51,7 +51,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   src/parser/parse_scene.c src/parser/read_scene.c \
 				   src/parser/validate_input.c src/parser/parse_cylinder.c \
 				   src/parser/parse_plane.c src/parser/parse_sphere.c \
-				   src/parser/parse_cone.c src/parser/set_transformations.c \
+				   src/parser/parse_cone.c src/parser/parse_material.c \
 				   \
 				   src/hook/hook_close_window.c src/hook/hook_resize_window.c \
 				   src/hook/hook_render_scene.c src/hook/hook_handle_cursor.c \

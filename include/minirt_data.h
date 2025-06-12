@@ -110,11 +110,12 @@ typedef enum s_error
 	ERR_MATRIX_NON_INVERSIBLE,
 	ERROR_REALLOC_INTERSECTIONS,
 	ERROR_EMPTY_SCENE,
+	ERROR_MATERIAL,
 	ERR_MAX
 }	t_error;
 
 # define ERR_MODULO ERR_ARGC
-# define CAPACITY 10 // initial size of array for reading scene
+# define CAPACITY 20 // initial size of array for reading scene
 # define NULL_TERMINATED_ARR -1
 
 /* ---------------------------- Scene structures  -------------------------- */
@@ -186,7 +187,7 @@ typedef struct	s_pat
 	t_matrix	inv_transform;
 	float		scale;
 	bool		has_pattern;
-}			t_pat;
+}				t_pat;
 
 typedef enum e_mtype
 {
@@ -266,6 +267,8 @@ typedef struct s_object
 	t_color			color;			// R,G,B colors in range [0.0-1.0]
 	t_color			amb_component;
 	t_material		*material;
+	bool			has_pattern;
+	t_pat			*pattern;
 }					t_object;
 
 /* --------------------- MLX42 constants and structures  ------------------- */

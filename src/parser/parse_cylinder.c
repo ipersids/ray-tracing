@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:35:22 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 23:06:49 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/12 13:14:35 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	rt_parse_cylinder(t_info *rt, char *line)
 		return (exit_code);
 	if (0 != rt_update_transform(rt, &rt->objs[i], rt->objs[i].id))
 		return (ERR_MATRIX_NON_INVERSIBLE);
-	exit_code = rt_validate_end_of_line(&line, &next);
+	exit_code = rt_parse_bonus_settings(rt, &line);
 	rt->n_objs += 1;
 	return (exit_code);
 }

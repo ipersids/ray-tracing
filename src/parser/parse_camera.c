@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 11:49:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 22:37:13 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/12 12:59:38 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	rt_parse_camera(t_info *rt, char *line)
 	if (0 != exit_code)
 		return (exit_code);
 	exit_code = rt_parse_float(&rt->camera.fov, &line, &next);
-	if (0 != exit_code || 0 != rt_validate_end_of_line(&line, &next))
+	if (0 != exit_code || 0 != rt_validate_end_of_line(&line))
 		return (ERR_OBJECT_CONFIG);
 	if (0.0 > rt->camera.fov || 180.0 < rt->camera.fov)
 		return (ERR_OBJECT_CONFIG_LIMITS);
