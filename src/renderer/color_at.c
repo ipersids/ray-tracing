@@ -24,6 +24,7 @@ static void 	remove_from_container(t_obj_container *container, int index);
 static void 	add_to_container(t_obj_container *container, t_object *obj);
 static float	get_refractive_index(t_obj_container *container);
 t_color			refracted_color(t_info *rt, t_phong_vars vars, int remaining);
+float			schlick(t_phong_vars vars);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -35,6 +36,7 @@ t_color	rt_color_at(t_info *rt, t_ray *ray, int remaining)
 	t_color			reflected;
 	t_color			refracted;
 	bool			shadowed;
+	float			reflectance;
 
 	t = NULL;
 	rt_intersect_world(rt, ray);
@@ -48,6 +50,12 @@ t_color	rt_color_at(t_info *rt, t_ray *ray, int remaining)
 	surface = lighting(vars, *vars.obj->material, rt->lights, shadowed);
 	reflected = reflected_color(rt, vars, remaining);
 	refracted = refracted_color(rt, vars, remaining);
+	if (vars.obj->material->reflective > 0 && vars.obj->material->transparency > 0)
+	{
+		reflectance = schlick(vars);
+		return (addition(surface, (addition(multiplication(reflected, reflectance), 
+				multiplication(refracted, 1 - reflectance)))));
+	}
 	return (addition(addition(surface, reflected), refracted));
 }
 
@@ -255,8 +263,8 @@ void	prepare_refraction_calculations(t_info *rt, t_intersection *target, float *
 	size_t				i;
 
 	container.obj_count = 0;
-	*n1 = 1.0f; // MABEY DONT NEED?
-	*n2 = 1.0f; // MABEY DONT NEED?
+	*n1 = 1.0f;
+	*n2 = 1.0f;
 	i = 0;
 	while (i < rt->n_ts)
 	{
@@ -348,4 +356,27 @@ t_color	refracted_color(t_info *rt, t_phong_vars vars, int remaining)
 	refracted_ray = (t_ray){vars.under_point, direction, RAY_REFRACTION};
 	result = rt_color_at(rt, &refracted_ray, remaining - 1);
 	return (multiplication(result, vars.obj->material->transparency));
+}
+
+float	schlick(t_phong_vars vars)
+{
+	float	cos;
+	float	cos_t;
+	float	n_ratio;
+	float	sin2_t;
+	float	reflectance;
+
+	cos = dot_product(vars.eyev, vars.normalv);
+	if (vars.n1 > vars.n2)
+	{
+		n_ratio = vars.n1 / vars.n2;
+		sin2_t = n_ratio * n_ratio * (1 - cos * cos);
+		if (sin2_t > 1)
+			return (1.0);
+		cos_t = sqrtf(1.0f - sin2_t);
+		cos = cos_t;
+	}
+	reflectance = ((vars.n1 - vars.n2) / (vars.n1 + vars.n2));
+	reflectance = reflectance * reflectance;
+	return (reflectance + (1 - reflectance) * powf(1 - cos, 5));
 }

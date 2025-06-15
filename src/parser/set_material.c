@@ -38,21 +38,22 @@ void	rt_set_material(t_color ambient, t_object *obj, t_mtype type)
 		obj->sp.material = rt_init_material(ambient, obj->sp.color, type);
 		obj->material = &obj->sp.material;
 		set_glass(obj);
-		//obj->material->reflective = 0.5;
+		obj->material->reflective = 0.9;
 		//obj->material->pattern = set_stripe_pattern(BLACK, WHITE, 0.01f, M_PI / 3);
 	}
 	else if (ELEMENT_CYLINDER == obj->id)
 	{
 		obj->cy.material = rt_init_material(ambient, obj->cy.color, type);
 		obj->material = &obj->cy.material;
-		obj->material->reflective = 0.5;
+		obj->material->reflective = 0.9;
+		set_glass(obj);
 	}
 	else if (ELEMENT_PLANE == obj->id)
 	{
 		obj->pl.material = rt_init_material(ambient, obj->pl.color, type);
 		obj->material = &obj->pl.material;
 		//obj->material->reflective = 0.6f;
-		//obj->material->pattern = set_checker_pattern(WHITE, BLACK, 10.0f);
+		obj->material->pattern = set_checker_pattern(WHITE, BLACK, 10.0f);
 	}
 }
 
@@ -63,15 +64,7 @@ void	set_glass(t_object *obj)
 	obj->material->diffuse = 0.1f;
 	obj->material->specular = 0.9f;
 	obj->material->shininess = 300.0f;
-	//obj->material->reflective = 0.1; // For testing
-/*
-	obj->material->transparency = 1.0f;
-	obj->material->refract_ind = 1.5f; // Glass
-	//obj->material->ambient_comp = 0.0f;     // Let light go through
-	obj->material->diffuse = 0.1f;
-	obj->material->specular = 0.9f;
-	obj->material->shininess = 300.0f;
-*/
+	obj->material->reflective = 0.1; // For testing
 }
 
 t_pat	set_stripe_pattern(t_color a, t_color b, float scale, float angle_rad)
