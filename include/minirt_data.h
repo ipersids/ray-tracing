@@ -61,8 +61,7 @@ typedef struct s_submatrix_var
 #  define IS_BONUS 0
 # endif
 
-# define PREVIOUS 0
-# define CURRENT 1
+# define RGBA 4
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -274,8 +273,10 @@ typedef struct s_object
 	t_color			amb_component;	// ambient.intensity * object.color
 	t_material		*material;
 	t_pat			*pattern;
+	mlx_image_t		*texture;
+	mlx_image_t		*bump_map;
 	bool			has_pattern;
-	t_bump_type		bump_index;
+	bool			has_texture;
 }					t_object;
 
 /* --------------------- MLX42 constants and structures  ------------------- */
