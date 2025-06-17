@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 15:37:00 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/17 22:05:50 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/17 22:48:39 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ int	rt_parse_pattern(t_info *rt, char **start)
 	}
 	else
 	{
-		rt->objs[rt->n_objs].texture = rt->win.texture[tex_type];
-		rt->objs[rt->n_objs].bump_map = rt->win.bump_map[tex_type];
 		rt->objs[rt->n_objs].has_texture = true;
+		rt->objs[rt->n_objs].tex_type = tex_type;
 	}
 	while (ft_isalpha(**start) || '_' == (**start))
 		++(*start);

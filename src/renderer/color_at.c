@@ -54,6 +54,7 @@ static t_phong_vars	precompute_data(t_intersection *t, t_ray *ray, t_info *rt)
 	else
 		vars.is_inside = false;
 	vars.point = addition(vars.point, multiplication(vars.normalv, SHADOW_BIAS));
+	vars.texture = rt->win.texture[vars.obj->tex_type];
 	return (vars);
 }
 
@@ -66,6 +67,13 @@ static t_color	lighting(t_phong_vars vars, t_material m, t_light *light, bool in
 		return (vars.obj->amb_component);
 	if (vars.obj->has_pattern == true)
 		surface_color = pattern_at_object(*vars.obj->pattern, *vars.obj, vars.point);
+	else if (vars.obj->has_texture == true && vars.obj->id == ELEMENT_SPHERE)
+	{
+		float u, v;
+		rt_get_spherical_uv(&vars.obj->sp, &vars.point, &u, &v);
+		surface_color = rt_texture_color_at(vars.texture, u, v);
+		// surface_color = vars.obj->color;
+	}
 	else
 		surface_color = vars.obj->color;
  	pc.eff_col = multiply_colors(surface_color, light[0].intensity);

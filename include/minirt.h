@@ -82,6 +82,9 @@ t_color		checker_pattern_at(t_pat pattern, t_point point);
 // t_color		radiant_gradient_pattern_at(t_pat pattern, t_point point);
 // t_color		ring_pattern_at(t_pat pattern, t_point point);
 
+void		rt_get_spherical_uv(t_sphere *sp, t_point *point, float *u, float *v);
+t_color		rt_texture_color_at(mlx_image_t *texture, float u, float v);
+
 /* ---------------------- Error and memory management ---------------------- */
 /// @dir src/destructor
 

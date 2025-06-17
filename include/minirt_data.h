@@ -273,10 +273,9 @@ typedef struct s_object
 	t_color			amb_component;	// ambient.intensity * object.color
 	t_material		*material;
 	t_pat			*pattern;
-	mlx_image_t		*texture;
-	mlx_image_t		*bump_map;
 	bool			has_pattern;
 	bool			has_texture;
+	t_bump_type		tex_type;
 }					t_object;
 
 /* --------------------- MLX42 constants and structures  ------------------- */
@@ -404,6 +403,7 @@ typedef struct s_phong_vars
 	bool		is_inside;
 	t_vec3		normalv;
 	t_vec3		reflectv;
+	mlx_image_t	*texture;
 }				t_phong_vars;
 
 # define BLACK (t_color){0, 0, 0}
