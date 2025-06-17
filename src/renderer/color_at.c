@@ -60,6 +60,8 @@ static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt)
 		return (vars);
 	}
 	vars.is_inside = false;
+	vars.n1 = 1.0f;
+	vars.n2 = 1.0f;
 	return (vars);
 }
 
@@ -233,4 +235,16 @@ t_color	reflected_color(t_info *rt, t_phong_vars vars, int remaining)
 	reflected_ray = (t_ray){vars.point, vars.reflectv, RAY_REFLECTION};
 	reflected_color = rt_color_at(rt, &reflected_ray, remaining - 1);
 	return (multiplication(reflected_color, vars.obj->material->reflective));
+}
+
+static void prepare_refraction(t_info *rt, t_phong_vars vars)
+{
+	t_obj_container	container[MAX_CONTAINERS];
+	int				i;
+
+	i = 0;
+	while (i < rt->n_ts)
+	{
+		if 
+	}
 }

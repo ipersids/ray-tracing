@@ -117,6 +117,7 @@ typedef enum e_type
 
 # define LIMIT_COORD 1000.0f
 # define LIMIT_S 1000.0f
+# define MAX_CONTAINERS 6
 
 typedef struct s_ambient_light
 {
@@ -242,7 +243,13 @@ typedef struct s_object
 		t_cylinder	cy;
 	};
 	t_material		*material;
-}					t_object;
+}				t_object;
+
+typedef struct s_obj_container
+{
+	t_object	*objects[MAX_CONTAINERS];
+	int			count;
+}				t_obj_container;
 
 /* --------------------- MLX42 constants and structures  ------------------- */
 
