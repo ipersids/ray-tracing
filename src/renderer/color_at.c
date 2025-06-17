@@ -38,24 +38,30 @@ t_color	rt_color_at(t_info *rt, t_ray *ray, int ray_bounces)
 
 static t_phong_vars	precompute_data(t_intersection *t, t_ray *ray, t_info *rt)
 {
-	t_phong_vars	vars;
+	t_phong_vars	v;
 
-	vars.t = t->t;
-	vars.obj = &rt->objs[t->i_object];
-	vars.point = ray_hit(*ray, t->t);
-	vars.eyev = negation(ray->dir);
-	vars.normalv = rt_normal_at(vars.obj, vars.point, t->obj_type);
-	vars.reflectv = reflect(ray->dir, vars.normalv);
-	if (dot_product(vars.normalv, vars.eyev) < 0.0f)
+	v.t = t->t;
+	v.obj = &rt->objs[t->i_object];
+	v.point = ray_hit(*ray, t->t);
+	v.eyev = negation(ray->dir);
+	if (IS_BONUS && v.obj->id == ELEMENT_SPHERE && v.obj->has_texture)
 	{
-		vars.is_inside = true;
-		vars.normalv = negation(vars.normalv);
+		v.texture = rt->win.texture[v.obj->tex_type];
+		v.bump = rt->win.bump_map[v.obj->tex_type];
+		v.normalv = rt_sphere_bumped_normal(v.bump, &v.obj->sp, &v.point);
 	}
 	else
-		vars.is_inside = false;
-	vars.point = addition(vars.point, multiplication(vars.normalv, SHADOW_BIAS));
-	vars.texture = rt->win.texture[vars.obj->tex_type];
-	return (vars);
+		v.normalv = rt_normal_at(v.obj, v.point, t->obj_type);
+	v.reflectv = reflect(ray->dir, v.normalv);
+	if (dot_product(v.normalv, v.eyev) < 0.0f)
+	{
+		v.is_inside = true;
+		v.normalv = negation(v.normalv);
+	}
+	else
+		v.is_inside = false;
+	v.point = addition(v.point, multiplication(v.normalv, SHADOW_BIAS));
+	return (v);
 }
 
 static t_color	lighting(t_phong_vars vars, t_material m, t_light *light, bool in_shadow)
@@ -69,10 +75,8 @@ static t_color	lighting(t_phong_vars vars, t_material m, t_light *light, bool in
 		surface_color = pattern_at_object(*vars.obj->pattern, *vars.obj, vars.point);
 	else if (vars.obj->has_texture == true && vars.obj->id == ELEMENT_SPHERE)
 	{
-		float u, v;
-		rt_get_spherical_uv(&vars.obj->sp, &vars.point, &u, &v);
-		surface_color = rt_texture_color_at(vars.texture, u, v);
-		// surface_color = vars.obj->color;
+		t_uv_vars uv = rt_get_spherical_uv(&vars.obj->sp, &vars.point);
+		surface_color = rt_texture_color_at(vars.texture, uv.u, uv.v);
 	}
 	else
 		surface_color = vars.obj->color;

@@ -62,6 +62,7 @@ typedef struct s_submatrix_var
 # endif
 
 # define RGBA 4
+# define BUMP_FACTOR 0.5f
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -404,6 +405,7 @@ typedef struct s_phong_vars
 	t_vec3		normalv;
 	t_vec3		reflectv;
 	mlx_image_t	*texture;
+	mlx_image_t	*bump;
 }				t_phong_vars;
 
 # define BLACK (t_color){0, 0, 0}
@@ -445,5 +447,42 @@ typedef struct s_intersect_vars
 	float	y0;
 	float	y1;
 }			t_intersect_vars;
+
+typedef struct s_bump_height_vars
+{
+	float		tex_x;
+	float		tex_y;
+	uint32_t	px_x;
+	uint32_t	px_y;
+	uint32_t	i;
+	float		height;
+}				t_bump_height_vars;
+
+typedef struct s_bump_gradient_vars
+{
+	float	delta_u;
+	float	delta_v;
+	float	h_center;
+	float	h_left;
+	float	h_right;
+	float	h_up;
+	float	h_down;
+}			t_bump_gradient_vars;
+
+typedef struct t_gradient
+{
+	float	gradient_u;
+	float	gradient_v;
+}			t_gradient;
+
+typedef struct s_uv_vars
+{
+	float	u;
+	float	v;
+	t_vec3	tanget;
+	t_vec3	bitanget;
+}			t_uv_vars;
+
+
 
 #endif // MINIRT_DATA_H

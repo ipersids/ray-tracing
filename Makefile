@@ -45,7 +45,8 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   src/materials/refractive_materials.c src/materials/patterns.c \
 				   src/materials/get_pattern.c \
 				   \
-				   src/texture-mapping/get_uv_coordinates.c \
+				   src/texture-mapping/get_uv_coordinates.c src/texture-mapping/get_gradient.c \
+				   src/texture-mapping/get_texture_color.c src/texture-mapping/get_bump_normal.c \
 				   \
 				   src/destructor/destroy_exit.c src/destructor/free_arr.c \
 				   src/destructor/handle_errors.c \
