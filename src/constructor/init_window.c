@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 20:31:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 20:17:05 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:33:14 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ int	rt_init_window(t_info *rt)
 	rt->win.img = mlx_new_image(rt->win.mlx, rt->win.width, rt->win.height);
 	if (!rt->win.img || mlx_image_to_window(rt->win.mlx, rt->win.img, 0, 0) < 0)
 		return (ERR_MLX42);
+	exit_code = rt_init_bump_texture(&rt->win);
+	if (0 != exit_code)
+		return (exit_code);
 	init_hook(rt);
 	return (0);
 }

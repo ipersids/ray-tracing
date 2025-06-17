@@ -171,6 +171,12 @@ typedef struct s_light
 
 # define PATTERN_SHIFT 0.01f
 
+typedef enum e_bump_type
+{
+	BUMP_EARTH,
+	BUMP_MAX
+}	t_bump_type;
+
 typedef enum e_pattype
 {
 	PATTERN_STRIPE,
@@ -267,8 +273,9 @@ typedef struct s_object
 	t_color			color;			// R,G,B colors in range [0.0-1.0]
 	t_color			amb_component;	// ambient.intensity * object.color
 	t_material		*material;
-	bool			has_pattern;
 	t_pat			*pattern;
+	bool			has_pattern;
+	t_bump_type		bump_index;
 }					t_object;
 
 /* --------------------- MLX42 constants and structures  ------------------- */
@@ -318,6 +325,8 @@ typedef struct s_window
 	bool		resized;
 	double		elapsed_time;
 	mlx_image_t	*img;
+	mlx_image_t	*texture[BUMP_MAX];
+	mlx_image_t	*bump_map[BUMP_MAX];
 	t_cursor	cursor;
 }				t_window;
 
