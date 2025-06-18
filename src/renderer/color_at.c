@@ -44,14 +44,7 @@ static t_phong_vars	precompute_data(t_intersection *t, t_ray *ray, t_info *rt)
 	v.obj = &rt->objs[t->i_object];
 	v.point = ray_hit(*ray, t->t);
 	v.eyev = negation(ray->dir);
-	if (IS_BONUS && v.obj->id == ELEMENT_SPHERE && v.obj->has_texture)
-	{
-		v.texture = rt->win.texture[v.obj->tex_type];
-		v.bump = rt->win.bump_map[v.obj->tex_type];
-		v.normalv = rt_sphere_bumped_normal(v.bump, &v.obj->sp, &v.point);
-	}
-	else
-		v.normalv = rt_normal_at(v.obj, v.point, t->obj_type);
+	v.normalv = rt_normal_at(rt, v.obj, v.point, t->obj_type);
 	v.reflectv = reflect(ray->dir, v.normalv);
 	if (dot_product(v.normalv, v.eyev) < 0.0f)
 	{

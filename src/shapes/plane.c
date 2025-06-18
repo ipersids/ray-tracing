@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 01:51:01 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/05 23:31:54 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/18 23:12:05 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_intersections	rt_intersect_plane(const t_plane *pl, t_ray ray)
 	t_intersections	xs;
 
 	xs.count = 0;
+	xs.obj_type = ELEMENT_PLANE;
 	ray.dir = matrix_multiply_vector(pl->inv_transform, ray.dir);
 	ray.orig = matrix_multiply_point(pl->inv_transform, ray.orig);
 	if (fabsf(ray.dir.y) < EPSILON)
@@ -36,7 +37,6 @@ t_intersections	rt_intersect_plane(const t_plane *pl, t_ray ray)
 	xs.count = 1;
 	xs.t[0] = -ray.orig.y / ray.dir.y;
 	xs.t[1] = xs.t[0];
-	xs.obj_type = ELEMENT_PLANE;
 	return (xs);
 }
 
@@ -55,4 +55,14 @@ t_vec3	rt_plane_normal_at(const t_plane *pl)
 
 	world_normal = matrix_multiply_vector(pl->inv_transpose, canonical_normal);
 	return (normalize(world_normal));
+}
+
+t_vec3	rt_plane_bumped_normal_at(mlx_image_t *tex, t_plane *pl, t_point *p)
+{
+	t_vec3	normal;
+
+	(void)tex;
+	(void)p;
+	normal = rt_plane_normal_at(pl);
+	return (normal);
 }

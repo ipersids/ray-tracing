@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:30:27 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 10:57:42 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/18 22:48:04 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,15 @@ t_vec3	rt_cylinder_normal_at(const t_cylinder *cy, t_point w_point)
 	world_normal = matrix_multiply_vector(cy->inv_transpose, obj_normal);
 	world_normal = normalize(world_normal);
 	return (world_normal);
+}
+
+t_vec3	rt_cylinder_bumped_normal_at(mlx_image_t *tex, t_cylinder *cy, t_point *p)
+{
+	t_vec3	normal;
+
+	(void)tex;
+	normal = rt_cylinder_normal_at(cy, *p);
+	return (normal);
 }
 
 /* ------------------- Private Function Implementation --------------------- */

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:39:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/18 18:10:29 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/18 23:07:40 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	rt_parse_texture(t_info *rt, char **start)
 
 	texture_type = get_texture_type(*start);
 	if (TEXTURE_MAX == texture_type)
-		return (ERROR_PATTERN);
+		return (ERR_PATTERN);
 	rt->objs[rt->n_objs].has_texture = true;
 	rt->objs[rt->n_objs].tex_type = texture_type;
 	while (ft_isalpha(**start) || '_' == (**start))

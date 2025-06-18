@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 00:13:27 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 14:12:59 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/18 22:50:21 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,15 @@ t_vec3	rt_cone_normal_at(const t_cone *co, t_point w_point)
 	world_normal = matrix_multiply_vector(co->inv_transpose, obj_normal);
 	world_normal = normalize(world_normal);
 	return (world_normal);
+}
+
+t_vec3	rt_cone_bumped_normal_at(mlx_image_t *tex, t_cone *co, t_point *p)
+{
+	t_vec3	normal;
+
+	(void)tex;
+	normal = rt_cone_normal_at(co, *p);
+	return (normal);
 }
 
 static t_intersections	truncate_co(const t_cone *co, t_intersect_vars *vars,

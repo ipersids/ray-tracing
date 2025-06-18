@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:38:34 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/18 18:15:10 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/18 22:52:04 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	rt_parse_bump_map(t_info *rt, char **start)
 
 	bump_type = get_bump_map_type(*start);
 	if (BUMP_MAX == bump_type)
-		return (ERROR_BUMP_MAP);
+		return (ERR_BUMP_MAP);
 	rt->objs[rt->n_objs].has_bump_map = true;
 	rt->objs[rt->n_objs].bump_type = bump_type;
 	while (ft_isalpha(**start) || '_' == (**start))
