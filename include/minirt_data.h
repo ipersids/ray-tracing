@@ -112,6 +112,7 @@ typedef enum s_error
 	ERROR_EMPTY_SCENE,
 	ERROR_MATERIAL,
 	ERROR_PATTERN,
+	ERROR_BUMP_MAP,
 	ERR_MAX
 }	t_error;
 
@@ -177,6 +178,13 @@ typedef enum e_bump_type
 	BUMP_MARS,
 	BUMP_MAX
 }	t_bump_type;
+
+typedef enum e_texture_type
+{
+	TEXTURE_EARTH,
+	TEXTURE_MARS,
+	TEXTURE_MAX
+}	t_texture_type;
 
 typedef enum e_pattype
 {
@@ -277,7 +285,9 @@ typedef struct s_object
 	t_pat			*pattern;
 	bool			has_pattern;
 	bool			has_texture;
-	t_bump_type		tex_type;
+	bool			has_bump_map;
+	t_texture_type	tex_type;
+	t_bump_type		bump_type;
 }					t_object;
 
 /* --------------------- MLX42 constants and structures  ------------------- */

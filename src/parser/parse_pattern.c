@@ -1,44 +1,21 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_pattern.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 15:37:00 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/18 02:04:28 by ipersids         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minirt.h"
 
 /* --------------------- Private function prototypes ----------------------- */
 
 static inline bool	is_valid_eol(char *line);
 static t_pattype	get_pattern_type(char *line);
-static t_bump_type	get_texture_type(char *line);
 
 /* --------------------------- Public Functions ---------------------------- */
 
 int	rt_parse_pattern(t_info *rt, char **start)
 {
 	t_pattype	p_type;
-	t_bump_type	tex_type;
 
 	p_type = get_pattern_type(*start);
-	tex_type = get_texture_type(*start);
-	if (PATTERN_MAX == p_type && BUMP_MAX == tex_type)
+	if (PATTERN_MAX == p_type)
 		return (ERROR_PATTERN);
-	if (PATTERN_MAX != p_type)
-	{
-		rt->objs[rt->n_objs].pattern = &rt->patterns[p_type];
-		rt->objs[rt->n_objs].has_pattern = true;
-	}
-	else
-	{
-		rt->objs[rt->n_objs].has_texture = true;
-		rt->objs[rt->n_objs].tex_type = tex_type;
-	}
+	rt->objs[rt->n_objs].pattern = &rt->patterns[p_type];
+	rt->objs[rt->n_objs].has_pattern = true;
 	while (ft_isalpha(**start) || '_' == (**start))
 		++(*start);
 	return (0);
@@ -59,15 +36,6 @@ static t_pattype	get_pattern_type(char *line)
 	// if (ft_strncmp(line, "radiant_gradient", 16) == 0 && is_valid_eol(&line[16]))
 	// 	return (PATTERN_RADIANT_GRADIENT);
 	return (PATTERN_MAX);
-}
-
-static t_bump_type	get_texture_type(char *line)
-{
-	if (ft_strncmp(line, "bump_earth", 10) == 0 && is_valid_eol(&line[10]))
-		return (BUMP_EARTH);
-	if (ft_strncmp(line, "bump_mars", 9) == 0 && is_valid_eol(&line[9]))
-		return (BUMP_MARS);
-	return (BUMP_MAX);
 }
 
 static inline bool	is_valid_eol(char *line)

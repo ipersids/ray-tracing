@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 23:54:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/17 22:24:02 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/18 18:16:42 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ int	rt_parse_bonus_settings(t_info *rt, char **line)
 
 	i = rt->n_objs;
 	rt->objs[i].material = &rt->materials[MATERIAL_DEFAULT];
-	rt->objs[i].has_pattern = false;
 	exit_code = rt_validate_end_of_line(line);
 	if (!IS_BONUS || (IS_BONUS && 0 == exit_code))
 		return (exit_code);
@@ -157,7 +156,12 @@ int	rt_parse_bonus_settings(t_info *rt, char **line)
 	exit_code = rt_validate_end_of_line(line);
 	if (0 == exit_code)
 		return (exit_code);
-	exit_code = rt_parse_pattern(rt, line);
+	if (0 != rt_parse_pattern(rt, line) && 0 != rt_parse_texture(rt, line))
+		return (ERROR_PATTERN);
+	exit_code = rt_validate_end_of_line(line);
+	if (0 == exit_code)
+		return (exit_code);
+	exit_code = rt_parse_bump_map(rt, line);
 	if (0 != exit_code)
 		return (exit_code);
 	exit_code = rt_validate_end_of_line(line);

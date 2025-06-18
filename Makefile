@@ -39,7 +39,7 @@ SRC_DIR			:= src
 # Sources and objects
 SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   src/constructor/init_window.c src/constructor/init_cursor.c \
-				   src/constructor/init_texture.c \
+				   src/constructor/init_texture.c src/constructor/init_bump_map.c \
 				   \
 				   src/materials/diffuse_materials.c src/materials/reflective_materials.c \
 				   src/materials/refractive_materials.c src/materials/patterns.c \
@@ -57,7 +57,8 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   src/parser/validate_input.c src/parser/parse_cylinder.c \
 				   src/parser/parse_plane.c src/parser/parse_sphere.c \
 				   src/parser/parse_cone.c src/parser/parse_material.c \
-				   src/parser/parse_pattern.c \
+				   src/parser/parse_pattern.c src/parser/parse_bump_map.c \
+				   src/parser/parse_texture.c \
 				   \
 				   src/hook/hook_close_window.c src/hook/hook_resize_window.c \
 				   src/hook/hook_render_scene.c src/hook/hook_handle_cursor.c \

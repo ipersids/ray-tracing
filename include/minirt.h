@@ -40,7 +40,8 @@ void		rt_init_info(t_info *rt);
 int			rt_allocate_memory(t_counter *cnt, t_info *rt);
 int			rt_init_window(t_info *rt);
 void		rt_init_cursor(t_info *rt);
-int			rt_init_bump_texture(t_window *win);
+int			rt_init_bump_map(t_window *win);
+int			rt_init_texture(t_window *win);
 
 t_material	init_default_material(void);
 

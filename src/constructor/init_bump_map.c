@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_texture.c                                     :+:      :+:    :+:   */
+/*   init_bump_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/17 14:17:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/18 18:15:33 by ipersids         ###   ########.fr       */
+/*   Created: 2025/06/18 17:44:06 by ipersids          #+#    #+#             */
+/*   Updated: 2025/06/18 17:54:10 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
-static const char*	get_texture_path(t_texture_type texture_type);
+static const char*	get_bump_map_path(t_bump_type bump_type);
 
 /* --------------------------- Public Functions ---------------------------- */
 
-int	rt_init_texture(t_window *win)
+int	rt_init_bump_map(t_window *win)
 {
-	mlx_texture_t	*texture;
+	mlx_texture_t	*bump_texture;
 	size_t			i;
 
 	if (!IS_BONUS)
 		return (0);
 	i = 0;
-	while (i < TEXTURE_MAX)
+	while (i < BUMP_MAX)
 	{
-		texture = mlx_load_png(get_texture_path(i));
-		if (!texture)
+		bump_texture = mlx_load_png(get_bump_map_path(i));
+		if (!bump_texture)
 			return (ERR_MLX42);
-		win->texture[i] = mlx_texture_to_image(win->mlx, texture);
-		mlx_delete_texture(texture);
-		if (!win->texture[i])
+		win->bump_map[i] = mlx_texture_to_image(win->mlx, bump_texture);
+		mlx_delete_texture(bump_texture);
+		if (!win->bump_map[i])
 			return (ERR_MLX42);
 		++i;
 	}
@@ -42,12 +42,12 @@ int	rt_init_texture(t_window *win)
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static const char*	get_texture_path(t_texture_type texture_type)
+static const char*	get_bump_map_path(t_bump_type bump_type)
 {
-	static const char	list[TEXTURE_MAX][100] = {
-		"textures/eartth_texture.png",
-		"textures/mars_texture.png"
+	static const char	list[BUMP_MAX][100] = {
+		"textures/earth_bump.png",
+		"textures/mars_bump.png"
 	};
 
-	return (list[texture_type]);
+	return (list[bump_type]);
 }

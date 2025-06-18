@@ -2,8 +2,8 @@ A 0.5                          255,255,255
 C 0,-1,-90                     0,0.1,1   40
 L -25,45,-30                    0.9     255,255,255
 
-sp -21,8,10                   20     255,255,255 lambertian bump_earth
-sp 15,-3,-50                    12      255,255,255 default bump_mars
+sp -21,8,10                   20     255,255,255 lambertian texture_earth # bump_earth
+sp 15,-3,-50                    12      255,255,255 default texture_mars # bump_mars
 sp 15,25,100                    8       0,0,255 mirror 
 
 pl 0,-10,60    0,1,0   	   255,125,0 	rusted_metall checker # Floor (orange)
