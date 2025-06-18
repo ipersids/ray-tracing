@@ -22,7 +22,7 @@ SUBM_LIBFT_LIB	:= $(SUBM_LIBFT_DIR)/libft$(LIB_EXT)
 # Compilation variables
 CC				:= clang
 # Flags hints:
-# -O2 (level of optimisation) 
+# -O2 (level of optimisation)
 # -flto (Link Time Optimization)
 CFLAGS			:= -O2 -flto -Wall -Wextra -Werror
 CFLAGS_BONUS 	:= $(CFLAGS) -D IS_BONUS=1
@@ -89,8 +89,8 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   \
 				   \
 				   src/display-config/debug_utils.c
-				   
-				   
+
+
 SRC_MAIN		:= src/main.c
 
 OBJS			:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
@@ -121,7 +121,7 @@ clean:
 	$(MAKE) -C $(SUBM_LIBFT_DIR) clean
 
 fclean: clean
-	$(RM_DIR) $(SUBM_MLX_DIR)/build 
+	$(RM_DIR) $(SUBM_MLX_DIR)/build
 	$(RM) $(NAME) $(NAME_BONUS)
 	$(MAKE) -C $(SUBM_LIBFT_DIR) fclean
 
