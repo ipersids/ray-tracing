@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 14:17:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/17 22:45:29 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/18 02:00:59 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	rt_init_bump_texture(t_window *win)
 static const char*	get_texture_path(t_bump_type texture_type)
 {
 	static const char	list[BUMP_MAX][100] = {
-		"textures/eartth_texture.png"
+		"textures/eartth_texture.png",
+		"textures/mars_texture.png"
 	};
 
 	return (list[texture_type]);
@@ -57,7 +58,8 @@ static const char*	get_texture_path(t_bump_type texture_type)
 static const char*	get_bump_map_path(t_bump_type bump_type)
 {
 	static const char	list[BUMP_MAX][100] = {
-		"textures/earth_bump.png"
+		"textures/earth_bump.png",
+		"textures/mars_bump.png"
 	};
 
 	return (list[bump_type]);

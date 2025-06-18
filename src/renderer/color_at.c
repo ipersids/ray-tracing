@@ -60,7 +60,8 @@ static t_phong_vars	precompute_data(t_intersection *t, t_ray *ray, t_info *rt)
 	}
 	else
 		v.is_inside = false;
-	v.point = addition(v.point, multiplication(v.normalv, SHADOW_BIAS));
+	v.point = addition(v.point, v.normalv);
+	v.over_point = addition(v.point, multiplication(v.normalv, SHADOW_BIAS));
 	return (v);
 }
 

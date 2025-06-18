@@ -174,6 +174,7 @@ typedef struct s_light
 typedef enum e_bump_type
 {
 	BUMP_EARTH,
+	BUMP_MARS,
 	BUMP_MAX
 }	t_bump_type;
 
@@ -400,6 +401,7 @@ typedef struct s_phong_vars
 	float		t;
 	t_object	*obj;
 	t_vec3		point;
+	t_vec3		over_point;
 	t_vec3		eyev;
 	bool		is_inside;
 	t_vec3		normalv;

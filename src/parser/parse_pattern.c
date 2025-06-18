@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 15:37:00 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/17 22:48:39 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/18 02:04:28 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static t_bump_type	get_texture_type(char *line)
 {
 	if (ft_strncmp(line, "bump_earth", 10) == 0 && is_valid_eol(&line[10]))
 		return (BUMP_EARTH);
+	if (ft_strncmp(line, "bump_mars", 9) == 0 && is_valid_eol(&line[9]))
+		return (BUMP_MARS);
 	return (BUMP_MAX);
 }
 
