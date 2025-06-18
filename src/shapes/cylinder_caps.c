@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 22:17:11 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/06 01:31:32 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/07 15:52:03 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,13 @@ static inline bool	check_cap(const t_ray *ray, const float t);
  * @param ray The ray to test for intersection.
  * @return t_intersections Structure containing intersection data.
  */
-t_intersections	rt_intersect_cap(const t_cylinder *cy, t_ray ray)
+t_intersections	rt_intersect_cylinder_cap(const t_cylinder *cy, t_ray ray)
 {
 	t_intersections	res;
 	float			t;
 
 	res.count = 0;
 	res.obj_type = ELEMENT_CYLINDER_CAP;
-	if (equal(ray.dir.y, 0.0f))
-		return (res);
 	ray.dir = matrix_multiply_vector(cy->inv_transform, ray.dir);
 	ray.orig = matrix_multiply_point(cy->inv_transform, ray.orig);
 	t = (-cy->half_height - ray.orig.y) / ray.dir.y;

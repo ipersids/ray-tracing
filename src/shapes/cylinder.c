@@ -6,20 +6,13 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:30:27 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/06 01:34:04 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/07 10:57:42 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /* --------------------- Private function prototypes ----------------------- */
-
-/**
- * @brief Swaps two float values.
- * @param t1 Pointer to the first float.
- * @param t2 Pointer to the second float.
- */
-static void				swapf(float *t1, float *t2);
 
 /**
  * @brief Truncates intersections to the finite height of the cylinder.
@@ -93,15 +86,6 @@ t_vec3	rt_cylinder_normal_at(const t_cylinder *cy, t_point w_point)
 }
 
 /* ------------------- Private Function Implementation --------------------- */
-
-static void	swapf(float *t1, float *t2)
-{
-	float	tmp;
-
-	tmp = *t1;
-	*t1 = *t2;
-	*t2 = tmp;
-}
 
 static t_intersections	truncate_cy(const t_cylinder *cy,
 							t_intersect_vars *vars, const t_ray *ray)

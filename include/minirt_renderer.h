@@ -5,8 +5,10 @@
 /// @dir src/renderer
 
 void			rt_camera_render(t_info *rt);
-void			rt_camera_init(t_camera *cam, t_canvas *win);
-t_color			rt_color_at(t_info *rt, t_ray *ray, int remaining);
+void			rt_camera_init(t_camera *cam, t_window *win);
+void			rt_reset_camera(t_info *rt);
+void			rt_save_camera_settings(t_camera *camera);
+t_color			rt_color_at(t_info *rt, t_ray *ray, int ray_bounces);
 t_vec3			rt_normal_at(t_object *obj, t_point world_point, t_type otype);
 void			rt_intersect_world(t_info *rt, t_ray *ray);
 t_intersection	*find_closest_intersection(t_intersection *ts, int n_ts);
@@ -30,7 +32,14 @@ t_vec3			rt_plane_normal_at(const t_plane *pl);
 
 t_intersections	rt_intersect_cylinder(const t_cylinder *cy, t_ray ray);
 t_vec3			rt_cylinder_normal_at(const t_cylinder *cy, t_point w_point);
-t_intersections	rt_intersect_cap(const t_cylinder *cy, t_ray ray);
+t_intersections	rt_intersect_cylinder_cap(const t_cylinder *cy, t_ray ray);
 t_vec3			rt_cap_normal_at(const t_cylinder *cy, t_point w_point);
+
+/* --------------------------- Cone calculations --------------------------- */
+
+t_intersections	rt_intersect_cone(const t_cone *co, t_ray r);
+t_vec3			rt_cone_normal_at(const t_cone *co, t_point w_point);
+t_intersections	rt_intersect_cone_cap(const t_cone *co, t_ray ray);
+t_vec3			rt_cone_cap_normal_at(const t_cone *co, t_point w_point);
 
 #endif // MINIRT_RENDERER_H

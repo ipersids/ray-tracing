@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_cursor.c                                       :+:      :+:    :+:   */
+/*   init_cursor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:46:10 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 23:36:09 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 22:21:57 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,19 @@
  * 
  * @param rt Pointer to the main program structure (t_info*).
  */
-void	rt_set_cursor(t_info *rt)
+void	rt_init_cursor(t_info *rt)
 {
 	t_vec3	*forward;
 
 	forward = &rt->camera.forward;
 	rt->win.cursor.pitch = asinf(-forward->y) * (180.0f / M_PI);
+	if (MAX_PITCH_CAMERA < rt->win.cursor.pitch)
+		rt->win.cursor.pitch = MAX_PITCH_CAMERA;
+	else if (-MAX_PITCH_CAMERA > rt->win.cursor.pitch)
+		rt->win.cursor.pitch = -MAX_PITCH_CAMERA;
 	rt->win.cursor.yaw = atan2f(forward->x, forward->z) * (180.0f / M_PI);
 	while (180.0f < rt->win.cursor.yaw)
 		rt->win.cursor.yaw -= 360.0f;
 	while (-180.0f > rt->win.cursor.yaw)
 		rt->win.cursor.yaw += 360.0f;
-	rt->win.cursor.is_first = true;
-	rt->win.cursor.is_dragging = false;
 }

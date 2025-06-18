@@ -6,16 +6,17 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 01:37:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/06 13:26:45 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:12:11 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_tests.h"
 
 void test_camera(void) {
 	t_camera cam = {0};
-	t_canvas win = {0};
+	t_window win = {0};
 	t_ray ray = {0};
+	t_matrix transform;
 
 	printf(PRINT_PURPLE"\n\nTEST CAMERA SETUP: \n"PRINT_DEFAULT);
 
@@ -37,21 +38,25 @@ void test_camera(void) {
 
 	printf("TEST rt_view_transform(): ");
 	rt_view_transform(&cam, win.world_up);
-	assert(matrix_equality(cam.transform, matrix_identity()));
+	assert(matrix_try_inverse(cam.inv_transform, &transform));
+	assert(matrix_equality(transform, matrix_identity()));
 	cam.forward = subtraction((t_vec3){0.0, 0.0, 1.0}, cam.pos);
 	cam.forward = normalize(cam.forward);
 	rt_view_transform(&cam, win.world_up);
-	assert(matrix_equality(cam.transform, matrix_scaling(-1.0, 1.0, -1.0)));
+	assert(matrix_try_inverse(cam.inv_transform, &transform));
+	assert(matrix_equality(transform, matrix_scaling(-1.0, 1.0, -1.0)));
 	cam.pos = (t_vec3){0.0, 0.0, 8.0};
 	cam.forward = subtraction((t_vec3){0.0, 0.0, 0.0}, cam.pos);
 	cam.forward = normalize(cam.forward);
 	rt_view_transform(&cam, win.world_up);
-	assert(matrix_equality(cam.transform, matrix_translation(0.0, 0.0, -8.0)));
+	assert(matrix_try_inverse(cam.inv_transform, &transform));
+	assert(matrix_equality(transform, matrix_translation(0.0, 0.0, -8.0)));
 	cam.pos = (t_vec3){1.0, 3.0, 2.0};
 	cam.forward = subtraction((t_vec3){4.0, -2.0, 8.0}, cam.pos);
 	cam.forward = normalize(cam.forward);
 	win.world_up = normalize((t_vec3){1.0, 1.0, 0.0});
 	rt_view_transform(&cam, win.world_up);
+	assert(matrix_try_inverse(cam.inv_transform, &transform));
 	t_matrix m = {
 		{
 			{-0.50709, 0.50709, 0.67612, -2.36643},
@@ -61,7 +66,7 @@ void test_camera(void) {
 		},
 		4
 	};
-	assert(matrix_equality(cam.transform, m));
+	assert(matrix_equality(transform, m));
 	printf(PRINT_GREEN"success\n"PRINT_DEFAULT);
 
 	printf("TEST rt_get_ray(): ");
@@ -79,21 +84,22 @@ void test_camera(void) {
 	ray = rt_get_ray(&cam, 0, 0);
 	assert(equal(ray.orig.x, 0.0) && equal(ray.orig.y, 0.0) && equal(ray.orig.z, 0.0));
 	assert(equal(ray.dir.x, 0.66519) && equal(ray.dir.y, 0.33259) && equal(ray.dir.z, -0.66851));
-	cam.transform = matrix_multiply(matrix_rotation_y(M_PI / 4.0), matrix_translation(0.0, -2.0, 5.0));
-	assert(matrix_try_inverse(cam.transform, &cam.inv_transform));
+	transform = matrix_multiply(matrix_rotation_y(M_PI / 4.0), matrix_translation(0.0, -2.0, 5.0));
+	assert(matrix_try_inverse(transform, &cam.inv_transform));
 	ray = rt_get_ray(&cam, 100, 50);
 	assert(equal(ray.orig.x, 0.0) && equal(ray.orig.y, 2.0) && equal(ray.orig.z, -5.0));
 	assert(equal(ray.dir.x, sqrtf(2.0) / 2.0) && equal(ray.dir.y, 0.0) && equal(ray.dir.z, -(sqrtf(2.0) / 2.0)));
-	t_matrix tmp = cam.transform;
+	t_matrix tmp = transform;
 	cam.pos = (t_vec3){0.0, 2.0, -5.0};
 	cam.forward = (t_vec3){0.707, 0, -0.707};
 	cam.forward = normalize(cam.forward);
 	cam.fov = 90.0;
 	rt_camera_init(&cam, &win);
 	rt_view_transform(&cam, win.world_up);
+	assert(matrix_try_inverse(cam.inv_transform, &transform));
 	ray = rt_get_ray(&cam, 100, 50);
 	assert(equal(ray.orig.x, 0.0) && equal(ray.orig.y, 2.0) && equal(ray.orig.z, -5.0));
 	assert(equal(ray.dir.x, sqrtf(2.0) / 2.0) && equal(ray.dir.y, 0.0) && equal(ray.dir.z, -(sqrtf(2.0) / 2.0)));
-	assert(matrix_equality(tmp, cam.transform));
+	assert(matrix_equality(tmp, transform));
 	printf(PRINT_GREEN"success\n"PRINT_DEFAULT);
 }

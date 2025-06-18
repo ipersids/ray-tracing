@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 11:05:03 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/01 11:31:39 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/12 11:30:50 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,12 @@ static bool	is_empty_line(char *nl, char *line);
  * @param content Pointer to the array of strings to store the scene content.
  * @return int EXIT_SUCCESS on success, or an error code on failure.
  */
-int	rt_read_scene(int fd, char ***content)
+int	rt_read_scene(int fd, char ***content, int capacity)
 {
 	static int	row = 0;
 	static int	exit_code = 0;
-	int			capacity;
 	char		*nl;
 
-	capacity = CAPACITY;
 	(*content) = (char **) malloc(capacity * sizeof(char *));
 	if (!(*content))
 		return (ERR_SYSTEM);
@@ -67,6 +65,8 @@ int	rt_read_scene(int fd, char ***content)
 		}
 		(*content)[row] = get_next_line(fd, FALSE);
 	}
+	if (0 == row && !(*content)[row])
+		return (ERROR_EMPTY_SCENE);
 	return (EXIT_SUCCESS);
 }
 
@@ -121,7 +121,7 @@ static bool	is_empty_line(char *nl, char *line)
 			break ;
 		i++;
 	}
-	if ('\0' == line[i])
+	if ('\0' == line[i] || '#' == line[i])
 	{
 		free(line);
 		return (true);

@@ -37,6 +37,7 @@
 *.hex
 miniRT
 miniRT_test
+miniRT_bonus
 
 # Debug files
 *.dSYM/

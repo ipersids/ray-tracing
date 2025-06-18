@@ -25,6 +25,7 @@ CC				:= clang
 # -O2 (level of optimisation)
 # -flto (Link Time Optimization)
 CFLAGS			:= -O2 -flto -Wall -Wextra -Werror
+CFLAGS_BONUS 	:= $(CFLAGS) -D IS_BONUS=1
 HDRS			:= -Iinclude -I$(SUBM_MLX_DIR)/include -I$(SUBM_LIBFT_DIR)/include
 LIBS			:= -L$(SUBM_MLX_DIR)/build -lmlx42 \
 				   -L$(SUBM_LIBFT_DIR) -lft \
@@ -36,8 +37,12 @@ OBJ_DIR			:= obj
 SRC_DIR			:= src
 
 # Sources and objects
-SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
-				   src/constructor/init_window.c src/constructor/init_material.c \
+SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
+				   src/constructor/init_window.c src/constructor/init_cursor.c \
+				   \
+				   src/materials/diffuse_materials.c src/materials/reflective_materials.c \
+				   src/materials/refractive_materials.c src/materials/patterns.c \
+				   src/materials/get_pattern.c \
 				   \
 				   src/destructor/destroy_exit.c src/destructor/free_arr.c \
 				   src/destructor/handle_errors.c \
@@ -47,13 +52,16 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/parser/parse_scene.c src/parser/read_scene.c \
 				   src/parser/validate_input.c src/parser/parse_cylinder.c \
 				   src/parser/parse_plane.c src/parser/parse_sphere.c \
-				   src/parser/set_transformations.c src/parser/set_material.c \
-				   src/parser/set_cursor.c \
+				   src/parser/parse_cone.c src/parser/parse_material.c \
+				   src/parser/parse_pattern.c \
 				   \
 				   src/hook/hook_close_window.c src/hook/hook_resize_window.c \
-				   src/hook/hook_render_scene.c src/hook/hook_rotate_camera.c \
+				   src/hook/hook_render_scene.c src/hook/hook_handle_cursor.c \
 				   src/hook/hook_handle_mouse.c src/hook/hook_zoom_camera.c \
-				   src/hook/hook_walk_around.c \
+				   src/hook/hook_handle_keys.c src/hook/move_camera.c \
+				   src/hook/move_object.c src/hook/calculate_movement.c \
+				   src/hook/reset_camera.c src/hook/scale_object.c \
+				   src/hook/rotate_camera.c src/hook/rotate_object.c \
 				   \
 				   src/renderer/camera.c src/renderer/color_at.c \
 				   src/renderer/intersect_world.c src/renderer/normal_at.c \
@@ -69,22 +77,27 @@ SRCS			:= src/constructor/init_info.c src/constructor/init_objects.c \
 				   src/calculations/matrices/get_submatrix.c \
 				   src/calculations/matrices/inverse.c \
 				   src/calculations/matrices/rotation_between_vectors.c \
+				   src/calculations/sort_intersections.c \
 				   \
 				   src/shapes/sphere.c src/shapes/plane.c src/shapes/cylinder.c \
-				   src/shapes/cylinder_caps.c \
+				   src/shapes/cylinder_caps.c src/shapes/cone.c \
+				   src/shapes/cone_cap.c \
 				   \
 				   src/transformation/objects_transform.c src/transformation/view_transform.c \
+				   src/transformation/update_transform.c \
 				   \
 				   \
 				   \
-				   src/display-config/debug_utils.c src/display-config/test_matrix_math.c \
-				   src/display-config/test_matrix_transformation.c src/display-config/test_camera.c \
+				   src/display-config/debug_utils.c
 
 
 SRC_MAIN		:= src/main.c
 
 OBJS			:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 OBJ_MAIN		:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_MAIN))
+
+OBJS_BONUS		:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%_bonus.o, $(SRCS))
+OBJ_MAIN_BONUS	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%_bonus.o, $(SRC_MAIN))
 
 #for tarcking changes in header files
 H_FILES			:= include/minirt_data.h include/minirt.h include/minirt_renderer.h \
@@ -94,7 +107,7 @@ H_FILES			:= include/minirt_data.h include/minirt.h include/minirt_renderer.h \
 all: update-submodule build-submodule $(NAME)
 
 run: all
-	./miniRT scene/simple.rt
+	./miniRT scene/shadow.rt
 
 $(NAME): $(OBJS) $(OBJ_MAIN)
 	$(CC) $(CFLAGS) $(OBJS) $(OBJ_MAIN) $(HDRS) $(LIBS) -o $(NAME)
@@ -109,7 +122,7 @@ clean:
 
 fclean: clean
 	$(RM_DIR) $(SUBM_MLX_DIR)/build
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(NAME_BONUS)
 	$(MAKE) -C $(SUBM_LIBFT_DIR) fclean
 
 re: fclean all
@@ -125,20 +138,47 @@ build-submodule:
 	@echo "\nMLX42 is ready.\n"
 	$(MAKE) -C $(SUBM_LIBFT_DIR)
 
+# BONUS
+NAME_BONUS		:= miniRT_bonus
+
+bonus: update-submodule build-submodule $(NAME_BONUS)
+	./miniRT_bonus ./scene/simple.rt
+
+$(NAME_BONUS): $(OBJS_BONUS) $(OBJ_MAIN_BONUS)
+	$(CC) $(CFLAGS_BONUS) $(OBJS_BONUS) $(OBJ_MAIN_BONUS) $(HDRS) $(LIBS) -o $(NAME_BONUS)
+
+$(OBJ_DIR)/%_bonus.o: $(SRC_DIR)/%.c $(H_FILES)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS_BONUS) $(HDRS)  -c $< -o $@
+
 # TESTING
-TEST_MAIN		:= src/display-config/test_main.c
-OBJ_TEST_MAIN		:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(TEST_MAIN))
+TEST_SRC		:= tests/test_main.c \
+				   tests/test_matrix_math.c \
+				   tests/test_matrix_transformation.c tests/test_camera.c \
+				   tests/test_cone.c tests/test_parser.c
+
+OBJ_TEST_SRC	:= $(patsubst %.c, $(OBJ_DIR)/%_test.o, $(TEST_SRC))
 
 NAME_TEST		:= miniRT_test
-CFLAGS_TEST		:= $(CFLAGS) -g -fsanitize=address
+
+ifeq ($(OS),MacOS)
+	CFLAGS_TEST		:= -O0 -g -fsanitize=address
+else
+	CFLAGS_TEST		:= $(CFLAGS)
+endif
 
 test: update-submodule build-submodule $(NAME_TEST)
 	./miniRT_test
 
-$(NAME_TEST): $(OBJS) $(OBJ_TEST_MAIN)
-	$(CC) $(CFLAGS_TEST) $(OBJS) $(OBJ_TEST_MAIN) $(HDRS) $(LIBS) -o $(NAME_TEST)
+$(NAME_TEST): $(OBJS) ${OBJ_TEST_SRC}
+	$(CC) $(CFLAGS_TEST) $(OBJS) $(OBJ_TEST_SRC) $(HDRS) $(LIBS) -o $(NAME_TEST)
+
+$(OBJ_DIR)/tests/%_test.o: tests/%.c $(H_FILES)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS_TEST) $(HDRS)  -c $< -o $@
 
 tclean:
+	$(RM_DIR) $(OBJ_DIR)/tests
 	$(RM) $(NAME_TEST)
 
 .PHONY: all clean fclean re update-submodule build-submodule
