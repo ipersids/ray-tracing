@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:02:01 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/19 16:03:14 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/19 16:38:40 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_uv_vars	rt_get_spherical_uv(t_sphere *sp, t_point *point)
 
 t_uv_vars	rt_get_planar_uv(t_plane *pl, t_point *point)
 {
-	const float	scale = 0.02f;
+	const float	scale = 0.015f;
     t_point     local_point;
     t_uv_vars   res;
 
@@ -65,7 +65,7 @@ t_uv_vars	rt_get_planar_uv(t_plane *pl, t_point *point)
     res.u = fmodf(local_point.x * scale, 1.0f);
 	if (0.0f > res.u)
 		res.u = res.u + 1.0f;
-	res.v = 1.0f - fmodf(local_point.z * scale, 1.0f);
+	res.v = fmodf(local_point.z * scale, 1.0f);
 	if (0.0f > res.v)
 		res.v = res.v + 1.0f;
 	res.tangent = (t_vec3){1.0f, 0.0f, 0.0f};

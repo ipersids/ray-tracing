@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 23:31:40 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/17 23:58:28 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/19 20:01:55 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_color	rt_texture_color_at(mlx_image_t *texture, float u, float v)
 	t_color		color;
 	uint32_t	i;
 
-	tex_x = fmodf(u * texture->width, texture->width);
-	tex_y = fmodf(v * texture->height, texture->height);
+	tex_x = fmodf(u * (texture->width - 1), texture->width - 1);
+	tex_y = fmodf(v * (texture->height - 1), texture->height - 1);
 	px_x = (uint32_t)tex_x;
 	px_y = (uint32_t)tex_y;
 	i = (px_y * texture->width + px_x) * RGBA;
