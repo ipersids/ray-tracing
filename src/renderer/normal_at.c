@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:12:23 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/18 23:26:55 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/20 00:35:21 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_vec3	rt_normal_at(t_info *rt, t_object *obj, t_point p, t_type id)
 
 t_vec3	bumped_normal_at(t_info *rt, t_object *obj, t_point *p, t_type id)
 {
-	mlx_image_t *bump_map;
+	mlx_image_t	*bump_map;
 
 	bump_map = rt->win.bump_map[obj->bump_type];
 	if (ELEMENT_SPHERE == id)

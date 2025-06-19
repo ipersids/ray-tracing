@@ -2,6 +2,7 @@
  * @note (project status)
  * - for now we support comments with `#` at the end line in the scene file
  * - add lite world intersection version (used in src/hook/hook_handle_mouse.c)
+ * - delete get_time_ms(void) in src/hook/hook_render_scene.c (and <time.h>)
  * 
  * @note (recourses):
  * - lightning model: https://learnopengl.com/Lighting/Basic-Lighting
@@ -34,8 +35,6 @@
 # include "minirt_math.h"		// matrices math library
 # include "minirt_parser.h"		// scene parcing and validation
 # include "minirt_renderer.h"	// camera, ray, colors related functions
-
-# include "display_config.h"	// debug print objects config
 
 /* ----------------------------- Initialisation  --------------------------- */
 /// @dir src/constructor

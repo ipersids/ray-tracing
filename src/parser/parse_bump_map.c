@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:38:34 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/19 13:09:48 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/20 00:20:18 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
-static inline bool	is_valid_eol(char *line);
+static inline bool		is_valid_eol(char *line);
 static t_bump_type	get_bump_map_type(char *line);
 
 /* --------------------------- Public Functions ---------------------------- */

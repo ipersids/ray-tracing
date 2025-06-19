@@ -72,7 +72,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   src/renderer/intersect_world.c src/renderer/normal_at.c \
 				   src/renderer/ray.c src/renderer/ray_utils.c \
 				   src/renderer/refracting.c src/renderer/refracting_utils.c\
-				   src/renderer/color_at_utils.c\
+				   src/renderer/color_at_utils.c src/renderer/reflecting.c \
 				   \
 				   src/calculations/vectors/vector_operations.c \
 				   src/calculations/vectors/vector_math.c src/calculations/colors.c \
@@ -91,11 +91,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   src/shapes/cone_cap.c \
 				   \
 				   src/transformation/objects_transform.c src/transformation/view_transform.c \
-				   src/transformation/update_transform.c \
-				   \
-				   \
-				   \
-				   src/display-config/debug_utils.c
+				   src/transformation/update_transform.c 
 
 
 SRC_MAIN		:= src/main.c
@@ -108,7 +104,7 @@ OBJ_MAIN_BONUS	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%_bonus.o, $(SRC_MAIN))
 
 #for tarcking changes in header files
 H_FILES			:= include/minirt_data.h include/minirt.h include/minirt_renderer.h \
-				   include/minirt_math.h include/minirt_parser.h include/display_config.h
+				   include/minirt_math.h include/minirt_parser.h
 
 # RULES
 all: update-submodule build-submodule $(NAME)
@@ -162,7 +158,7 @@ $(OBJ_DIR)/%_bonus.o: $(SRC_DIR)/%.c $(H_FILES)
 TEST_SRC		:= tests/test_main.c \
 				   tests/test_matrix_math.c \
 				   tests/test_matrix_transformation.c tests/test_camera.c \
-				   tests/test_cone.c tests/test_parser.c
+				   tests/test_cone.c tests/test_parser.c tests/debug_utils.c
 
 OBJ_TEST_SRC	:= $(patsubst %.c, $(OBJ_DIR)/%_test.o, $(TEST_SRC))
 

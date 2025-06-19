@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 11:49:27 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/18 22:51:51 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/20 00:20:00 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
-static inline bool	is_valid_eol(char *line);
+static inline bool		is_valid_eol(char *line);
 static t_mtype		get_material_type(char *line);
 
 /* --------------------------- Public Functions ---------------------------- */

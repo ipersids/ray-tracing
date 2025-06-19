@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 00:52:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/12 21:30:24 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/20 00:25:42 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,3 @@ t_material	init_mirror_material(void)
 	res.transparency = 0.0f;
 	return (res);
 }
-

@@ -70,7 +70,7 @@ bool			is_inside_container(t_obj_container *container, t_object *object, int *in
 float			get_refractive_index(t_obj_container *container);
 float			schlick(t_phong_vars vars);
 
-t_color			reflected_color(t_info *rt, t_phong_vars vars, int ray_bounces);
+t_color			reflected_color(t_info *rt, t_phong_vars vars, int remaining);
 t_color			refracted_color(t_info *rt, t_phong_vars vars, int remaining);
 
 #endif // MINIRT_RENDERER_H

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/17 16:27:56 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/20 00:15:48 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	init_camera(t_camera *camera);
  * @param window A pointer to the `t_window` structure to be initialized.
  */
 static void	init_window(t_window *window);
-
 
 static void	init_material(t_material *materials);
 static void	init_pattern(t_pat *patterns);
@@ -87,6 +86,4 @@ static void	init_pattern(t_pat *patterns)
 	patterns[PATTERN_STRIPE] = set_stripe_pattern();
 	patterns[PATTERN_GRADIENT] = set_gradient_pattern();
 	patterns[PATTERN_CHECKER] = set_checker_pattern();
-	// patterns[PATTERN_RADIANT_GRADIENT] = init_glass_pattern();
-	// patterns[PATTERN_RING] = init_lambertian_pattern();
 }

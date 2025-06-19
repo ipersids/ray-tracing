@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 14:17:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/19 13:32:08 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/20 00:15:30 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
-static const char*	get_texture_path(t_texture_type texture_type);
+static const char	*get_texture_path(t_texture_type texture_type);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -42,7 +42,7 @@ int	rt_init_texture(t_window *win)
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static const char*	get_texture_path(t_texture_type texture_type)
+static const char	*get_texture_path(t_texture_type texture_type)
 {
 	static const char	list[TEXTURE_MAX][100] = {
 		"textures/eartth_texture.png",

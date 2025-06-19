@@ -431,7 +431,21 @@ typedef struct s_phong_vars
 	t_vec3		normalv;
 	t_vec3		reflectv;
 	mlx_image_t	*texture;
+	t_color		surface_color;
 }				t_phong_vars;
+
+typedef struct s_color_at_vars
+{
+	t_color	tmp_color_one;
+	t_color	tmp_color_two;
+	t_color tmp_color_surface;
+	t_color	surface;
+	t_color	reflected;
+	t_color	refracted;
+	bool	shadowed;
+	float	reflectance;
+}			t_color_at_vars;
+
 
 # define BLACK (t_color){0, 0, 0}
 # define WHITE (t_color){1, 1, 1}

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:44:06 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/19 15:10:05 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/20 00:15:14 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
-static const char*	get_bump_map_path(t_bump_type bump_type);
+static const char	*get_bump_map_path(t_bump_type bump_type);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -42,7 +42,7 @@ int	rt_init_bump_map(t_window *win)
 
 /* ------------------- Private Function Implementation --------------------- */
 
-static const char*	get_bump_map_path(t_bump_type bump_type)
+static const char	*get_bump_map_path(t_bump_type bump_type)
 {
 	static const char	list[BUMP_MAX][100] = {
 		"textures/earth_bump.png",
