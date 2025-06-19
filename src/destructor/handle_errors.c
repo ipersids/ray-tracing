@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:19:51 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/12 15:39:51 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/18 18:10:04 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ static const char	*get_error_message(int exit_code)
 		"Reallocation of intersections failed",
 		"Scene file is empty",
 		"Incorrect material type",
-		"Incorrect pattern type"
+		"Incorrect pattern or texture type",
+		"Incorrect bump map type"
 	};
 
 	if (!(ERR_MLX42 < exit_code && ERR_MAX > exit_code))

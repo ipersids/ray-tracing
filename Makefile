@@ -24,7 +24,7 @@ CC				:= clang
 # Flags hints:
 # -O2 (level of optimisation)
 # -flto (Link Time Optimization)
-CFLAGS			:= -O2 -flto -Wall -Wextra -Werror
+CFLAGS			:= -O2 -flto -Wall -Wextra -Werror #-g -fsanitize=address
 CFLAGS_BONUS 	:= $(CFLAGS) -D IS_BONUS=1
 HDRS			:= -Iinclude -I$(SUBM_MLX_DIR)/include -I$(SUBM_LIBFT_DIR)/include
 LIBS			:= -L$(SUBM_MLX_DIR)/build -lmlx42 \
@@ -39,10 +39,14 @@ SRC_DIR			:= src
 # Sources and objects
 SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   src/constructor/init_window.c src/constructor/init_cursor.c \
+				   src/constructor/init_texture.c src/constructor/init_bump_map.c \
 				   \
 				   src/materials/diffuse_materials.c src/materials/reflective_materials.c \
 				   src/materials/refractive_materials.c src/materials/patterns.c \
 				   src/materials/get_pattern.c \
+				   \
+				   src/texture-mapping/get_uv_coordinates.c src/texture-mapping/get_gradient.c \
+				   src/texture-mapping/get_texture_color.c \
 				   \
 				   src/destructor/destroy_exit.c src/destructor/free_arr.c \
 				   src/destructor/handle_errors.c \
@@ -53,7 +57,8 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   src/parser/validate_input.c src/parser/parse_cylinder.c \
 				   src/parser/parse_plane.c src/parser/parse_sphere.c \
 				   src/parser/parse_cone.c src/parser/parse_material.c \
-				   src/parser/parse_pattern.c \
+				   src/parser/parse_pattern.c src/parser/parse_bump_map.c \
+				   src/parser/parse_texture.c \
 				   \
 				   src/hook/hook_close_window.c src/hook/hook_resize_window.c \
 				   src/hook/hook_render_scene.c src/hook/hook_handle_cursor.c \
@@ -66,6 +71,8 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   src/renderer/camera.c src/renderer/color_at.c \
 				   src/renderer/intersect_world.c src/renderer/normal_at.c \
 				   src/renderer/ray.c src/renderer/ray_utils.c \
+				   src/renderer/refracting.c src/renderer/refracting_utils.c\
+				   src/renderer/color_at_utils.c src/renderer/reflecting.c \
 				   \
 				   src/calculations/vectors/vector_operations.c \
 				   src/calculations/vectors/vector_math.c src/calculations/colors.c \
@@ -84,11 +91,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   src/shapes/cone_cap.c \
 				   \
 				   src/transformation/objects_transform.c src/transformation/view_transform.c \
-				   src/transformation/update_transform.c \
-				   \
-				   \
-				   \
-				   src/display-config/debug_utils.c
+				   src/transformation/update_transform.c 
 
 
 SRC_MAIN		:= src/main.c
@@ -101,7 +104,7 @@ OBJ_MAIN_BONUS	:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%_bonus.o, $(SRC_MAIN))
 
 #for tarcking changes in header files
 H_FILES			:= include/minirt_data.h include/minirt.h include/minirt_renderer.h \
-				   include/minirt_math.h include/minirt_parser.h include/display_config.h
+				   include/minirt_math.h include/minirt_parser.h
 
 # RULES
 all: update-submodule build-submodule $(NAME)
@@ -142,7 +145,7 @@ build-submodule:
 NAME_BONUS		:= miniRT_bonus
 
 bonus: update-submodule build-submodule $(NAME_BONUS)
-	./miniRT_bonus ./scene/simple.rt
+	./miniRT_bonus ./scene/test.rt
 
 $(NAME_BONUS): $(OBJS_BONUS) $(OBJ_MAIN_BONUS)
 	$(CC) $(CFLAGS_BONUS) $(OBJS_BONUS) $(OBJ_MAIN_BONUS) $(HDRS) $(LIBS) -o $(NAME_BONUS)
@@ -155,7 +158,7 @@ $(OBJ_DIR)/%_bonus.o: $(SRC_DIR)/%.c $(H_FILES)
 TEST_SRC		:= tests/test_main.c \
 				   tests/test_matrix_math.c \
 				   tests/test_matrix_transformation.c tests/test_camera.c \
-				   tests/test_cone.c tests/test_parser.c
+				   tests/test_cone.c tests/test_parser.c tests/debug_utils.c
 
 OBJ_TEST_SRC	:= $(patsubst %.c, $(OBJ_DIR)/%_test.o, $(TEST_SRC))
 

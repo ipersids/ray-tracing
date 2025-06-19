@@ -6,13 +6,15 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:30:21 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 14:10:55 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/20 01:01:51 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include <time.h>
 
-static inline double get_time_ms(void) {
+static inline double	get_time_ms(void)
+{
 	struct timespec	ts;
 
 	clock_gettime(CLOCK_MONOTONIC, &ts);
@@ -36,6 +38,8 @@ void	rt_render_hook(void *param)
 {
 	t_info		*rt;
 	t_window	*win;
+	double		start;
+	double		end;
 
 	rt = (t_info *)param;
 	win = &rt->win;
@@ -48,9 +52,9 @@ void	rt_render_hook(void *param)
 	}
 	if (false == win->rendered)
 	{
-		double start = get_time_ms();
+		start = get_time_ms();
 		rt_camera_render(rt);
-		double end = get_time_ms();
+		end = get_time_ms();
 		printf("Render: %s%.1f%s ms (%dx%d)\n", PRINT_RED, end - start,
 			PRINT_DEFAULT, rt->win.img->width, rt->win.img->height); // delete
 		win->rendered = true;

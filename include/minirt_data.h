@@ -61,8 +61,8 @@ typedef struct s_submatrix_var
 #  define IS_BONUS 0
 # endif
 
-# define PREVIOUS 0
-# define CURRENT 1
+# define RGBA 4
+# define BUMP_FACTOR 0.5f
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -77,7 +77,7 @@ typedef struct s_submatrix_var
  * This constant sets the default number of rays that can be recursively "shot"
  * (e.g., for reflections) when calculating the color at a point.
  */
-# define MAX_RAY_RECURSION_DEPTH 5
+# define MAX_RAY_RECURSION_DEPTH 6
 
 /**
  * @brief Error codes
@@ -108,10 +108,11 @@ typedef enum s_error
 	ERR_CAMERA_PITCH_ANGLE,
 	ERR_CAMERA_NON_INVERSIBLE,
 	ERR_MATRIX_NON_INVERSIBLE,
-	ERROR_REALLOC_INTERSECTIONS,
-	ERROR_EMPTY_SCENE,
-	ERROR_MATERIAL,
-	ERROR_PATTERN,
+	ERR_REALLOC_INTERSECTIONS,
+	ERR_EMPTY_SCENE,
+	ERR_MATERIAL,
+	ERR_PATTERN,
+	ERR_BUMP_MAP,
 	ERR_MAX
 }	t_error;
 
@@ -173,6 +174,22 @@ typedef struct s_light
 
 # define PATTERN_SHIFT 0.01f
 
+typedef enum e_bump_type
+{
+	BUMP_EARTH,
+	BUMP_MARS,
+	BUMP_WALL,
+	BUMP_MAX
+}	t_bump_type;
+
+typedef enum e_texture_type
+{
+	TEXTURE_EARTH,
+	TEXTURE_MARS,
+	TEXTURE_WALL,
+	TEXTURE_MAX
+}	t_texture_type;
+
 typedef enum e_pattype
 {
 	PATTERN_STRIPE,
@@ -180,12 +197,13 @@ typedef enum e_pattype
 	PATTERN_CHECKER,
 	// PATTERN_RING,
 	// PATTERN_RADIANT_GRADIENT,
-	PATTERN_MAX
+	PATTERN_MAX,
+	PATTERN_DEFAULT
 }			t_pattype;
 
-typedef struct	s_pat
+typedef struct s_pat
 {
-	t_pattype 	type;
+	t_pattype	type;
 	t_color		color_a;
 	t_color		color_b;
 	t_matrix	transform;
@@ -269,8 +287,12 @@ typedef struct s_object
 	t_color			color;			// R,G,B colors in range [0.0-1.0]
 	t_color			amb_component;	// ambient.intensity * object.color
 	t_material		*material;
-	bool			has_pattern;
 	t_pat			*pattern;
+	bool			has_pattern;
+	bool			has_texture;
+	bool			has_bump_map;
+	t_texture_type	tex_type;
+	t_bump_type		bump_type;
 }					t_object;
 
 typedef struct s_obj_containter
@@ -278,7 +300,6 @@ typedef struct s_obj_containter
 	t_object	*objs[MAX_CONTAINERS];
 	int			obj_count;
 }				t_obj_container;
-
 
 /* --------------------- MLX42 constants and structures  ------------------- */
 
@@ -327,6 +348,8 @@ typedef struct s_window
 	bool		resized;
 	double		elapsed_time;
 	mlx_image_t	*img;
+	mlx_image_t	*texture[TEXTURE_MAX];
+	mlx_image_t	*bump_map[BUMP_MAX];
 	t_cursor	cursor;
 }				t_window;
 
@@ -375,12 +398,12 @@ typedef struct s_info
 	t_camera		camera;			// Camera data
 	t_light			*lights;		// Array to store lights on the scene
 	size_t			n_lights;		// Amount of lights in the *lights array
-	t_object		*objs;			// Array to store scene's objects (sp, pl, cy)
+	t_object		*objs;			// Array to store objects (sp, pl, cy)
 	size_t			n_objs;			// Amount of items in the *objs array
 	t_window		win;			// mlx window and images info struct
 	t_intersection	*ts;			// Intersection collection
-	size_t			n_ts;			// Amount t-values in intersection collection
-	size_t			capacity_ts;	// Current capacity in intersection collection
+	size_t			n_ts;			// Amount t-values in intersection collect
+	size_t			capacity_ts;	// Current capacity in intersection collect
 	t_pat			patterns[PATTERN_MAX];
 	t_material		materials[MATERIAL_MAX];
 }					t_info;
@@ -402,12 +425,25 @@ typedef struct s_phong_vars
 	float		n2;
 	t_object	*obj;
 	t_vec3		point;
+	t_vec3		under_point;
 	t_vec3		eyev;
-	bool		is_inside;
 	t_vec3		normalv;
 	t_vec3		reflectv;
-	t_vec3		under_point;
+	mlx_image_t	*texture;
+	t_color		surface_color;
 }				t_phong_vars;
+
+typedef struct s_color_at_vars
+{
+	t_color	tmp_color_one;
+	t_color	tmp_color_two;
+	t_color	tmp_color_surface;
+	t_color	surface;
+	t_color	reflected;
+	t_color	refracted;
+	bool	shadowed;
+	float	reflectance;
+}			t_color_at_vars;
 
 # define BLACK (t_color){0, 0, 0}
 # define WHITE (t_color){1, 1, 1}
@@ -449,4 +485,39 @@ typedef struct s_intersect_vars
 	float	y1;
 }			t_intersect_vars;
 
-#endif // MINIRT_DATA_H;
+typedef struct s_bump_height_vars
+{
+	float		tex_x;
+	float		tex_y;
+	uint32_t	px_x;
+	uint32_t	px_y;
+	uint32_t	i;
+	float		height;
+}				t_bump_height_vars;
+
+typedef struct s_bump_gradient_vars
+{
+	float	delta_u;
+	float	delta_v;
+	float	h_center;
+	float	h_left;
+	float	h_right;
+	float	h_up;
+	float	h_down;
+}			t_bump_gradient_vars;
+
+typedef struct t_gradient
+{
+	float	gradient_u;
+	float	gradient_v;
+}			t_gradient;
+
+typedef struct s_uv_vars
+{
+	float	u;
+	float	v;
+	t_vec3	tangent;
+	t_vec3	bitangent;
+}			t_uv_vars;
+
+#endif // MINIRT_DATA_H

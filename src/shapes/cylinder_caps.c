@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 22:17:11 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 15:52:03 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/18 23:49:09 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,30 +68,28 @@ t_intersections	rt_intersect_cylinder_cap(const t_cylinder *cy, t_ray ray)
  * @param w_point The point in world coordinates.
  * @return t_vec3 The normal vector at the given point.
  */
-t_vec3	rt_cap_normal_at(const t_cylinder *cy, t_point w_point)
+t_vec3	rt_cylinder_cap_normal_at(const t_cylinder *cy, t_point point)
 {
 	t_vec3	obj_point;
-	t_vec3	obj_normal;
+	t_vec3	canonical_normal;
 	t_vec3	world_normal;
-	float	dist;
 
-	obj_point = matrix_multiply_point(cy->inv_transform, w_point);
-	dist = (obj_point.x * obj_point.x) + (obj_point.z * obj_point.z);
-	if (dist < 1.0f && (obj_point.y >= cy->half_height - EPSILON))
-	{
-		obj_normal = (t_vec3){0.0f, 1.0f, 0.0f};
-		world_normal = matrix_multiply_vector(cy->inv_transpose, obj_normal);
-		return (normalize(world_normal));
-	}
-	if (dist < 1.0f && (obj_point.y <= -cy->half_height + EPSILON))
-	{
-		obj_normal = (t_vec3){0.0f, -1.0f, 0.0f};
-		world_normal = matrix_multiply_vector(cy->inv_transpose, obj_normal);
-		return (normalize(world_normal));
-	}
-	obj_normal = (t_vec3){obj_point.x, 0.0f, obj_point.z};
-	world_normal = matrix_multiply_vector(cy->inv_transpose, obj_normal);
+	obj_point = matrix_multiply_point(cy->inv_transform, point);
+	if (obj_point.y > 0.0f)
+		canonical_normal = (t_vec3){0.0f, 1.0f, 0.0f};
+	else
+		canonical_normal = (t_vec3){0.0f, -1.0f, 0.0f};
+	world_normal = matrix_multiply_vector(cy->inv_transpose, canonical_normal);
 	return (normalize(world_normal));
+}
+
+t_vec3	rt_cap_bumped_normal_at(mlx_image_t *tex, t_cylinder *cy, t_point *p)
+{
+	t_vec3	normal;
+
+	(void)tex;
+	normal = rt_cylinder_cap_normal_at(cy, *p);
+	return (normal);
 }
 
 /* ------------------- Private Function Implementation --------------------- */
