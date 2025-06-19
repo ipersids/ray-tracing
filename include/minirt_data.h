@@ -244,13 +244,13 @@ typedef struct s_object
 	};
 	t_material		*material;
 }				t_object;
-
+/*
 typedef struct s_obj_container
 {
 	t_object	*objects[MAX_CONTAINERS];
 	int			count;
 }				t_obj_container;
-
+*/
 typedef struct s_obj_containter
 {
 	t_object	*objs[MAX_CONTAINERS];

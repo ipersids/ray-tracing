@@ -37,7 +37,7 @@ void	rt_set_material(t_color ambient, t_object *obj, t_mtype type)
 	{
 		obj->sp.material = rt_init_material(ambient, obj->sp.color, type);
 		obj->material = &obj->sp.material;
-		set_glass(obj);
+		//set_glass(obj);
 		obj->material->reflective = 0.9;
 		//obj->material->pattern = set_stripe_pattern(BLACK, WHITE, 0.01f, M_PI / 3);
 	}
@@ -46,7 +46,7 @@ void	rt_set_material(t_color ambient, t_object *obj, t_mtype type)
 		obj->cy.material = rt_init_material(ambient, obj->cy.color, type);
 		obj->material = &obj->cy.material;
 		obj->material->reflective = 0.9;
-		set_glass(obj);
+		//set_glass(obj);
 	}
 	else if (ELEMENT_PLANE == obj->id)
 	{

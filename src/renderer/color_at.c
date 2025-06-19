@@ -81,8 +81,6 @@ static t_phong_vars	prepare_shading(t_intersection *t, t_ray *ray, t_info *rt)
 	}
 	vars.under_point = subtraction(vars.point, (multiplication(vars.normalv, EPSILON)));
 	vars.is_inside = false;
-	vars.n1 = 1.0f;
-	vars.n2 = 1.0f;
 	return (vars);
 }
 
