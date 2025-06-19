@@ -55,5 +55,8 @@ uint32_t	rt_convert_to_rgba(const t_color *color);
 
 float		radians(float degrees);
 bool		equal(float a, float b);
+void		swapf(float *t1, float *t2);
+float		clampf(float n, float min, float max);
+void		intersections_sort(t_intersection *arr, int low, int high);
 
 #endif // MINIRT_MATH_H
