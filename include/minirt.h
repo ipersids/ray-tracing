@@ -10,6 +10,10 @@
  * - The Cherno Ray Tracing youtube playlist
  *   https://www.youtube.com/playlist?list=PLlrATfBNZ98edc5GshdBtREv5asFW3yXl
  * - Welcome to Computer Graphics: https://scratchapixel.com/
+ * - Texture and bump Mapping 
+ * 	 https://medium.com/@dbildibay/ray-tracing-adventure-part-iv-678768947371
+ * - Bump, Normal, Displacement, and Parallax Mapping
+ * 	 https://youtu.be/cM7RjEtZGHw
  */
 
 #ifndef MINIRT_H
@@ -83,7 +87,9 @@ t_color		checker_pattern_at(t_pat pattern, t_point point);
 // t_color		radiant_gradient_pattern_at(t_pat pattern, t_point point);
 // t_color		ring_pattern_at(t_pat pattern, t_point point);
 
+t_uv_vars	rt_get_uv_coordinates(t_object *obj, t_point *point);
 t_uv_vars	rt_get_spherical_uv(t_sphere *sp, t_point *point);
+t_uv_vars	rt_get_planar_uv(t_plane *pl, t_point *point);
 t_color		rt_texture_color_at(mlx_image_t *texture, float u, float v);
 t_gradient	rt_get_gradient(mlx_image_t *tex, float u, float v);
 

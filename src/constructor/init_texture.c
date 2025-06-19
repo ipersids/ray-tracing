@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 14:17:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/18 18:15:33 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/19 13:32:08 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static const char*	get_texture_path(t_texture_type texture_type)
 {
 	static const char	list[TEXTURE_MAX][100] = {
 		"textures/eartth_texture.png",
-		"textures/mars_texture.png"
+		"textures/mars_texture.png",
+		"textures/painted-white-bricks_ao.png"
 	};
 
 	return (list[texture_type]);

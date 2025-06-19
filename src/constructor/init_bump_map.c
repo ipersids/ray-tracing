@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:44:06 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/18 17:54:10 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:10:05 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static const char*	get_bump_map_path(t_bump_type bump_type)
 {
 	static const char	list[BUMP_MAX][100] = {
 		"textures/earth_bump.png",
-		"textures/mars_bump.png"
+		"textures/mars_bump.png",
+		"textures/painted-white-bricks_height.png"
 	};
 
 	return (list[bump_type]);

@@ -1,13 +1,13 @@
-A 0.5                          255,255,255
+A 0.3                          255,255,255
 C 0,-1,-90                     0,0.1,1   40
-L -25,45,-30                    0.9     255,255,255
+L -25,45,-30                    0.6     255,255,255
 
 sp -21,8,10                   20     255,255,255 lambertian texture_earth bump_earth
-sp 15,-3,-50                    12      255,255,255 default default bump_mars
+sp 15,-3,-50                    12      255,125,0 lambertian default bump_wall
 sp 15,25,100                    8       0,0,255 mirror 
 
-pl 0,-10,60    0,1,0   	   255,125,0 	rusted_metall checker # Floor (orange)
-pl -50,0,50    1,0,0       0,125,255    # Left wall (ocean)
+pl 0,-10,60    0,1,0   	   255,125,0 	lambertian default #bump_earth # Floor (orange)
+pl -50,0,50    1,0,0       255,255,255    lambertian default #bump_wall # Left wall (white)
 pl 50,0,50     -1,0,0      125,255,0    # Right wall (spring green)
 pl 0,0,150     0,0,-1      255,255,0    # Back wall (yellow)
 pl 0,50,50     0,-1,0      255,0,255    # Ceiling (magenta)

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 01:51:01 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/18 23:12:05 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/19 14:06:57 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,22 @@ t_vec3	rt_plane_normal_at(const t_plane *pl)
 
 t_vec3	rt_plane_bumped_normal_at(mlx_image_t *tex, t_plane *pl, t_point *p)
 {
-	t_vec3	normal;
+	t_uv_vars	uv;
+	t_gradient	var;
+	t_vec3		perturbation;
+	t_vec3		normal;
+	t_vec3		bumped_normal;
 
-	(void)tex;
-	(void)p;
+	uv = rt_get_planar_uv(pl, p);
+	var = rt_get_gradient(tex, uv.u, uv.v);
+	perturbation = addition(
+		multiplication(uv.tanget, var.gradient_u),
+		multiplication(uv.bitanget, var.gradient_v)
+	);
+	perturbation = multiplication(perturbation, BUMP_FACTOR);
+	perturbation = matrix_multiply_vector(pl->inv_transpose, perturbation);
 	normal = rt_plane_normal_at(pl);
-	return (normal);
+	bumped_normal = addition(normal, perturbation);
+	bumped_normal = normalize(bumped_normal);
+	return (bumped_normal);
 }

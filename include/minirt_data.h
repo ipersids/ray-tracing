@@ -176,6 +176,7 @@ typedef enum e_bump_type
 {
 	BUMP_EARTH,
 	BUMP_MARS,
+	BUMP_WALL,
 	BUMP_MAX
 }	t_bump_type;
 
@@ -183,6 +184,7 @@ typedef enum e_texture_type
 {
 	TEXTURE_EARTH,
 	TEXTURE_MARS,
+	TEXTURE_WALL,
 	TEXTURE_MAX
 }	t_texture_type;
 

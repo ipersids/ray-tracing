@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:39:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/18 23:07:40 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/19 13:09:21 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static t_texture_type	get_texture_type(char *line)
 		return (TEXTURE_EARTH);
 	if (ft_strncmp(line, "texture_mars", 12) == 0 && is_valid_eol(&line[12]))
 		return (TEXTURE_MARS);
+	if (ft_strncmp(line, "texture_wall", 12) == 0 && is_valid_eol(&line[12]))
+		return (TEXTURE_WALL);
 	return (TEXTURE_MAX);
 }
 

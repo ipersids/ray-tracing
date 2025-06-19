@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:38:34 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/18 22:52:04 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/19 13:09:48 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static t_bump_type	get_bump_map_type(char *line)
 		return (BUMP_EARTH);
 	if (ft_strncmp(line, "bump_mars", 9) == 0 && is_valid_eol(&line[9]))
 		return (BUMP_MARS);
+	if (ft_strncmp(line, "bump_wall", 9) == 0 && is_valid_eol(&line[9]))
+		return (BUMP_WALL);
 	return (BUMP_MAX);
 }
 

@@ -6,11 +6,18 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:02:01 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/18 01:02:18 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/19 14:15:20 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+t_uv_vars	rt_get_uv_coordinates(t_object *obj, t_point *point)
+{
+	if (ELEMENT_SPHERE == obj->id)
+		return (rt_get_spherical_uv(&obj->sp, point));
+	return (rt_get_planar_uv(&obj->pl, point));
+}
 
 /**
  * @brief 
@@ -46,4 +53,22 @@ t_uv_vars	rt_get_spherical_uv(t_sphere *sp, t_point *point)
 	res.bitanget.z = sinf(theta) * cosf(phi);
 	res.bitanget = normalize(res.bitanget);
 	return (res);
+}
+
+t_uv_vars	rt_get_planar_uv(t_plane *pl, t_point *point)
+{
+	const float	scale = 0.02f;
+    t_point     local_point;
+    t_uv_vars   res;
+
+    local_point = matrix_multiply_point(pl->inv_transform, *point);
+    res.u = fmodf(local_point.x * scale, 1.0f);
+	if (0.0f > res.u)
+		res.u = res.u + 1.0f;
+	res.v = 1.0f - fmodf(local_point.z * scale, 1.0f);
+	if (0.0f > res.v)
+		res.v = res.v + 1.0f;
+	res.tanget = (t_vec3){1.0f, 0.0f, 0.0f};
+	res.bitanget = (t_vec3){0.0f, 0.0f, 1.0f};
+    return (res);
 }
