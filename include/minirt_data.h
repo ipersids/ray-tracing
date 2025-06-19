@@ -77,7 +77,7 @@ typedef struct s_submatrix_var
  * This constant sets the default number of rays that can be recursively "shot"
  * (e.g., for reflections) when calculating the color at a point.
  */
-# define MAX_RAY_RECURSION_DEPTH 5
+# define MAX_RAY_RECURSION_DEPTH 6
 
 /**
  * @brief Error codes
@@ -426,10 +426,8 @@ typedef struct s_phong_vars
 	float		n2;
 	t_object	*obj;
 	t_vec3		point;
-	t_vec3		over_point;
 	t_vec3		under_point;
 	t_vec3		eyev;
-	bool		is_inside;
 	t_vec3		normalv;
 	t_vec3		reflectv;
 	mlx_image_t	*texture;
