@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 01:51:01 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/19 14:06:57 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/19 16:01:41 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ t_vec3	rt_plane_bumped_normal_at(mlx_image_t *tex, t_plane *pl, t_point *p)
 	uv = rt_get_planar_uv(pl, p);
 	var = rt_get_gradient(tex, uv.u, uv.v);
 	perturbation = addition(
-		multiplication(uv.tanget, var.gradient_u),
-		multiplication(uv.bitanget, var.gradient_v)
+		multiplication(uv.tangent, var.gradient_u),
+		multiplication(uv.bitangent, var.gradient_v)
 	);
 	perturbation = multiplication(perturbation, BUMP_FACTOR);
 	perturbation = matrix_multiply_vector(pl->inv_transpose, perturbation);

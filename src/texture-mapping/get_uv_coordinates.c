@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:02:01 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/19 14:15:20 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/19 16:03:14 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ t_uv_vars	rt_get_spherical_uv(t_sphere *sp, t_point *point)
 	res.u = 1.0f - (theta / (2 * M_PI));
 	res.u = fmodf(res.u + u_rotate, 1.0f);
 	res.v = phi / M_PI;
-	res.tanget.x = -sinf(theta);
-	res.tanget.y = 0.0f;
-	res.tanget.z = cosf(theta);
-	res.tanget = normalize(res.tanget);
-	res.bitanget.x = cosf(theta) * cosf(phi);
-	res.bitanget.y = -sinf(phi);
-	res.bitanget.z = sinf(theta) * cosf(phi);
-	res.bitanget = normalize(res.bitanget);
+	res.tangent.x = -sinf(theta);
+	res.tangent.y = 0.0f;
+	res.tangent.z = cosf(theta);
+	res.tangent = normalize(res.tangent);
+	res.bitangent.x = cosf(theta) * cosf(phi);
+	res.bitangent.y = -sinf(phi);
+	res.bitangent.z = sinf(theta) * cosf(phi);
+	res.bitangent = normalize(res.bitangent);
 	return (res);
 }
 
@@ -68,7 +68,7 @@ t_uv_vars	rt_get_planar_uv(t_plane *pl, t_point *point)
 	res.v = 1.0f - fmodf(local_point.z * scale, 1.0f);
 	if (0.0f > res.v)
 		res.v = res.v + 1.0f;
-	res.tanget = (t_vec3){1.0f, 0.0f, 0.0f};
-	res.bitanget = (t_vec3){0.0f, 0.0f, 1.0f};
+	res.tangent = (t_vec3){1.0f, 0.0f, 0.0f};
+	res.bitangent = (t_vec3){0.0f, 0.0f, 1.0f};
     return (res);
 }

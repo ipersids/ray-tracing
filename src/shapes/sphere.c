@@ -51,8 +51,8 @@ t_vec3	rt_sphere_bumped_normal_at(mlx_image_t *tex, t_sphere *sp, t_point *p)
 	uv = rt_get_spherical_uv(sp, p);
 	var = rt_get_gradient(tex, uv.u, uv.v);
 	perturbation = addition(
-		multiplication(uv.tanget, var.gradient_u),
-		multiplication(uv.bitanget, var.gradient_v)
+		multiplication(uv.tangent, var.gradient_u),
+		multiplication(uv.bitangent, var.gradient_v)
 	);
 	perturbation = multiplication(perturbation, BUMP_FACTOR);
 	perturbation = matrix_multiply_vector(sp->inv_transpose, perturbation);

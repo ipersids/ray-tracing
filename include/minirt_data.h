@@ -142,16 +142,18 @@ typedef enum e_type
 
 /**
  * @brief Pitch angle limit
- * 
- * Prevents the camera from looking straight up or down, 
+ *
+ * Prevents the camera from looking straight up or down,
  * which can cause gimbal lock or degenerate view matrices.
- * 
+ *
  * Fot minimum value used -MAX_PITCH
  */
 # define MAX_PITCH_CAMERA 60.0f
 # define MAX_PITCH_OBJECT 89.0f
 # define Z_DRIFT_DAMPING 1.0f
 # define ROTATION_STEP 5.0f
+# define LIMIT_S 1000.0f
+# define MAX_CONTAINERS 6
 
 typedef struct s_camera
 {
@@ -293,6 +295,13 @@ typedef struct s_object
 	t_bump_type		bump_type;
 }					t_object;
 
+typedef struct s_obj_containter
+{
+	t_object	*objs[MAX_CONTAINERS];
+	int			obj_count;
+}				t_obj_container;
+
+
 /* --------------------- MLX42 constants and structures  ------------------- */
 
 // Default resolutions for window (16:9 aspect ratio):
@@ -351,7 +360,8 @@ typedef enum e_ray_type
 {
 	RAY_CAMERA,
 	RAY_SHADOW,
-	RAY_REFLECTION
+	RAY_REFLECTION,
+	RAY_REFRACTION
 }	t_ray_type;
 
 typedef struct s_ray
@@ -412,15 +422,17 @@ typedef struct s_counter
 typedef struct s_phong_vars
 {
 	float		t;
+	float		n1;
+	float		n2;
 	t_object	*obj;
 	t_vec3		point;
 	t_vec3		over_point;
+	t_vec3		under_point;
 	t_vec3		eyev;
 	bool		is_inside;
 	t_vec3		normalv;
 	t_vec3		reflectv;
 	mlx_image_t	*texture;
-	mlx_image_t	*bump;
 }				t_phong_vars;
 
 # define BLACK (t_color){0, 0, 0}
@@ -494,10 +506,8 @@ typedef struct s_uv_vars
 {
 	float	u;
 	float	v;
-	t_vec3	tanget;
-	t_vec3	bitanget;
+	t_vec3	tangent;
+	t_vec3	bitangent;
 }			t_uv_vars;
-
-
 
 #endif // MINIRT_DATA_H

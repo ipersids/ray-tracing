@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 01:47:44 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/08 16:50:48 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:15:57 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @brief Initializes the camera and renders the scene pixel by pixel.
  *
  * Sets up the camera parameters and iterates over each pixel in the image,
- * casting a ray through each pixel, computing its color, 
+ * casting a ray through each pixel, computing its color,
  * and drawing it to the image.
  *
  * @param rt Pointer to the main program structure.
