@@ -201,9 +201,9 @@ typedef enum e_pattype
 	PATTERN_DEFAULT
 }			t_pattype;
 
-typedef struct	s_pat
+typedef struct s_pat
 {
-	t_pattype 	type;
+	t_pattype	type;
 	t_color		color_a;
 	t_color		color_b;
 	t_matrix	transform;
@@ -301,7 +301,6 @@ typedef struct s_obj_containter
 	int			obj_count;
 }				t_obj_container;
 
-
 /* --------------------- MLX42 constants and structures  ------------------- */
 
 // Default resolutions for window (16:9 aspect ratio):
@@ -349,7 +348,7 @@ typedef struct s_window
 	bool		resized;
 	double		elapsed_time;
 	mlx_image_t	*img;
-	mlx_image_t	*texture[BUMP_MAX];
+	mlx_image_t	*texture[TEXTURE_MAX];
 	mlx_image_t	*bump_map[BUMP_MAX];
 	t_cursor	cursor;
 }				t_window;
@@ -399,12 +398,12 @@ typedef struct s_info
 	t_camera		camera;			// Camera data
 	t_light			*lights;		// Array to store lights on the scene
 	size_t			n_lights;		// Amount of lights in the *lights array
-	t_object		*objs;			// Array to store scene's objects (sp, pl, cy)
+	t_object		*objs;			// Array to store objects (sp, pl, cy)
 	size_t			n_objs;			// Amount of items in the *objs array
 	t_window		win;			// mlx window and images info struct
 	t_intersection	*ts;			// Intersection collection
-	size_t			n_ts;			// Amount t-values in intersection collection
-	size_t			capacity_ts;	// Current capacity in intersection collection
+	size_t			n_ts;			// Amount t-values in intersection collect
+	size_t			capacity_ts;	// Current capacity in intersection collect
 	t_pat			patterns[PATTERN_MAX];
 	t_material		materials[MATERIAL_MAX];
 }					t_info;
@@ -438,14 +437,13 @@ typedef struct s_color_at_vars
 {
 	t_color	tmp_color_one;
 	t_color	tmp_color_two;
-	t_color tmp_color_surface;
+	t_color	tmp_color_surface;
 	t_color	surface;
 	t_color	reflected;
 	t_color	refracted;
 	bool	shadowed;
 	float	reflectance;
 }			t_color_at_vars;
-
 
 # define BLACK (t_color){0, 0, 0}
 # define WHITE (t_color){1, 1, 1}

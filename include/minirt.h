@@ -72,7 +72,7 @@ t_material	init_diamond_material(void);
 t_material	init_water_material(void);
 t_material	init_ice_material(void);
 
-// t_pat	set_stripe_pattern(t_color a, t_color b, float scale, float angle_rad);
+//t_pat	set_stripe_pattern(t_color a, t_color b, float scale, float angle_rad);
 // t_pat	set_checker_pattern(t_color a, t_color b, float scale);
 // t_pat	set_gradient_pattern(t_color a, t_color b, float scale);
 t_pat		set_stripe_pattern(void);
@@ -109,7 +109,7 @@ void		rt_render_hook(void *param);
 void		rt_cursor_hook(double xpos, double ypos, void *param);
 void		rt_mouse_hook(mouse_key_t k, action_t a, modifier_key_t m, void *p);
 void		rt_scroll_hook(double xdelta, double ydelta, void *param);
-void		rt_key_hook(mlx_key_data_t k, void* param);
+void		rt_key_hook(mlx_key_data_t k, void *param);
 
 void		rt_rotate_camera(t_info *rt, t_cursor *cursor, double x, double y);
 void		rt_move_camera(t_info *rt, mlx_key_data_t *key);
