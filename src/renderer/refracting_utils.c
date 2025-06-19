@@ -41,13 +41,19 @@ void remove_from_container(t_obj_container *container, int index)
 
 void add_to_container(t_obj_container *container, t_object *obj)
 {
-		container->objs[container->obj_count] = obj;
-		container->obj_count++;
+	if (container->obj_count >= MAX_CONTAINERS)
+		return ;
+	container->objs[container->obj_count] = obj;
+	container->obj_count++;
 }
 
 float	get_refractive_index(t_obj_container *container)
 {
-	if (container->obj_count == 0)
+	if (container->obj_count <= 0)
+		return (1.0f);
+	if (!container->objs[container->obj_count - 1]->material)
+		return (1.0f);
+	if (!container->objs[container->obj_count -1])
 		return (1.0f);
 	else
 		return (container->objs[container->obj_count - 1]->material->refractive);

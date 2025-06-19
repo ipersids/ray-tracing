@@ -24,7 +24,7 @@ CC				:= clang
 # Flags hints:
 # -O2 (level of optimisation)
 # -flto (Link Time Optimization)
-CFLAGS			:= -O2 -flto -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS			:= -O2 -flto -Wall -Wextra -Werror #-g -fsanitize=address
 CFLAGS_BONUS 	:= $(CFLAGS) -D IS_BONUS=1
 HDRS			:= -Iinclude -I$(SUBM_MLX_DIR)/include -I$(SUBM_LIBFT_DIR)/include
 LIBS			:= -L$(SUBM_MLX_DIR)/build -lmlx42 \
@@ -144,7 +144,7 @@ build-submodule:
 NAME_BONUS		:= miniRT_bonus
 
 bonus: update-submodule build-submodule $(NAME_BONUS)
-	./miniRT_bonus ./scene/simple.rt
+	./miniRT_bonus ./scene/test.rt
 
 $(NAME_BONUS): $(OBJS_BONUS) $(OBJ_MAIN_BONUS)
 	$(CC) $(CFLAGS_BONUS) $(OBJS_BONUS) $(OBJ_MAIN_BONUS) $(HDRS) $(LIBS) -o $(NAME_BONUS)
