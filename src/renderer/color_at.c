@@ -69,10 +69,11 @@ static t_color	lighting(t_phong_vars vars, t_light *light, bool in_shadow)
 	if (!light)
 		return (vars.obj->amb_component);
 	pc.eff_col = multiply_colors(vars.surface_color, light[0].intensity);
-	pc.lightv = normalize(subtraction(light[0].pos, vars.point));
+	// pc.lightv = normalize(subtraction(light[0].pos, vars.point));
 	pc.amb = multiply_colors(pc.eff_col, vars.obj->amb_component);
 	if (in_shadow)
 		return (pc.amb);
+	pc.lightv = normalize(subtraction(light[0].pos, vars.point));
 	pc.l_dot_norm = dot_product(pc.lightv, vars.normalv);
 	if (light_behind_surface(pc.l_dot_norm))
 		set_dark(&pc);

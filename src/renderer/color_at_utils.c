@@ -29,19 +29,21 @@ void	set_color(t_phong_color *pc, t_material *m, t_phong_vars *vars, t_light lig
 
 bool	in_shadow(t_info *rt, t_point point)
 {
-	float			distance_to_light;
-	t_vec3			dir_to_light;
-	t_vec3			direction;
-	t_ray			shadow_ray;
-	t_intersection	*hit;
+	t_in_shadow_vars	var;
+	size_t				i;
 
-	dir_to_light = subtraction(rt->lights->pos, point);
-	distance_to_light = magnitude(dir_to_light);
-	direction = normalize(dir_to_light);
-	shadow_ray = (t_ray){point, direction, RAY_SHADOW};
-	rt_intersect_world(rt, &shadow_ray);
-	hit = find_closest_intersection(rt->ts, rt->n_ts);
-	if (hit && hit->t < distance_to_light)
-		return (true);
+	i = 0;
+	while (i < rt->n_lights)
+	{
+		var.dir_to_light = subtraction(rt->lights[i].pos, point);
+		var.distance_to_light = magnitude(var.dir_to_light);
+		var.direction = normalize(var.dir_to_light);
+		var.shadow_ray = (t_ray){point, var.direction, RAY_SHADOW};
+		rt_intersect_world(rt, &var.shadow_ray);
+		var.hit = find_closest_intersection(rt->ts, rt->n_ts);
+		if (var.hit && var.hit->t < var.distance_to_light)
+			return (true);
+		++i;
+	}
 	return (false);
 }

@@ -1,7 +1,8 @@
 /**
  * @note (project status)
  * - for now we support comments with `#` at the end line in the scene file
- * - add lite world intersection version (used in src/hook/hook_handle_mouse.c)
+ * - add lite world intersection version (used in src/hook/hook_handle_mouse.c,
+ * 	 src/renderer/color_at_utils.c)
  * - delete get_time_ms(void) in src/hook/hook_render_scene.c (and <time.h>)
  * 
  * @note (recourses):

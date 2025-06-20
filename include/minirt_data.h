@@ -520,4 +520,13 @@ typedef struct s_uv_vars
 	t_vec3	bitangent;
 }			t_uv_vars;
 
+typedef struct s_in_shadow_vars
+{
+	float			distance_to_light;
+	t_vec3			dir_to_light;
+	t_vec3			direction;
+	t_ray			shadow_ray;
+	t_intersection	*hit;
+}					t_in_shadow_vars;
+
 #endif // MINIRT_DATA_H

@@ -11,6 +11,7 @@ void			rt_save_camera_settings(t_camera *camera);
 t_color			rt_color_at(t_info *rt, t_ray *ray, int ray_bounces);
 t_vec3			rt_normal_at(t_info *rt, t_object *obj, t_point p, t_type id);
 void			rt_intersect_world(t_info *rt, t_ray *ray);
+t_intersection	rt_intersect_world_lite(t_info *rt, t_ray *ray);
 t_intersection	*find_closest_intersection(t_intersection *ts, int n_ts);
 
 t_ray			rt_get_ray(t_camera *cam, int32_t x, int32_t y);
