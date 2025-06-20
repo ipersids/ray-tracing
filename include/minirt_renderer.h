@@ -67,7 +67,7 @@ void			remove_from_container(t_obj_container *container, int index);
 void			add_to_container(t_obj_container *container, t_object *obj);
 
 bool			light_behind_surface(float l_dot_norm);
-bool			in_shadow(t_info *rt, t_point point);
+bool			in_shadow(t_info *rt, t_point point, t_point light_pos);
 bool			is_inside_container(t_obj_container *container,
 					t_object *object, int *index);
 

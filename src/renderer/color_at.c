@@ -26,7 +26,7 @@ t_color	rt_color_at(t_info *rt, t_ray *ray, int ray_bounces)
 	at.surface = (t_color){0.0f, 0.0f, 0.f};
 	while (i < rt->n_lights)
 	{
-		at.shadowed = in_shadow(rt, v.point);
+		at.shadowed = in_shadow(rt, v.point, rt->lights[i].pos);
 		at.tmp_color_surface = lighting(v, &rt->lights[i], at.shadowed);
 		at.surface = addition(at.tmp_color_surface, at.surface);
 		++i;
