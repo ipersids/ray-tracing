@@ -1,11 +1,14 @@
+[![MiniRT Unit Tests](https://github.com/ipersids/ray-tracing/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/ipersids/ray-tracing/actions/workflows/unit-tests.yml)
+
 <div align="center">
-<p><a href="https://www.hive.fi/en/curriculum">Hive (42 School Network)</a></p>  
 
 <h1>MiniRT</h1> 
 
-</div>
+<picture>
+<img alt="Example of simple scene." src="tests/imgs/scene01.png" height="250">
+</picture>
 
-[![MiniRT Unit Tests](https://github.com/ipersids/ray-tracing/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/ipersids/ray-tracing/actions/workflows/unit-tests.yml)
+</div>
 
 #### Introduction   
 MiniRT is a rendering program that uses ray tracing technology to create realistic images with a given configuration.  
@@ -26,7 +29,9 @@ MiniRT is a rendering program that uses ray tracing technology to create realist
 - [x] Camera with field of view and orientation control.  
 - [x] Shading, shadows and patterns.
 - [x] Reflection.
-- [ ] Refraction.
+- [x] Refraction.
+- [x] Sphere texture and bump mapping.
+- [x] Different materials support.
 
 ## Controls
 
@@ -37,7 +42,7 @@ MiniRT is a rendering program that uses ray tracing technology to create realist
 | Reset camera                           | `R`                                     | Reset camera to default position/orientation     |
 | Zoom camera                            | Mouse Scroll                            | Zoom in/out (FOV)                                |
 | Select & manipulate object             | Right Mouse Button                      | Select object under cursor for manipulation      |
-| Move selected object (screen plane)    | Right Mouse Drag                        | Move object in screen plane                      |
+| Move selected object                   | Right Mouse Drag                        | Move object in screen plane                      |
 | Move selected object (depth)           | `Ctrl` + Right Mouse Drag               | Move object along view direction                 |
 | Rotate selected object                 | `W` / `A` / `S` / `D` (object selected) | Rotate object (pitch/yaw)                        |
 | Scale selected object                  | `+` / `-` (object selected)             | Scale object up/down                             |
@@ -108,6 +113,7 @@ make
 ________  
 <div align="center">
 
+<p><a href="https://www.hive.fi/en/curriculum">Hive (42 School Network)</a></p>  
 <p>Developed by <a href="https://github.com/EggInAVest">Roni Eerikainen</a> and <a href="https://github.com/ipersids">Julia Persidskaia</a>.</p>
 
 </div>

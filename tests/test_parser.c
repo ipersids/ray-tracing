@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 00:51:58 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 15:13:42 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/20 01:39:13 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	free_and_init(t_info *rt)
 void test_parser(void) {
 	t_info rt;
     int exit_code;
-    char *valid_file[] = {"", "scene/shadow.rt"};
+    char *valid_file[] = {"", "tests/shadow.rt"};
     char *invalid_files[] = {
         "scene/badnameerror.rt",
         "badpatherror/subject.rt",

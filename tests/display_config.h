@@ -1,7 +1,7 @@
 #ifndef DISPLAY_CONFIG_H
 # define DISPLAY_CONFIG_H
 
-# include <time.h>
+#include "minirt.h"
 
 void	debug_print_info(t_info *rt);
 void	debug_print_camera(t_camera *camera);

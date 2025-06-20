@@ -2,6 +2,7 @@
  * @note (project status)
  * - for now we support comments with `#` at the end line in the scene file
  * - add lite world intersection version (used in src/hook/hook_handle_mouse.c)
+ * - delete get_time_ms(void) in src/hook/hook_render_scene.c (and <time.h>)
  * 
  * @note (recourses):
  * - lightning model: https://learnopengl.com/Lighting/Basic-Lighting
@@ -10,6 +11,10 @@
  * - The Cherno Ray Tracing youtube playlist
  *   https://www.youtube.com/playlist?list=PLlrATfBNZ98edc5GshdBtREv5asFW3yXl
  * - Welcome to Computer Graphics: https://scratchapixel.com/
+ * - Texture and bump Mapping 
+ * 	 https://medium.com/@dbildibay/ray-tracing-adventure-part-iv-678768947371
+ * - Bump, Normal, Displacement, and Parallax Mapping
+ * 	 https://youtu.be/cM7RjEtZGHw
  */
 
 #ifndef MINIRT_H
@@ -31,8 +36,6 @@
 # include "minirt_parser.h"		// scene parcing and validation
 # include "minirt_renderer.h"	// camera, ray, colors related functions
 
-# include "display_config.h"	// debug print objects config
-
 /* ----------------------------- Initialisation  --------------------------- */
 /// @dir src/constructor
 
@@ -40,6 +43,8 @@ void		rt_init_info(t_info *rt);
 int			rt_allocate_memory(t_counter *cnt, t_info *rt);
 int			rt_init_window(t_info *rt);
 void		rt_init_cursor(t_info *rt);
+int			rt_init_bump_map(t_window *win);
+int			rt_init_texture(t_window *win);
 
 t_material	init_default_material(void);
 
@@ -67,7 +72,7 @@ t_material	init_diamond_material(void);
 t_material	init_water_material(void);
 t_material	init_ice_material(void);
 
-// t_pat	set_stripe_pattern(t_color a, t_color b, float scale, float angle_rad);
+//t_pat	set_stripe_pattern(t_color a, t_color b, float scale, float angle_rad);
 // t_pat	set_checker_pattern(t_color a, t_color b, float scale);
 // t_pat	set_gradient_pattern(t_color a, t_color b, float scale);
 t_pat		set_stripe_pattern(void);
@@ -80,6 +85,12 @@ t_color		gradient_pattern_at(t_pat pattern, t_point point);
 t_color		checker_pattern_at(t_pat pattern, t_point point);
 // t_color		radiant_gradient_pattern_at(t_pat pattern, t_point point);
 // t_color		ring_pattern_at(t_pat pattern, t_point point);
+
+t_uv_vars	rt_get_uv_coordinates(t_object *obj, t_point *point);
+t_uv_vars	rt_get_spherical_uv(t_sphere *sp, t_point *point);
+t_uv_vars	rt_get_planar_uv(t_plane *pl, t_point *point);
+t_color		rt_texture_color_at(mlx_image_t *texture, float u, float v);
+t_gradient	rt_get_gradient(mlx_image_t *tex, float u, float v);
 
 /* ---------------------- Error and memory management ---------------------- */
 /// @dir src/destructor
@@ -98,7 +109,7 @@ void		rt_render_hook(void *param);
 void		rt_cursor_hook(double xpos, double ypos, void *param);
 void		rt_mouse_hook(mouse_key_t k, action_t a, modifier_key_t m, void *p);
 void		rt_scroll_hook(double xdelta, double ydelta, void *param);
-void		rt_key_hook(mlx_key_data_t k, void* param);
+void		rt_key_hook(mlx_key_data_t k, void *param);
 
 void		rt_rotate_camera(t_info *rt, t_cursor *cursor, double x, double y);
 void		rt_move_camera(t_info *rt, mlx_key_data_t *key);

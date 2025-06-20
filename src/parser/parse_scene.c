@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:58:48 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 20:24:54 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/18 22:51:36 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	rt_parse_scene(t_info *rt, char **scene)
 	t_counter	cnt;
 
 	if (!scene || !(*scene))
-		return (ERROR_EMPTY_SCENE);
+		return (ERR_EMPTY_SCENE);
 	ft_memset(&cnt, 0, sizeof(cnt));
 	exit_code = validate_object_type(&cnt, scene);
 	if (0 != exit_code)

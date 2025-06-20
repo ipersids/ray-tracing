@@ -6,12 +6,12 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 20:06:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 19:27:13 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/20 00:59:16 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "minirt.h"
+#include "display_config.h"
 
 void	debug_print_info(t_info *rt)
 {
