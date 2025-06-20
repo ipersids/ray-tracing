@@ -3,7 +3,7 @@
  * - for now we support comments with `#` at the end line in the scene file
  * - add lite world intersection version (used in src/hook/hook_handle_mouse.c)
  * - delete get_time_ms(void) in src/hook/hook_render_scene.c (and <time.h>)
- * 
+ *
  * @note (recourses):
  * - lightning model: https://learnopengl.com/Lighting/Basic-Lighting
  * - Physically Based Rendering: From Theory to Implementation:
@@ -11,7 +11,7 @@
  * - The Cherno Ray Tracing youtube playlist
  *   https://www.youtube.com/playlist?list=PLlrATfBNZ98edc5GshdBtREv5asFW3yXl
  * - Welcome to Computer Graphics: https://scratchapixel.com/
- * - Texture and bump Mapping 
+ * - Texture and bump Mapping
  * 	 https://medium.com/@dbildibay/ray-tracing-adventure-part-iv-678768947371
  * - Bump, Normal, Displacement, and Parallax Mapping
  * 	 https://youtu.be/cM7RjEtZGHw
@@ -89,6 +89,7 @@ t_color		checker_pattern_at(t_pat pattern, t_point point);
 t_uv_vars	rt_get_uv_coordinates(t_object *obj, t_point *point);
 t_uv_vars	rt_get_spherical_uv(t_sphere *sp, t_point *point);
 t_uv_vars	rt_get_planar_uv(t_plane *pl, t_point *point);
+t_uv_vars	rt_get_cylinder_uv(t_cylinder *cy, t_point *point);
 t_color		rt_texture_color_at(mlx_image_t *texture, float u, float v);
 t_gradient	rt_get_gradient(mlx_image_t *tex, float u, float v);
 

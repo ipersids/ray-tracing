@@ -154,7 +154,7 @@ typedef enum e_type
 # define Z_DRIFT_DAMPING 1.0f
 # define ROTATION_STEP 5.0f
 # define LIMIT_S 1000.0f
-# define MAX_CONTAINERS 6
+# define MAX_CONTAINERS 100
 
 typedef struct s_camera
 {

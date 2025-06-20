@@ -6,7 +6,7 @@
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:30:27 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/20 11:59:11 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:06:12 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,24 @@ t_vec3	rt_cylinder_normal_at(const t_cylinder *cy, t_point w_point)
 
 t_vec3	rt_cylinder_bumped_normal_at(mlx_image_t *tex, t_cylinder *cy, t_point *p)
 {
-	t_vec3	normal;
+	t_uv_vars	uv;
+	t_gradient	var;
+	t_vec3		perturbation;
+	t_vec3		normal;
+	t_vec3		bumped_normal;
 
-	(void)tex;
+	uv = rt_get_cylinder_uv(cy, p);
+	var = rt_get_gradient(tex, uv.u, uv.v);
+	perturbation = addition(
+			multiplication(uv.tangent, var.gradient_u),
+			multiplication(uv.bitangent, var.gradient_v)
+			);
+	perturbation = multiplication(perturbation, BUMP_FACTOR);
+	perturbation = matrix_multiply_vector(cy->inv_transpose, perturbation);
 	normal = rt_cylinder_normal_at(cy, *p);
-	return (normal);
+	bumped_normal = addition(normal, perturbation);
+	bumped_normal = normalize(bumped_normal);
+	return (bumped_normal);
 }
 
 /* ------------------- Private Function Implementation --------------------- */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_intersections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 16:25:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 16:26:41 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/20 14:06:47 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	intersections_sort(t_intersection *arr, int low, int high)
 {
 	int	i_pivot;
 
+	i_pivot = 0;
 	if (low < high)
 	{
 		i_pivot = partition(arr, low, high);
