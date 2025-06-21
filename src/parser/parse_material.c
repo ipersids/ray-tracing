@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 11:49:27 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/21 11:07:19 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:43:51 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ static t_mtype	get_material_type(char *line)
 		return (MATERIAL_DEFAULT);
 	if (ft_strncmp(line, "lambertian", 10) == 0 && is_valid_eol(&line[10]))
 		return (MATERIAL_LAMBERTIAN);
-	if (ft_strncmp(line, "rusted_metall", 13) == 0 && is_valid_eol(&line[13]))
-		return (MATERIAL_RUSTED_METALL);
-	if (ft_strncmp(line, "metall", 6) == 0 && is_valid_eol(&line[6]))
-		return (MATERIAL_METALL);
+	if (ft_strncmp(line, "rusted_metal", 12) == 0 && is_valid_eol(&line[12]))
+		return (MATERIAL_RUSTED_METAL);
+	if (ft_strncmp(line, "metal", 5) == 0 && is_valid_eol(&line[5]))
+		return (MATERIAL_METAL);
 	if (ft_strncmp(line, "glass", 5) == 0 && is_valid_eol(&line[5]))
 		return (MATERIAL_GLASS);
 	if (ft_strncmp(line, "diamond", 7) == 0 && is_valid_eol(&line[7]))

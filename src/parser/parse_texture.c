@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:39:52 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/21 11:11:45 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:33:09 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,26 @@ int	rt_parse_texture(t_info *rt, char **start)
 
 static t_texture_type	get_texture_type(char *line)
 {
+	if (ft_strncmp(line, "texture_sun", 11) == 0 && is_valid_eol(&line[11]))
+		return (TEXTURE_SUN);
+	if (ft_strncmp(line, "texture_mercury", 15) == 0 && is_valid_eol(&line[15]))
+		return (TEXTURE_MERCURY);
+	if (ft_strncmp(line, "texture_venus", 13) == 0 && is_valid_eol(&line[13]))
+		return (TEXTURE_VENUS);
 	if (ft_strncmp(line, "texture_earth", 13) == 0 && is_valid_eol(&line[13]))
 		return (TEXTURE_EARTH);
 	if (ft_strncmp(line, "texture_mars", 12) == 0 && is_valid_eol(&line[12]))
 		return (TEXTURE_MARS);
-	if (ft_strncmp(line, "texture_wall", 12) == 0 && is_valid_eol(&line[12]))
-		return (TEXTURE_WALL);
+	if (ft_strncmp(line, "texture_jupiter", 15) == 0 && is_valid_eol(&line[15]))
+		return (TEXTURE_JUPITER);
+	if (ft_strncmp(line, "texture_saturn", 14) == 0 && is_valid_eol(&line[14]))
+		return (TEXTURE_SATURN);
+	if (ft_strncmp(line, "texture_uranus", 14) == 0 && is_valid_eol(&line[14]))
+		return (TEXTURE_URANUS);
+	if (ft_strncmp(line, "texture_neptune", 15) == 0 && is_valid_eol(&line[15]))
+		return (TEXTURE_NEPTUNE);
+	if (ft_strncmp(line, "texture_pluto", 13) == 0 && is_valid_eol(&line[13]))
+		return (TEXTURE_PLUTO);
 	return (TEXTURE_MAX);
 }
 

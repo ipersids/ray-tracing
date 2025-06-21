@@ -145,7 +145,7 @@ build-submodule:
 NAME_BONUS		:= miniRT_bonus
 
 bonus: update-submodule build-submodule $(NAME_BONUS)
-	./miniRT_bonus ./scene/test.rt
+	./miniRT_bonus ./scene/solar-system.rt
 
 $(NAME_BONUS): $(OBJS_BONUS) $(OBJ_MAIN_BONUS)
 	$(CC) $(CFLAGS_BONUS) $(OBJS_BONUS) $(OBJ_MAIN_BONUS) $(HDRS) $(LIBS) -o $(NAME_BONUS)

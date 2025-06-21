@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 14:17:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/21 10:51:30 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:31:32 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,16 @@ int	rt_init_texture(t_window *win)
 static const char	*get_texture_path(t_texture_type texture_type)
 {
 	static const char	list[TEXTURE_MAX][100] = {
+		"textures/sun_texture.png",
+		"textures/mercury_texture.png",
+		"textures/venus_texture.png",
 		"textures/eartth_texture.png",
 		"textures/mars_texture.png",
-		"textures/painted-white-bricks_ao.png"
+		"textures/jupiter_texture.png",
+		"textures/saturn_texture.png",
+		"textures/uranus_texture.png",
+		"textures/neptune_texture.png",
+		"textures/pluto_texture.png"
 	};
 
 	return (list[texture_type]);
