@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:51:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 14:09:31 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 10:18:56 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,8 @@ static void	handle_object(t_info *rt, t_window *win, action_t action)
 		win->cursor.is_camera = false;
 		mlx_get_mouse_pos(win->mlx, &x, &y);
 		ray = rt_get_ray(&rt->camera, x, y);
-		/// @todo create intersect_world lite ->
 		rt_intersect_world(rt, &ray);
 		t = find_closest_intersection(rt->ts, rt->n_ts);
-		// <- end todo
 		if (NULL != t)
 		{
 			win->cursor.is_object = true;

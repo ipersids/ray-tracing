@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:44:06 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/20 00:15:14 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 10:46:14 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,24 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
+/**
+ * @brief Returns the file path for a given bump map type.
+ * @param bump_type The bump map type.
+ * @return The file path as a string.
+ */
 static const char	*get_bump_map_path(t_bump_type bump_type);
 
 /* --------------------------- Public Functions ---------------------------- */
 
+/**
+ * @brief Initializes bump maps for the window.
+ *
+ * Loads bump map textures from disk and converts them to images 
+ * for use in rendering. Only runs if IS_BONUS is enabled.
+ *
+ * @param win Pointer to the window structure.
+ * @return 0 on success, or ERR_MLX42 on failure.
+ */
 int	rt_init_bump_map(t_window *win)
 {
 	mlx_texture_t	*bump_texture;

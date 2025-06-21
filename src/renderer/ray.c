@@ -33,6 +33,13 @@ t_ray	rt_get_ray(t_camera *cam, int32_t px, int32_t py)
 	return (ray);
 }
 
+/**
+ * @brief Computes the point along a ray at parameter t.
+ *
+ * @param ray The ray.
+ * @param t The parameter value.
+ * @return The point at ray.origin + t * ray.direction.
+ */
 t_vec3	ray_hit(t_ray ray, float t)
 {
 	t_vec3	scaled_direction;
@@ -41,11 +48,19 @@ t_vec3	ray_hit(t_ray ray, float t)
 	return (addition(ray.orig, scaled_direction));
 }
 
-t_ray	transform_ray(t_ray ray, t_matrix matrix)
+/**
+ * @brief Computes the reflection vector for an incoming vec and a normal.
+ *
+ * @param in The incoming vector.
+ * @param normal The normal vector at the point of reflection.
+ * @return The reflected vector.
+ */
+t_vec3	reflect(t_vec3 in, t_vec3 normal)
 {
-	t_ray	result;
+	t_vec3	result;
+	t_vec3	scaled_norm;
 
-	result.orig = matrix_multiply_point(matrix, ray.orig);
-	result.dir = matrix_multiply_vector(matrix, ray.dir);
+	scaled_norm = multiplication(normal, 2 * dot_product(in, normal));
+	result = subtraction(in, scaled_norm);
 	return (result);
 }

@@ -195,8 +195,6 @@ typedef enum e_pattype
 	PATTERN_STRIPE,
 	PATTERN_GRADIENT,
 	PATTERN_CHECKER,
-	// PATTERN_RING,
-	// PATTERN_RADIANT_GRADIENT,
 	PATTERN_MAX,
 	PATTERN_DEFAULT
 }			t_pattype;
@@ -446,6 +444,7 @@ typedef struct s_color_at_vars
 	float			reflectance;
 }					t_color_at_vars;
 
+// norminette: Preprocessor statement must only contain constant defines
 # define BLACK (t_color){0, 0, 0}
 # define WHITE (t_color){1, 1, 1}
 # define RED (t_color){1, 0, 0}
@@ -500,7 +499,6 @@ typedef struct s_bump_gradient_vars
 {
 	float	delta_u;
 	float	delta_v;
-	float	h_center;
 	float	h_left;
 	float	h_right;
 	float	h_up;

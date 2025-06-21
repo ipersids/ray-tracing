@@ -70,7 +70,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   \
 				   src/renderer/camera.c src/renderer/color_at.c \
 				   src/renderer/intersect_world.c src/renderer/normal_at.c \
-				   src/renderer/ray.c src/renderer/ray_utils.c \
+				   src/renderer/ray.c \
 				   src/renderer/refracting.c src/renderer/refracting_utils.c\
 				   src/renderer/color_at_utils.c src/renderer/reflecting.c \
 				   \

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 00:51:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/12 21:29:50 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:02:16 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 /* --------------------------- Public Functions ---------------------------- */
 
+/**
+ * @brief Default
+ * @return t_material 
+ */
 t_material	init_default_material(void)
 {
 	t_material	res;

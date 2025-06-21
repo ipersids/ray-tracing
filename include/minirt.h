@@ -1,9 +1,10 @@
 /**
  * @note (project status)
  * - for now we support comments with `#` at the end line in the scene file
- * - add lite world intersection version (used in src/hook/hook_handle_mouse.c,
- * 	 src/renderer/color_at_utils.c)
  * - delete get_time_ms(void) in src/hook/hook_render_scene.c (and <time.h>)
+ * - plane returns 1 intersection: check if it is critical for the logic 
+ * 	 that checks if a point is "inside" a container 
+ * 	 (used for refraction calculations)
  * 
  * @note (recourses):
  * - lightning model: https://learnopengl.com/Lighting/Basic-Lighting

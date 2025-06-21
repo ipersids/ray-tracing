@@ -6,15 +6,13 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:05:03 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/20 00:26:48 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:36:26 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /* --------------------- Private function prototypes ----------------------- */
-
-static t_intersections	handle_bonus_shape(t_ray *ray, t_info *rt, size_t i);
 
 /**
  * @brief Adds all intersections from xs to the global intersection array.
@@ -25,6 +23,8 @@ static t_intersections	handle_bonus_shape(t_ray *ray, t_info *rt, size_t i);
  */
 static void				add_intersections(const t_intersections *xs,
 							t_info *rt, size_t i);
+
+static t_intersections	handle_bonus_shape(t_ray *ray, t_info *rt, size_t i);
 
 /* --------------------------- Public Functions ---------------------------- */
 
@@ -63,6 +63,33 @@ void	rt_intersect_world(t_info *rt, t_ray *ray)
 		++i;
 	}
 	intersections_sort(rt->ts, 0, rt->n_ts - 1);
+}
+
+/**
+ * @brief Finds the closest valid intersection from a list.
+ *
+ * Iterates through the intersection array and returns a pointer 
+ * to the first intersection with a positive t-value 
+ * greater than EPSILON (i.e., in front of the ray origin).
+ *
+ * @param ts Pointer to the array of intersections.
+ * @param n_ts Number of intersections in the array.
+ * @return Pointer to the closest valid intersection, or NULL if none found.
+ */
+t_intersection	*find_closest_intersection(t_intersection *ts, int n_ts)
+{
+	int	i;
+
+	if (n_ts <= 0)
+		return (NULL);
+	i = 0;
+	while (i < n_ts)
+	{
+		if (ts[i].t > EPSILON)
+			return (&ts[i]);
+		++i;
+	}
+	return (NULL);
 }
 
 /* ------------------- Private Function Implementation --------------------- */

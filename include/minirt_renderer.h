@@ -16,7 +16,6 @@ t_intersection	*find_closest_intersection(t_intersection *ts, int n_ts);
 
 t_ray			rt_get_ray(t_camera *cam, int32_t x, int32_t y);
 t_vec3			ray_hit(t_ray ray, float t);
-t_ray			transform_ray(t_ray ray, t_matrix matrix);
 t_vec3			reflect(t_vec3 in, t_vec3 normal);
 
 /* --------------------------- Sphere calculations -------------------------- */
@@ -51,7 +50,7 @@ t_vec3			rt_cone_normal_at(const t_cone *co, t_point w_point);
 t_vec3			rt_cone_bumped_normal_at(mlx_image_t *tex, t_cone *co,
 					t_point *p);
 t_intersections	rt_intersect_cone_cap(const t_cone *co, t_ray ray);
-t_vec3			rt_cone_cap_normal_at(const t_cone *co, t_point w_point);
+t_vec3			rt_cone_cap_normal_at(const t_cone *co);
 t_vec3			rt_cone_cap_bumped_normal_at(mlx_image_t *tex, t_cone *co,
 					t_point *p);
 

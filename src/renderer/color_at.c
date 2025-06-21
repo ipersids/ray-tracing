@@ -9,6 +9,19 @@ static t_color		compute_fresnel_effect(t_color_at_vars *at, t_phong_vars v);
 
 /* --------------------------- Public Functions ---------------------------- */
 
+/**
+ * @brief Computes the color seen along a ray in the scene.
+ *
+ * Traces the given ray, finds the closest intersection, and computes 
+ * the color at that point using the Phong lighting model, including shadows, 
+ * reflections, and refractions. 
+ * If both reflectivity and transparency are present, applies the Fresnel effect.
+ *
+ * @param rt Pointer to the main program structure.
+ * @param ray Pointer to the ray being traced.
+ * @param ray_bounces Remaining recursion depth for reflections/refractions.
+ * @return The resulting color as a t_color struct.
+ */
 t_color	rt_color_at(t_info *rt, t_ray *ray, int ray_bounces)
 {
 	t_phong_vars	v;
@@ -40,6 +53,18 @@ t_color	rt_color_at(t_info *rt, t_ray *ray, int ray_bounces)
 
 /* ------------------- Private Function Implementation --------------------- */
 
+/**
+ * @brief Precomputes intersection data for shading calculations.
+ *
+ * Calculates intersection point, eye vector, normal vector, reflection vector,
+ * and prepares refraction indices. Also handles texture assignment 
+ * and surface color.
+ *
+ * @param t Pointer to the intersection structure.
+ * @param ray Pointer to the ray.
+ * @param rt Pointer to the main program structure.
+ * @return A filled t_phong_vars struct with precomputed data.
+ */
 static t_phong_vars	precompute_data(t_intersection *t, t_ray *ray, t_info *rt)
 {
 	t_phong_vars	v;
@@ -64,6 +89,16 @@ static t_phong_vars	precompute_data(t_intersection *t, t_ray *ray, t_info *rt)
 	return (v);
 }
 
+/**
+ * @brief Computes the lighting at a point using the Phong model.
+ *
+ * Calculates ambient, diffuse, and specular components.
+ *
+ * @param vars Precomputed Phong variables for the intersection.
+ * @param light Pointer to the light source.
+ * @param in_shadow True if the point is in shadow.
+ * @return The resulting color at the point.
+ */
 static t_color	lighting(t_phong_vars vars, t_light *light, bool in_shadow)
 {
 	t_phong_color	pc;
@@ -83,6 +118,13 @@ static t_color	lighting(t_phong_vars vars, t_light *light, bool in_shadow)
 	return (addition(addition(pc.amb, pc.dif), pc.spec));
 }
 
+/**
+ * @brief Sets the surface color for the intersection point.
+ *
+ * Determines the surface color based on pattern, texture, or base color.
+ *
+ * @param vars Pointer to the Phong variables structure.
+ */
 static void	set_surface_color(t_phong_vars *vars)
 {
 	t_uv_vars	uv;
@@ -102,6 +144,16 @@ static void	set_surface_color(t_phong_vars *vars)
 		vars->surface_color = vars->obj->color;
 }
 
+/**
+ * @brief Computes the Fresnel effect for combined reflection and refraction.
+ *
+ * Uses Schlick's approximation to blend reflected and refracted colors:
+ * https://en.wikipedia.org/wiki/Schlick%27s_approximation
+ *
+ * @param at Pointer to the color_at_vars structure.
+ * @param v Precomputed Phong variables.
+ * @return The resulting color with Fresnel effect applied.
+ */
 static t_color	compute_fresnel_effect(t_color_at_vars *at, t_phong_vars v)
 {
 	at->reflectance = schlick(v);

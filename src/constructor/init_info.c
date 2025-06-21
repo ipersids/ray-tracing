@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/20 00:15:48 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 10:47:48 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,16 @@ static void	init_camera(t_camera *camera);
  */
 static void	init_window(t_window *window);
 
+/**
+ * @brief Initialize default materials array.
+ * @param materials Pointer to the materials array.
+ */
 static void	init_material(t_material *materials);
+
+/**
+ * @brief Initialize default patterns array.
+ * @param patterns Pointer to the patterns array.
+ */
 static void	init_pattern(t_pat *patterns);
 
 /* --------------------------- Public Functions ---------------------------- */

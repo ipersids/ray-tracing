@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:12:23 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/20 00:35:21 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:40:19 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_vec3	rt_normal_at(t_info *rt, t_object *obj, t_point p, t_type id)
 	if (ELEMENT_CONE == id)
 		return (rt_cone_normal_at(&obj->co, p));
 	if (ELEMENT_CONE_CAP == id)
-		return (rt_cone_cap_normal_at(&obj->co, p));
+		return (rt_cone_cap_normal_at(&obj->co));
 	else
 		rt_destroy_exit(rt, ERR_OBJECT_TYPE);
 	return (sphere_normal_at(&obj->sp, p));
@@ -48,6 +48,15 @@ t_vec3	rt_normal_at(t_info *rt, t_object *obj, t_point p, t_type id)
 
 /* ------------------- Private Function Implementation --------------------- */
 
+/**
+ * @brief Computes the bumped (perturbed) normal at a point using a bump map.
+ *
+ * @param rt Pointer to the main program structure.
+ * @param obj Pointer to the object.
+ * @param p Pointer to the point in world coordinates.
+ * @param id The type of the object.
+ * @return The bumped normal vector at the given point.
+ */
 t_vec3	bumped_normal_at(t_info *rt, t_object *obj, t_point *p, t_type id)
 {
 	mlx_image_t	*bump_map;

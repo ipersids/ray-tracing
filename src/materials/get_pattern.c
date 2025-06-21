@@ -16,13 +16,9 @@ t_color	pattern_at_object(t_pat pattern, t_object obj, t_point w_point)
 		return (stripe_pattern_at(pattern, pattern_point));
 	else if (pattern.type == PATTERN_GRADIENT)
 		return (gradient_pattern_at(pattern, pattern_point));
-	// else if (pattern.type == PATTERN_RING)
-	// 	return (ring_pattern_at(pattern, pattern_point));
 	else if (pattern.type == PATTERN_CHECKER)
 		return (checker_pattern_at(pattern, pattern_point));
-	// else if (pattern.type == PATTERN_RADIANT_GRADIENT)
-	// 	return (radiant_gradient_pattern_at(pattern, pattern_point));
-	return (BLACK);
+	return ((t_color){0.0f, 0.0f, 0.0f});
 }
 
 t_color	stripe_pattern_at(t_pat pattern, t_point point)

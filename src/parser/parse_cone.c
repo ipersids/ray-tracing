@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 19:32:11 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/12 13:14:22 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:11:01 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@ static int	parse_direction(t_info *rt, char **line, char **next);
 
 /* --------------------------- Public Functions ---------------------------- */
 
+/**
+ * @brief Parses a cone object from the scene description line.
+ * 
+ * Only valid if IS_BONUS is enabled.
+ * 
+ * @param rt Pointer to the main program structure.
+ * @param line Pointer to the current line in the scene file.
+ * @return 0 on success, or an error code on failure.
+ */
 int	rt_parse_cone(t_info *rt, char *line)
 {
 	char	*next;

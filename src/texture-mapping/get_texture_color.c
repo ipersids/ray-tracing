@@ -6,11 +6,13 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 23:31:40 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/20 00:25:31 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:03:47 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+/* --------------------------- Public Functions ---------------------------- */
 
 t_color	rt_texture_color_at(mlx_image_t *texture, float u, float v)
 {
