@@ -91,6 +91,7 @@ t_color		checker_pattern_at(t_pat pattern, t_point point);
 t_uv_vars	rt_get_uv_coordinates(t_object *obj, t_point *point);
 t_uv_vars	rt_get_spherical_uv(t_sphere *sp, t_point *point);
 t_uv_vars	rt_get_planar_uv(t_plane *pl, t_point *point);
+t_uv_vars	rt_get_cylinder_uv(t_cylinder *cy, t_point *point);
 t_color		rt_texture_color_at(mlx_image_t *texture, float u, float v);
 t_gradient	rt_get_gradient(mlx_image_t *tex, float u, float v);
 

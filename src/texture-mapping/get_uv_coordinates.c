@@ -16,6 +16,8 @@ t_uv_vars	rt_get_uv_coordinates(t_object *obj, t_point *point)
 {
 	if (ELEMENT_SPHERE == obj->id)
 		return (rt_get_spherical_uv(&obj->sp, point));
+	if (ELEMENT_CYLINDER == obj->id)
+		return (rt_get_cylinder_uv(&obj->cy, point));
 	return (rt_get_planar_uv(&obj->pl, point));
 }
 
@@ -70,5 +72,26 @@ t_uv_vars	rt_get_planar_uv(t_plane *pl, t_point *point)
 		res.v = res.v + 1.0f;
 	res.tangent = (t_vec3){1.0f, 0.0f, 0.0f};
 	res.bitangent = (t_vec3){0.0f, 0.0f, 1.0f};
+	return (res);
+}
+
+t_uv_vars	rt_get_cylinder_uv(t_cylinder *cy, t_point *point)
+{
+	const float	u_rotate = 0.05f;
+	t_point		local_point;
+	t_uv_vars	res;
+	float		theta;
+
+	local_point = matrix_multiply_point(cy->inv_transform, *point);
+	theta = atan2f(local_point.x, local_point.z);
+	res.u = 1.0f - (theta / (2 * M_PI));
+	res.u = fmodf(res.u + u_rotate, 1.0f);
+	res.v = 1.0f - (local_point.y + cy->half_height) / (2.0f * cy->half_height);
+	if (0.0f > res.v)
+		res.v = res.v + 1.0f;
+	res.tangent.x = -sinf(theta);
+	res.tangent.z = 0.0f;
+	res.tangent.y = cosf(theta);
+	res.bitangent = (t_vec3){0.0f, 1.0f, 0.0f};
 	return (res);
 }
