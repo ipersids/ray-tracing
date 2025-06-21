@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/21 10:47:48 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:43:22 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ static void	init_material(t_material *materials)
 {
 	materials[MATERIAL_DEFAULT] = init_default_material();
 	materials[MATERIAL_LAMBERTIAN] = init_lambertian_material();
-	materials[MATERIAL_METALL] = init_metal_material();
-	materials[MATERIAL_RUSTED_METALL] = init_rasted_metal_material();
+	materials[MATERIAL_METAL] = init_metal_material();
+	materials[MATERIAL_RUSTED_METAL] = init_rasted_metal_material();
 	materials[MATERIAL_GLASS] = init_glass_material();
 	materials[MATERIAL_DIAMOND] = init_diamond_material();
 	materials[MATERIAL_PLASTIC] = init_plastic_material();

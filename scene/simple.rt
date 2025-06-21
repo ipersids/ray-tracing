@@ -7,7 +7,7 @@ L -25,45,-30                    0.6     255,255,255
 # sp 15,-3,-50                    16      0,0,0 glass
 # sp 15,25,100                    8       0,0,255 #lambertian
 
-# pl 0,-10,60    0,1,0   	   255,125,0 	#rusted_metall checker # Floor (orange)
+# pl 0,-10,60    0,1,0   	   255,125,0 	#rusted_metal checker # Floor (orange)
 # pl -50,0,50    1,0,0       0,125,255    # Left wall (ocean)
 # pl 50,0,50     -1,0,0      125,255,0    # Right wall (spring green)
 # pl 0,0,150     0,0,-1      255,255,0    # Back wall (yellow)
