@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 14:17:38 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/20 00:15:30 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 10:51:30 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,24 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
+/**
+ * @brief Returns the file path for a given texture type.
+ * @param texture_type The texture type.
+ * @return The file path as a string.
+ */
 static const char	*get_texture_path(t_texture_type texture_type);
 
 /* --------------------------- Public Functions ---------------------------- */
 
+/**
+ * @brief Initializes textures for the window.
+ *
+ * Loads texture images from disk and converts them for use in rendering.
+ * Only runs if IS_BONUS is enabled.
+ *
+ * @param win Pointer to the window structure.
+ * @return 0 on success, or ERR_MLX42 on failure.
+ */
 int	rt_init_texture(t_window *win)
 {
 	mlx_texture_t	*texture;

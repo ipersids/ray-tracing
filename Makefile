@@ -24,7 +24,7 @@ CC				:= clang
 # Flags hints:
 # -O2 (level of optimisation)
 # -flto (Link Time Optimization)
-CFLAGS			:= -O2 -flto -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS			:= -O3 -flto -ffast-math -march=native -Wall -Wextra -Werror #-g -fsanitize=address
 CFLAGS_BONUS 	:= $(CFLAGS) -D IS_BONUS=1
 HDRS			:= -Iinclude -I$(SUBM_MLX_DIR)/include -I$(SUBM_LIBFT_DIR)/include
 LIBS			:= -L$(SUBM_MLX_DIR)/build -lmlx42 \
@@ -70,7 +70,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   \
 				   src/renderer/camera.c src/renderer/color_at.c \
 				   src/renderer/intersect_world.c src/renderer/normal_at.c \
-				   src/renderer/ray.c src/renderer/ray_utils.c \
+				   src/renderer/ray.c \
 				   src/renderer/refracting.c src/renderer/refracting_utils.c\
 				   src/renderer/color_at_utils.c src/renderer/reflecting.c \
 				   \

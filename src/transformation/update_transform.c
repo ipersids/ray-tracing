@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:23:17 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/20 00:23:20 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:09:43 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 /* --------------------------- Public Functions ---------------------------- */
 
+/**
+ * @brief Wrapper to update the transformation matrices for a scene obj/camera.
+ * @param rt Pointer to the main program structure.
+ * @param obj Pointer to the object to update.
+ * @param id The type of the object (ELEMENT_SPHERE, ELEMENT_PLANE, etc.).
+ * @return 0 on success, or an error code if the object type is unknown 
+ * 		   or transformation fails.
+ */
 int	rt_update_transform(t_info *rt, void *obj, t_type id)
 {
 	t_object	*shape;

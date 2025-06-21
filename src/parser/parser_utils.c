@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 23:54:02 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/18 22:51:26 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:12:45 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,19 @@ int	rt_validate_end_of_line(char **startptr)
 	return (0);
 }
 
+/**
+ * @brief Parses bonus settings for an object from the scene description.
+ *
+ * Handles optional material, pattern, texture, and bump map settings 
+ * for the current object. If IS_BONUS is not enabled or no bonus settings 
+ * are present, sets the default material. Each bonus setting is parsed 
+ * in order, and the function returns an error code if any
+ * parsing step fails.
+ *
+ * @param rt Pointer to the main program structure.
+ * @param line Pointer to the current position in the scene line.
+ * @return 0 on success, or an error code on failure.
+ */
 int	rt_parse_bonus_settings(t_info *rt, char **line)
 {
 	int		exit_code;

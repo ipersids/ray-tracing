@@ -11,11 +11,11 @@ void			rt_save_camera_settings(t_camera *camera);
 t_color			rt_color_at(t_info *rt, t_ray *ray, int ray_bounces);
 t_vec3			rt_normal_at(t_info *rt, t_object *obj, t_point p, t_type id);
 void			rt_intersect_world(t_info *rt, t_ray *ray);
+t_intersection	rt_intersect_world_lite(t_info *rt, t_ray *ray);
 t_intersection	*find_closest_intersection(t_intersection *ts, int n_ts);
 
 t_ray			rt_get_ray(t_camera *cam, int32_t x, int32_t y);
 t_vec3			ray_hit(t_ray ray, float t);
-t_ray			transform_ray(t_ray ray, t_matrix matrix);
 t_vec3			reflect(t_vec3 in, t_vec3 normal);
 
 /* --------------------------- Sphere calculations -------------------------- */
@@ -50,7 +50,7 @@ t_vec3			rt_cone_normal_at(const t_cone *co, t_point w_point);
 t_vec3			rt_cone_bumped_normal_at(mlx_image_t *tex, t_cone *co,
 					t_point *p);
 t_intersections	rt_intersect_cone_cap(const t_cone *co, t_ray ray);
-t_vec3			rt_cone_cap_normal_at(const t_cone *co, t_point w_point);
+t_vec3			rt_cone_cap_normal_at(const t_cone *co);
 t_vec3			rt_cone_cap_bumped_normal_at(mlx_image_t *tex, t_cone *co,
 					t_point *p);
 
@@ -66,7 +66,7 @@ void			remove_from_container(t_obj_container *container, int index);
 void			add_to_container(t_obj_container *container, t_object *obj);
 
 bool			light_behind_surface(float l_dot_norm);
-bool			in_shadow(t_info *rt, t_point point);
+bool			in_shadow(t_info *rt, t_point point, t_point light_pos);
 bool			is_inside_container(t_obj_container *container,
 					t_object *object, int *index);
 

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 11:49:27 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/20 00:20:00 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:07:19 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,34 @@
 
 /* --------------------- Private function prototypes ----------------------- */
 
+/**
+ * @brief Checks if the character at the end of the material type is valid.
+ *
+ * Valid end-of-line characters are whitespace, null terminator, or '#'.
+ *
+ * @param line Pointer to the character after the material type.
+ * @return true if valid, false otherwise.
+ */
 static inline bool		is_valid_eol(char *line);
+
+/**
+ * @brief Returns the material type corresponding to the string in the line.
+ * @param line Pointer to the start of the material type string.
+ * @return The corresponding t_mtype, or MATERIAL_MAX if not found.
+ */
 static t_mtype		get_material_type(char *line);
 
 /* --------------------------- Public Functions ---------------------------- */
 
+/**
+ * @brief Parses a material type from the scene description.
+ * 
+ * Only valid if IS_BONUS is enabled.
+ * 
+ * @param rt Pointer to the main program structure.
+ * @param start Pointer to the current position in the scene line.
+ * @return 0 on success, or ERR_MATERIAL if the type is invalid.
+ */
 int	rt_parse_material(t_info *rt, char **start)
 {
 	t_mtype	m_type;

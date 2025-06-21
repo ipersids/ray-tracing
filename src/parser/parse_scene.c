@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:58:48 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/18 22:51:36 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/20 23:40:58 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ static int	validate_object_type(t_counter *cnt, char **scene)
 	int		i;
 	t_type	type;
 
-	i = 0;
-	while (scene[i] != NULL)
+	i = -1;
+	while (scene[++i] != NULL)
 	{
 		type = get_object_type(scene[i]);
 		if (ELEMENT_AMBIENT == type)
@@ -121,8 +121,9 @@ static int	validate_object_type(t_counter *cnt, char **scene)
 			return (ERR_OBJECT_AMOUNT);
 		if (!IS_BONUS && 1 < cnt->lights)
 			return (ERR_OBJECT_AMOUNT);
-		++i;
 	}
+	if (0 == cnt->figures)
+		return (ERR_OBJECT_AMOUNT);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 00:53:58 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/12 21:30:31 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 00:55:52 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_material	init_glass_material(void)
 	t_material	res;
 
 	res.diffuse = 0.0f;
-	res.specular = 0.9f;
+	res.specular = 1.0f;
 	res.shininess = 300.0f;
 	res.reflective = 0.1f;
 	res.refractive = 1.52f;

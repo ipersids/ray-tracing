@@ -195,8 +195,6 @@ typedef enum e_pattype
 	PATTERN_STRIPE,
 	PATTERN_GRADIENT,
 	PATTERN_CHECKER,
-	// PATTERN_RING,
-	// PATTERN_RADIANT_GRADIENT,
 	PATTERN_MAX,
 	PATTERN_DEFAULT
 }			t_pattype;
@@ -435,16 +433,18 @@ typedef struct s_phong_vars
 
 typedef struct s_color_at_vars
 {
-	t_color	tmp_color_one;
-	t_color	tmp_color_two;
-	t_color	tmp_color_surface;
-	t_color	surface;
-	t_color	reflected;
-	t_color	refracted;
-	bool	shadowed;
-	float	reflectance;
-}			t_color_at_vars;
+	t_intersection	*t;
+	t_color			tmp_color_one;
+	t_color			tmp_color_two;
+	t_color			tmp_color_surface;
+	t_color			surface;
+	t_color			reflected;
+	t_color			refracted;
+	bool			shadowed;
+	float			reflectance;
+}					t_color_at_vars;
 
+// norminette: Preprocessor statement must only contain constant defines
 # define BLACK (t_color){0, 0, 0}
 # define WHITE (t_color){1, 1, 1}
 # define RED (t_color){1, 0, 0}
@@ -462,7 +462,7 @@ typedef struct s_phong_color
 	float	l_dot_norm;
 	float	refl_dot_eye;
 	float	factor;
-}				t_phong_color;
+}			t_phong_color;
 
 typedef struct s_ray_vars
 {
@@ -499,7 +499,6 @@ typedef struct s_bump_gradient_vars
 {
 	float	delta_u;
 	float	delta_v;
-	float	h_center;
 	float	h_left;
 	float	h_right;
 	float	h_up;
@@ -519,5 +518,14 @@ typedef struct s_uv_vars
 	t_vec3	tangent;
 	t_vec3	bitangent;
 }			t_uv_vars;
+
+typedef struct s_in_shadow_vars
+{
+	float			distance_to_light;
+	t_vec3			dir_to_light;
+	t_vec3			direction;
+	t_ray			shadow_ray;
+	t_intersection	*hit;
+}					t_in_shadow_vars;
 
 #endif // MINIRT_DATA_H

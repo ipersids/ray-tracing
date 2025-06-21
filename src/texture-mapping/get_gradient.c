@@ -6,14 +6,26 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 00:49:31 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/20 00:23:34 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:01:29 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/* --------------------- Private function prototypes ----------------------- */
+
 static float	get_height(mlx_image_t *tex, float u, float v);
 
+/* --------------------------- Public Functions ---------------------------- */
+
+/**
+ * @brief Computes the gradient of a bump map texture at given UV coordinates.
+ *
+ * @param tex Pointer to the bump map texture image.
+ * @param u U coordinate (horizontal, 0.0 to 1.0).
+ * @param v V coordinate (vertical, 0.0 to 1.0).
+ * @return t_gradient Structure containing the gradient in u and v directions.
+ */
 t_gradient	rt_get_gradient(mlx_image_t *tex, float u, float v)
 {
 	t_bump_gradient_vars	var;
@@ -21,7 +33,6 @@ t_gradient	rt_get_gradient(mlx_image_t *tex, float u, float v)
 
 	var.delta_u = 1.0f / tex->width;
 	var.delta_v = 1.0f / tex->height;
-	var.h_center = get_height(tex, u, v);
 	var.h_left = get_height(tex, fmaxf(0.0f, u - var.delta_u), v);
 	var.h_right = get_height(tex, fminf(1.0f, u + var.delta_u), v);
 	var.h_up = get_height(tex, u, fmaxf(0.0f, v - var.delta_v));
@@ -31,7 +42,16 @@ t_gradient	rt_get_gradient(mlx_image_t *tex, float u, float v)
 	return (res);
 }
 
-// Relative luminance: https://en.wikipedia.org/wiki/Relative_luminance
+/* ------------------- Private Function Implementation --------------------- */
+/**
+ * @brief Gets the height value from a bump map texture at given UV coord.
+ *
+ * @param tex Pointer to the bump map texture image.
+ * @param u U coordinate (horizontal, 0.0 to 1.0).
+ * @param v V coordinate (vertical, 0.0 to 1.0).
+ * @return The height value (relative luminance) at the given UV coordinate.
+ * @note Relative luminance: https://en.wikipedia.org/wiki/Relative_luminance
+ */
 static float	get_height(mlx_image_t *tex, float u, float v)
 {
 	t_bump_height_vars	vars;
