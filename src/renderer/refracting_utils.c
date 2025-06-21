@@ -49,12 +49,15 @@ void add_to_container(t_obj_container *container, t_object *obj)
 
 float	get_refractive_index(t_obj_container *container)
 {
-	if (container->obj_count <= 0)
+	int	count;
+
+	count = container->obj_count - 1;
+	if (count <= 0)
 		return (1.0f);
-	if (!container->objs[container->obj_count - 1]->material)
-		return (1.0f);
-	if (!container->objs[container->obj_count -1])
-		return (1.0f);
+	if (!container->objs[count]->material)
+	 	return (1.0f);
+	if (!container->objs[count])
+	 	return (1.0f);
 	else
-		return (container->objs[container->obj_count - 1]->material->refractive);
+		return (container->objs[count]->material->refractive);
 }

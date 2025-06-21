@@ -13,7 +13,7 @@ L -25,45,-30                    0.6     255,255,255
 # pl 0,0,150     0,0,-1      255,255,0    # Back wall (yellow)
 # pl 0,50,50     0,-1,0      255,0,255    # Ceiling (magenta)
 
-#cy 0,4,-30	0,1,0 5	24	0,0,255 #mirror
+cy 0,4,0	0,1,0 5	24	255,255,255 default texture_earth
 # co 0,25,-30	0,-1,0 1	10	128,255,255 #glass
 
 # Now commented lines are allowed!
