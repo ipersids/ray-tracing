@@ -1,9 +1,26 @@
-A 0.1                           255,255,255
+A 0.4                           255,255,255
 
 C 0,5,-40                      0,0,1   60
-L -15,20,-25                   0.8     255,255,255
+L -15,20,-25                   0.5    255,0,0
+L 15,20,-25						0.5		0,255,0
+L 0,20,-25                   0.5    0,0,255
 
-sp 0,5,0                      10       255,255,255
-sp -10,5,0                      5       0,255,0
-sp 10,5,0                       5       0,0,255
-pl 0,-3,0                      0,1,0   255,255,255    # Floor
+sp -10,1,0                      7       255,255,255	mirror	# Red sphere
+sp 0,1,0                      	7       255,255,255	mirror	# Green sphere
+sp 10,1,0                       7       255,255,255	mirror	# Blue sphere
+
+sp -10,0,-8                     5       255,255,255	glass	# Red sphere
+sp -2,0,-8                     	5       255,255,255	glass	# Green sphere
+sp 6,0,-8                       5       255,255,255	glass	# Blue sphere
+
+sp -10,0,-8                     2       255,255,0	mirror	# Red sphere
+sp -2,0,-8                     	2       125,255,0	mirror	# Green sphere
+sp 6,0,-8                       2       0,125,255	mirror	# Blue sphere
+
+
+pl 0,-6,0                      0,1,0   	255,255,0 default stripe   		# Floor
+pl 0,50,0                      0,1,0   	255,0,255 default stripe 		# Ceiling
+pl 50,0,0                      -1,0,0   0,255,255 default stripe   	# Right wall
+pl -50,0,0                      1,0,0   125,125,125 default stripe  	# Left wall
+pl 0,-3,50                      0,0,-1  40,120,40 default stripe 	# Back wall
+pl 0,-3,-80                      0,0,1   100,120,40 default stripe 	# Front wall

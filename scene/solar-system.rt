@@ -6,9 +6,10 @@ A 0.3                          255,255,255
 
 # Camera positioned to clearly see the solar system
 C 0,15,-100                     0,-0.1,0.9      70
+#C 30,6,30                     0,-0.1,0.9      70
 
 # Main light source positioned to illuminate the scene well
-L -15,20,-25                   0.8        255,255,255
+L -15,20,-5                   0.8        255,255,255
 
 # Secondary light for better illumination
 L 20,15,15                     0.4        255,240,200
@@ -26,28 +27,28 @@ sp -25,2,8                     4          255,200,80		default		texture_venus
 sp 15,-3,30                    5          70,130,255		default		texture_earth
 
 # Earth's Moon - Visible gray sphere near Earth
-# sp 18,-1,35                    2          180,180,180
+ sp 18,-1,35                    2          180,180,180
 
 # Mars - Red sphere
 sp -35,0,-15                   4          200,100,60		default		texture_mars
 
 # Asteroid Belt - Larger rocks for visibility
-# sp 45,3,20                     2          100,90,80
-# sp -50,-2,25                   2          120,100,85
-# sp 40,0,-30                    2          90,80,70
+ sp 45,3,20                     2          100,90,80
+ sp -50,-2,25                   2          120,100,85
+ sp 40,0,-30                    2          90,80,70
 
 # Jupiter - Very large gas giant
 sp 65,0,25                     12         220,160,100		default		texture_jupiter
 
 # Jupiter's largest moons - bigger for visibility
-# sp 70,4,30                     3          180,180,180
-# sp 60,-3,20                    2          200,200,200
+ sp 70,4,30                     3          180,180,180
+ sp 60,-3,20                    2          200,200,200
 
 # Saturn - Large pale yellow sphere
 sp -80,3,-40                   10         240,220,150		default		texture_saturn
 
 # Saturn's moon Titan - Large orange moon
-# sp -85,0,-45                   3          200,170,100
+ sp -85,0,-45                   3          200,170,100
 
 # Uranus - Blue-green sphere
 sp 55,-5,-65                   7          120,220,200		default		texture_uranus
@@ -57,6 +58,21 @@ sp -45,2,90                    7          60,120,255		default		texture_neptune
 
 # Pluto - Small but visible distant dwarf planet
 sp 100,2,50                    3          160,140,120		default		texture_pluto
+
+# Spaceship flying out from earth
+
+# Body of the spaceship
+cy 25,2,50		1,1,1			1 3		255,255,255	
+
+# The exhaust
+co 25.5,2.5,50.3		1,1,1			0.4 1		128,128,128 lambertian
+
+# The nose of the ship
+co 23.55,0.53,48.64		1,1,1			0.57 1		255,0,0 lambertian
+
+# Flame
+co 25.5,2.5,51.6		1,1,1			0.4 1.3		255,125,0 lambertian
+
 
 # Background stars - larger for visibility
 sp -120,40,150                 2          255,255,255
