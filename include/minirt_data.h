@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt_data.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/23 14:26:29 by reerikai          #+#    #+#             */
+/*   Updated: 2025/06/23 14:26:30 by reerikai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_DATA_H
 # define MINIRT_DATA_H
 
@@ -200,8 +212,12 @@ typedef enum e_texture_type
 typedef enum e_pattype
 {
 	PATTERN_STRIPE,
+	PATTERN_STRIPE_OBJ,
+	PATTERN_RING,
+	PATTERN_RING_OBJ,
 	PATTERN_GRADIENT,
 	PATTERN_CHECKER,
+	PATTERN_CHECKER_OBJ,
 	PATTERN_MAX,
 	PATTERN_DEFAULT
 }			t_pattype;
@@ -451,13 +467,6 @@ typedef struct s_color_at_vars
 	float			reflectance;
 }					t_color_at_vars;
 
-// norminette: Preprocessor statement must only contain constant defines
-# define BLACK (t_color){0, 0, 0}
-# define WHITE (t_color){1, 1, 1}
-# define RED (t_color){1, 0, 0}
-# define GREEN (t_color){0, 1, 0}
-# define BLUE (t_color){0, 0, 1}
-
 typedef struct s_phong_color
 {
 	t_color	eff_col;
@@ -525,6 +534,14 @@ typedef struct s_uv_vars
 	t_vec3	tangent;
 	t_vec3	bitangent;
 }			t_uv_vars;
+
+typedef struct s_refract_vars
+{
+	float	n_ratio;
+	float	cos_i;
+	float	sin2_t;
+	float	cos_t;
+}			t_refract_vars;
 
 typedef struct s_in_shadow_vars
 {

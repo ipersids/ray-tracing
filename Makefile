@@ -43,7 +43,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   \
 				   src/materials/diffuse_materials.c src/materials/reflective_materials.c \
 				   src/materials/refractive_materials.c src/materials/patterns.c \
-				   src/materials/get_pattern.c \
+				   src/materials/get_pattern.c src/materials/patterns_obj.c \
 				   \
 				   src/texture-mapping/get_uv_coordinates.c src/texture-mapping/get_gradient.c \
 				   src/texture-mapping/get_texture_color.c \
@@ -91,7 +91,7 @@ SRCS			:= src/constructor/init_info.c src/constructor/allocate_memory.c \
 				   src/shapes/cone_cap.c \
 				   \
 				   src/transformation/objects_transform.c src/transformation/view_transform.c \
-				   src/transformation/update_transform.c 
+				   src/transformation/update_transform.c
 
 
 SRC_MAIN		:= src/main.c
@@ -145,7 +145,7 @@ build-submodule:
 NAME_BONUS		:= miniRT_bonus
 
 bonus: update-submodule build-submodule $(NAME_BONUS)
-	./miniRT_bonus ./scene/solar-system.rt
+#	./miniRT_bonus ./scene/solar-system.rt
 
 $(NAME_BONUS): $(OBJS_BONUS) $(OBJ_MAIN_BONUS)
 	$(CC) $(CFLAGS_BONUS) $(OBJS_BONUS) $(OBJ_MAIN_BONUS) $(HDRS) $(LIBS) -o $(NAME_BONUS)

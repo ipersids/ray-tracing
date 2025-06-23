@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/23 14:26:46 by reerikai          #+#    #+#             */
+/*   Updated: 2025/06/23 14:26:47 by reerikai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /**
  * @note (project status)
  * - for now we support comments with `#` at the end line in the scene file
  * - delete get_time_ms(void) in src/hook/hook_render_scene.c (and <time.h>)
- * - plane returns 1 intersection: check if it is critical for the logic 
- * 	 that checks if a point is "inside" a container 
+ * - plane returns 1 intersection: check if it is critical for the logic
+ * 	 that checks if a point is "inside" a container
  * 	 (used for refraction calculations)
- * 
+ *
  * @note (recourses):
  * - lightning model: https://learnopengl.com/Lighting/Basic-Lighting
  * - Physically Based Rendering: From Theory to Implementation:
@@ -13,7 +25,7 @@
  * - The Cherno Ray Tracing youtube playlist
  *   https://www.youtube.com/playlist?list=PLlrATfBNZ98edc5GshdBtREv5asFW3yXl
  * - Welcome to Computer Graphics: https://scratchapixel.com/
- * - Texture and bump Mapping 
+ * - Texture and bump Mapping
  * 	 https://medium.com/@dbildibay/ray-tracing-adventure-part-iv-678768947371
  * - Bump, Normal, Displacement, and Parallax Mapping
  * 	 https://youtu.be/cM7RjEtZGHw
@@ -74,19 +86,20 @@ t_material	init_diamond_material(void);
 t_material	init_water_material(void);
 t_material	init_ice_material(void);
 
-//t_pat	set_stripe_pattern(t_color a, t_color b, float scale, float angle_rad);
-// t_pat	set_checker_pattern(t_color a, t_color b, float scale);
-// t_pat	set_gradient_pattern(t_color a, t_color b, float scale);
 t_pat		set_stripe_pattern(void);
 t_pat		set_checker_pattern(void);
 t_pat		set_gradient_pattern(void);
+t_pat		set_ring_pattern(void);
+t_pat		set_stripe_pattern_obj(void);
+t_pat		set_checker_pattern_obj(void);
+t_pat		set_ring_pattern_obj(void);
 
 t_color		pattern_at_object(t_pat pattern, t_object obj, t_point w_point);
 t_color		stripe_pattern_at(t_pat pattern, t_point point);
 t_color		gradient_pattern_at(t_pat pattern, t_point point);
 t_color		checker_pattern_at(t_pat pattern, t_point point);
 // t_color		radiant_gradient_pattern_at(t_pat pattern, t_point point);
-// t_color		ring_pattern_at(t_pat pattern, t_point point);
+t_color		ring_pattern_at(t_pat pattern, t_point point);
 
 t_uv_vars	rt_get_uv_coordinates(t_object *obj, t_point *point);
 t_uv_vars	rt_get_spherical_uv(t_sphere *sp, t_point *point);

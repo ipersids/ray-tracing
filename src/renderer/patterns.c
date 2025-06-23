@@ -6,7 +6,7 @@
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 18:38:57 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/03 11:40:14 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/06/23 14:19:53 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@
 // 	return (pattern);
 // }
 
-t_color	stripe_pattern_at(t_pat *pattern, t_point point)
-{
-	if ((int)point.x % 2 == 0)
-		return (pattern->color_a);
-	else
-		return (pattern->color_b);
-}
+// t_color	stripe_pattern_at(t_pat *pattern, t_point point)
+// {
+// 	if ((int)point.x % 2 == 0)
+// 		return (pattern->color_a);
+// 	else
+// 		return (pattern->color_b);
+// }

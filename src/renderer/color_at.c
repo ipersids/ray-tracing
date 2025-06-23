@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color_at.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/23 14:25:37 by reerikai          #+#    #+#             */
+/*   Updated: 2025/06/23 14:25:38 by reerikai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 /* --------------------- Private function prototypes ----------------------- */
@@ -12,9 +24,9 @@ static t_color		compute_fresnel_effect(t_color_at_vars *at, t_phong_vars v);
 /**
  * @brief Computes the color seen along a ray in the scene.
  *
- * Traces the given ray, finds the closest intersection, and computes 
- * the color at that point using the Phong lighting model, including shadows, 
- * reflections, and refractions. 
+ * Traces the given ray, finds the closest intersection, and computes
+ * the color at that point using the Phong lighting model, including shadows,
+ * reflections, and refractions.
  * If both reflectivity and transparency are present, applies the Fresnel effect.
  *
  * @param rt Pointer to the main program structure.
@@ -57,7 +69,7 @@ t_color	rt_color_at(t_info *rt, t_ray *ray, int ray_bounces)
  * @brief Precomputes intersection data for shading calculations.
  *
  * Calculates intersection point, eye vector, normal vector, reflection vector,
- * and prepares refraction indices. Also handles texture assignment 
+ * and prepares refraction indices. Also handles texture assignment
  * and surface color.
  *
  * @param t Pointer to the intersection structure.

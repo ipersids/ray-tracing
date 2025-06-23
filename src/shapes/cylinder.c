@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:30:27 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/19 23:29:15 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/23 11:55:08 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ t_vec3	rt_cylinder_normal_at(const t_cylinder *cy, t_point w_point)
 	return (world_normal);
 }
 
-t_vec3	rt_cylinder_bumped_normal_at(mlx_image_t *tex, t_cylinder *cy, t_point *p)
+t_vec3	rt_cylinder_bumped_normal_at(mlx_image_t *tex,
+		t_cylinder *cy, t_point *p)
 {
 	t_uv_vars	uv;
 	t_gradient	var;
