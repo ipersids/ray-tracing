@@ -1,0 +1,15 @@
+A 0.5 255,255,255
+
+C 0,0,-25   0,0,1   60
+
+L 0,50,-25  0.9    	255,255,255
+
+co -12,5,0	0,-0.5,0.5 	1 2	44,117,255 		default					# Bright Blue
+co -4,5,0	0,-0.5,0.5 	1 2	80,255,120		default stripe_obj		# Light Green
+co 4,5,0	0,-0.5,0.5 	1 2	255,85,100		default checker_obj		# Light Red
+co 12,5,0	0,-0.5,0.5 	1 2	255,255,0 		default ring_obj		# Bright Yellow
+
+co -12,-3,0	0,-0.5,0.5 	1 2	0,170,160 		glass					# Teal
+co -4,-3,0	0,-0.5,0.5 	1 2	120,70,200 		mirror					# Deep Blue / Purple
+co 4,-3,0	0,-0.5,0.5 	1 2	200,150,50 		metal					# Gold / Bronze
+co 12,-3,0	0,-0.5,0.5 	1 2	100,120,140 	lambertian				# Blueish Gray

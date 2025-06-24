@@ -18,9 +18,9 @@ sp -2,1,-8                     	2       136,8,8		mirror	# Dark red mirror sphere
 sp 6,1,-8                       2       128,0,128	mirror	# Purple mirror sphere
 
 
-pl 0,-6,0                      0,1,0   	255,255,0 default ring   		# Floor
+pl 0,-6,0                      0,1,0   	255,255,0 default ring   	# Floor
 pl 0,50,0                      0,1,0   	255,0,255 default ring 		# Ceiling
-pl 50,0,0                      -1,0,0   0,255,255 default ring   		# Right wall
+pl 50,0,0                      -1,0,0   0,255,255 default ring   	# Right wall
 pl -50,0,0                      1,0,0   125,125,125 default ring  	# Left wall
 pl 0,-3,50                      0,0,-1  40,120,40 default ring 		# Back wall
-pl 0,-3,-80                      0,0,1   100,120,40 default ring 		# Front wall
+pl 0,-3,-80                      0,0,1   100,120,40 default ring 	# Front wall

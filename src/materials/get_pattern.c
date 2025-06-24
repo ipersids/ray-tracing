@@ -6,7 +6,7 @@
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:49:38 by reerikai          #+#    #+#             */
-/*   Updated: 2025/06/23 14:27:59 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/06/24 12:34:15 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_color	pattern_at_object(t_pat pattern, t_object obj, t_point w_point)
 	t_matrix	obj_inv;
 
 	find_object(obj, &obj_inv);
-	object_point = matrix_multiply_vector(obj_inv, w_point);
-	pattern_point = matrix_multiply_vector(pattern.inv_transform, object_point);
+	object_point = matrix_multiply_point(obj_inv, w_point);
+	pattern_point = matrix_multiply_point(pattern.inv_transform, object_point);
 	if (pattern.type == PATTERN_STRIPE)
 		return (stripe_pattern_at(pattern, pattern_point));
 	else if (pattern.type == PATTERN_GRADIENT)
