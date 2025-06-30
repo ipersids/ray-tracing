@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_world.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:05:03 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/21 11:36:26 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/25 16:47:25 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static t_intersections	handle_bonus_shape(t_ray *ray, t_info *rt, size_t i);
 /**
  * @brief Intersects a ray with all objects in the world.
  *
- * Iterates through all objects in the scene, computes intersections 
- * with the given ray, and stores all intersections in the rt->ts array. 
+ * Iterates through all objects in the scene, computes intersections
+ * with the given ray, and stores all intersections in the rt->ts array.
  * After collecting intersections, sorts them by distance using quick sort.
  *
  * @param rt Pointer to the main program structure.
@@ -68,8 +68,8 @@ void	rt_intersect_world(t_info *rt, t_ray *ray)
 /**
  * @brief Finds the closest valid intersection from a list.
  *
- * Iterates through the intersection array and returns a pointer 
- * to the first intersection with a positive t-value 
+ * Iterates through the intersection array and returns a pointer
+ * to the first intersection with a positive t-value
  * greater than EPSILON (i.e., in front of the ray origin).
  *
  * @param ts Pointer to the array of intersections.
@@ -121,7 +121,7 @@ static void	add_intersections(const t_intersections *xs, t_info *rt, size_t i)
 	if ((rt->n_ts + xs->count) >= rt->capacity_ts)
 	{
 		nsize = ((rt->capacity_ts + xs->count) * 2) * sizeof(t_intersection);
-		tmp = ft_realloc(rt->ts, rt->capacity_ts, nsize);
+		tmp = ft_realloc(rt->ts, rt->capacity_ts * sizeof(t_intersection), nsize);
 		if (!tmp)
 			rt_destroy_exit(rt, ERR_REALLOC_INTERSECTIONS);
 		rt->ts = tmp;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_intersections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 16:25:14 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/07 16:26:41 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/25 16:42:27 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

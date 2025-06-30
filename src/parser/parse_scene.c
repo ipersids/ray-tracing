@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:58:48 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/20 23:40:58 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:39:55 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int		parse_line(t_info *rt, char *line);
 
 /**
  * @brief Parse the entire scene from an array of strings.
- * 
+ *
  * @param rt Pointer to the ray tracing information structure.
  * @param scene Array of strings representing the scene.
  * @return int 0 on success, or an error code.
