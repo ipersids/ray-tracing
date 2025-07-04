@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   refracting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:25:16 by reerikai          #+#    #+#             */
-/*   Updated: 2025/06/24 14:33:43 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/07/05 02:31:41 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

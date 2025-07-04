@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_uv_coordinates.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:02:01 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/23 10:47:45 by reerikai         ###   ########.fr       */
+/*   Updated: 2025/07/05 02:33:50 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
