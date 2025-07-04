@@ -1,16 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   refracting_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/23 14:25:16 by reerikai          #+#    #+#             */
+/*   Updated: 2025/07/05 02:31:41 by ipersids         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 void	update_container(t_obj_container *container, t_object *object)
 {
-	int index;
+	int	index;
 
+	index = 0;
 	if (is_inside_container(container, object, &index))
 		remove_from_container(container, index);
 	else
 		add_to_container(container, object);
 }
 
-bool	is_inside_container(t_obj_container *container, t_object *object, int *index)
+bool	is_inside_container(t_obj_container *container,
+			t_object *object, int *index)
 {
 	int	i;
 
@@ -27,9 +41,11 @@ bool	is_inside_container(t_obj_container *container, t_object *object, int *inde
 	return (false);
 }
 
-void remove_from_container(t_obj_container *container, int index)
+void	remove_from_container(t_obj_container *container, int index)
 {
-	int i = index;
+	int	i;
+
+	i = index;
 	while (i < container->obj_count - 1)
 	{
 		container->objs[i] = container->objs[i + 1];
@@ -39,7 +55,7 @@ void remove_from_container(t_obj_container *container, int index)
 		container->obj_count--;
 }
 
-void add_to_container(t_obj_container *container, t_object *obj)
+void	add_to_container(t_obj_container *container, t_object *obj)
 {
 	if (container->obj_count >= MAX_CONTAINERS)
 		return ;
@@ -49,15 +65,15 @@ void add_to_container(t_obj_container *container, t_object *obj)
 
 float	get_refractive_index(t_obj_container *container)
 {
-	int	count;
+	int	i;
 
-	count = container->obj_count - 1;
-	if (count <= 0)
+	i = container->obj_count - 1;
+	if (i <= 0)
 		return (1.0f);
-	if (!container->objs[count]->material)
-	 	return (1.0f);
-	if (!container->objs[count])
-	 	return (1.0f);
+	if (!container->objs[i]->material)
+		return (1.0f);
+	if (!container->objs[i])
+		return (1.0f);
 	else
-		return (container->objs[count]->material->refractive);
+		return (container->objs[i]->material->refractive);
 }

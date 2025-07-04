@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cone_cap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:30:35 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/21 11:40:53 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/23 11:54:26 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static inline bool	check_cap(const t_ray *ray, const float t, float radius);
 
 /**
  * @brief Computes intersections between a ray and the cap of a cone.
- * 
+ *
  * @param co Pointer to the cone structure.
  * @param ray The ray to test for intersection.
  * @return t_intersections Structure containing intersection data.
@@ -60,7 +60,6 @@ t_vec3	rt_cone_cap_normal_at(const t_cone *co)
 	world_normal = matrix_multiply_vector(co->inv_transpose, canonical_normal);
 	return (normalize(world_normal));
 }
-
 
 t_vec3	rt_cone_cap_bumped_normal_at(mlx_image_t *tex, t_cone *co, t_point *p)
 {

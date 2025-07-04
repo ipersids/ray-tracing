@@ -3,8 +3,8 @@ C 0,-10,-100                     0,0.1,1   40
 L -25,45,-30                    0.8     255,255,255
 
 sp 0,0,10                   28      0,0,0  glass
-sp 0,0,10                   14      0,0,0  glass
-sp 0,0,10                   10      255,255,255 default texture_earth bump_earth
+sp 0,0,10                   24      0,0,0  glass
+sp 0,0,10                   8      255,255,255 mirror
 
 pl 0,0,150     0,0,-1      0,0,0 default checker    # Back wall
 

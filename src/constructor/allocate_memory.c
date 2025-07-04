@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   allocate_memory.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 18:53:41 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/11 20:24:02 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/25 16:46:47 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 /**
  * @brief Allocate memory for objects and lights in the ray tracing structure.
- * 
+ *
  * @param cnt Pointer to the counter structure.
  * @param rt Pointer to the ray tracing information structure.
  * @return int Returns 0 on success, or ERR_SYSTEM on memory allocation failure.

@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:02:01 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/20 00:35:53 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/07/05 02:33:50 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ t_uv_vars	rt_get_uv_coordinates(t_object *obj, t_point *point)
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  * Spherical angles:
  * 	- Theta (θ): Horizontal angle around the sphere (longitude)
  * 	- Phi (φ): Vertical angle from top to bottom (latitude)
- * 
- * @param local_point 
- * @param u 
- * @param v 
+ *
+ * @param local_point
+ * @param u
+ * @param v
  */
 t_uv_vars	rt_get_spherical_uv(t_sphere *sp, t_point *point)
 {

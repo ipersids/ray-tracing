@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_render_scene.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 20:30:21 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/20 01:01:51 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:33:26 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static inline double	get_time_ms(void)
  * @brief Hook function to render the scene when needed.
  *
  * - Updates the elapsed time using the delta time provided by MLX.
- * - If the window was resized, resizes the image buffer 
+ * - If the window was resized, resizes the image buffer
  *   and resets the resized flag.
- * - If the scene has not been rendered since the last change, 
+ * - If the scene has not been rendered since the last change,
  *   renders the scene, and sets the rendered flag.
  *
  * @param param Pointer to the main program structure (t_info*).

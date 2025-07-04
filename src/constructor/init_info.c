@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_info.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:47:12 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/21 12:43:22 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/23 14:11:49 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,8 @@ static void	init_pattern(t_pat *patterns)
 	patterns[PATTERN_STRIPE] = set_stripe_pattern();
 	patterns[PATTERN_GRADIENT] = set_gradient_pattern();
 	patterns[PATTERN_CHECKER] = set_checker_pattern();
+	patterns[PATTERN_RING] = set_ring_pattern();
+	patterns[PATTERN_STRIPE_OBJ] = set_stripe_pattern_obj();
+	patterns[PATTERN_CHECKER_OBJ] = set_checker_pattern_obj();
+	patterns[PATTERN_RING_OBJ] = set_ring_pattern_obj();
 }

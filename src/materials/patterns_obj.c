@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   patterns.c                                         :+:      :+:    :+:   */
+/*   patterns_obj.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/23 14:23:58 by reerikai          #+#    #+#             */
-/*   Updated: 2025/06/23 14:23:59 by reerikai         ###   ########.fr       */
+/*   Created: 2025/06/23 14:24:10 by reerikai          #+#    #+#             */
+/*   Updated: 2025/06/23 14:24:11 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/* --------------------------- Public Functions ---------------------------- */
-
-t_pat	set_stripe_pattern(void)
+t_pat	set_stripe_pattern_obj(void)
 {
-	const float	scale = 10;
+	const float	scale = 0.1;
 	const float	angle_rad = 0.785398;
 	t_pat		pattern;
 	t_matrix	scale_matrix;
@@ -24,7 +22,7 @@ t_pat	set_stripe_pattern(void)
 
 	scale_matrix = matrix_scaling(scale, 1.0f, 1.0f);
 	rot_matrix = matrix_rotation_y(angle_rad);
-	pattern.type = PATTERN_STRIPE;
+	pattern.type = PATTERN_STRIPE_OBJ;
 	pattern.color_a = (t_color){0.0f, 0.0f, 0.f};
 	pattern.color_b = (t_color){1.0f, 1.0f, 1.0f};
 	pattern.has_pattern = true;
@@ -33,12 +31,12 @@ t_pat	set_stripe_pattern(void)
 	return (pattern);
 }
 
-t_pat	set_checker_pattern(void)
+t_pat	set_checker_pattern_obj(void)
 {
-	const float	scale = 10;
+	const float	scale = 0.5;
 	t_pat		pattern;
 
-	pattern.type = PATTERN_CHECKER;
+	pattern.type = PATTERN_CHECKER_OBJ;
 	pattern.color_a = (t_color){0.0f, 0.0f, 0.0f};
 	pattern.color_b = (t_color){1.0f, 1.0f, 1.0f};
 	pattern.has_pattern = true;
@@ -47,41 +45,21 @@ t_pat	set_checker_pattern(void)
 	return (pattern);
 }
 
-t_pat	set_gradient_pattern(void)
+t_pat	set_ring_pattern_obj(void)
 {
-	const float	scale = 10;
+	const float	scale = 0.1;
+	const float	angle_rad = 2.5;
 	t_pat		pattern;
+	t_matrix	scale_matrix;
+	t_matrix	rot_matrix;
 
-	pattern.type = PATTERN_GRADIENT;
+	scale_matrix = matrix_scaling(scale, 1.0f, 1.0f);
+	rot_matrix = matrix_rotation_y(angle_rad);
+	pattern.type = PATTERN_RING_OBJ;
 	pattern.color_a = (t_color){0.0f, 0.0f, 0.0f};
 	pattern.color_b = (t_color){1.0f, 1.0f, 1.0f};
 	pattern.has_pattern = true;
-	pattern.transform = matrix_scaling(scale, 1.0f, 1.0f);
+	pattern.transform = matrix_multiply(rot_matrix, scale_matrix);
 	matrix_try_inverse(pattern.transform, &pattern.inv_transform);
 	return (pattern);
-}
-
-t_pat	set_ring_pattern(void)
-{
-	const float	scale = 1.0;
-	t_pat		pattern;
-
-	pattern.type = PATTERN_RING;
-	pattern.color_a = (t_color){0.0f, 0.0f, 0.0f};
-	pattern.color_b = (t_color){1.0f, 1.0f, 1.0f};
-	pattern.has_pattern = true;
-	pattern.transform = matrix_scaling(scale, 1.0f, 1.0f);
-	matrix_try_inverse(pattern.transform, &pattern.inv_transform);
-	return (pattern);
-}
-
-t_color	ring_pattern_at(t_pat pattern, t_point point)
-{
-	float	distance;
-
-	distance = sqrtf(point.x * point.x + point.z * point.z);
-	if ((int)floorf(distance) % 2 == 0)
-		return (pattern.color_a);
-	else
-		return (pattern.color_b);
 }

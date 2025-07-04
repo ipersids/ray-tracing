@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_pattern.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: reerikai <reerikai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 10:21:09 by ipersids          #+#    #+#             */
-/*   Updated: 2025/06/21 11:07:43 by ipersids         ###   ########.fr       */
+/*   Updated: 2025/06/23 14:12:48 by reerikai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_pattype	get_pattern_type(char *line);
  *
  * Sets the pattern for the current object if a valid type is found.
  * Only valid if IS_BONUS is enabled.
- * 
+ *
  * @param rt Pointer to the main program structure.
  * @param start Pointer to the current position in the scene line.
  * @return 0 on success, or ERR_PATTERN if the type is invalid.
@@ -68,10 +68,18 @@ static t_pattype	get_pattern_type(char *line)
 		return (PATTERN_DEFAULT);
 	if (ft_strncmp(line, "stripe", 6) == 0 && is_valid_eol(&line[6]))
 		return (PATTERN_STRIPE);
+	if (ft_strncmp(line, "stripe_obj", 10) == 0 && is_valid_eol(&line[10]))
+		return (PATTERN_STRIPE_OBJ);
 	if (ft_strncmp(line, "gradient", 8) == 0 && is_valid_eol(&line[8]))
 		return (PATTERN_GRADIENT);
 	if (ft_strncmp(line, "checker", 7) == 0 && is_valid_eol(&line[7]))
 		return (PATTERN_CHECKER);
+	if (ft_strncmp(line, "checker_obj", 11) == 0 && is_valid_eol(&line[11]))
+		return (PATTERN_CHECKER_OBJ);
+	if (ft_strncmp(line, "ring", 4) == 0 && is_valid_eol(&line[4]))
+		return (PATTERN_RING);
+	if (ft_strncmp(line, "ring_obj", 8) == 0 && is_valid_eol(&line[8]))
+		return (PATTERN_RING_OBJ);
 	return (PATTERN_MAX);
 }
 
