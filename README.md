@@ -53,31 +53,40 @@ MiniRT is a rendering program that uses ray tracing technology to create realist
 ```css
 ray-tracing/
 │
-├── include/                  # Header files
+├── include/                   # Header files
 │   ├── minirt_data.h
-│   ├── ...
+│   ├── minirt_math.h
+│   ├── minirt_parser.h
+│   ├── minirt_renderer.h
 │   └── minirt.h
 │
-├── lib/                      # Libraries
-│   ├── libft/                # Submodule libft
-│   └── mlx42/                # Submodule MLX42
+├── lib/                       # Libraries
+│   ├── libft/...              # Submodule libft
+│   └── mlx42/...              # Submodule MLX42
 │
-├── scene/                    # Scene config files
-│   └── simple.rt
+├── scene/                     # Scene config files
+│   ├── bonus/*.rt
+│   └── mandatory/*.rt
 │
-├── src/                      # Source files
-│   ├── constructor/
-│   │   └── *.c
-│   ├── destructor/
-│   │   └── *.c
-│   ├── .../
-│   │   └── *.c
-│   ├── parser/
-│   │   └── *.c
-│   └── main.c
+├── src/                       # Source files
+│   ├── calculations/          # Custom math library
+│   │   ├── *.c
+│   │   ├── matrices/...
+│   │   └── vectors/...
+│   ├── constructor/           # Initialize structures and allocate memory
+│   ├── destructor/            # Free resources and handle errors
+│   ├── hook/                  # Handle user input and rendering loop
+│   ├── materials/             # Set up different materials and patterns
+│   ├── parser/                # Parse config file '.rt' (../scene/)
+│   ├── renderer/              # Handle lighting, reflections, refractions, and rays
+│   ├── shapes/                # Object-related calculations
+│   ├── texture-mapping/       # Apply texture and bump map to objects
+│   ├── transformation/        # Calculate matrix transformations
+│   └── main.c                 # Start here
 │
-├── ...
-└── Makefile                  # Building project tool
+├── LICENSE
+├── Makefile                   # Project build tool
+└── README.md
 
 ```   
 
@@ -87,18 +96,19 @@ ray-tracing/
 ```bash
 git clone https://github.com/ipersids/ray-tracing.git
 cd ray-tracing
-make
+make bonus
 ```   
 
 2. Run the ray tracer with the path to the config file:  
 ```bash
-./miniRT scene/simple.rt
+./miniRT_bonus scene/bonus/solar-system.rt
 ```  
 
 **Other commands:**  
 	* `make clean` will remove all .o' files.  
 	* `make fclean` will remove all .o' and executable files.  
-	* `make re` will trigger the fclean command and rebuild the program.    
+	* `make re` will trigger the fclean command and rebuild the program.  
+	* `make` will compile lite version of project  
 
 **Linker dependencies:**   
 
